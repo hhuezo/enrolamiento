@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ResponsePaises } from '../_model/responsePaises';
+import { CatalogoService } from '../_service/catalogo.service';
 
 @Component({
   selector: 'app-demographic-information',
@@ -24,9 +26,12 @@ export class DemographicInformationComponent implements OnInit {
   departamento!: string;
   fecha_nacimiento!: string;
 
+  responsePaises?: ResponsePaises;
+
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private catalogoService: CatalogoService
   ) { }
 
 
@@ -51,7 +56,18 @@ export class DemographicInformationComponent implements OnInit {
         txt_fecha_nacimiento: ['', Validators.required],
       }
       
-    )
+    );
+
+
+    this.catalogoService.getPaises().subscribe((resp: ResponsePaises) => { this.responsePaises = resp;
+      console.log('response paises: ', this.responsePaises);
+
+
+    
+    });
+
+
+
   }
 
   back(){

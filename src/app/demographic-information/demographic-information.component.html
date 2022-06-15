@@ -76,17 +76,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-12 control-label">Departamento </label>
+                                        <label class="col-md-12 control-label">Fecha de nacimiento </label>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <select class="form-control select" formControlName="cbo_departamento"  tabindex="5">
-                                                <option value="">Seleccione Departamento</option>
-                                                <option value="0101">SAN SALVADOR</option>
-                                                <option value="0401">LA LIBERTAD</option>
-                                            </select>
-                                            <div *ngIf="submitted && f['cbo_departamento'].errors"
+                                            <input type="date" class="form-control"
+                                                formControlName="txt_fecha_nacimiento"
+                                                [ngClass]="{'is-invalid': submitted && f['txt_fecha_nacimiento'].errors}"  tabindex="5"/>
+                                            <div *ngIf="submitted && f['txt_fecha_nacimiento'].errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="f['cbo_departamento'].errors?.['required']">Complete este
-                                                    campo</div>
+                                                <div *ngIf="f['txt_fecha_nacimiento'].errors?.['required']">Complete
+                                                    este campo</div>
                                             </div>
 
                                         </div>
@@ -101,7 +99,7 @@
                                         <label class="col-md-12 control-label">Pais de nacimiento</label>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <select class="form-control select" formControlName="cbo_pais_nacimiento" tabindex="2">
-                                                <option value="">Seleccione Departamento</option>
+                                                <option value="">Seleccione Pais</option>
                                                 <option value="0100">EL SALVADOR</option>
                                                 <option value="1500">PANAMA</option>
                                             </select>
@@ -116,9 +114,27 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label class="col-md-12 control-label">Departamento </label>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <select class="form-control select" formControlName="cbo_departamento"  tabindex="4">
+                                                <option value="">Seleccione Departamento</option>
+                                                <option value="0101">SAN SALVADOR</option>
+                                                <option value="0401">LA LIBERTAD</option>
+                                            </select>
+                                            <div *ngIf="submitted && f['cbo_departamento'].errors"
+                                                class="invalid-feedback">
+                                                <div *ngIf="f['cbo_departamento'].errors?.['required']">Complete este
+                                                    campo</div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12">&nbsp;</div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label class="col-md-12 control-label">Municipio</label>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <select class="form-control select" formControlName="cbo_municipio" tabindex="4">
+                                            <select class="form-control select" formControlName="cbo_municipio" tabindex="6">
                                                 <option value="">Seleccione Municipio</option>
                                                 <option value="0101">SAN SALVADOR</option>
                                                 <option value="0102">SOYAPANGO</option>
@@ -132,21 +148,8 @@
                                         </div>
                                         <div class="col-md-12">&nbsp;</div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12 control-label">Fecha de nacimiento </label>
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <input type="date" class="form-control"
-                                                formControlName="txt_fecha_nacimiento"
-                                                [ngClass]="{'is-invalid': submitted && f['txt_fecha_nacimiento'].errors}"  tabindex="6"/>
-                                            <div *ngIf="submitted && f['txt_fecha_nacimiento'].errors"
-                                                class="invalid-feedback">
-                                                <div *ngIf="f['txt_fecha_nacimiento'].errors?.['required']">Complete
-                                                    este campo</div>
-                                            </div>
+                                    
 
-                                        </div>
-                                        <div class="col-md-12">&nbsp;</div>
-                                    </div>
 
                                 </div>
 
