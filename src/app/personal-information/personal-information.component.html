@@ -1,243 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-    Enrolamiento
-  </title>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      Enrolamiento
+    </title>
 
-</head>
+  </head>
 
-<body>
-  <app-header></app-header>
-
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-1">
-      </div>
-      <div class="col-md-10">
-        <form [formGroup]="form!" (ngSubmit)="guardar()" >
-        <div class="row">
-          <div class="col-md-12">&nbsp;
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <app-options></app-options>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">&nbsp;
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <h1>Datos personales </h1>
-          </div>
-        </div>
-        <div class="row">
-          
-          <div class="col-md-6">
-
-            <div class="form-group">
-              <label class="col-md-12 control-label">Según CIP • Nombre</label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <input type="text" class="form-control" formControlName="txt_nombre" tabindex="1"
-                  [ngClass]="{'is-invalid': submitted && f['txt_nombre'].errors}">
-
-                <div *ngIf="submitted && f['txt_nombre'].errors" class="invalid-feedback">
-                  <div *ngIf="f['txt_nombre'].errors?.['required']">Complete este campo</div>
-                </div>
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>
+  <body>
+    <app-header></app-header>
 
 
-            <div class="form-group">
-              <label class="col-md-12 control-label">Según CIP • Apellido materno</label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <input type="text" class="form-control" formControlName="txt_ape_materno" tabindex="3"
-                  [ngClass]="{'is-invalid': submitted && f['txt_ape_materno'].errors}" />
-                <div *ngIf="submitted && f['txt_ape_materno'].errors" class="invalid-feedback">
-                  <div *ngIf="f['txt_ape_materno'].errors?.['required']">Complete este campo</div>
-                </div>
-
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>
-
-
-  
-
-            <div class="form-group">
-              <label class="col-md-12 control-label">Número de CIP</label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <input type="text" class="form-control" formControlName="txt_dui" tabindex="5"
-                  [ngClass]="{'is-invalid': submitted && f['txt_dui'].errors}" />
-                <div *ngIf="submitted && f['txt_dui'].errors" class="invalid-feedback">
-                  <div *ngIf="f['txt_dui'].errors?.['required']">Complete este campo</div>
-                </div>
-
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>
-
-
-            <div class="form-group">
-              <label class="col-md-12 control-label">Ocupación</label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <select class="form-control" formControlName="cbo_ocupacion" tabindex="7">
-                  <option value="">Seleccione Ocupacion</option>
-                  <option value="1">EMPLEADO</option>
-                  <option value="2">MOTORISTA</option>
-                </select>
-
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>
-
-
-            <div class="form-group">
-              <label class="col-md-12 control-label">Correo electrónico</label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <input type="email" class="form-control" formControlName="txt_email" tabindex="9"
-                  [ngClass]="{'is-invalid': submitted && f['txt_email'].errors}" />
-                <div *ngIf="submitted && f['txt_email'].errors" class="invalid-feedback">
-                  <div *ngIf="f['txt_email'].errors?.['required']">Complete este campo</div>
-                </div>
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-12 control-label">Género</label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <select class="form-control select" formControlName="cbo_genero" tabindex="11">
-                  <option value="">Seleccione Genero</option>
-                  <option value="MA">MASCULINO</option>
-                  <option value="FE">FEMENINO</option>
-                </select>
-
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>
-
-
-          </div>
-          <div class="col-md-6">
-
-            <div class="form-group">
-              <label class="col-md-12 control-label">Según CIP • Apellido paterno</label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <input type="text" class="form-control input" formControlName="txt_ape_paterno" tabindex="2"
-                  [ngClass]="{'is-invalid': submitted && f['txt_ape_paterno'].errors}" />
-
-                <div *ngIf="submitted && f['txt_ape_paterno'].errors" class="invalid-feedback">
-                  <div *ngIf="f['txt_ape_paterno'].errors?.['required']">Complete este campo</div>
-                </div>
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>
-
-
-
-            <div class="form-group">
-              <label class="col-md-12 control-label">Según CIP • Apellido casado/a</label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <input type="text" class="form-control" formControlName="txt_ape_casada" tabindex="4"
-                  [ngClass]="{'is-invalid': submitted && f['txt_ape_casada'].errors}" />
-                <div *ngIf="submitted && f['txt_ape_casada'].errors" class="invalid-feedback">
-                  <div *ngIf="f['txt_ape_casada'].errors?.['required']">Complete este campo</div>
-                </div>
-
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-12 control-label">Fecha de emisión de CIP</label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <input type="date" class="form-control" formControlName="txt_fecha_emision_dui" tabindex="6"
-                  [ngClass]="{'is-invalid': submitted && f['txt_fecha_emision_dui'].errors}" />
-                <div *ngIf="submitted && f['txt_fecha_emision_dui'].errors" class="invalid-feedback">
-                  <div *ngIf="f['txt_fecha_emision_dui'].errors?.['required']">Complete este campo</div>
-                </div>
-
-
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>
-
-
-
-            <div class="form-group">
-              <label class="col-md-12 control-label">Fecha de vencimiento de CIP</label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <input type="date" class="form-control input" formControlName="txt_fecha_vto_dui" [ngClass]="{'is-invalid': submitted && f['txt_fecha_vto_dui'].errors}" tabindex="8"  />
-                <div *ngIf="submitted && f['txt_fecha_vto_dui'].errors" class="invalid-feedback">
-                  <div *ngIf="f['txt_fecha_vto_dui'].errors?.['required']">Complete este campo</div>
-                </div>
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-12 control-label">Estado civil </label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <select class="form-control select" formControlName="cbo_estado_civil" tabindex="10">
-                  <option value="">Seleccione Estado</option>
-                  <option value="SO">SOLTERO</option>
-                  <option value="CA">CASADO(A)</option>
-              </select>
-
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-12 control-label">Teléfono celular</label>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <input type="text" class="form-control" formControlName="txt_telefono_celular" id="txt_telefono_celular" [ngClass]="{'is-invalid': submitted && f['txt_telefono_celular'].errors}" tabindex="12" />
-                    <div *ngIf="submitted && f['txt_telefono_celular'].errors" class="invalid-feedback">
-                      <div *ngIf="f['txt_telefono_celular'].errors?.['required']">Complete este campo</div>
-                    </div>
-                    
-
-              </div>
-              <div class="col-md-12">&nbsp;</div>
-            </div>  
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12 d-flex justify-content-center">
-            <button (click)="back()" type="button" class="btn btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <button (click)="guardar()" type="button" class="btn btn-primary">&nbsp;Guardar&nbsp;</button>
-          </div>
-        </div>
-        </form>
-      </div>
-      <div class="col-md-1">
-      </div>
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+          <form [formGroup]="form!" (ngSubmit)="guardar()">
+            <div class="row">
+              <div class="col-md-12">&nbsp;
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <app-options></app-options>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">&nbsp;
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h1>Datos personales </h1>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Según CIP • Nombre</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control"
+                      formControlName="txt_nombre" tabindex="1"
+                      [ngClass]="{'is-invalid': submitted &&
+                      f['txt_nombre'].errors}">
+
+                    <div *ngIf="submitted && f['txt_nombre'].errors"
+                      class="invalid-feedback">
+                      <div *ngIf="f['txt_nombre'].errors?.['required']">Complete
+                        este campo</div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Según CIP • Apellido
+                    materno</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control"
+                      formControlName="txt_ape_materno" tabindex="3"
+                      [ngClass]="{'is-invalid': submitted &&
+                      f['txt_ape_materno'].errors}" />
+                    <div *ngIf="submitted && f['txt_ape_materno'].errors"
+                      class="invalid-feedback">
+                      <div *ngIf="f['txt_ape_materno'].errors?.['required']">Complete
+                        este campo</div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Número de CIP</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control"
+                      formControlName="txt_dui" tabindex="5"
+                      [ngClass]="{'is-invalid': submitted &&
+                      f['txt_dui'].errors}" />
+                    <div *ngIf="submitted && f['txt_dui'].errors"
+                      class="invalid-feedback">
+                      <div *ngIf="f['txt_dui'].errors?.['required']">Complete
+                        este campo</div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Ocupación</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <select formControlName="cbo_ocupacion"
+                      class="form-control">
+                      <option value="{{ocupacion.ID}}" *ngFor="let ocupacion of
+                        ocupaciones">{{ocupacion.OCU_DESCRIPCION}}</option>
+                    </select>
+
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Correo electrónico</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="email" class="form-control"
+                      formControlName="txt_email" tabindex="9"
+                      [ngClass]="{'is-invalid': submitted &&
+                      f['txt_email'].errors}" />
+                    <div *ngIf="submitted && f['txt_email'].errors"
+                      class="invalid-feedback">
+                      <div *ngIf="f['txt_email'].errors?.['required']">Complete
+                        este campo</div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Género</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <select class="form-control select"
+                      formControlName="cbo_genero" tabindex="11">
+                      <option value="">Seleccione Genero</option>
+                      <option value="MA">MASCULINO</option>
+                      <option value="FE">FEMENINO</option>
+                    </select>
+
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+
+              </div>
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Según CIP • Apellido
+                    paterno</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control input"
+                      formControlName="txt_ape_paterno" tabindex="2"
+                      [ngClass]="{'is-invalid': submitted &&
+                      f['txt_ape_paterno'].errors}" />
+
+                    <div *ngIf="submitted && f['txt_ape_paterno'].errors"
+                      class="invalid-feedback">
+                      <div *ngIf="f['txt_ape_paterno'].errors?.['required']">Complete
+                        este campo</div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Según CIP • Apellido
+                    casado/a</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control"
+                      formControlName="txt_ape_casada" tabindex="4"
+                      [ngClass]="{'is-invalid': submitted &&
+                      f['txt_ape_casada'].errors}" />
+                    <div *ngIf="submitted && f['txt_ape_casada'].errors"
+                      class="invalid-feedback">
+                      <div *ngIf="f['txt_ape_casada'].errors?.['required']">Complete
+                        este campo</div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Fecha de emisión de CIP</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="date" class="form-control"
+                      formControlName="txt_fecha_emision_dui" tabindex="6"
+                      [ngClass]="{'is-invalid': submitted &&
+                      f['txt_fecha_emision_dui'].errors}" />
+                    <div *ngIf="submitted && f['txt_fecha_emision_dui'].errors"
+                      class="invalid-feedback">
+                      <div
+                        *ngIf="f['txt_fecha_emision_dui'].errors?.['required']">Complete
+                        este campo</div>
+                    </div>
+
+
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Fecha de vencimiento de
+                    CIP</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="date" class="form-control input"
+                      formControlName="txt_fecha_vto_dui"
+                      [ngClass]="{'is-invalid': submitted &&
+                      f['txt_fecha_vto_dui'].errors}" tabindex="8" />
+                    <div *ngIf="submitted && f['txt_fecha_vto_dui'].errors"
+                      class="invalid-feedback">
+                      <div *ngIf="f['txt_fecha_vto_dui'].errors?.['required']">Complete
+                        este campo</div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Estado civil </label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <select class="form-control select"
+                      formControlName="cbo_estado_civil" tabindex="10">
+                      <option value="">Seleccione Estado</option>
+                      <option value="SO">SOLTERO</option>
+                      <option value="CA">CASADO(A)</option>
+                    </select>
+
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Teléfono celular</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control"
+                      formControlName="txt_telefono_celular"
+                      id="txt_telefono_celular" [ngClass]="{'is-invalid':
+                      submitted && f['txt_telefono_celular'].errors}"
+                      tabindex="12" />
+                    <div *ngIf="submitted && f['txt_telefono_celular'].errors"
+                      class="invalid-feedback">
+                      <div
+                        *ngIf="f['txt_telefono_celular'].errors?.['required']">Complete
+                        este campo</div>
+                    </div>
+
+
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 d-flex justify-content-center">
+                <button (click)="back()" type="button" class="btn
+                  btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button (click)="guardar()" type="button" class="btn
+                  btn-primary">&nbsp;Guardar&nbsp;</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="row">
+          <div class="col-md-12">&nbsp;</div>
+        </div>
+      </div>
     </div>
-    </div>
-  </div>
 
 
 
 
-</body>
+  </body>
 
 </html>

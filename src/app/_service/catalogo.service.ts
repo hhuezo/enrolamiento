@@ -16,15 +16,36 @@ export class CatalogoService {
     private router: Router
   ) { }
 
-  getPaises(){
+  getPaises() {
 
     //console.log("Inicio dentro de login");
-    
+
     //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
-//console.log('esta es el body validate login '+body);
-console.log('esta es la url catalogo paises '+this.url);
+    //console.log('esta es el body validate login '+body);
+    console.log('esta es la url catalogo paises ' + this.url);
+
+    //console.log('esta es la url validate login '+this.url);
+
+    return this.http.get<any>(this.url, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+
+  }
+
+
+
+  getOcupaciones() {
+
+    //console.log("Inicio dentro de login");
+
+    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
+    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
+
+    //console.log('esta es el body validate login '+body);
+    this.url ="http://localhost/blog/public/api/get_ocupaciones";
+    console.log('esta es la url catalogo paises ' + this.url);
 
     //console.log('esta es la url validate login '+this.url);
 

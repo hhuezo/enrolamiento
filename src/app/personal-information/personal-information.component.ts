@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ResponseOcupaciones } from '../_model/responseOcupaciones';
+import { CatalogoService } from '../_service/catalogo.service';
+
 
 @Component({
   selector: 'app-personal-information',
@@ -9,7 +12,11 @@ import { Router } from '@angular/router';
 })
 export class PersonalInformationComponent implements OnInit {
 
-  form!:FormGroup;
+  //combos
+  ocupaciones: any;
+  responseOcupaciones?: ResponseOcupaciones;
+
+  form!: FormGroup;
   submitted = false;
 
   nombre!: string;
@@ -26,10 +33,10 @@ export class PersonalInformationComponent implements OnInit {
   telefono_celular!: string;
 
   img_personal_information?: HTMLImageElement;
-  
+
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router, private catalogoService: CatalogoService
   ) { }
 
 
@@ -61,66 +68,76 @@ export class PersonalInformationComponent implements OnInit {
         txt_telefono_celular: ['', Validators.required],
 
       }
-      
+
     )
+
+
+    this.catalogoService.getOcupaciones().subscribe((resp: ResponseOcupaciones) => { this.responseOcupaciones = resp;
+      console.log('ocupaciones: ', this.responseOcupaciones);
+      this.ocupaciones = this.responseOcupaciones  ;
+
+
+    });
   }
 
-  
+
+
+
   get f(): { [key: string]: AbstractControl } {
     return this.form!.controls;
   }
 
 
-  back(){
+  back() {
     this.router.navigate(['/home']);
   }
 
-  guardar(){
+  guardar() {
 
 
-this.nombre = this.form.controls['txt_nombre'].value;
-this.ape_paterno = this.form.controls['txt_ape_paterno'].value;
-this.ape_materno = this.form.controls['txt_ape_materno'].value;
-this.ape_casada = this.form.controls['txt_ape_casada'].value;
-this.dui = this.form.controls['txt_dui'].value;
-this.fecha_emision_dui = this.form.controls['txt_fecha_emision_dui'].value;
-this.ocupacion = this.form.controls['cbo_ocupacion'].value;
-this.fecha_vto_dui = this.form.controls['txt_fecha_vto_dui'].value;
-this.email = this.form.controls['txt_email'].value;
-this.estado_civil = this.form.controls['cbo_estado_civil'].value;
-this.genero = this.form.controls['cbo_genero'].value;
-this.telefono_celular = this.form.controls['txt_telefono_celular'].value;
+    this.nombre = this.form.controls['txt_nombre'].value;
+    this.ape_paterno = this.form.controls['txt_ape_paterno'].value;
+    this.ape_materno = this.form.controls['txt_ape_materno'].value;
+    this.ape_casada = this.form.controls['txt_ape_casada'].value;
+    this.dui = this.form.controls['txt_dui'].value;
+    this.fecha_emision_dui = this.form.controls['txt_fecha_emision_dui'].value;
+    this.ocupacion = this.form.controls['cbo_ocupacion'].value;
+    this.fecha_vto_dui = this.form.controls['txt_fecha_vto_dui'].value;
+    this.email = this.form.controls['txt_email'].value;
+    this.estado_civil = this.form.controls['cbo_estado_civil'].value;
+    this.genero = this.form.controls['cbo_genero'].value;
+    this.telefono_celular = this.form.controls['txt_telefono_celular'].value;
 
 
-console.log('this.nombre= '+this.nombre+'<br>');
-console.log('this.ape_paterno= '+this.ape_paterno+'<br>');
-console.log('this.ape_materno= '+this.ape_materno+'<br>');
-console.log('this.ape_casada= '+this.ape_casada+'<br>');
-console.log('this.dui= '+this.dui+'<br>');
-console.log('this.fecha_emision_dui= '+this.fecha_emision_dui+'<br>');
-console.log('this.ocupacion= '+this.ocupacion+'<br>');
-console.log('this.fecha_vto_dui= '+this.fecha_vto_dui+'<br>');
-console.log('this.email= '+this.email+'<br>');
-console.log('this.estado_civil= '+this.estado_civil+'<br>');
-console.log('this.genero= '+this.genero+'<br>');
-console.log('this.telefono_celular= '+this.telefono_celular+'<br>');
+    console.log('this.nombre= ' + this.nombre + '<br>');
+    console.log('this.ape_paterno= ' + this.ape_paterno + '<br>');
+    console.log('this.ape_materno= ' + this.ape_materno + '<br>');
+    console.log('this.ape_casada= ' + this.ape_casada + '<br>');
+    console.log('this.dui= ' + this.dui + '<br>');
+    console.log('this.fecha_emision_dui= ' + this.fecha_emision_dui + '<br>');
+    console.log('this.ocupacion= ' + this.ocupacion + '<br>');
+    console.log('this.fecha_vto_dui= ' + this.fecha_vto_dui + '<br>');
+    console.log('this.email= ' + this.email + '<br>');
+    console.log('this.estado_civil= ' + this.estado_civil + '<br>');
+    console.log('this.genero= ' + this.genero + '<br>');
+    console.log('this.telefono_celular= ' + this.telefono_celular + '<br>');
 
     console.log('guardando datos... de informacion personal');
 
-    sessionStorage.setItem('nombre',this.nombre);
-    sessionStorage.setItem('ape_paterno',this.ape_paterno);
-    sessionStorage.setItem('ape_materno',this.ape_materno);
-    sessionStorage.setItem('ape_casada',this.ape_casada);
-    sessionStorage.setItem('dui',this.dui);
-    sessionStorage.setItem('fecha_emision_dui',this.fecha_emision_dui);
-    sessionStorage.setItem('ocupacion',this.ocupacion);
-    sessionStorage.setItem('fecha_vto_dui',this.fecha_vto_dui);
-    sessionStorage.setItem('email',this.email);
-    sessionStorage.setItem('estado_civil',this.estado_civil);
-    sessionStorage.setItem('genero',this.genero);
-    sessionStorage.setItem('telefono_celular',this.telefono_celular);
+    sessionStorage.setItem('nombre', this.nombre);
+    sessionStorage.setItem('ape_paterno', this.ape_paterno);
+    sessionStorage.setItem('ape_materno', this.ape_materno);
+    sessionStorage.setItem('ape_casada', this.ape_casada);
+    sessionStorage.setItem('dui', this.dui);
+    sessionStorage.setItem('fecha_emision_dui', this.fecha_emision_dui);
+    sessionStorage.setItem('ocupacion', this.ocupacion);
+    sessionStorage.setItem('fecha_vto_dui', this.fecha_vto_dui);
+    sessionStorage.setItem('email', this.email);
+    sessionStorage.setItem('estado_civil', this.estado_civil);
+    sessionStorage.setItem('genero', this.genero);
+    sessionStorage.setItem('telefono_celular', this.telefono_celular);
 
-  
+
     this.router.navigate(['/physic-information']);
 
 

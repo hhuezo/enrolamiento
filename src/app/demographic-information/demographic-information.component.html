@@ -1,187 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        Enrolamiento
+      Enrolamiento
     </title>
 
-</head>
+  </head>
 
-<body>
+  <body>
     <app-header></app-header>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-1">
-            </div>
-            <div class="col-md-10">
-                <form [formGroup]="form!" (ngSubmit)="guardar()">
-                    <div class="row">
-                        <div class="col-md-12">&nbsp;
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <app-options></app-options>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">&nbsp;
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1>Datos demograficos </h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-12 control-label">Domicilio </label>
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <input type="text" name="txt_domicilio" id="txt_domicilio"
-                                                class="form-control" formControlName="txt_domicilio"
-                                                [ngClass]="{'is-invalid': submitted && f['txt_domicilio'].errors}" tabindex="1" />
-                                            <div *ngIf="submitted && f['txt_domicilio'].errors"
-                                                class="invalid-feedback">
-                                                <div *ngIf="f['txt_domicilio'].errors?.['required']">Complete este campo
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-12">&nbsp;</div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label class="col-md-12 control-label">Lugar de nacimiento </label>
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <input type="text" class="form-control"
-                                                formControlName="txt_lugar_nacimiento"
-                                                [ngClass]="{'is-invalid': submitted && f['txt_lugar_nacimiento'].errors}" tabindex="3"
-                                                id="nit" placeholder="txt_lugar_nacimiento" />
-                                            <div *ngIf="submitted && f['txt_lugar_nacimiento'].errors"
-                                                class="invalid-feedback">
-                                                <div *ngIf="f['txt_lugar_nacimiento'].errors?.['required']">Complete
-                                                    este campo</div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-12">&nbsp;</div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-md-12 control-label">Fecha de nacimiento </label>
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <input type="date" class="form-control"
-                                                formControlName="txt_fecha_nacimiento"
-                                                [ngClass]="{'is-invalid': submitted && f['txt_fecha_nacimiento'].errors}"  tabindex="5"/>
-                                            <div *ngIf="submitted && f['txt_fecha_nacimiento'].errors"
-                                                class="invalid-feedback">
-                                                <div *ngIf="f['txt_fecha_nacimiento'].errors?.['required']">Complete
-                                                    este campo</div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-12">&nbsp;</div>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label class="col-md-12 control-label">Pais de nacimiento</label>
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                          <select formControlName="cbo_pais_nacimiento" >
-                                            <option value="{{pais.id}}" *ngFor="let pais of paises">{{pais.nombre}}</option>
-                                          </select>
-
-                                            <div *ngIf="submitted && f['cbo_pais_nacimiento'].errors"
-                                                class="invalid-feedback">
-                                                <div *ngIf="f['cbo_pais_nacimiento'].errors?.['required']">Complete este
-                                                    campo</div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-12">&nbsp;</div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-md-12 control-label">Departamento </label>
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <select class="form-control select" formControlName="cbo_departamento"  tabindex="4">
-                                                <option value="">Seleccione Departamento</option>
-                                                <option value="0101">SAN SALVADOR</option>
-                                                <option value="0401">LA LIBERTAD</option>
-                                            </select>
-                                            <div *ngIf="submitted && f['cbo_departamento'].errors"
-                                                class="invalid-feedback">
-                                                <div *ngIf="f['cbo_departamento'].errors?.['required']">Complete este
-                                                    campo</div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-12">&nbsp;</div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-md-12 control-label">Municipio</label>
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <select class="form-control select" formControlName="cbo_municipio" tabindex="6">
-                                                <option value="">Seleccione Municipio</option>
-                                                <option value="0101">SAN SALVADOR</option>
-                                                <option value="0102">SOYAPANGO</option>
-                                            </select>
-                                            <div *ngIf="submitted && f['cbo_municipio'].errors"
-                                                class="invalid-feedback">
-                                                <div *ngIf="f['cbo_municipio'].errors?.['required']">Complete este campo
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-12">&nbsp;</div>
-                                    </div>
-
-
-
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                    </div>
-                                  </div>
-
-                                  <div class="row">
-                                    <div class="col-md-12 d-flex justify-content-center">
-                                      <button (click)="back()" type="button" class="btn btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
-                                      &nbsp;&nbsp;&nbsp;&nbsp;
-                                      <button (click)="guardar()" type="button" class="btn btn-primary">&nbsp;Guardar&nbsp;</button>
-                                    </div>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-1">
-            </div>
+      <div class="row">
+        <div class="col-md-1">
         </div>
+        <div class="col-md-10">
+          <form [formGroup]="form!" (ngSubmit)="guardar()">
+            <div class="row">
+              <div class="col-md-12">&nbsp;
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <app-options></app-options>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">&nbsp;
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h1>Datos demograficos </h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="col-md-12 control-label">Domicilio </label>
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <input type="text" name="txt_domicilio"
+                          id="txt_domicilio"
+                          class="form-control" formControlName="txt_domicilio"
+                          [ngClass]="{'is-invalid': submitted &&
+                          f['txt_domicilio'].errors}" tabindex="1" />
+                        <div *ngIf="submitted && f['txt_domicilio'].errors"
+                          class="invalid-feedback">
+                          <div *ngIf="f['txt_domicilio'].errors?.['required']">Complete
+                            este campo
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-12">&nbsp;</div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="col-md-12 control-label">Lugar de nacimiento
+                      </label>
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <input type="text" class="form-control"
+                          formControlName="txt_lugar_nacimiento"
+                          [ngClass]="{'is-invalid': submitted &&
+                          f['txt_lugar_nacimiento'].errors}" tabindex="3"
+                          id="nit" placeholder="txt_lugar_nacimiento" />
+                        <div *ngIf="submitted &&
+                          f['txt_lugar_nacimiento'].errors"
+                          class="invalid-feedback">
+                          <div
+                            *ngIf="f['txt_lugar_nacimiento'].errors?.['required']">Complete
+                            este campo</div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-12">&nbsp;</div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-12 control-label">Fecha de nacimiento
+                      </label>
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <input type="date" class="form-control"
+                          formControlName="txt_fecha_nacimiento"
+                          [ngClass]="{'is-invalid': submitted &&
+                          f['txt_fecha_nacimiento'].errors}" tabindex="5" />
+                        <div *ngIf="submitted &&
+                          f['txt_fecha_nacimiento'].errors"
+                          class="invalid-feedback">
+                          <div
+                            *ngIf="f['txt_fecha_nacimiento'].errors?.['required']">Complete
+                            este campo</div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-12">&nbsp;</div>
+                    </div>
+
+
+                  </div>
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-12 control-label">Pais de nacimiento</label>
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <select formControlName="cbo_pais_nacimiento"
+                          class="form-control">
+                          <option value="{{pais.id}}" *ngFor="let pais of paises">{{pais.nombre}}</option>
+                        </select>
+
+                        <div *ngIf="submitted &&
+                          f['cbo_pais_nacimiento'].errors"
+                          class="invalid-feedback">
+                          <div
+                            *ngIf="f['cbo_pais_nacimiento'].errors?.['required']">Complete
+                            este
+                            campo</div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-12">&nbsp;</div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-12 control-label">Departamento
+                      </label>
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <select class="form-control select"
+                          formControlName="cbo_departamento" tabindex="4">
+                          <option value="">Seleccione Departamento</option>
+                          <option value="0101">SAN SALVADOR</option>
+                          <option value="0401">LA LIBERTAD</option>
+                        </select>
+                        <div *ngIf="submitted && f['cbo_departamento'].errors"
+                          class="invalid-feedback">
+                          <div
+                            *ngIf="f['cbo_departamento'].errors?.['required']">Complete
+                            este
+                            campo</div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-12">&nbsp;</div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-12 control-label">Municipio</label>
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <select class="form-control select"
+                          formControlName="cbo_municipio" tabindex="6">
+                          <option value="">Seleccione Municipio</option>
+                          <option value="0101">SAN SALVADOR</option>
+                          <option value="0102">SOYAPANGO</option>
+                        </select>
+                        <div *ngIf="submitted && f['cbo_municipio'].errors"
+                          class="invalid-feedback">
+                          <div *ngIf="f['cbo_municipio'].errors?.['required']">Complete
+                            este campo
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-12">&nbsp;</div>
+                    </div>
+
+
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                      <button (click)="back()" type="button" class="btn
+                        btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <button (click)="guardar()" type="button" class="btn
+                        btn-primary">&nbsp;Guardar&nbsp;</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-1">
+        </div>
+      </div>
     </div>
 
-</body>
+  </body>
 
 </html>
