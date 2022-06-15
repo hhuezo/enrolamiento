@@ -17,6 +17,7 @@ import { FingerprintComponent } from './fingerprint/fingerprint.component';
 import { WebcamModule } from 'ngx-webcam';
 import { HeaderComponent } from './header/header.component';
 import { CarnetPrintComponent } from './carnet-print/carnet-print.component';
+import { OptionsComponent } from './options/options.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CarnetPrintComponent } from './carnet-print/carnet-print.component';
     SignComponent,
     FingerprintComponent,
     HeaderComponent,
-    CarnetPrintComponent
+    CarnetPrintComponent,
+    OptionsComponent
   ],
   imports: [
     BrowserModule,
