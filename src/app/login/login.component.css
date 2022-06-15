@@ -1,0 +1,452 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.body {
+    position: relative;
+    height: 100vh;
+
+    background: #F4F4F8;
+}
+
+.texbox {
+    box-sizing: border-box;
+
+    width: 710px;
+    height: 54px;
+
+    background: #FFFFFF;
+    border: 0.5px solid #CED4DA;
+    border-radius: 5px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.label {
+
+
+    height: 23px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 23px;
+    /* identical to box height, or 164% */
+
+
+    color: #323945;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 61px 0px;
+    gap: 100px;
+
+    position: absolute;
+    width: 880px;
+    height: 683px;
+    left: 520px;
+    top: 153px;
+
+    background: #FFFFFF;
+    border-radius: 20px;
+
+}
+
+main>* {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 61px 0px;
+    gap: 100px;
+
+    position: absolute;
+    width: 880px;
+    height: 683px;
+    left: 520px;
+    top: 153px;
+
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+header {
+    grid-area: header;
+}
+
+aside:first-of-type {
+    grid-area: izquierda;
+}
+
+article {
+    grid-area: contenido;
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 61px 0px;
+    gap: 100px;
+
+    margin-top: 153px;
+    height: 683px;
+    /*position: absolute;
+width: 100%;
+height: 683px;
+left: 520px;
+top: 153px;*/
+
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+
+contenido {
+    display: grid;
+    height: 100%;
+
+    /* Especificar posiciones de las areas mobile */
+    grid-template-areas:
+        "logo"
+        "form_login"
+    ;
+
+
+}
+
+
+
+#grid-content {
+    display: grid;
+    grid-gap: 10px;
+    height: 60%;
+    padding: 0;
+
+    grid-template-columns: 1fr 1fr;
+
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+
+}
+
+
+
+
+
+
+
+.titulo {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 54px;
+
+
+    color: #1A365E;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+
+.subtitulo {
+    width: 673px;
+    height: 23px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 23px;
+    /* identical to box height, or 144% */
+
+
+    /* Gray Stroke */
+
+    color: #B0B0B0;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+
+.input {
+    box-sizing: border-box;
+
+    width: 710px;
+    height: 54px;
+
+    background: #FFFFFF;
+    border: 0.5px solid #CED4DA;
+    border-radius: 5px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+
+.forgot_user {
+
+    height: 23px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 23px;
+    /* identical to box height, or 164% */
+
+    text-align: center;
+    text-decoration:none;
+
+    /* Celeste NG */
+
+    color: #3B82F6;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+.btn_ingresar {
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    text-align: center;
+
+    /* Celeste NG */
+
+    background: #3B82F6;
+    color: white;
+    border-radius: 5px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.btn_crear {
+
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    text-align: center;
+
+    /* Celeste NG */
+
+    background: #FFFFFF;
+    color: #3B82F6;
+    border-radius: 5px;
+    border-color: #0D6EFD;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    text-decoration: none;
+
+
+
+
+
+
+}
+
+
+
+
+.forgot_pass {
+  
+    height: 23px;
+
+    
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 23px;
+    /* identical to box height, or 164% */
+
+    /*text-align: center;*/
+    text-decoration:none;
+
+    /* Celeste NG */
+
+    color: #3B82F6;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+
+}
+
+.div_pass{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.box_form {
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 61px 0px;
+    gap: 100px;
+
+    position: absolute;
+    width: 880px;
+    height: 683px;
+    left: 520px;
+    top: 153px;
+
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+
+
+.btnIngresa {
+    background-color: #0D6EFD;
+    border: 0.5px solid #828282;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.btnCrear {
+    background-color: #828282;
+    border: 0.5px solid #828282;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: #fff;
+}
+
+
+/* size sm small >=576px */
+@media (min-width: 576px) {
+    main {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+
+        background: #F4F4F8;
+
+    }
+}
+
+/* size md medium >=768px */
+@media (min-width: 768px) {
+    main {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+
+        background: #F4F4F8;
+
+    }
+}
+
+/* size lg large >=992px */
+@media (min-width: 992px) {
+    main {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+
+        background: #F4F4F8;
+
+    }
+}
+
+/* size xl extra large >=1200px */
+@media (min-width: 1200px) {
+    main {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+
+        background: #F4F4F8;
+
+    }
+}
+
+/* size xxl extra extra large >=1400px */
+@media (min-width: 1400px) {
+    main {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+
+        background: #F4F4F8;
+
+    }
+}

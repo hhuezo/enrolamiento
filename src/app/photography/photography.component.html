@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <title>
+        Enrolamiento
+    </title>
+
+</head>
+
+<body>
+
+    <app-header></app-header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-12">&nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="container-fluid">
+                            <div class="row ">
+                                <div class="col-md-2">
+                                    <img class="body-options-img " src="./assets/images/datos_personales_blue.svg"
+                                        alt="">
+                                    <p>Datos Personales</p>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <img class="body-options-img" src="./assets/images/datos_fisicos_blue.svg" alt="">
+                                    <p>Datos Fisicos</p>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <img class="body-options-img" src="./assets/images/datos_demograficos_blue.svg"
+                                        alt="">
+                                    <p>Datos Demograficos</p>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <img class="body-options-img" src="./assets/images/datos_foto_blue.svg" alt="">
+                                    <p>Fotografia</p>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <img class="body-options-img" src="./assets/images/datos_firma.svg" alt="">
+                                    <p>Firma</p>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <img class="body-options-img" src="./assets/images/datos_huella.svg" alt="">
+                                    <p>Huella Digital</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">&nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Captura de fotografía </h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text">Tendrá 5 segundos para ver el punto de referencia de la cámara, mientras toma la
+                            fotografía</p>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="container-fluid">
+                                    <div class="row photo_div">
+
+
+                                        <div class="container-fluid">
+                                            <div class="row">
+
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div
+                                                            class="col-md-3 justify-content-center d-flex align-items-center">
+                                                            <a class="btn btn-primary" (click)="takePicture()">Capturar
+                                                                foto</a>
+                                                        </div>
+                                                        <div class="col-md-9">
+
+                                                            <div class="col-md-12">&nbsp;</div>
+
+                                                            <div id="div_cam"
+                                                                class="col-md-12  justify-content-center photo_div"
+                                                                style="background-color: #FFF;   height: 393px;">
+                                                                <!-- inicio camara -->
+                                                                <webcam [height]="390" [trigger]="triggerObservable"
+                                                                    (imageCapture)="handleImage($event)">
+                                                                </webcam>
+                                                                <!-- fin camara -->
+
+
+                                                            </div>
+
+                                                            <div id="div_photo" class="col-md-12 photo_div">
+                                                                <div
+                                                                    class="col-md-12  justify-content-center photo_div2" style="background-color: #FFF;   height: 393px;">
+                                                                    <div class="snapshot" *ngIf="webcamImage">
+                                                                        <img [src]="webcamImage.imageAsDataUrl"
+                                                                            style="height: 393px;" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <p class="numero">{{seconds}}</p>
+
+                                                        </div>
+
+                                                        <div
+                                                            class="col-md-3 justify-content-center d-flex align-items-center">
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">&nbsp;</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">&nbsp;</div>
+
+                                <div class="row">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                        <button (click)="clean()" type="button" class="btn btn-outline-primary">&nbsp;Regresar a
+                                            inicio&nbsp;</button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-outline-primary" routerLink="/registro">Borrar Foto</a>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button (click)="guardar()" type="button" class="btn btn-primary">&nbsp;Guardar&nbsp;</button>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

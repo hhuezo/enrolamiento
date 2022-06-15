@@ -1,0 +1,157 @@
+h1 {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 65px;
+
+    text-align: center;
+
+    /* #1053BA */
+
+    color: #1053BA;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+.control-label {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-size: 18px;
+    line-height: 30px;
+    color: #828282;
+
+}
+
+
+input,
+select {
+    box-sizing: border-box;
+    width: 99%;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #CED4DA;
+    border-radius: 5px;
+}
+
+.text {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    color: #4F4F4F;
+}
+
+/* para carnet  */
+
+.div_carnet {
+    position: absolute;
+    width: 854px;
+    height: 498px;
+    left: 324.5px;
+
+
+    background: #302323;
+    opacity: 0.1;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.rectangule147 {
+    position: absolute;
+    width: 854px;
+    height: 451px;
+    left: 0;
+    bottom: 0;
+   /* top: 67px;*/
+
+    background: #87a5c0;
+    border-radius: 20px;
+
+}
+.maskgroup229{
+    position: absolute;
+    width: 854px;
+    height: 451px;
+    left: 0;
+    top: 67px;
+}
+
+
+.vector97{
+    position: absolute;
+    width: 1015px;
+    height: 181.31px;
+    left: 0;
+    bottom: 0;
+    
+    background: linear-gradient(262.21deg, #5893D9 4.89%, rgba(17, 86, 167, 0) 81.61%);
+}
+
+/* NEW STYLE */
+.main-carnet {
+    background-image: url("../../assets/images/Carnet.png");
+    display: flex;
+    background-size: contain;
+    background-repeat: no-repeat;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    width: 50%;
+    justify-content: space-between;
+    border-radius: 30px;
+    margin-top: 50px;
+}
+.main {
+    display: flex;
+    justify-content: center;
+}
+.carnet-header{
+    padding: 8%;
+    color: #FFFFFF;
+}
+h2{
+    font-size: 1.9em;
+    white-space: nowrap;
+}
+.carnet-info {
+    margin-top: 90px;
+    padding: 8%;
+    color: #1A365E;
+}
+.carnet-right {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin-top: 35px;
+    /*background-image: url("../../assets/images/Carnet-mundo.png");
+    background-size: cover;
+    background-repeat: no-repeat;*/
+}
+
+.carnet-right > p{
+    margin-top: 10px;
+}
+.txt-firma{
+    position: absolute;
+    top: 58%;
+    color: #1A365E;
+}
+
+
+/* NEW STYLE */

@@ -1,0 +1,40 @@
+h1 {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 65px;
+
+    text-align: center;
+
+    /* #1053BA */
+
+    color: #1053BA;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+.control-label {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-size: 18px;
+    line-height: 30px;
+    color: #828282;
+
+}
+
+
+input, select {
+    box-sizing: border-box;
+    width: 99%;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #CED4DA;
+    border-radius: 5px;
+}

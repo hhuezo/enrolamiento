@@ -1,0 +1,26 @@
+h1 {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 65px;
+    text-align: center;
+    color: #1053BA;
+}
+
+.text {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    color: #4F4F4F;
+}
+
+.text2 {
+    font-family: 'Open Sans';
+    font-size: 24px;
+    color: #1053BA;
+}
+
