@@ -16,6 +16,8 @@ export class DemographicInformationComponent implements OnInit {
   img_personal_information?: HTMLImageElement;
   img_demographic_information?: HTMLImageElement;
 
+  paises: any;
+
   form!:FormGroup;
   submitted = false;
 
@@ -55,15 +57,15 @@ export class DemographicInformationComponent implements OnInit {
         cbo_departamento: ['', Validators.required],
         txt_fecha_nacimiento: ['', Validators.required],
       }
-      
+
     );
 
 
     this.catalogoService.getPaises().subscribe((resp: ResponsePaises) => { this.responsePaises = resp;
-      console.log('response paises: ', this.responsePaises);
+      console.log('paises: ', this.responsePaises);
+      this.paises = this.responsePaises  ;
 
 
-    
     });
 
 
@@ -73,7 +75,7 @@ export class DemographicInformationComponent implements OnInit {
   back(){
     this.router.navigate(['/home']);
   }
-  
+
   guardar(){
     this.domicilio = this.form.controls['txt_domicilio'].value;
     this.lugar_nacimiento = this.form.controls['txt_lugar_nacimiento'].value;
@@ -106,7 +108,7 @@ export class DemographicInformationComponent implements OnInit {
   }
 
   load_icons() {
-    
+
     this.img_personal_information = document.getElementById("img_personal_information") as HTMLImageElement;
     this.img_personal_information.src = "../../assets/images/datos_personales_blue.svg";
 

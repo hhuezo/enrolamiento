@@ -98,11 +98,10 @@
                                     <div class="form-group">
                                         <label class="col-md-12 control-label">Pais de nacimiento</label>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <select class="form-control select" formControlName="cbo_pais_nacimiento" tabindex="2">
-                                                <option value="">Seleccione Pais</option>
-                                                <option value="0100">EL SALVADOR</option>
-                                                <option value="1500">PANAMA</option>
-                                            </select>
+                                          <select formControlName="cbo_pais_nacimiento" >
+                                            <option value="{{pais.id}}" *ngFor="let pais of paises">{{pais.nombre}}</option>
+                                          </select>
+
                                             <div *ngIf="submitted && f['cbo_pais_nacimiento'].errors"
                                                 class="invalid-feedback">
                                                 <div *ngIf="f['cbo_pais_nacimiento'].errors?.['required']">Complete este
@@ -148,7 +147,7 @@
                                         </div>
                                         <div class="col-md-12">&nbsp;</div>
                                     </div>
-                                    
+
 
 
                                 </div>
@@ -157,7 +156,7 @@
                                     <div class="col-md-12">
                                     </div>
                                   </div>
-                          
+
                                   <div class="row">
                                     <div class="col-md-12 d-flex justify-content-center">
                                       <button (click)="back()" type="button" class="btn btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
