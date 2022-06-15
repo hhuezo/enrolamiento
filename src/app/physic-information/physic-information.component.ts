@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
 })
 export class PhysicInformationComponent implements OnInit {
 
+  //opctions icons
+  img_physic_information?: HTMLImageElement;
+  img_personal_information?: HTMLImageElement;
+
   form!:FormGroup;
   submitted = false;
 
@@ -35,7 +39,7 @@ export class PhysicInformationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.load_icons();
     this.submitted = true;
 
     // if (this.form!.invalid) {
@@ -120,4 +124,11 @@ export class PhysicInformationComponent implements OnInit {
 
   }
 
+  load_icons() {
+    this.img_personal_information = document.getElementById("img_personal_information") as HTMLImageElement;
+    this.img_personal_information.src = "../../assets/images/datos_personales_blue.svg";
+
+    this.img_physic_information = document.getElementById("img_physic_information") as HTMLImageElement;
+    this.img_physic_information.src = "../../assets/images/datos_fisicos_blue.svg";
+  }
 }

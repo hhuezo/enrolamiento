@@ -24,6 +24,8 @@ export class PersonalInformationComponent implements OnInit {
   estado_civil!: string;
   genero!: string;
   telefono_celular!: string;
+
+  img_personal_information?: HTMLImageElement;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +35,7 @@ export class PersonalInformationComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.load_icons();
     this.submitted = true;
 
     // if (this.form!.invalid) {
@@ -121,6 +124,11 @@ console.log('this.telefono_celular= '+this.telefono_celular+'<br>');
     this.router.navigate(['/physic-information']);
 
 
+  }
+
+  load_icons() {
+    this.img_personal_information = document.getElementById("img_personal_information") as HTMLImageElement;
+    this.img_personal_information.src = "../../assets/images/datos_personales_blue.svg";
   }
 
 }

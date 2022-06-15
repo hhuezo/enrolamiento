@@ -9,6 +9,11 @@ import { Router } from '@angular/router';
 })
 export class DemographicInformationComponent implements OnInit {
 
+  //options icons
+  img_physic_information?: HTMLImageElement;
+  img_personal_information?: HTMLImageElement;
+  img_demographic_information?: HTMLImageElement;
+
   form!:FormGroup;
   submitted = false;
 
@@ -26,7 +31,7 @@ export class DemographicInformationComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.load_icons();
     this.submitted = true;
 
     // if (this.form!.invalid) {
@@ -84,5 +89,16 @@ export class DemographicInformationComponent implements OnInit {
     return this.form!.controls;
   }
 
+  load_icons() {
+    
+    this.img_personal_information = document.getElementById("img_personal_information") as HTMLImageElement;
+    this.img_personal_information.src = "../../assets/images/datos_personales_blue.svg";
+
+    this.img_physic_information = document.getElementById("img_physic_information") as HTMLImageElement;
+    this.img_physic_information.src = "../../assets/images/datos_fisicos_blue.svg";
+
+    this.img_demographic_information = document.getElementById("img_demographic_information") as HTMLImageElement;
+    this.img_demographic_information.src = "../../assets/images/datos_demograficos_blue.svg";
+  }
 
 }
