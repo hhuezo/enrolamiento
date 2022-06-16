@@ -73,6 +73,24 @@ export class DatosPersonaService {
   }
 
 
+  physicInformation(requestDatosPersona: RequestDatosPersona) {
+
+    this.url = "http://192.168.26.32/blog/public/api/tmp_persona/physic_information";
+    const body = `{"dui":"${sessionStorage.getItem("dui")}","anteojos":"${requestDatosPersona.anteojos}","nariz":"${requestDatosPersona.nariz}",
+    "piel":"${requestDatosPersona.piel}","senales_especiales":"${requestDatosPersona.senales_especiales}",
+    "boca":"${requestDatosPersona.boca}","audifonos":"${requestDatosPersona.audifonos}",
+    "peso_libras":"${requestDatosPersona.peso_libras}","cabello":"${requestDatosPersona.cabello}","lentes_contacto":"${requestDatosPersona.lentes_contacto}",
+    "ojos":"${requestDatosPersona.ojos}","estatura":"${requestDatosPersona.estatura}","tipo_sangre":"${requestDatosPersona.tipo_sangre}"}`;
+
+    console.log('esta es el body guardar persona ' + body);
+    console.log('esta es la url guardar persona ' + this.url);
+
+    //console.log('esta es la url validate login '+this.url);
+
+    return this.http.post<any>(this.url, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
 
 
   getPersona() {

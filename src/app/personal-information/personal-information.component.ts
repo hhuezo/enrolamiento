@@ -19,7 +19,7 @@ export class PersonalInformationComponent implements OnInit {
   responseOcupaciones?: ResponseOcupaciones;
   RequestDatosPersona?: RequestDatosPersona;
 
-  empleado: any;
+  persona: any;
 
 
   form!: FormGroup;
@@ -97,7 +97,7 @@ export class PersonalInformationComponent implements OnInit {
 
 
 
-    //createPersona
+
     if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
       //console.log('sin session');
     }
@@ -106,23 +106,23 @@ export class PersonalInformationComponent implements OnInit {
       this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
         this.RequestDatosPersona = resp;
 
-     //   console.log('empleado: ', this.RequestDatosPersona);
-        this.empleado = this.RequestDatosPersona;
+     //   console.log('persona: ', this.RequestDatosPersona);
+        this.persona = this.RequestDatosPersona;
 
 
-        this.nombre = this.empleado[0].PER_NOMBRE;
-        this.ape_paterno = this.empleado[0].PER_APELLIDO_PATERNO;
-        this.ape_materno = this.empleado[0].PER_APELLIDO_MATERNO;
-        this.ape_casada = this.empleado[0].PER_APELLIDO_CASADA;
-        this.dui = this.empleado[0].PER_NRO_DE_DOCUMENTO;
-        this.fecha_emision_dui = this.empleado[0].PER_FECHA_EMISION_DUI
-        this.ocupacion = this.empleado[0].PER_ID_OCU_CODIGO;
-        this.fecha_vto_dui = this.empleado[0].PER_FECHA_VENCIMIENTO_DUI
+        this.nombre = this.persona[0].PER_NOMBRE;
+        this.ape_paterno = this.persona[0].PER_APELLIDO_PATERNO;
+        this.ape_materno = this.persona[0].PER_APELLIDO_MATERNO;
+        this.ape_casada = this.persona[0].PER_APELLIDO_CASADA;
+        this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
+        this.fecha_emision_dui = this.persona[0].PER_FECHA_EMISION_DUI
+        this.ocupacion = this.persona[0].PER_ID_OCU_CODIGO;
+        this.fecha_vto_dui = this.persona[0].PER_FECHA_VENCIMIENTO_DUI
 
-        this.email = this.empleado[0].PER_EMAIL;
-        this.estado_civil = this.empleado[0].PER_ESTADO_CIVIL;
-        this.genero = this.empleado[0].PER_SEXO;
-        this.telefono_celular = this.empleado[0].PER_TELEFONO_PERSONAL;
+        this.email = this.persona[0].PER_EMAIL;
+        this.estado_civil = this.persona[0].PER_ESTADO_CIVIL;
+        this.genero = this.persona[0].PER_SEXO;
+        this.telefono_celular = this.persona[0].PER_TELEFONO_PERSONAL;
 
       });
 
