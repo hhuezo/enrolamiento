@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
 
 
   datos_personales(){
+    sessionStorage.setItem('dui', '');
     this.router.navigate(['/personal-information']);
   }
 

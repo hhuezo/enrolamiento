@@ -37,12 +37,12 @@ export class DatosPersonaService {
 
 
   createPersona(requestDatosPersona: RequestDatosPersona) {
-    this.url = "http://192.168.26.32/blog/public/api/tmp_persona/";
+    this.url = "http://192.168.26.32/blog/public/api/tmp_persona";
     const body = `{"nombre":"${requestDatosPersona.nombre}","ape_materno":"${requestDatosPersona.ape_materno}",
     "ape_paterno":"${requestDatosPersona.ape_paterno}","ape_casada":"${requestDatosPersona.ape_casada}",
     "fecha_emision_dui":"${requestDatosPersona.fecha_emision_dui}","dui":"${requestDatosPersona.dui}",
     "email":"${requestDatosPersona.email}","genero":"${requestDatosPersona.genero}","fecha_vto_dui":"${requestDatosPersona.fecha_vto_dui}",
-    "telefono_celular":"${requestDatosPersona.telefono_celular}"}`;
+    "telefono_celular":"${requestDatosPersona.telefono_celular}","ocupacion":"${requestDatosPersona.ocupacion}"}`;
 
     console.log('esta es el body guardar persona ' + body);
     console.log('esta es la url guardar persona ' + this.url);
@@ -54,6 +54,27 @@ export class DatosPersonaService {
     });
   }
 
+  updatePersonalInformation(requestDatosPersona: RequestDatosPersona) {
+    this.url = "http://192.168.26.32/blog/public/api/tmp_persona/personal_information/"+sessionStorage.getItem('dui');
+    const body = `{"nombre":"${requestDatosPersona.nombre}","ape_materno":"${requestDatosPersona.ape_materno}",
+    "ape_paterno":"${requestDatosPersona.ape_paterno}","ape_casada":"${requestDatosPersona.ape_casada}",
+    "fecha_emision_dui":"${requestDatosPersona.fecha_emision_dui}","dui":"${requestDatosPersona.dui}",
+    "email":"${requestDatosPersona.email}","genero":"${requestDatosPersona.genero}","fecha_vto_dui":"${requestDatosPersona.fecha_vto_dui}",
+    "telefono_celular":"${requestDatosPersona.telefono_celular}","ocupacion":"${requestDatosPersona.ocupacion}"}`;
+
+    console.log('esta es el body modifica persona ' + body);
+    console.log('esta es la url guardar persona ' + this.url);
+
+    //console.log('esta es la url validate login '+this.url);
+
+    return this.http.post<any>(this.url, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+
+
+
   getPersona() {
 
     //console.log("Inicio dentro de login");
@@ -63,7 +84,7 @@ export class DatosPersonaService {
 
     //console.log('esta es el body validate login '+body);
     this.url ="http://192.168.26.32/blog/public/api/tmp_persona/"+sessionStorage.getItem('dui');
-    console.log('esta es la url show persona ' + this.url);
+    //console.log('esta es la url show persona ' + this.url);
 
     //console.log('esta es la url validate login '+this.url);
 

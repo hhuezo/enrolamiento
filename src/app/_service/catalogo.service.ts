@@ -29,7 +29,7 @@ export class CatalogoService {
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
     //console.log('esta es el body validate login '+body);
-    console.log('esta es la url catalogo paises ' + this.url_paises);
+    //console.log('esta es la url catalogo paises ' + this.url_paises);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -43,8 +43,8 @@ export class CatalogoService {
 
   getOcupaciones() {
 
-    this.url_ocupaciones ="http://192.168.26.32/blog/public/api/get_ocupaciones";
-    console.log('esta es la url catalogo paises ' + this.url_ocupaciones);
+    //this.url_ocupaciones = "http://192.168.26.32/blog/public/api/get_ocupaciones";
+    //console.log('esta es la url catalogo ocupaciones ' + this.url_ocupaciones);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -56,22 +56,22 @@ export class CatalogoService {
 
 
 
-  getDepartamentos(paisSeleccionado: string){
+  getDepartamentos(paisSeleccionado: string) {
 
-    if (paisSeleccionado==='1') this.divisionSeleccionada='DP';
-    if (paisSeleccionado==='2') this.divisionSeleccionada='PV';
+    if (paisSeleccionado === '1') this.divisionSeleccionada = 'DP';
+    if (paisSeleccionado === '2') this.divisionSeleccionada = 'PV';
 
     //console.log("Inicio dentro de login");
 
     //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
-//console.log('esta es el body validate login '+body);
-console.log('esta es la url catalogo departamentos '+this.url_departamentos);
+    //console.log('esta es el body validate login '+body);
+    console.log('esta es la url catalogo departamentos ' + this.url_departamentos);
 
     //console.log('esta es la url validate login '+this.url);
 
-    return this.http.get<any>(this.url_departamentos+"/"+paisSeleccionado+"/"+this.divisionSeleccionada, {
+    return this.http.get<any>(this.url_departamentos + "/" + paisSeleccionado + "/" + this.divisionSeleccionada, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
 
@@ -79,22 +79,22 @@ console.log('esta es la url catalogo departamentos '+this.url_departamentos);
 
 
 
-  getMunicipios(paisSeleccionado: string, departamentoSeleccionado: string){
+  getMunicipios(paisSeleccionado: string, departamentoSeleccionado: string) {
 
-    if (paisSeleccionado==='1') this.divisionSeleccionada='MU';
-    if (paisSeleccionado==='2') this.divisionSeleccionada='DT';
+    if (paisSeleccionado === '1') this.divisionSeleccionada = 'MU';
+    if (paisSeleccionado === '2') this.divisionSeleccionada = 'DT';
 
     //console.log("Inicio dentro de login");
 
     //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
-//console.log('esta es el body validate login '+body);
-console.log('esta es la url catalogo departamentos '+this.url_municipios);
+    //console.log('esta es el body validate login '+body);
+    console.log('esta es la url catalogo departamentos ' + this.url_municipios);
 
     //console.log('esta es la url validate login '+this.url);
 
-    return this.http.get<any>(this.url_municipios+"/"+paisSeleccionado+"/"+this.divisionSeleccionada+"/"+departamentoSeleccionado, {
+    return this.http.get<any>(this.url_municipios + "/" + paisSeleccionado + "/" + this.divisionSeleccionada + "/" + departamentoSeleccionado, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
 
