@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ResponseDepartamentos } from '../_model/responseDepartamentos';
+import { ResponseMunicipios } from '../_model/responseMunicipios';
 import { ResponsePaises } from '../_model/responsePaises';
 import { CatalogoService } from '../_service/catalogo.service';
 
@@ -16,7 +18,7 @@ export class DemographicInformationComponent implements OnInit {
   img_personal_information?: HTMLImageElement;
   img_demographic_information?: HTMLImageElement;
 
-  paises: any;
+
 
   form!:FormGroup;
   submitted = false;
@@ -28,7 +30,15 @@ export class DemographicInformationComponent implements OnInit {
   departamento!: string;
   fecha_nacimiento!: string;
 
-  responsePaises?: ResponsePaises;
+  responsePaises?: ResponsePaises[];
+  paises: ResponsePaises[] = [];
+
+  responseDepartamentos?: ResponseDepartamentos[];
+  departamentos: ResponseDepartamentos[] = [];
+
+  responseMunicipios?: ResponseMunicipios[];
+  municipios: ResponseMunicipios[] = [];
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,16 +71,48 @@ export class DemographicInformationComponent implements OnInit {
     );
 
 
-    this.catalogoService.getPaises().subscribe((resp: ResponsePaises) => { this.responsePaises = resp;
-      console.log('paises: ', this.responsePaises);
-      this.paises = this.responsePaises  ;
+    this.catalogoService.getPaises().subscribe((resp: ResponsePaises[]) => { this.responsePaises = resp;
+      console.log('response paises: ', this.responsePaises);
 
+      this.paises = this.responsePaises;
 
     });
 
 
 
   }
+
+
+  onChangePais(paisSeleccionado: string){
+
+    this.catalogoService.getDepartamentos(paisSeleccionado).subscribe((resp: ResponseDepartamentos[]) => { this.responseDepartamentos = resp;
+      console.log('response paises: ', this.responsePaises);
+
+      this.departamentos = this.responseDepartamentos;
+
+
+    });
+
+
+  }
+
+
+
+  onChangeDepartamento(paisSeleccionado: string, departamentoSeleccionado: string){
+
+    this.catalogoService.getMunicipios(paisSeleccionado, departamentoSeleccionado).subscribe((resp: ResponseMunicipios[]) => { this.responseMunicipios = resp;
+      console.log('response paises: ', this.responseMunicipios);
+
+      this.municipios = this.responseMunicipios;
+
+
+    });
+
+
+  }
+
+
+
 
   back(){
     this.router.navigate(['/home']);

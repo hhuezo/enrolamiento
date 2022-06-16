@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RequestDatosPersona } from '../_model/requestDatosPersona';
+import { ResponseEmpleados } from '../_model/responseEmpleados';
 import { ResponseOcupaciones } from '../_model/responseOcupaciones';
 import { CatalogoService } from '../_service/catalogo.service';
+import { DatosPersonaService } from '../_service/datos-persona.service';
 
 
 @Component({
@@ -15,6 +18,10 @@ export class PersonalInformationComponent implements OnInit {
   //combos
   ocupaciones: any;
   responseOcupaciones?: ResponseOcupaciones;
+  responseEmpleados?: ResponseEmpleados;
+
+  empleado: any;
+
 
   form!: FormGroup;
   submitted = false;
@@ -34,9 +41,15 @@ export class PersonalInformationComponent implements OnInit {
 
   img_personal_information?: HTMLImageElement;
 
+
+
+
+
+
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router, private catalogoService: CatalogoService
+    private router: Router, private catalogoService: CatalogoService,
+    private datosPersonaService: DatosPersonaService
   ) { }
 
 
@@ -44,6 +57,48 @@ export class PersonalInformationComponent implements OnInit {
 
     this.load_icons();
     this.submitted = true;
+
+
+    //para combo de ocupaciones
+    this.catalogoService.getOcupaciones().subscribe((resp: ResponseOcupaciones) => {
+      this.responseOcupaciones = resp;
+      console.log('ocupaciones: ', this.responseOcupaciones);
+      this.ocupaciones = this.responseOcupaciones;
+    });
+
+    if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
+      //console.log('sin session');
+    }
+    else {
+
+
+
+
+      this.datosPersonaService.getPersona().subscribe((resp: ResponseEmpleados) => {
+        this.responseEmpleados = resp;
+        //console.log('empleado: ', this.responseEmpleados);
+        this.empleado = this.responseEmpleados;
+
+
+        this.nombre = this.empleado[0].PER_NOMBRE;
+        this.ape_paterno = this.empleado[0].PER_NOMBRE;
+        this.ape_materno = this.empleado[0].PER_APELLIDO_MATERNO;
+        this.ape_casada = this.empleado[0].PER_APELLIDO_CASADA;
+        this.dui = this.empleado[0].PER_NRO_DE_DOCUMENTO;
+        this.fecha_emision_dui = this.empleado[0].PER_FECHA_EMISION_DUI
+        this.ocupacion = this.empleado[0].PER_ID_OCU_CODIGO;
+        this.fecha_vto_dui = this.empleado[0].PER_FECHA_VENCIMIENTO_DUI
+
+        this.email = this.empleado[0].PER_EMAIL;
+        this.estado_civil = this.empleado[0].PER_ESTADO_CIVIL;
+        this.genero = this.empleado[0].PER_SEXO;
+        this.telefono_celular = this.empleado[0].PER_TELEFONO_PERSONAL;
+
+
+      });
+
+
+    }
 
     // if (this.form!.invalid) {
     //   return;
@@ -69,15 +124,20 @@ export class PersonalInformationComponent implements OnInit {
 
       }
 
+
+
+
     )
 
 
-    this.catalogoService.getOcupaciones().subscribe((resp: ResponseOcupaciones) => { this.responseOcupaciones = resp;
-      console.log('ocupaciones: ', this.responseOcupaciones);
-      this.ocupaciones = this.responseOcupaciones  ;
 
 
-    });
+
+
+
+    //createPersona
+
+
   }
 
 
@@ -138,7 +198,31 @@ export class PersonalInformationComponent implements OnInit {
     sessionStorage.setItem('telefono_celular', this.telefono_celular);
 
 
-    this.router.navigate(['/physic-information']);
+    //this.router.navigate(['/physic-information']);
+
+
+
+
+    let body = new RequestDatosPersona();
+    body.nombre = this.nombre;
+    body.ape_materno = this.ape_materno;
+    body.ape_paterno = this.ape_paterno;
+    body.ape_casada = this.ape_casada;
+    body.fecha_emision_dui = this.fecha_emision_dui;
+    body.dui = this.dui;
+    body.email = this.email;
+    body.genero = this.genero;
+    body.fecha_vto_dui = this.fecha_vto_dui;
+    body.telefono_celular = this.telefono_celular;
+
+
+    this.datosPersonaService.createPersona(body).subscribe((resp: ResponseEmpleados) => {
+      this.responseEmpleados = resp;
+      console.log('paises: ', this.responseEmpleados);
+      //this.paises = this.responseEmpleados  ;
+
+
+    });
 
 
   }
