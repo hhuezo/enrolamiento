@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
-import { ResponseEmpleados } from '../_model/responseEmpleados';
 import { ResponseOcupaciones } from '../_model/responseOcupaciones';
 import { CatalogoService } from '../_service/catalogo.service';
 import { DatosPersonaService } from '../_service/datos-persona.service';
@@ -18,7 +17,7 @@ export class PersonalInformationComponent implements OnInit {
   //combos
   ocupaciones: any;
   responseOcupaciones?: ResponseOcupaciones;
-  responseEmpleados?: ResponseEmpleados;
+  RequestDatosPersona?: RequestDatosPersona;
 
   empleado: any;
 
@@ -104,11 +103,11 @@ export class PersonalInformationComponent implements OnInit {
     }
     else {
       console.log('session');
-      this.datosPersonaService.getPersona().subscribe((resp: ResponseEmpleados) => {
-        this.responseEmpleados = resp;
+      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
+        this.RequestDatosPersona = resp;
 
-     //   console.log('empleado: ', this.responseEmpleados);
-        this.empleado = this.responseEmpleados;
+     //   console.log('empleado: ', this.RequestDatosPersona);
+        this.empleado = this.RequestDatosPersona;
 
 
         this.nombre = this.empleado[0].PER_NOMBRE;
@@ -211,8 +210,8 @@ export class PersonalInformationComponent implements OnInit {
     body.ocupacion = this.ocupacion;
 
     if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
-      this.datosPersonaService.createPersona(body).subscribe((resp: ResponseEmpleados) => {
-        this.responseEmpleados = resp;
+      this.datosPersonaService.createPersona(body).subscribe((resp: RequestDatosPersona) => {
+        this.RequestDatosPersona = resp;
         sessionStorage.setItem('dui', this.dui);
       });
     }
@@ -221,8 +220,8 @@ export class PersonalInformationComponent implements OnInit {
       console.log("bodyyyy" + body);
 
       //update
-      this.datosPersonaService.updatePersonalInformation(body).subscribe((resp: ResponseEmpleados) => {
-        this.responseEmpleados = resp;
+      this.datosPersonaService.updatePersonalInformation(body).subscribe((resp: RequestDatosPersona) => {
+        this.RequestDatosPersona = resp;
       });
     }
 
