@@ -43,7 +43,7 @@ export class CatalogoService {
 
   getOcupaciones() {
 
-    this.url_ocupaciones ="http://localhost/blog/public/api/get_ocupaciones";
+    this.url_ocupaciones ="http://192.168.26.32/blog/public/api/get_ocupaciones";
     console.log('esta es la url catalogo paises ' + this.url_ocupaciones);
 
     //console.log('esta es la url validate login '+this.url);
