@@ -103,6 +103,20 @@ export class CatalogoService {
 
 
 
+  getGeros() {
+
+    this.url_ocupaciones = "http://192.168.26.32/blog/public/api/get_generos";
+
+
+    return this.http.get<any>(this.url_ocupaciones, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+
+  }
+
+
+
+
 
 
 }

@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { ResponseOcupaciones } from '../_model/responseOcupaciones';
+import { ResponseGeneros } from '../_model/responseGeneros';
 import { CatalogoService } from '../_service/catalogo.service';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 
@@ -16,7 +17,9 @@ export class PersonalInformationComponent implements OnInit {
 
   //combos
   ocupaciones: any;
+  generos: any;
   responseOcupaciones?: ResponseOcupaciones;
+  responseGeneros?: ResponseGeneros;
   RequestDatosPersona?: RequestDatosPersona;
 
   persona: any;
@@ -64,6 +67,11 @@ export class PersonalInformationComponent implements OnInit {
       //console.log('ocupacionesss: ', this.ocupaciones);
     });
 
+       //para combo de generos
+       this.catalogoService.getGeros().subscribe((resp: ResponseGeneros) => { this.responseGeneros = resp;
+        this.generos = this.responseGeneros;
+        console.log('generos: ', this.generos);
+      });
 
 
 
