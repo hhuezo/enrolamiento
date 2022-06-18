@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
+import { ResponseEstadosCivil } from '../_model/responseEstadosCivil';
 import { ResponseOcupaciones } from '../_model/responseOcupaciones';
 import { ResponseGeneros } from '../_model/responseGeneros';
 import { CatalogoService } from '../_service/catalogo.service';
@@ -43,7 +44,8 @@ export class PersonalInformationComponent implements OnInit {
 
   img_personal_information?: HTMLImageElement;
 
-
+  responseEstadosCivil?: ResponseEstadosCivil[];
+  estados_civil: ResponseEstadosCivil[] = [];
 
 
 
@@ -51,7 +53,7 @@ export class PersonalInformationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router, private catalogoService: CatalogoService,
-    private datosPersonaService: DatosPersonaService
+    private datosPersonaService: DatosPersonaService,
   ) { }
 
 
@@ -140,6 +142,20 @@ export class PersonalInformationComponent implements OnInit {
 
   }
 
+/*
+  onChangeEstadoCivil(paisSeleccionado: string){
+
+    this.catalogoService.getEstadosCiviles(paisSeleccionado).subscribe((resp: ResponseEstadosCivil[]) => { this.responseEstadosCivil = resp;
+      console.log('response estados civil: ', this.responseEstadosCivil);
+
+      this.estados_civil = this.responseEstadosCivil;
+
+
+    });
+
+
+  }
+*/
 
 
 
