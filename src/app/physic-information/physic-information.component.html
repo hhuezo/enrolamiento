@@ -57,14 +57,16 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Piel</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <select class="form-control select" formControlName="cbo_colores_pieles" tabindex="3">
-                                            <option value="">Seleccione color de piel</option>
-                                            <option value="1">BLANCA</option>
-                                            <option value="2">MORENA</option>
-                                            <option value="3">AMARILLA</option>
-                                            <option value="4">TRIGUEÑA</option>
-                                            <option value="5">NEGRA</option>
-                                        </select>
+
+                                      <select formControlName="cbo_colores_pieles" tabindex="4">
+                                        <option value="">Seleccione color de piel</option>
+                                        <option *ngFor="let item of color_piel" value="{{item.ID}}"
+                                          [selected]="colores_pieles == item.ID">
+                                          {{item.CPI_DESCRIPCION}}
+                                        </option>
+                                      </select>
+
+
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
                                 </div>

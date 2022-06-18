@@ -16,6 +16,7 @@ export class CatalogoService {
   private url_ocupaciones: string = `${environment.HOST_LOGIN}/api/catalogo/ocupaciones`;
   private url_generos: string = `${environment.HOST_LOGIN}/api/catalogo/generos`;
   private url_estados: string = `${environment.HOST_LOGIN}/api/catalogo/estados`;
+  private url_color_piel: string = `${environment.HOST_LOGIN}/api/catalogo/color_piel`;
   //private requestLogin?: RequestLogin;
 
   constructor(
@@ -123,6 +124,18 @@ export class CatalogoService {
 
 
     return this.http.get<any>(this.url_estados, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+
+  }
+
+
+  getColorPiel() {
+
+    this.url_color_piel = "http://192.168.26.32/blog/public/api/get_color_piel";
+
+
+    return this.http.get<any>(this.url_color_piel, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
 

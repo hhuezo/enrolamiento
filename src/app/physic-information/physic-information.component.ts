@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
-import { ResponseOcupaciones } from '../_model/responseOcupaciones';
+import { ResponseColoresPieles } from '../_model/responseColoresPieles';
+import { CatalogoService } from '../_service/catalogo.service';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 
 @Component({
@@ -16,10 +17,11 @@ export class PhysicInformationComponent implements OnInit {
   img_physic_information?: HTMLImageElement;
   img_personal_information?: HTMLImageElement;
 
-  responseOcupaciones?: ResponseOcupaciones;
+  responseColoresPieles?: ResponseColoresPieles;
   RequestDatosPersona?: RequestDatosPersona;
 
   persona: any;
+  color_piel: any;
 
   form!: FormGroup;
   submitted = false;
@@ -46,37 +48,12 @@ export class PhysicInformationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private datosPersonaService: DatosPersonaService,
+    private datosPersonaService: DatosPersonaService,private catalogoService: CatalogoService
   ) { }
 
   ngOnInit(): void {
     this.load_icons();
     this.submitted = true;
-
-    // if (this.form!.invalid) {
-    //   return;
-    // }
-
-    // sessionStorage.clear();
-    // localStorage.clear();
-
-    this.form = this.formBuilder.group(
-      {
-        cbo_anteojos: ['', Validators.required],
-        cbo_tipos_narices: ['', Validators.required],
-        cbo_colores_pieles: ['', Validators.required],
-        cbo_senales_especiales: ['', Validators.required],
-        cbo_tipos_bocas: ['', Validators.required],
-        txt_audifonos: ['', Validators.required],
-        txt_peso_libras: ['', Validators.required],
-        cbo_colores_cabellos: ['', Validators.required],
-        cbo_lentes_contacto: ['', Validators.required],
-        txt_estatura: ['', Validators.required],
-        cbo_colores_ojos: ['', Validators.required],
-        cbo_tipo_sangre: ['', Validators.required],
-      }
-
-    )
 
     if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
       console.log('session');
@@ -107,6 +84,35 @@ export class PhysicInformationComponent implements OnInit {
 
 
     }
+
+
+      //para combo de estados civiles
+      this.catalogoService.getColorPiel().subscribe((resp: ResponseColoresPieles) => {
+        this.responseColoresPieles = resp;
+        this.color_piel = this.responseColoresPieles;
+         console.log('color_piel: ', this.color_piel);
+      });
+
+
+    this.form = this.formBuilder.group(
+      {
+        cbo_anteojos: ['', Validators.required],
+        cbo_tipos_narices: ['', Validators.required],
+        cbo_colores_pieles: ['', Validators.required],
+        cbo_senales_especiales: ['', Validators.required],
+        cbo_tipos_bocas: ['', Validators.required],
+        txt_audifonos: ['', Validators.required],
+        txt_peso_libras: ['', Validators.required],
+        cbo_colores_cabellos: ['', Validators.required],
+        cbo_lentes_contacto: ['', Validators.required],
+        txt_estatura: ['', Validators.required],
+        cbo_colores_ojos: ['', Validators.required],
+        cbo_tipo_sangre: ['', Validators.required],
+      }
+
+    )
+
+
 
 
 
