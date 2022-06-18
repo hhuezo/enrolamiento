@@ -21,7 +21,9 @@ export class PersonalInformationComponent implements OnInit {
   generos: any;
   responseOcupaciones?: ResponseOcupaciones;
   responseGeneros?: ResponseGeneros;
+  responseEstadosCivil?: ResponseEstadosCivil;
   RequestDatosPersona?: RequestDatosPersona;
+
 
   persona: any;
 
@@ -44,8 +46,8 @@ export class PersonalInformationComponent implements OnInit {
 
   img_personal_information?: HTMLImageElement;
 
-  responseEstadosCivil?: ResponseEstadosCivil[];
-  estados_civil: ResponseEstadosCivil[] = [];
+
+  estados_civil?: any;
 
 
 
@@ -59,21 +61,66 @@ export class PersonalInformationComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+
     this.load_icons();
     this.submitted = true;
 
 
+    if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
+      //console.log('sin session');
+    }
+    else {
+      console.log('session');
+      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
+        this.RequestDatosPersona = resp;
+
+        console.log('persona actual: ', this.RequestDatosPersona);
+        this.persona = this.RequestDatosPersona;
+
+
+        this.nombre = this.persona[0].PER_NOMBRE;
+        this.ape_paterno = this.persona[0].PER_APELLIDO_PATERNO;
+        this.ape_materno = this.persona[0].PER_APELLIDO_MATERNO;
+        this.ape_casada = this.persona[0].PER_APELLIDO_CASADA;
+        this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
+        this.fecha_emision_dui = this.persona[0].PER_FECHA_EMISION_DUI
+        this.ocupacion = this.persona[0].PER_ID_OCU_CODIGO;
+        this.fecha_vto_dui = this.persona[0].PER_FECHA_VENCIMIENTO_DUI
+
+        this.email = this.persona[0].PER_EMAIL;
+        this.estado_civil = this.persona[0].PER_ESTADO_CIVIL;
+        this.genero = this.persona[0].PER_SEXO;
+        this.telefono_celular = this.persona[0].PER_TELEFONO_PERSONAL;
+
+      });
+
+
+    }
+
+
     //para combo de ocupaciones
-    this.catalogoService.getOcupaciones().subscribe((resp: ResponseOcupaciones) => { this.responseOcupaciones = resp;
+    this.catalogoService.getOcupaciones().subscribe((resp: ResponseOcupaciones) => {
+      this.responseOcupaciones = resp;
       this.ocupaciones = this.responseOcupaciones;
       //console.log('ocupacionesss: ', this.ocupaciones);
     });
 
-       //para combo de generos
-       this.catalogoService.getGeros().subscribe((resp: ResponseGeneros) => { this.responseGeneros = resp;
-        this.generos = this.responseGeneros;
-        console.log('generos: ', this.generos);
-      });
+    //para combo de generos
+    this.catalogoService.getGeneros().subscribe((resp: ResponseGeneros) => {
+      this.responseGeneros = resp;
+      this.generos = this.responseGeneros;
+      console.log("genro actual "+this.genero)
+    });
+
+    //para combo de estados civiles
+    this.catalogoService.getEstadoCivil().subscribe((resp: ResponseEstadosCivil) => {
+      this.responseEstadosCivil = resp;
+      this.estados_civil = this.responseEstadosCivil;
+      // console.log('estados_civil: ', this.estados_civil);
+    });
+
+
 
 
 
@@ -108,55 +155,9 @@ export class PersonalInformationComponent implements OnInit {
 
 
 
-    if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
-      //console.log('sin session');
-    }
-    else {
-      console.log('session');
-      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
-
-     //   console.log('persona: ', this.RequestDatosPersona);
-        this.persona = this.RequestDatosPersona;
-
-
-        this.nombre = this.persona[0].PER_NOMBRE;
-        this.ape_paterno = this.persona[0].PER_APELLIDO_PATERNO;
-        this.ape_materno = this.persona[0].PER_APELLIDO_MATERNO;
-        this.ape_casada = this.persona[0].PER_APELLIDO_CASADA;
-        this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
-        this.fecha_emision_dui = this.persona[0].PER_FECHA_EMISION_DUI
-        this.ocupacion = this.persona[0].PER_ID_OCU_CODIGO;
-        this.fecha_vto_dui = this.persona[0].PER_FECHA_VENCIMIENTO_DUI
-
-        this.email = this.persona[0].PER_EMAIL;
-        this.estado_civil = this.persona[0].PER_ESTADO_CIVIL;
-        this.genero = this.persona[0].PER_SEXO;
-        this.telefono_celular = this.persona[0].PER_TELEFONO_PERSONAL;
-
-      });
-
-
-    }
 
 
   }
-
-/*
-  onChangeEstadoCivil(paisSeleccionado: string){
-
-    this.catalogoService.getEstadosCiviles(paisSeleccionado).subscribe((resp: ResponseEstadosCivil[]) => { this.responseEstadosCivil = resp;
-      console.log('response estados civil: ', this.responseEstadosCivil);
-
-      this.estados_civil = this.responseEstadosCivil;
-
-
-    });
-
-
-  }
-*/
-
 
 
   get f(): { [key: string]: AbstractControl } {
@@ -184,7 +185,7 @@ export class PersonalInformationComponent implements OnInit {
     this.genero = this.form.controls['cbo_genero'].value;
     this.telefono_celular = this.form.controls['txt_telefono_celular'].value;
 
-    console.log("aaa: "+this.form.controls['txt_nombre'].value);
+    console.log("aaa: " + this.form.controls['txt_nombre'].value);
 
     console.log('this.nombre= ' + this.nombre + '<br>');
     console.log('this.ape_paterno= ' + this.ape_paterno + '<br>');
@@ -201,18 +202,18 @@ export class PersonalInformationComponent implements OnInit {
 
     console.log('guardando datos... de informacion personal');
 
-   /* sessionStorage.setItem('nombre', this.nombre);
-    sessionStorage.setItem('ape_paterno', this.ape_paterno);
-    sessionStorage.setItem('ape_materno', this.ape_materno);
-    sessionStorage.setItem('ape_casada', this.ape_casada);
+    /* sessionStorage.setItem('nombre', this.nombre);
+     sessionStorage.setItem('ape_paterno', this.ape_paterno);
+     sessionStorage.setItem('ape_materno', this.ape_materno);
+     sessionStorage.setItem('ape_casada', this.ape_casada);
 
-    sessionStorage.setItem('fecha_emision_dui', this.fecha_emision_dui);
-    sessionStorage.setItem('ocupacion', this.ocupacion);
-    sessionStorage.setItem('fecha_vto_dui', this.fecha_vto_dui);
-    sessionStorage.setItem('email', this.email);
-    sessionStorage.setItem('estado_civil', this.estado_civil);
-    sessionStorage.setItem('genero', this.genero);
-    sessionStorage.setItem('telefono_celular', this.telefono_celular);*/
+     sessionStorage.setItem('fecha_emision_dui', this.fecha_emision_dui);
+     sessionStorage.setItem('ocupacion', this.ocupacion);
+     sessionStorage.setItem('fecha_vto_dui', this.fecha_vto_dui);
+     sessionStorage.setItem('email', this.email);
+     sessionStorage.setItem('estado_civil', this.estado_civil);
+     sessionStorage.setItem('genero', this.genero);
+     sessionStorage.setItem('telefono_celular', this.telefono_celular);*/
 
 
 
@@ -232,6 +233,7 @@ export class PersonalInformationComponent implements OnInit {
     body.fecha_vto_dui = this.fecha_vto_dui;
     body.telefono_celular = this.telefono_celular;
     body.ocupacion = this.ocupacion;
+    body.estado_civil = this.estado_civil;
 
     if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
       this.datosPersonaService.createPersona(body).subscribe((resp: RequestDatosPersona) => {
@@ -239,7 +241,7 @@ export class PersonalInformationComponent implements OnInit {
         sessionStorage.setItem('dui', this.dui);
       });
     }
-    else{
+    else {
 
       console.log("bodyyyy" + body);
 
@@ -252,7 +254,7 @@ export class PersonalInformationComponent implements OnInit {
 
 
 
-    //this.router.navigate(['/physic-information']);
+    this.router.navigate(['/physic-information']);
   }
 
   load_icons() {

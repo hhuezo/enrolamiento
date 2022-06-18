@@ -14,6 +14,8 @@ export class CatalogoService {
   private url_departamentos: string = `${environment.HOST_LOGIN}/api/catalogo/departamentos`;
   private url_municipios: string = `${environment.HOST_LOGIN}/api/catalogo/municipios`;
   private url_ocupaciones: string = `${environment.HOST_LOGIN}/api/catalogo/ocupaciones`;
+  private url_generos: string = `${environment.HOST_LOGIN}/api/catalogo/generos`;
+  private url_estados: string = `${environment.HOST_LOGIN}/api/catalogo/estados`;
   //private requestLogin?: RequestLogin;
 
   constructor(
@@ -103,12 +105,24 @@ export class CatalogoService {
 
 
 
-  getGeros() {
+  getGeneros() {
 
-    this.url_ocupaciones = "http://192.168.26.32/blog/public/api/get_generos";
+    this.url_generos = "http://192.168.26.32/blog/public/api/get_generos";
 
 
-    return this.http.get<any>(this.url_ocupaciones, {
+    return this.http.get<any>(this.url_generos, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+
+  }
+
+
+  getEstadoCivil() {
+
+    this.url_estados = "http://192.168.26.32/blog/public/api/get_estado_civil";
+
+
+    return this.http.get<any>(this.url_estados, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
 
