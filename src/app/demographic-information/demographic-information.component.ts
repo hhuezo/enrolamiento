@@ -33,6 +33,8 @@ export class DemographicInformationComponent implements OnInit {
   responsePaises?: ResponsePaises[];
   paises: ResponsePaises[] = [];
 
+
+
   responseDepartamentos?: ResponseDepartamentos[];
   departamentos: ResponseDepartamentos[] = [];
 
@@ -76,7 +78,7 @@ export class DemographicInformationComponent implements OnInit {
       console.log('response paises: ', this.responsePaises);
 
       this.paises = this.responsePaises;
-
+      console.log("paiese :::" +this.responsePaises);
     });
 
 
