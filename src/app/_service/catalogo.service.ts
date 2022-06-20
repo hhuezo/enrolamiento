@@ -55,7 +55,7 @@ export class CatalogoService {
   getOcupaciones() {
 
     //this.url_ocupaciones ="http://192.168.26.32/blog/public/api/get_ocupaciones";
-    console.log('esta es la url catalogo paises ' + this.url_ocupaciones);
+    //console.log('esta es la url catalogo paises ' + this.url_ocupaciones);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -101,7 +101,7 @@ export class CatalogoService {
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
     //console.log('esta es el body validate login '+body);
-    console.log('esta es la url catalogo departamentos ' + this.url_municipios);
+  //  console.log('esta es la url catalogo departamentos ' + this.url_municipios);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -132,7 +132,7 @@ export class CatalogoService {
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
 //console.log('esta es el body validate login '+body);
-console.log('esta es la url catalogo estados civiles '+this.url_generos);
+//console.log('esta es la url catalogo estados civiles '+this.url_generos);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -155,7 +155,7 @@ console.log('esta es la url catalogo estados civiles '+this.url_generos);
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
 //console.log('esta es el body validate login '+body);
-console.log('esta es la url catalogo estados civiles '+this.url_estados_civiles);
+//console.log('esta es la url catalogo estados civiles '+this.url_estados_civiles);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -178,7 +178,7 @@ console.log('esta es la url catalogo estados civiles '+this.url_estados_civiles)
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
 //console.log('esta es el body validate login '+body);
-console.log('esta es la url catalogo estados civiles '+this.url_tipos_documento);
+//console.log('esta es la url catalogo estados civiles '+this.url_tipos_documento);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -200,7 +200,7 @@ console.log('esta es la url catalogo estados civiles '+this.url_tipos_documento)
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
 //console.log('esta es el body validate login '+body);
-console.log('esta es la url catalogo tipos de nariz '+this.url_tipos_nariz);
+//console.log('esta es la url catalogo tipos de nariz '+this.url_tipos_nariz);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -222,7 +222,7 @@ console.log('esta es la url catalogo tipos de nariz '+this.url_tipos_nariz);
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
 //console.log('esta es el body validate login '+body);
-console.log('esta es la url catalogo colores de piel '+this.url_colores_piel);
+//console.log('esta es la url catalogo colores de piel '+this.url_colores_piel);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -245,7 +245,7 @@ console.log('esta es la url catalogo colores de piel '+this.url_colores_piel);
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
 //console.log('esta es el body validate login '+body);
-console.log('esta es la url catalogo tipos de boca '+this.url_tipos_boca);
+//console.log('esta es la url catalogo tipos de boca '+this.url_tipos_boca);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -267,7 +267,7 @@ console.log('esta es la url catalogo tipos de boca '+this.url_tipos_boca);
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
 //console.log('esta es el body validate login '+body);
-console.log('esta es la url catalogo colores de cabello '+this.url_colores_cabello);
+//console.log('esta es la url catalogo colores de cabello '+this.url_colores_cabello);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -289,7 +289,7 @@ console.log('esta es la url catalogo colores de cabello '+this.url_colores_cabel
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
 //console.log('esta es el body validate login '+body);
-console.log('esta es la url catalogo colores de ojo '+this.url_colores_ojo);
+//console.log('esta es la url catalogo colores de ojo '+this.url_colores_ojo);
 
     //console.log('esta es la url validate login '+this.url);
 
