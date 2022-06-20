@@ -105,8 +105,8 @@
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <select formControlName="cbo_ocupacion"
                       class="form-control">
-                      <option value="{{ocupacion.ID}}" *ngFor="let ocupacion of
-                        ocupaciones">{{ocupacion.OCU_DESCRIPCION}}</option>
+                      <option value="{{ocupacion.id}}" *ngFor="let ocupacion of
+                        ocupaciones">{{ocupacion.ocu_descripcion}}</option>
                     </select>
 
                   </div>
@@ -136,8 +136,8 @@
                     <select class="form-control select"
                       formControlName="cbo_genero" tabindex="11">
                       <option value="">Seleccione Genero</option>
-                      <option value="MA">MASCULINO</option>
-                      <option value="FE">FEMENINO</option>
+                      <option value="{{genero.id}}" *ngFor="let genero of
+                      generos">{{genero.gen_descripcion}}</option>
                     </select>
 
                   </div>
@@ -229,9 +229,9 @@
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <select class="form-control select"
                       formControlName="cbo_estado_civil" tabindex="10">
-                      <option value="">Seleccione Estado</option>
-                      <option value="SO">SOLTERO</option>
-                      <option value="CA">CASADO(A)</option>
+                      <option value="">Seleccione Estado Civil</option>
+                      <option value="{{estado_civil.id}}" *ngFor="let estado_civil of
+                      estados_civil">{{estado_civil.est_descripcion}}</option>
                     </select>
 
                   </div>

@@ -18,6 +18,7 @@
             <div class="col-md-1">
             </div>
             <div class="col-md-10">
+                <form [formGroup]="form!" (ngSubmit)="guardar()">
                 <div class="row">
                     <div class="row">
                         <div class="col-md-12">&nbsp;
@@ -58,11 +59,8 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <select class="form-control select" formControlName="cbo_colores_pieles" tabindex="3">
                                             <option value="">Seleccione color de piel</option>
-                                            <option value="1">BLANCA</option>
-                                            <option value="2">MORENA</option>
-                                            <option value="3">AMARILLA</option>
-                                            <option value="4">TRIGUEÑA</option>
-                                            <option value="5">NEGRA</option>
+                                            <option value="{{color_piel.id}}" *ngFor="let color_piel of
+                                            colores_piel">{{color_piel.cpi_descripcion}}</option>
                                         </select>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
@@ -73,9 +71,8 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <select class="form-control select" formControlName="cbo_tipos_bocas" tabindex="5">
                                             <option value="">Seleccione tipo de boca</option>
-                                            <option value="1">CHICA</option>
-                                            <option value="2">REGULAR</option>
-                                            <option value="3">GRANDE</option>
+                                            <option value="{{tipo_boca.id}}" *ngFor="let tipo_boca of
+                                            tipos_boca">{{tipo_boca.tbo_descripcion}}</option>
                                         </select>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
@@ -115,12 +112,9 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <select class="form-control select" formControlName="cbo_colores_ojos" tabindex="11">
                                             <option value="">Seleccione colores de ojos</option>
-                                            <option value="1">AZULES</option>
-                                            <option value="2">VERDES</option>
-                                            <option value="3">PARDOS</option>
-                                            <option value="4">NEGROS</option>
-                                            <option value="5">CAFE</option>
-
+                                            <option value="{{color_ojo.id}}" *ngFor="let color_ojo of
+                                            colores_ojo">{{color_ojo.coj_descripcion}}</option>
+                                            
                                         </select>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
@@ -134,9 +128,9 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <select class="form-control select" formControlName="cbo_tipos_narices" tabindex="2">
                                             <option value="">Seleccione Nariz</option>
-                                            <option value="1">REGULAR</option>
-                                            <option value="2">GRANDE</option>
-                                            <option value="3">CHICA</option>
+                                            <option value="{{tipo_nariz.id}}" *ngFor="let tipo_nariz of
+                                            tipos_nariz">{{tipo_nariz.tna_descripcion}}</option>
+
                                         </select>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
@@ -177,16 +171,8 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <select class="form-control select" formControlName="cbo_colores_cabellos" tabindex="8">
                                             <option value="">Seleccione colores de cabello</option>
-                                            <option value="1">CASTAÑO</option>
-                                            <option value="2">NEGRO</option>
-                                            <option value="3">RUBIO</option>
-                                            <option value="4">CANO</option>
-                                            <option value="5">PELIRROJO</option>
-                                            <option value="6">CALVO</option>
-                                            <option value="7">ENTRECANO</option>
-                                            <option value="8">ROJO</option>
-                                            <option value="9">BLANCO</option>
-
+                                            <option value="{{color_cabello.id}}" *ngFor="let color_cabello of
+                                            colores_cabello">{{color_cabello.cca_descripcion}}</option>
                                         </select>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
@@ -242,6 +228,7 @@
 
                     </div>
                 </div>
+            </form>
             </div>
             <div class="col-md-1">
             </div>

@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ResponseColoresCabello } from '../_model/responseColoresCabello';
+import { ResponseColoresOjo } from '../_model/responseColoresOjo';
+import { ResponseColoresPiel } from '../_model/responseColoresPiel';
+import { ResponseTiposBoca } from '../_model/responseTiposBoca';
+import { ResponseTiposNariz } from '../_model/responseTiposNariz';
+import { CatalogoService } from '../_service/catalogo.service';
 
 @Component({
   selector: 'app-physic-information',
@@ -33,9 +39,29 @@ export class PhysicInformationComponent implements OnInit {
   estatura!: string;
   tipo_sangre!: string;
 
+
+
+  responseTiposNariz?: ResponseTiposNariz[];
+  tipos_nariz: ResponseTiposNariz[] = [];
+
+  responseColoresPiel?: ResponseColoresPiel[];
+  colores_piel: ResponseColoresPiel[] = [];
+
+  responseTiposBoca?: ResponseTiposBoca[];
+  tipos_boca: ResponseTiposBoca[] = [];
+
+  responseColoresCabello?: ResponseColoresCabello[];
+  colores_cabello: ResponseColoresCabello[] = [];
+
+  responseColoresOjo?: ResponseColoresOjo[];
+  colores_ojo: ResponseColoresOjo[] = [];
+
+
+
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private catalogoService: CatalogoService
   ) { }
 
   ngOnInit(): void {
@@ -49,17 +75,72 @@ export class PhysicInformationComponent implements OnInit {
     // sessionStorage.clear();
     // localStorage.clear();
 
+
+    //para combo de tipos de nariz
+    this.catalogoService.getTiposNariz().subscribe((resp: ResponseTiposNariz[]) => { this.responseTiposNariz = resp;
+      console.log('response tipos nariz: ', this.responseTiposNariz);
+
+      this.tipos_nariz = this.responseTiposNariz;
+
+
+    });
+    
+
+
+    //para combo colores de piel
+    this.catalogoService.getColoresPiel().subscribe((resp: ResponseColoresPiel[]) => { this.responseColoresPiel = resp;
+      console.log('response colores de piel: ', this.responseColoresPiel);
+
+      this.colores_piel = this.responseColoresPiel;
+
+
+    });
+    
+
+    //para combo de tipos de boca
+    this.catalogoService.getTiposBoca().subscribe((resp: ResponseTiposBoca[]) => { this.responseTiposBoca = resp;
+      console.log('response tipos boca: ', this.responseTiposBoca);
+
+      this.tipos_boca = this.responseTiposBoca;
+
+
+    });
+
+
+
+    //para combo colores de cabello
+    this.catalogoService.getColoresCabello().subscribe((resp: ResponseColoresCabello[]) => { this.responseColoresCabello = resp;
+      console.log('response colores de cabello: ', this.responseColoresCabello);
+
+      this.colores_cabello = this.responseColoresCabello;
+
+
+    });
+
+
+    //para combo colores de ojos
+    this.catalogoService.getColoresOjo().subscribe((resp: ResponseColoresOjo[]) => { this.responseColoresOjo = resp;
+      console.log('response colores de ojo: ', this.responseColoresOjo);
+
+      this.colores_ojo = this.responseColoresOjo;
+
+
+    });
+        
+
+
+
     this.form = this.formBuilder.group(
       {
-        txt_anteojos: ['', Validators.required],
+        cbo_anteojos: ['', Validators.required],
         cbo_tipos_narices: ['', Validators.required],
         cbo_colores_pieles: ['', Validators.required],
-        txt_senales_especiales: ['', Validators.required],
+        cbo_senales_especiales: ['', Validators.required],
         cbo_tipos_bocas: ['', Validators.required],
         txt_audifonos: ['', Validators.required],
         txt_peso_libras: ['', Validators.required],
         cbo_colores_cabellos: ['', Validators.required],
-        txt_lentes_contacto: ['', Validators.required],
+        cbo_lentes_contacto: ['', Validators.required],        
         txt_estatura: ['', Validators.required],
         cbo_colores_ojos: ['', Validators.required],
         cbo_tipo_sangre: ['', Validators.required],
@@ -77,15 +158,15 @@ export class PhysicInformationComponent implements OnInit {
   }
 
   guardar(){
-    this.anteojos = this.form.controls['txt_anteojos'].value;
+    this.anteojos = this.form.controls['cbo_anteojos'].value;
     this.tipos_narices = this.form.controls['cbo_tipos_narices'].value;
     this.colores_pieles = this.form.controls['cbo_colores_pieles'].value;
-    this.senales_especiales = this.form.controls['txt_senales_especiales'].value;
+    this.senales_especiales = this.form.controls['cbo_senales_especiales'].value;
     this.tipos_bocas = this.form.controls['cbo_tipos_bocas'].value;
     this.audifonos = this.form.controls['txt_audifonos'].value;
     this.peso_lb = this.form.controls['txt_peso_libras'].value;
     this.colores_cabellos = this.form.controls['cbo_colores_cabellos'].value;
-    this.lentes_contacto = this.form.controls['txt_lentes_contacto'].value;
+    this.lentes_contacto = this.form.controls['cbo_lentes_contacto'].value;
     this.estatura = this.form.controls['txt_estatura'].value;
     this.colores_ojos = this.form.controls['cbo_colores_ojos'].value;
     this.tipo_sangre = this.form.controls['cbo_tipo_sangre'].value;

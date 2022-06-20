@@ -40,6 +40,7 @@ export class DemographicInformationComponent implements OnInit {
   municipios: ResponseMunicipios[] = [];
 
 
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -95,6 +96,7 @@ export class DemographicInformationComponent implements OnInit {
 
 
   }
+
 
 
 

@@ -18,6 +18,7 @@ import { WebcamModule } from 'ngx-webcam';
 import { HeaderComponent } from './header/header.component';
 import { CarnetPrintComponent } from './carnet-print/carnet-print.component';
 import { OptionsComponent } from './options/options.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { OptionsComponent } from './options/options.component';
     FingerprintComponent,
     HeaderComponent,
     CarnetPrintComponent,
-    OptionsComponent
+    OptionsComponent,
+    ConfigurationComponent
   ],
   imports: [
     BrowserModule,
