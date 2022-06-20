@@ -3,8 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { ResponseEstadosCivil } from '../_model/responseEstadosCivil';
-import { ResponseOcupaciones } from '../_model/responseOcupaciones';
 import { ResponseGeneros } from '../_model/responseGeneros';
+import { ResponseOcupaciones } from '../_model/responseOcupaciones';
 import { CatalogoService } from '../_service/catalogo.service';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 
@@ -18,10 +18,8 @@ export class PersonalInformationComponent implements OnInit {
 
   //combos
   ocupaciones: any;
-  generos: any;
   responseOcupaciones?: ResponseOcupaciones;
-  responseGeneros?: ResponseGeneros;
-  responseEstadosCivil?: ResponseEstadosCivil;
+
   RequestDatosPersona?: RequestDatosPersona;
 
 
@@ -46,8 +44,11 @@ export class PersonalInformationComponent implements OnInit {
 
   img_personal_information?: HTMLImageElement;
 
+  responseGeneros?: ResponseGeneros[];
+  generos: ResponseGeneros[] = [];
 
-  estados_civil?: any;
+  responseEstadosCivil?: ResponseEstadosCivil[];
+  estados_civil: ResponseEstadosCivil[] = [];
 
 
 
@@ -65,6 +66,41 @@ export class PersonalInformationComponent implements OnInit {
 
     this.load_icons();
     this.submitted = true;
+
+
+    //para combo de ocupaciones
+    this.catalogoService.getOcupaciones().subscribe((resp: ResponseOcupaciones) => {
+      this.responseOcupaciones = resp;
+      console.log('ocupaciones: ', this.responseOcupaciones);
+      this.ocupaciones = this.responseOcupaciones;
+    });
+
+
+    //para combo de generos
+    this.catalogoService.getGeneros('1').subscribe((resp: ResponseGeneros[]) => {
+      this.responseGeneros = resp;
+      console.log('response generos: ', this.responseGeneros);
+
+      this.generos = this.responseGeneros;
+
+
+    });
+
+
+    //para combo de estados civiles
+    this.catalogoService.getEstadosCiviles().subscribe((resp: ResponseEstadosCivil[]) => {
+      this.responseEstadosCivil = resp;
+      console.log('response estados civil: ', this.responseEstadosCivil);
+
+      this.estados_civil = this.responseEstadosCivil;
+
+
+    });
+
+
+
+
+
 
 
     if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
@@ -99,26 +135,7 @@ export class PersonalInformationComponent implements OnInit {
     }
 
 
-    //para combo de ocupaciones
-    this.catalogoService.getOcupaciones().subscribe((resp: ResponseOcupaciones) => {
-      this.responseOcupaciones = resp;
-      this.ocupaciones = this.responseOcupaciones;
-      //console.log('ocupacionesss: ', this.ocupaciones);
-    });
 
-    //para combo de generos
-    this.catalogoService.getGeneros().subscribe((resp: ResponseGeneros) => {
-      this.responseGeneros = resp;
-      this.generos = this.responseGeneros;
-      console.log("genro actual "+this.genero)
-    });
-
-    //para combo de estados civiles
-    this.catalogoService.getEstadoCivil().subscribe((resp: ResponseEstadosCivil) => {
-      this.responseEstadosCivil = resp;
-      this.estados_civil = this.responseEstadosCivil;
-      // console.log('estados_civil: ', this.estados_civil);
-    });
 
 
 
@@ -141,12 +158,7 @@ export class PersonalInformationComponent implements OnInit {
         cbo_genero: ['', Validators.required],
         txt_telefono_celular: ['', Validators.required],
 
-      }
-
-
-
-
-    )
+      })
 
 
 

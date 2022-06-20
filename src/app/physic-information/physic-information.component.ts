@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RequestDatosPersona } from '../_model/requestDatosPersona';
-import { ResponseColoresPieles } from '../_model/responseColoresPieles';
+import { ResponseColoresCabello } from '../_model/responseColoresCabello';
+import { ResponseColoresOjo } from '../_model/responseColoresOjo';
+import { ResponseColoresPiel } from '../_model/responseColoresPiel';
+import { ResponseTiposBoca } from '../_model/responseTiposBoca';
+import { ResponseTiposNariz } from '../_model/responseTiposNariz';
 import { CatalogoService } from '../_service/catalogo.service';
+import { RequestDatosPersona } from '../_model/requestDatosPersona';
+
 import { DatosPersonaService } from '../_service/datos-persona.service';
 
 @Component({
@@ -17,7 +22,6 @@ export class PhysicInformationComponent implements OnInit {
   img_physic_information?: HTMLImageElement;
   img_personal_information?: HTMLImageElement;
 
-  responseColoresPieles?: ResponseColoresPieles;
   RequestDatosPersona?: RequestDatosPersona;
 
   persona: any;
@@ -44,6 +48,25 @@ export class PhysicInformationComponent implements OnInit {
   colores_cabellos!: string;
   estatura!: string;
   tipo_sangre!: string;
+
+
+
+  responseTiposNariz?: ResponseTiposNariz[];
+  tipos_nariz: ResponseTiposNariz[] = [];
+
+  responseColoresPiel?: ResponseColoresPiel[];
+  colores_piel: ResponseColoresPiel[] = [];
+
+  responseTiposBoca?: ResponseTiposBoca[];
+  tipos_boca: ResponseTiposBoca[] = [];
+
+  responseColoresCabello?: ResponseColoresCabello[];
+  colores_cabello: ResponseColoresCabello[] = [];
+
+  responseColoresOjo?: ResponseColoresOjo[];
+  colores_ojo: ResponseColoresOjo[] = [];
+
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -86,12 +109,62 @@ export class PhysicInformationComponent implements OnInit {
     }
 
 
-      //para combo de estados civiles
-      this.catalogoService.getColorPiel().subscribe((resp: ResponseColoresPieles) => {
-        this.responseColoresPieles = resp;
-        this.color_piel = this.responseColoresPieles;
-         console.log('color_piel: ', this.color_piel);
-      });
+
+
+
+
+    //para combo de tipos de nariz
+    this.catalogoService.getTiposNariz().subscribe((resp: ResponseTiposNariz[]) => { this.responseTiposNariz = resp;
+      console.log('response tipos nariz: ', this.responseTiposNariz);
+
+      this.tipos_nariz = this.responseTiposNariz;
+
+
+    });
+
+
+
+    //para combo colores de piel
+    this.catalogoService.getColoresPiel().subscribe((resp: ResponseColoresPiel[]) => { this.responseColoresPiel = resp;
+      console.log('response colores de piel: ', this.responseColoresPiel);
+
+      this.colores_piel = this.responseColoresPiel;
+
+
+    });
+
+
+    //para combo de tipos de boca
+    this.catalogoService.getTiposBoca().subscribe((resp: ResponseTiposBoca[]) => { this.responseTiposBoca = resp;
+      console.log('response tipos boca: ', this.responseTiposBoca);
+
+      this.tipos_boca = this.responseTiposBoca;
+
+
+    });
+
+
+
+    //para combo colores de cabello
+    this.catalogoService.getColoresCabello().subscribe((resp: ResponseColoresCabello[]) => { this.responseColoresCabello = resp;
+      console.log('response colores de cabello: ', this.responseColoresCabello);
+
+      this.colores_cabello = this.responseColoresCabello;
+
+
+    });
+
+
+    //para combo colores de ojos
+    this.catalogoService.getColoresOjo().subscribe((resp: ResponseColoresOjo[]) => { this.responseColoresOjo = resp;
+      console.log('response colores de ojo: ', this.responseColoresOjo);
+
+      this.colores_ojo = this.responseColoresOjo;
+
+
+    });
+
+
 
 
     this.form = this.formBuilder.group(

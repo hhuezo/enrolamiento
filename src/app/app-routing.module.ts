@@ -10,6 +10,7 @@ import { PhotographyComponent } from './photography/photography.component';
 import { PhysicInformationComponent } from './physic-information/physic-information.component';
 import { SignComponent } from './sign/sign.component';
 import { OptionsComponent } from './options/options.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 /* se declaran las rutas de los componentes */
 const routes: Routes = [
@@ -23,6 +24,8 @@ const routes: Routes = [
   { path: 'fingerprint', component: FingerprintComponent },
   { path: 'carnet-print', component: CarnetPrintComponent },
   { path: 'options', component: OptionsComponent },
+  { path: 'configuration', component: ConfigurationComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 

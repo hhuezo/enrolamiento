@@ -140,10 +140,7 @@
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <select formControlName="cbo_genero" tabindex="4">
                       <option value="">Seleccione Genero</option>
-                      <option *ngFor="let item of generos" value="{{item.ID}}"
-                        [selected]="genero == item.ID">
-                        {{item.GEN_DESCRIPCION}}
-                      </option>
+                      <option value="{{item.id}}" *ngFor="let item of  generos" [selected]="genero == item.id">{{item.gen_descripcion}}</option>
                     </select>
 
 
@@ -243,12 +240,8 @@
 
                     <select class="form-control select"
                       formControlName="cbo_estado_civil" tabindex="10">
-
-                        <option value="">Seleccione Estado</option>
-                        <option *ngFor="let item of estados_civil"  value="{{item.ID}}"   [selected]="estado_civil == item.ID">
-                          {{item.EST_DESCRIPCION}}
-                        </option>
-
+                      <option value="">Seleccione Estado Civil</option>
+                      <option value="{{item.id}}" *ngFor="let item of estados_civil" [selected]="estado_civil == item.id">{{item.est_descripcion}}</option>
                     </select>
 
                   </div>

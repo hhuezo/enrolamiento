@@ -100,7 +100,8 @@ export class LoginComponent implements OnInit {
             // localStorage.setItem('codigo_pais', this.codigo_pais);
 
             // this.router.navigate(['/home']);
-            this.router.navigate(['/home']);
+            this.router.navigate(['/configuration']);
+
             
         } else if (this.responselogin.val === '1') {
             this.msjerr = this.responselogin.mensaje;

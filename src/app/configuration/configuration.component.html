@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      Enrolamiento
+    </title>
+
+  </head>
+
+  <body>
+    <app-header></app-header>
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+          <form [formGroup]="form!" (ngSubmit)="guardar()">
+            <div class="row">
+              <div class="col-md-12">&nbsp;
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">&nbsp;
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h1>Configuracion </h1>
+              </div>
+            </div>
+            <div class="row">
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label">Pais</label>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <select formControlName="cbo_pais_documento"
+                      class="form-control">
+                      <option value="{{pais.id}}" *ngFor="let pais of
+                        paises">{{pais.nombre}}</option>
+                    </select>
+
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+
+              <div class="form-group">
+                <label class="col-md-12 control-label">Codigo Area (del Pais) </label>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control"
+                        formControlName="txt_codigo_area"
+                         />
+   
+
+                </div>
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+            </div>
+
+            <div class="col-md-4">
+
+              <div class="form-group">
+                <label class="col-md-12 control-label">Tipo Documento</label>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <select formControlName="cbo_tipo_documento"
+                    class="form-control">
+                    <option value="{{tipo_documento.id}}" *ngFor="let tipo_documento of
+                      tipos_documento">{{tipo_documento.tdo_descripcion}}</option>
+                  </select>
+
+                </div>
+                <div class="col-md-12">&nbsp;</div>
+              </div>
+          </div>
+            
+            </div>
+
+
+
+
+
+            <div class="row">
+              <div class="col-md-12">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 d-flex justify-content-center">
+                <button (click)="back()" type="button" class="btn
+                  btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button (click)="guardar()" type="button" class="btn
+                  btn-primary">&nbsp;Guardar&nbsp;</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="row">
+          <div class="col-md-12">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </body>
+
+</html>
