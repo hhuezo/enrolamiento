@@ -103,8 +103,8 @@
                                             (change)='onChangePais(cbo_pais_nacimiento.value)'
                                             >
                                             <option value="">Seleccione Pais</option>
-                                            <option value="{{pais.id}}" *ngFor="let pais of
-                                            paises">{{pais.nombre}}</option>
+                                            <option value="{{item.id}}" *ngFor="let item of
+                                            paises">{{item.pai_descripcion}}</option>
                                             </select>
                                             <div *ngIf="submitted && f['cbo_pais_nacimiento'].errors"
                                                 class="invalid-feedback">

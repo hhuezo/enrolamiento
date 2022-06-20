@@ -41,29 +41,32 @@
             </div>
             <div class="row">
 
-            <div class="col-md-4">
+            <div class="col-md-3">
 
                 <div class="form-group">
                   <label class="col-md-12 control-label">Pais</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <select formControlName="cbo_pais_documento"
-                      class="form-control">
-                      <option value="{{pais.id}}" *ngFor="let pais of
-                        paises">{{pais.nombre}}</option>
+                    <select class="form-control select" formControlName="cbo_pais_documento"
+                    #cbo_pais_documento tabindex="2"
+                    (change)='onChangePais(cbo_pais_documento.value)'
+                    >
+
+                      <option value="{{item.id}}" *ngFor="let item of
+                        paises">{{item.pai_descripcion}}</option>
                     </select>
 
                   </div>
                   <div class="col-md-12">&nbsp;</div>
                 </div>
             </div>
-
-            <div class="col-md-4">
+            
+            <div class="col-md-3">
 
               <div class="form-group">
-                <label class="col-md-12 control-label">Codigo Area (del Pais) </label>
+                <label class="col-md-12 control-label">Codigo (del Pais) </label>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="text" class="form-control"
-                        formControlName="txt_codigo_area"
+                        formControlName="txt_codigo_pais" id="txt_codigo_pais"
                          />
    
 
@@ -72,13 +75,30 @@
             </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
+
+              <div class="form-group">
+                <label class="col-md-12 control-label">Codigo Area (del Pais) </label>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control"
+                        formControlName="txt_codigo_area" id="txt_codigo_area"
+                         />
+   
+
+                </div>
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+            </div>
+
+            <div class="col-md-3">
 
               <div class="form-group">
                 <label class="col-md-12 control-label">Tipo Documento</label>
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                  <select formControlName="cbo_tipo_documento"
-                    class="form-control">
+                  <select class="form-control select" formControlName="cbo_tipo_documento"
+                  #cbo_tipo_documento tabindex="2"
+                  (change)='onChangeTipoDocumento(cbo_tipo_documento.value)'
+                  >
                     <option value="{{tipo_documento.id}}" *ngFor="let tipo_documento of
                       tipos_documento">{{tipo_documento.tdo_descripcion}}</option>
                   </select>

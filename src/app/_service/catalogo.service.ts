@@ -51,6 +51,49 @@ export class CatalogoService {
   }
 
 
+  getPais(paisSeleccionado: string){
+
+    // if (paisSeleccionado==='1') this.divisionSeleccionada='DP';
+    // if (paisSeleccionado==='2') this.divisionSeleccionada='PV';
+
+    //console.log("Inicio dentro de login");
+
+    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
+    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
+
+//console.log('esta es el body validate login '+body);
+console.log('esta es la url catalogo de pais seleccionado '+this.url_paises);
+
+    //console.log('esta es la url validate login '+this.url);
+
+    return this.http.get<any>(this.url_paises+"/"+paisSeleccionado, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+
+  }
+
+
+  getTipoDocumento(codigoTipoDocumento: string){
+
+    // if (paisSeleccionado==='1') this.divisionSeleccionada='DP';
+    // if (paisSeleccionado==='2') this.divisionSeleccionada='PV';
+
+    //console.log("Inicio dentro de login");
+
+    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
+    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
+
+//console.log('esta es el body validate login '+body);
+console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_tipos_documento);
+
+    //console.log('esta es la url validate login '+this.url);
+
+    return this.http.get<any>(this.url_tipos_documento+"/"+codigoTipoDocumento, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+
+  }
+
 
   getOcupaciones() {
 
@@ -69,8 +112,8 @@ export class CatalogoService {
 
   getDepartamentos(paisSeleccionado: string) {
 
-    if (paisSeleccionado === '1') this.divisionSeleccionada = 'DP';
-    if (paisSeleccionado === '2') this.divisionSeleccionada = 'PV';
+    if (paisSeleccionado === '72') this.divisionSeleccionada = 'DP';
+    if (paisSeleccionado === '139') this.divisionSeleccionada = 'PV';
 
     //console.log("Inicio dentro de login");
 
@@ -78,9 +121,9 @@ export class CatalogoService {
     //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
 
     //console.log('esta es el body validate login '+body);
-    console.log('esta es la url catalogo departamentos ' + this.url_departamentos);
+    //console.log('esta es la url catalogo departamentos ' + this.url_departamentos);
 
-    //console.log('esta es la url validate login '+this.url);
+    console.log('esta es la url de departamentos '+this.url_departamentos + "/" + paisSeleccionado + "/" + this.divisionSeleccionada);
 
     return this.http.get<any>(this.url_departamentos + "/" + paisSeleccionado + "/" + this.divisionSeleccionada, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -92,8 +135,8 @@ export class CatalogoService {
 
   getMunicipios(paisSeleccionado: string, departamentoSeleccionado: string) {
 
-    if (paisSeleccionado === '1') this.divisionSeleccionada = 'MU';
-    if (paisSeleccionado === '2') this.divisionSeleccionada = 'DT';
+    if (paisSeleccionado === '72') this.divisionSeleccionada = 'MU';
+    if (paisSeleccionado === '139') this.divisionSeleccionada = 'DT';
 
     //console.log("Inicio dentro de login");
 
