@@ -161,16 +161,11 @@
                         <select class="form-control select"
                           formControlName="cbo_municipio" tabindex="6">
                           <option value="">Seleccione Municipio</option>
-                          <option value="{{municipio.uge_codigo}}" *ngFor="let
+                          <option value="{{municipio.id}}" *ngFor="let
                             municipio of
-                            municipios">{{municipio.uge_descripcion}}</option>
+                            municipios">{{municipio.id}}</option>
                         </select>
-                        <div *ngIf="submitted && f['cbo_municipio'].errors"
-                          class="invalid-feedback">
-                          <div *ngIf="f['cbo_municipio'].errors?.['required']">Complete
-                            este campo
-                          </div>
-                        </div>
+
 
                       </div>
                       <div class="col-md-12">&nbsp;</div>

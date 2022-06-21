@@ -1,4 +1,5 @@
 export interface ResponseMunicipios {
-    uge_codigo: string;
-    uge_descripcion: string;
+  id?: number;
+  uge_codigo: string;
+  uge_descripcion: string;
 }

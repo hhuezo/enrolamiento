@@ -103,7 +103,7 @@ export class CatalogoService {
     //console.log('esta es el body validate login '+body);
   //  console.log('esta es la url catalogo departamentos ' + this.url_municipios);
 
-    //console.log('esta es la url validate login '+this.url);
+    console.log("url: "+this.url_municipios + "/" + paisSeleccionado + "/" + this.divisionSeleccionada + "/" + departamentoSeleccionado);
 
     return this.http.get<any>(this.url_municipios + "/" + paisSeleccionado + "/" + this.divisionSeleccionada + "/" + departamentoSeleccionado, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')

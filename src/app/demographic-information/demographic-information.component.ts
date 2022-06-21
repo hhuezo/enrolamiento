@@ -5,6 +5,8 @@ import { ResponseDepartamentos } from '../_model/responseDepartamentos';
 import { ResponseMunicipios } from '../_model/responseMunicipios';
 import { ResponsePaises } from '../_model/responsePaises';
 import { CatalogoService } from '../_service/catalogo.service';
+import { RequestDatosPersona } from '../_model/requestDatosPersona';
+import { DatosPersonaService } from '../_service/datos-persona.service';
 
 @Component({
   selector: 'app-demographic-information',
@@ -41,12 +43,13 @@ export class DemographicInformationComponent implements OnInit {
   responseMunicipios?: ResponseMunicipios[];
   municipios: ResponseMunicipios[] = [];
 
-
+  RequestDatosPersona?: RequestDatosPersona;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private catalogoService: CatalogoService
+    private catalogoService: CatalogoService,
+    private datosPersonaService: DatosPersonaService,
   ) { }
 
 
@@ -75,10 +78,7 @@ export class DemographicInformationComponent implements OnInit {
 
 
     this.catalogoService.getPaises().subscribe((resp: ResponsePaises[]) => { this.responsePaises = resp;
-      console.log('response paises: ', this.responsePaises);
-
       this.paises = this.responsePaises;
-      console.log("paiese :::" +this.responsePaises);
     });
 
 
@@ -87,13 +87,8 @@ export class DemographicInformationComponent implements OnInit {
 
 
   onChangePais(paisSeleccionado: string){
-
     this.catalogoService.getDepartamentos(paisSeleccionado).subscribe((resp: ResponseDepartamentos[]) => { this.responseDepartamentos = resp;
-      console.log('response paises: ', this.responsePaises);
-
       this.departamentos = this.responseDepartamentos;
-
-
     });
 
 
@@ -103,16 +98,9 @@ export class DemographicInformationComponent implements OnInit {
 
 
   onChangeDepartamento(paisSeleccionado: string, departamentoSeleccionado: string){
-
     this.catalogoService.getMunicipios(paisSeleccionado, departamentoSeleccionado).subscribe((resp: ResponseMunicipios[]) => { this.responseMunicipios = resp;
-      console.log('response paises: ', this.responseMunicipios);
-
       this.municipios = this.responseMunicipios;
-
-
     });
-
-
   }
 
 
@@ -137,16 +125,31 @@ export class DemographicInformationComponent implements OnInit {
     console.log('Municipio: '+ this.municipio);
     console.log('Fecha Nacimiento: '+ this.fecha_nacimiento);
 
-    sessionStorage.setItem('domicilio',this.domicilio);
+   /* sessionStorage.setItem('domicilio',this.domicilio);
     sessionStorage.setItem('lugar_nacimiento',this.lugar_nacimiento);
     sessionStorage.setItem('departamento',this.departamento);
     sessionStorage.setItem('pais_nacimiento',this.pais_nacimiento);
     sessionStorage.setItem('municipio',this.municipio);
-    sessionStorage.setItem('fecha_nacimiento',this.fecha_nacimiento);
+    sessionStorage.setItem('fecha_nacimiento',this.fecha_nacimiento);*/
 
 
+    // guardando persona en tabla temporal
+    let body = new RequestDatosPersona();
+    body.domicilio = this.domicilio;
+    body.lugar_nacimiento = this.lugar_nacimiento;
+    body.municipio = this.municipio;
+    body.fecha_nacimiento = this.fecha_nacimiento;
 
-    this.router.navigate(['/photography']);
+    if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
+      console.log("body" + body);
+
+      //insertado datos
+      this.datosPersonaService.demographicInformation(body).subscribe((resp: RequestDatosPersona) => {
+        this.RequestDatosPersona = resp;
+      });
+    }
+
+   // this.router.navigate(['/photography']);
   }
 
   get f(): { [key: string]: AbstractControl } {

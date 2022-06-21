@@ -92,6 +92,24 @@ export class DatosPersonaService {
     });
   }
 
+  demographicInformation(requestDatosPersona: RequestDatosPersona) {
+
+    this.url = "http://192.168.26.32/blog/public/api/tmp_persona/demographic_information";
+    const body = `{"dui":"${sessionStorage.getItem("dui")}","domicilio":"${requestDatosPersona.domicilio}","lugar_nacimiento":"${requestDatosPersona.lugar_nacimiento}",
+    "municipio":"${requestDatosPersona.municipio}","fecha_nacimiento":"${requestDatosPersona.fecha_nacimiento}"}`;
+
+    console.log('esta es el body guardar persona ' + body);
+    console.log('esta es la url guardar persona ' + this.url);
+
+    //console.log('esta es la url validate login '+this.url);
+
+    return this.http.post<any>(this.url, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+
+
 
   getPersona() {
 
