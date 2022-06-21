@@ -71,7 +71,7 @@ export class PersonalInformationComponent implements OnInit {
     //para combo de ocupaciones
     this.catalogoService.getOcupaciones().subscribe((resp: ResponseOcupaciones) => {
       this.responseOcupaciones = resp;
-      console.log('ocupaciones: ', this.responseOcupaciones);
+      //console.log('ocupaciones: ', this.responseOcupaciones);
       this.ocupaciones = this.responseOcupaciones;
     });
 
@@ -79,7 +79,7 @@ export class PersonalInformationComponent implements OnInit {
     //para combo de generos
     this.catalogoService.getGeneros('1').subscribe((resp: ResponseGeneros[]) => {
       this.responseGeneros = resp;
-      console.log('response generos: ', this.responseGeneros);
+     // console.log('response generos: ', this.responseGeneros);
 
       this.generos = this.responseGeneros;
 
@@ -90,7 +90,7 @@ export class PersonalInformationComponent implements OnInit {
     //para combo de estados civiles
     this.catalogoService.getEstadosCiviles().subscribe((resp: ResponseEstadosCivil[]) => {
       this.responseEstadosCivil = resp;
-      console.log('response estados civil: ', this.responseEstadosCivil);
+      //console.log('response estados civil: ', this.responseEstadosCivil);
 
       this.estados_civil = this.responseEstadosCivil;
 
@@ -111,7 +111,7 @@ export class PersonalInformationComponent implements OnInit {
       this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
         this.RequestDatosPersona = resp;
 
-        console.log('persona actual: ', this.RequestDatosPersona);
+      //  console.log('persona actual: ', this.RequestDatosPersona);
         this.persona = this.RequestDatosPersona;
 
 
