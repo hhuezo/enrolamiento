@@ -135,6 +135,9 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 
   getMunicipios(paisSeleccionado: string, departamentoSeleccionado: string) {
 
+    this.url_municipios = `${environment.HOST_LOGIN}/api/catalogo/municipios`;
+    console.log("urlll: "+this.url_municipios + "/" + paisSeleccionado + "/" + departamentoSeleccionado);
+
     if (paisSeleccionado === '72') this.divisionSeleccionada = 'MU';
     if (paisSeleccionado === '139') this.divisionSeleccionada = 'DT';
 
@@ -146,7 +149,7 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
     //console.log('esta es el body validate login '+body);
   //  console.log('esta es la url catalogo departamentos ' + this.url_municipios);
 
-    console.log("url: "+this.url_municipios + "/" + paisSeleccionado + "/" + this.divisionSeleccionada + "/" + departamentoSeleccionado);
+
 
     return this.http.get<any>(this.url_municipios + "/" + paisSeleccionado + "/" + this.divisionSeleccionada + "/" + departamentoSeleccionado, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -155,7 +158,25 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
   }
 
 
+  getMunicipiosActuales(ubicacion: string)
+  {
+    //console.log('ubicacion: '+ "http://192.168.26.32/blog/public/api/get_municipios/"+ubicacion);
+    this.url_municipios = "http://192.168.26.32/blog/public/api/get_municipios";
 
+    return this.http.get<any>(this.url_municipios+"/"+ubicacion, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+  getDepartamentosActuales(ubicacion: string)
+  {
+    console.log('ubicacion: '+ "http://192.168.26.32/blog/public/api/get_departamentos/"+ubicacion);
+    this.url_departamentos= "http://192.168.26.32/blog/public/api/get_departamentos";
+
+    return this.http.get<any>(this.url_departamentos+"/"+ubicacion, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
 
 
 
@@ -165,20 +186,6 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 
 
   getGeneros(paisSeleccionado: string){
-
-    // if (paisSeleccionado==='1') this.divisionSeleccionada='DP';
-    // if (paisSeleccionado==='2') this.divisionSeleccionada='PV';
-
-    //console.log("Inicio dentro de login");
-
-    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
-    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
-
-//console.log('esta es el body validate login '+body);
-//console.log('esta es la url catalogo estados civiles '+this.url_generos);
-
-    //console.log('esta es la url validate login '+this.url);
-
     return this.http.get<any>(this.url_generos+"/"+paisSeleccionado, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -188,20 +195,6 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 
 
   getEstadosCiviles(){
-
-    // if (paisSeleccionado==='1') this.divisionSeleccionada='DP';
-    // if (paisSeleccionado==='2') this.divisionSeleccionada='PV';
-
-    //console.log("Inicio dentro de login");
-
-    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
-    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
-
-//console.log('esta es el body validate login '+body);
-//console.log('esta es la url catalogo estados civiles '+this.url_estados_civiles);
-
-    //console.log('esta es la url validate login '+this.url);
-
     return this.http.get<any>(this.url_estados_civiles, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -211,20 +204,6 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 
 
   getTiposDocumento(){
-
-    // if (paisSeleccionado==='1') this.divisionSeleccionada='DP';
-    // if (paisSeleccionado==='2') this.divisionSeleccionada='PV';
-
-    //console.log("Inicio dentro de login");
-
-    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
-    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
-
-//console.log('esta es el body validate login '+body);
-//console.log('esta es la url catalogo estados civiles '+this.url_tipos_documento);
-
-    //console.log('esta es la url validate login '+this.url);
-
     return this.http.get<any>(this.url_tipos_documento, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -233,20 +212,6 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 
 
   getTiposNariz(){
-
-    // if (paisSeleccionado==='1') this.divisionSeleccionada='DP';
-    // if (paisSeleccionado==='2') this.divisionSeleccionada='PV';
-
-    //console.log("Inicio dentro de login");
-
-    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
-    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
-
-//console.log('esta es el body validate login '+body);
-//console.log('esta es la url catalogo tipos de nariz '+this.url_tipos_nariz);
-
-    //console.log('esta es la url validate login '+this.url);
-
     return this.http.get<any>(this.url_tipos_nariz, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -255,20 +220,6 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 
 
   getColoresPiel(){
-
-    // if (paisSeleccionado==='1') this.divisionSeleccionada='DP';
-    // if (paisSeleccionado==='2') this.divisionSeleccionada='PV';
-
-    //console.log("Inicio dentro de login");
-
-    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
-    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
-
-//console.log('esta es el body validate login '+body);
-//console.log('esta es la url catalogo colores de piel '+this.url_colores_piel);
-
-    //console.log('esta es la url validate login '+this.url);
-
     return this.http.get<any>(this.url_colores_piel, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -278,20 +229,6 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 
 
   getTiposBoca(){
-
-    // if (paisSeleccionado==='1') this.divisionSeleccionada='DP';
-    // if (paisSeleccionado==='2') this.divisionSeleccionada='PV';
-
-    //console.log("Inicio dentro de login");
-
-    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
-    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
-
-//console.log('esta es el body validate login '+body);
-//console.log('esta es la url catalogo tipos de boca '+this.url_tipos_boca);
-
-    //console.log('esta es la url validate login '+this.url);
-
     return this.http.get<any>(this.url_tipos_boca, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -300,20 +237,6 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 
 
   getColoresCabello(){
-
-    // if (paisSeleccionado==='1') this.divisionSeleccionada='DP';
-    // if (paisSeleccionado==='2') this.divisionSeleccionada='PV';
-
-    //console.log("Inicio dentro de login");
-
-    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
-    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
-
-//console.log('esta es el body validate login '+body);
-//console.log('esta es la url catalogo colores de cabello '+this.url_colores_cabello);
-
-    //console.log('esta es la url validate login '+this.url);
-
     return this.http.get<any>(this.url_colores_cabello, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -322,20 +245,6 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 
 
   getColoresOjo(){
-
-    // if (paisSeleccionado==='1') this.divisionSeleccionada='DP';
-    // if (paisSeleccionado==='2') this.divisionSeleccionada='PV';
-
-    //console.log("Inicio dentro de login");
-
-    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
-    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
-
-//console.log('esta es el body validate login '+body);
-//console.log('esta es la url catalogo colores de ojo '+this.url_colores_ojo);
-
-    //console.log('esta es la url validate login '+this.url);
-
     return this.http.get<any>(this.url_colores_ojo, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });

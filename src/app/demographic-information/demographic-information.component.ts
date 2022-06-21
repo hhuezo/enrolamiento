@@ -22,14 +22,16 @@ export class DemographicInformationComponent implements OnInit {
 
 
 
-  form!:FormGroup;
+  form!: FormGroup;
   submitted = false;
 
+  dui!: string;
+  persona: any;
   domicilio!: string;
-  pais_nacimiento!: string;
+  pais_nacimiento!: any;
   lugar_nacimiento!: string;
-  municipio!: string;
-  departamento!: string;
+  municipio!: any;
+  departamento!: any;
   fecha_nacimiento!: string;
 
   responsePaises?: ResponsePaises[];
@@ -57,6 +59,48 @@ export class DemographicInformationComponent implements OnInit {
     this.load_icons();
     this.submitted = true;
 
+
+
+    if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
+      //console.log('sin session');
+
+      //console.log('session');
+      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
+        this.RequestDatosPersona = resp;
+
+        console.log('persona actual: ', this.RequestDatosPersona);
+        this.persona = this.RequestDatosPersona;
+
+
+        this.domicilio = this.persona[0].PER_DOMICILIO;
+        this.pais_nacimiento = this.persona[0].UGE_CODIGO_PAIS;
+        this.lugar_nacimiento = this.persona[0].PER_LUGAR_DE_NACIMIENTO;
+        this.municipio = this.persona[0].PER_ID_UGE_CODIGO;
+        this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
+        this.departamento = 45;
+        this.fecha_nacimiento = this.persona[0].PER_FECHA_DE_NACIMIENTO;
+
+
+        if(this.persona[0].PER_ID_UGE_CODIGO != null)
+        {
+          this.catalogoService.getMunicipiosActuales(this.persona[0].PER_ID_UGE_CODIGO).subscribe((resp: ResponseMunicipios[]) => {
+            this.responseMunicipios = resp;
+            this.municipios = this.responseMunicipios;
+          });
+
+
+          this.catalogoService.getDepartamentosActuales(this.persona[0].PER_ID_UGE_CODIGO).subscribe((resp: ResponseDepartamentos[]) => {
+            this.responseDepartamentos = resp;
+            this.departamentos = this.responseDepartamentos;
+          });
+        }
+
+      });
+
+
+    }
+
+
     // if (this.form!.invalid) {
     //   return;
     // }
@@ -76,8 +120,14 @@ export class DemographicInformationComponent implements OnInit {
 
     );
 
+    /* if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
+       this.catalogoService.getMunicipiosActuales().subscribe((resp: ResponsePaises[]) => { this.responsePaises = resp;
+         this.paises = this.responsePaises;
+       });
+     }*/
 
-    this.catalogoService.getPaises().subscribe((resp: ResponsePaises[]) => { this.responsePaises = resp;
+    this.catalogoService.getPaises().subscribe((resp: ResponsePaises[]) => {
+      this.responsePaises = resp;
       this.paises = this.responsePaises;
     });
 
@@ -86,8 +136,9 @@ export class DemographicInformationComponent implements OnInit {
   }
 
 
-  onChangePais(paisSeleccionado: string){
-    this.catalogoService.getDepartamentos(paisSeleccionado).subscribe((resp: ResponseDepartamentos[]) => { this.responseDepartamentos = resp;
+  onChangePais(paisSeleccionado: string) {
+    this.catalogoService.getDepartamentos(paisSeleccionado).subscribe((resp: ResponseDepartamentos[]) => {
+      this.responseDepartamentos = resp;
       this.departamentos = this.responseDepartamentos;
     });
 
@@ -97,8 +148,9 @@ export class DemographicInformationComponent implements OnInit {
 
 
 
-  onChangeDepartamento(paisSeleccionado: string, departamentoSeleccionado: string){
-    this.catalogoService.getMunicipios(paisSeleccionado, departamentoSeleccionado).subscribe((resp: ResponseMunicipios[]) => { this.responseMunicipios = resp;
+  onChangeDepartamento(paisSeleccionado: string, departamentoSeleccionado: string) {
+    this.catalogoService.getMunicipios(paisSeleccionado, departamentoSeleccionado).subscribe((resp: ResponseMunicipios[]) => {
+      this.responseMunicipios = resp;
       this.municipios = this.responseMunicipios;
     });
   }
@@ -106,11 +158,11 @@ export class DemographicInformationComponent implements OnInit {
 
 
 
-  back(){
+  back() {
     this.router.navigate(['/home']);
   }
 
-  guardar(){
+  guardar() {
     this.domicilio = this.form.controls['txt_domicilio'].value;
     this.lugar_nacimiento = this.form.controls['txt_lugar_nacimiento'].value;
     this.departamento = this.form.controls['cbo_departamento'].value;
@@ -118,19 +170,19 @@ export class DemographicInformationComponent implements OnInit {
     this.municipio = this.form.controls['cbo_municipio'].value;
     this.fecha_nacimiento = this.form.controls['txt_fecha_nacimiento'].value;
 
-    console.log('Domicilio : '+this.domicilio);
-    console.log('Lugar de Nacimiento :'+ this.lugar_nacimiento);
-    console.log('Departamento: '+this.departamento);
-    console.log('Pais de Nacimiento: '+ this.pais_nacimiento);
-    console.log('Municipio: '+ this.municipio);
-    console.log('Fecha Nacimiento: '+ this.fecha_nacimiento);
+    console.log('Domicilio : ' + this.domicilio);
+    console.log('Lugar de Nacimiento :' + this.lugar_nacimiento);
+    console.log('Departamento: ' + this.departamento);
+    console.log('Pais de Nacimiento: ' + this.pais_nacimiento);
+    console.log('Municipio: ' + this.municipio);
+    console.log('Fecha Nacimiento: ' + this.fecha_nacimiento);
 
-   /* sessionStorage.setItem('domicilio',this.domicilio);
-    sessionStorage.setItem('lugar_nacimiento',this.lugar_nacimiento);
-    sessionStorage.setItem('departamento',this.departamento);
-    sessionStorage.setItem('pais_nacimiento',this.pais_nacimiento);
-    sessionStorage.setItem('municipio',this.municipio);
-    sessionStorage.setItem('fecha_nacimiento',this.fecha_nacimiento);*/
+    /* sessionStorage.setItem('domicilio',this.domicilio);
+     sessionStorage.setItem('lugar_nacimiento',this.lugar_nacimiento);
+     sessionStorage.setItem('departamento',this.departamento);
+     sessionStorage.setItem('pais_nacimiento',this.pais_nacimiento);
+     sessionStorage.setItem('municipio',this.municipio);
+     sessionStorage.setItem('fecha_nacimiento',this.fecha_nacimiento);*/
 
 
     // guardando persona en tabla temporal
@@ -149,7 +201,7 @@ export class DemographicInformationComponent implements OnInit {
       });
     }
 
-   // this.router.navigate(['/photography']);
+    // this.router.navigate(['/photography']);
   }
 
   get f(): { [key: string]: AbstractControl } {

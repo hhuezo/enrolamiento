@@ -44,7 +44,7 @@
                     <div class="form-group">
                       <label class="col-md-12 control-label">Domicilio </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <input type="text" name="txt_domicilio"
+                        <input type="text" name="txt_domicilio" value="{{domicilio}}"
                           id="txt_domicilio"
                           class="form-control" formControlName="txt_domicilio"
                           [ngClass]="{'is-invalid': submitted &&
@@ -66,7 +66,7 @@
                       </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="text" class="form-control"
-                          formControlName="txt_lugar_nacimiento"
+                          formControlName="txt_lugar_nacimiento" value="{{lugar_nacimiento}}"
                           [ngClass]="{'is-invalid': submitted &&
                           f['txt_lugar_nacimiento'].errors}" tabindex="3"
                           />
@@ -87,7 +87,7 @@
                       </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="date" class="form-control"
-                          formControlName="txt_fecha_nacimiento"
+                          formControlName="txt_fecha_nacimiento" value="{{fecha_nacimiento}}"
                           [ngClass]="{'is-invalid': submitted &&
                           f['txt_fecha_nacimiento'].errors}" tabindex="5" />
                         <div *ngIf="submitted &&
@@ -114,7 +114,7 @@
                           #cbo_pais_nacimiento tabindex="2"
                           (change)='onChangePais(cbo_pais_nacimiento.value)'>
                           <option value="">Seleccione Pais</option>
-                          <option value="{{item.id}}" *ngFor="let item of paises">{{item.pai_descripcion}}</option>
+                          <option value="{{item.id}}" *ngFor="let item of paises"  [selected]="pais_nacimiento == item.id">{{item.pai_descripcion}}</option>
                         </select>
                         <div *ngIf="submitted &&
                           f['cbo_pais_nacimiento'].errors"
@@ -130,7 +130,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label class="col-md-12 control-label">Departamento
+                      <label class="col-md-12 control-label">Departamento {{departamento}}
                       </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <select class="form-control select"
@@ -139,9 +139,9 @@
                           (change)='onChangeDepartamento(cbo_pais_nacimiento.value,
                           cbo_departamento.value)'>
                           <option value="">Seleccione Departamento</option>
-                          <option value="{{departamento.uge_codigo}}"
-                            *ngFor="let departamento of
-                            departamentos">{{departamento.uge_descripcion}}</option>
+                          <option value="{{item.uge_codigo}}" *ngFor="let item of departamentos"  [selected]="departamento == item.id">
+                            {{item.id}}
+                          </option>
                         </select>
                         <div *ngIf="submitted && f['cbo_departamento'].errors"
                           class="invalid-feedback">
@@ -161,9 +161,7 @@
                         <select class="form-control select"
                           formControlName="cbo_municipio" tabindex="6">
                           <option value="">Seleccione Municipio</option>
-                          <option value="{{municipio.id}}" *ngFor="let
-                            municipio of
-                            municipios">{{municipio.uge_descripcion}}</option>
+                          <option value="{{item.id}}" *ngFor="let item of  municipios" [selected]="pais_nacimiento == item.id">{{item.uge_descripcion}}</option>
                         </select>
 
 

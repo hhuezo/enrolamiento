@@ -48,8 +48,8 @@ export class PhysicInformationComponent implements OnInit {
   colores_cabellos!: any;
   estatura!: string;
   tipo_sangre!: string;
-  opciones!:string[];
-  tipos_sangre!:string[];
+  opciones!: string[];
+  tipos_sangre!: string[];
 
 
 
@@ -73,7 +73,7 @@ export class PhysicInformationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private datosPersonaService: DatosPersonaService,private catalogoService: CatalogoService
+    private datosPersonaService: DatosPersonaService, private catalogoService: CatalogoService
   ) { }
 
   ngOnInit(): void {
@@ -83,7 +83,36 @@ export class PhysicInformationComponent implements OnInit {
     if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
       console.log('session');
 
-      this.obtenerDatosPersona();
+      // this.obtenerDatosPersona();
+
+
+      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
+        this.RequestDatosPersona = resp;
+
+        console.log('persona: ', this.RequestDatosPersona);
+        this.persona = this.RequestDatosPersona;
+
+
+        this.anteojos = this.persona[0].PER_ANTEOJOS;
+        console.log("anteojos " + this.anteojos);
+        this.tipos_narices = this.persona[0].PER_ID_TNA_CODIGO;
+        this.colores_pieles = this.persona[0].PER_ID_CPI_CODIGO;
+
+        this.senales_especiales = this.persona[0].PER_SENALES_ESPECIALES;
+        this.tipos_bocas = this.persona[0].PER_ID_TBO_CODIGO;
+        this.audifonos = this.persona[0].PER_AUDIFONO;
+        this.peso_lb = this.persona[0].PER_PESO;
+        this.colores_cabellos = this.persona[0].PER_ID_CCA_CODIGO;
+
+        this.lentes_contacto = this.persona[0].PER_LENTES_DE_CONTACTO;
+        this.estatura = this.persona[0].PER_ESTATURA;
+        this.colores_ojos = this.persona[0].PER_ID_COJ_CODIGO;
+        this.tipo_sangre = this.persona[0].PER_GRUPO_SANGUINEO;
+
+
+
+      });
+
 
       this.obtenerColoresPiel();
 
@@ -91,12 +120,13 @@ export class PhysicInformationComponent implements OnInit {
 
 
     this.opciones = ["SI", "NO"];
-    this.tipos_sangre = ["A +","A -","B +","B -","AB +","AB -","O +","O -"]
+    this.tipos_sangre = ["A +", "A -", "B +", "B -", "AB +", "AB -", "O +", "O -"]
 
 
     //para combo de tipos de nariz
-    this.catalogoService.getTiposNariz().subscribe((resp: ResponseTiposNariz[]) => { this.responseTiposNariz = resp;
-     // console.log('response tipos nariz: ', this.responseTiposNariz);
+    this.catalogoService.getTiposNariz().subscribe((resp: ResponseTiposNariz[]) => {
+      this.responseTiposNariz = resp;
+      // console.log('response tipos nariz: ', this.responseTiposNariz);
 
       this.tipos_nariz = this.responseTiposNariz;
 
@@ -108,8 +138,9 @@ export class PhysicInformationComponent implements OnInit {
 
 
     //para combo de tipos de boca
-    this.catalogoService.getTiposBoca().subscribe((resp: ResponseTiposBoca[]) => { this.responseTiposBoca = resp;
-     // console.log('response tipos boca: ', this.responseTiposBoca);
+    this.catalogoService.getTiposBoca().subscribe((resp: ResponseTiposBoca[]) => {
+      this.responseTiposBoca = resp;
+      // console.log('response tipos boca: ', this.responseTiposBoca);
 
       this.tipos_boca = this.responseTiposBoca;
 
@@ -119,7 +150,8 @@ export class PhysicInformationComponent implements OnInit {
 
 
     //para combo colores de cabello
-    this.catalogoService.getColoresCabello().subscribe((resp: ResponseColoresCabello[]) => { this.responseColoresCabello = resp;
+    this.catalogoService.getColoresCabello().subscribe((resp: ResponseColoresCabello[]) => {
+      this.responseColoresCabello = resp;
       //console.log('response colores de cabello: ', this.responseColoresCabello);
 
       this.colores_cabello = this.responseColoresCabello;
@@ -129,8 +161,9 @@ export class PhysicInformationComponent implements OnInit {
 
 
     //para combo colores de ojos
-    this.catalogoService.getColoresOjo().subscribe((resp: ResponseColoresOjo[]) => { this.responseColoresOjo = resp;
-     // console.log('response colores de ojo: ', this.responseColoresOjo);
+    this.catalogoService.getColoresOjo().subscribe((resp: ResponseColoresOjo[]) => {
+      this.responseColoresOjo = resp;
+      // console.log('response colores de ojo: ', this.responseColoresOjo);
 
       this.colores_ojo = this.responseColoresOjo;
 
@@ -166,7 +199,7 @@ export class PhysicInformationComponent implements OnInit {
   }
 
 
-  async obtenerDatosPersona(){
+  async obtenerDatosPersona() {
     await this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
       this.RequestDatosPersona = resp;
 
@@ -197,15 +230,16 @@ export class PhysicInformationComponent implements OnInit {
   }
 
 
-async  obtenerColoresPiel(){
-        //para combo colores de piel
-     await   this.catalogoService.getColoresPiel().subscribe((resp: ResponseColoresPiel[]) => { this.responseColoresPiel = resp;
-          //console.log('response colores de piel: ', this.responseColoresPiel);
-          console.log('response colores de piel: ', this.colores_pieles);
-          this.colores_piel = this.responseColoresPiel;
+  async obtenerColoresPiel() {
+    //para combo colores de piel
+    await this.catalogoService.getColoresPiel().subscribe((resp: ResponseColoresPiel[]) => {
+      this.responseColoresPiel = resp;
+      //console.log('response colores de piel: ', this.responseColoresPiel);
+      console.log('response colores de piel: ', this.colores_pieles);
+      this.colores_piel = this.responseColoresPiel;
 
 
-        });
+    });
 
   }
 
@@ -292,7 +326,7 @@ async  obtenerColoresPiel(){
 
 
 
-     this.router.navigate(['/demographic-information']);
+    this.router.navigate(['/demographic-information']);
 
 
   }

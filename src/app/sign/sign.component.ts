@@ -20,17 +20,21 @@ export class SignComponent implements OnInit {
   @ViewChild('canvas') canvasEl!: ElementRef;
   signatureImg: string | undefined;
 
-   //icons options
-   img_physic_information?: HTMLImageElement;
-   img_personal_information?: HTMLImageElement;
-   img_demographic_information?: HTMLImageElement;
-   img_photography?: HTMLImageElement;
-   img_sign?: HTMLImageElement;
+  //icons options
+  img_physic_information?: HTMLImageElement;
+  img_personal_information?: HTMLImageElement;
+  img_demographic_information?: HTMLImageElement;
+  img_photography?: HTMLImageElement;
+  img_sign?: HTMLImageElement;
 
   responseFirma?: ResponseFirma;
   msjerr?: string;
 
   responseDatosPersona?: ResponseDatosPersona;
+  RequestDatosPersona?: RequestDatosPersona;
+
+  dui!: any;
+  persona: any;
 
 
   constructor(
@@ -41,6 +45,23 @@ export class SignComponent implements OnInit {
 
   ngOnInit(): void {
     this.load_icons();
+
+    if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
+      //console.log('sin session');
+
+      //console.log('session');
+      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
+        this.RequestDatosPersona = resp;
+
+        console.log('persona actual: ', this.RequestDatosPersona);
+        this.persona = this.RequestDatosPersona;
+
+        this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
+
+      });
+
+
+    }
   }
 
 
@@ -65,26 +86,43 @@ export class SignComponent implements OnInit {
   savePad() {
     const base64Data = this.signaturePad.toDataURL();
 
+    let body = new RequestDatosPersona();
+    body.firma = base64Data;
+    body.dui = this.dui;
+    console.log(base64Data);
+
+    if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
+      console.log("body" + body);
+
+      //enviando  datos
+      this.datosPersonaService.sign(body).subscribe((resp: RequestDatosPersona) => {
+        this.RequestDatosPersona = resp;
+      });
+    }
 
 
-    let body = new RequestFirma();
-    // body.documento = this.usuario;
-    // body.password = this.encodedpw;
+
+  /*  let body = new RequestFirma();
     body.idPersona = '2';
     body.firma = base64Data;
 
-    console.log("bodyFirma: ", body);
+    console.log("bodyFirma: ", body.firma);
 
-    // this.serviceLogin = 
-    this.firmaService.guardarFirma(body).subscribe((resp: ResponseFirma) => { this.responseFirma = resp;
-    console.log('response: ', this.responseFirma);
+   // console.log("bodyFirma: ", body);
+
+    /*
+    // this.serviceLogin =
+    this.firmaService.guardarFirma(body).subscribe((resp: ResponseFirma) => {
+      this.responseFirma = resp;
+      console.log('response: ', this.responseFirma);
 
       if (this.responseFirma.val === '0') {
 
         //aqui guardo los datos de la persona temporalmente, esperando a que se termine el servicio de huella digital
         let body = new RequestDatosPersona();
+        body.firma = "firma_persona";
 
-
+        /*
           //datos personales
         body.nombre = sessionStorage.getItem('nombre')?.toString();
         body.ape_paterno = sessionStorage.getItem('ape_paterno')?.toString();
@@ -115,7 +153,7 @@ export class SignComponent implements OnInit {
         body.estatura = sessionStorage.getItem('estatura')?.toString();
         body.tipo_sangre = sessionStorage.getItem('tipo_sangre')?.toString();
 
-        
+
 
         //datos demograficos
         body.domicilio = sessionStorage.getItem('domicilio')?.toString();
@@ -131,8 +169,11 @@ export class SignComponent implements OnInit {
         body.pu_i = "pulgar_izquierdo";
         body.pu_d = "pulgar_derecho";
 
+*/
 
-        this.datosPersonaService.guardarPersona(body).subscribe((resp: ResponseDatosPersona) => { this.responseDatosPersona = resp;
+
+   /*     this.datosPersonaService.guardarPersona(body).subscribe((resp: ResponseDatosPersona) => {
+          this.responseDatosPersona = resp;
           console.log('response: ', this.responseDatosPersona);
 
           //alert('val= '+this.responseDatosPersona.val);
@@ -149,10 +190,10 @@ export class SignComponent implements OnInit {
               position: 'center'
             });
 
-            sessionStorage.setItem('firma',body.firma!);
+            sessionStorage.setItem('firma', body.firma!);
             this.router.navigate(['/carnet-print']);
             //this.router.navigate(['/fingerprint']);
-          }else{
+          } else {
             // this.msjerr = "Persona no pudo ser guardada, revise el json persona nuevamente";
             // Swal.fire({
             //   icon: 'error',
@@ -177,23 +218,23 @@ export class SignComponent implements OnInit {
 
           }
 
-        
+
         });
 
 
-          
-      } else if (this.responseFirma.val === '1') {
-          this.msjerr = this.responseFirma.mensaje;
 
-          // this.modalService.open(content);
-          Swal.fire({
-            icon: 'error',
-            title: this.msjerr,
-            confirmButtonText: 'ATRAS',
-            confirmButtonColor: '#007bff',
-            backdrop: false,
-            position: 'center'
-          });
+      } else if (this.responseFirma.val === '1') {
+        this.msjerr = this.responseFirma.mensaje;
+
+        // this.modalService.open(content);
+        Swal.fire({
+          icon: 'error',
+          title: this.msjerr,
+          confirmButtonText: 'ATRAS',
+          confirmButtonColor: '#007bff',
+          backdrop: false,
+          position: 'center'
+        });
       }
       else {
         this.msjerr = this.responseFirma.mensaje;
@@ -210,7 +251,7 @@ export class SignComponent implements OnInit {
       }
 
 
-    });
+    });*/
 
 
     console.log(base64Data);
@@ -218,7 +259,7 @@ export class SignComponent implements OnInit {
   }
 
   load_icons() {
-    
+
     this.img_personal_information = document.getElementById("img_personal_information") as HTMLImageElement;
     this.img_personal_information.src = "../../assets/images/datos_personales_blue.svg";
 
@@ -233,7 +274,7 @@ export class SignComponent implements OnInit {
 
     this.img_sign = document.getElementById("img_sign") as HTMLImageElement;
     this.img_sign.src = "../../assets/images/firma_blue.svg";
-    
+
   }
 
 }
