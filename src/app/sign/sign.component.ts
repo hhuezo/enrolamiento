@@ -53,7 +53,7 @@ export class SignComponent implements OnInit {
       this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
         this.RequestDatosPersona = resp;
 
-        console.log('persona actual: ', this.RequestDatosPersona);
+        //console.log('persona actual: ', this.RequestDatosPersona);
         this.persona = this.RequestDatosPersona;
 
         this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
@@ -89,10 +89,10 @@ export class SignComponent implements OnInit {
     let body = new RequestDatosPersona();
     body.firma = base64Data;
     body.dui = this.dui;
-    console.log(base64Data);
+    //console.log(base64Data);
 
     if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
-      console.log("body" + body);
+      //console.log("body" + body);
 
       //enviando  datos
       this.datosPersonaService.sign(body).subscribe((resp: RequestDatosPersona) => {

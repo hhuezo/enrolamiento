@@ -8,6 +8,9 @@ import { FotoService } from '../_service/foto.service';
 import { Router } from '@angular/router';
 import { ResponseFoto } from '../_model/responseFoto';
 
+import { RequestDatosPersona } from '../_model/requestDatosPersona';
+import { DatosPersonaService } from '../_service/datos-persona.service';
+
 @Component({
   selector: 'app-photography',
   templateUrl: './photography.component.html',
@@ -17,36 +20,72 @@ export class PhotographyComponent implements OnInit {
   seconds: number | any;
   trigger: Subject<void> = new Subject<void>();
   webcamImage: WebcamImage | any;
-  div_cam? : HTMLElement;
-  div_photo? : HTMLElement;
+  div_cam?: HTMLElement;
+  div_photo?: HTMLElement;
 
-   //icons options
-   img_physic_information?: HTMLImageElement;
-   img_personal_information?: HTMLImageElement;
-   img_demographic_information?: HTMLImageElement;
-   img_photography?: HTMLImageElement;
+  //icons options
+  img_physic_information?: HTMLImageElement;
+  img_personal_information?: HTMLImageElement;
+  img_demographic_information?: HTMLImageElement;
+  img_photography?: HTMLImageElement;
+
+  RequestDatosPersona?: RequestDatosPersona;
 
   msjerr?: string;
   foto?: string;
+  dui!: any;
+  persona: any;
 
   responseFoto?: ResponseFoto;
 
   constructor(
     private fotoService: FotoService,
-    private router: Router,
+    private router: Router,private datosPersonaService: DatosPersonaService
   ) { }
 
   ngOnInit(): void {
     this.load_icons();
     this.hide_photo();
+
+    if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
+      //console.log('sin session');
+
+      //console.log('session');
+      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
+        this.RequestDatosPersona = resp;
+
+        //console.log('persona actual: ', this.RequestDatosPersona);
+        this.persona = this.RequestDatosPersona;
+
+        this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
+
+      });
+
+
+    }
   }
 
 
-  clean(){
+  clean() {
     this.webcamImage.imageAsDataUrl = "";
   }
 
-  guardar(){
+  guardar() {
+
+    let body = new RequestDatosPersona();
+    body.dui = this.dui;
+    body.foto = this.foto;
+   //console.log("body: " +  body.foto);
+   if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
+      console.log("body" + body);
+
+      //enviando  datos
+      this.datosPersonaService.photography(body).subscribe((resp: RequestDatosPersona) => {
+        this.RequestDatosPersona = resp;
+      });
+    }
+
+    /*
     let body = new RequestFoto();
     // body.documento = this.usuario;
     // body.password = this.encodedpw;
@@ -55,7 +94,7 @@ export class PhotographyComponent implements OnInit {
 
     console.log("bodyFoto: ", body);
 
-    // this.serviceLogin = 
+    // this.serviceLogin =
     this.fotoService.guardarFoto(body).subscribe((resp: ResponseFoto) => { this.responseFoto = resp;
     console.log('response: ', this.responseFoto);
 
@@ -63,7 +102,7 @@ export class PhotographyComponent implements OnInit {
 
           sessionStorage.setItem('foto',this.foto!);
           this.router.navigate(['/sign']);
-          
+
       } else if (this.responseFoto.val === '1') {
           this.msjerr = this.responseFoto.mensaje;
 
@@ -92,13 +131,13 @@ export class PhotographyComponent implements OnInit {
       }
 
 
-    });
+    });*/
   }
 
 
 
   takePicture(): void {
-    
+
     this.seconds = 5;
     setTimeout(() => {
       this.seconds = 4;
@@ -124,10 +163,12 @@ export class PhotographyComponent implements OnInit {
   handleImage(webcamImage: WebcamImage): void {
     this.webcamImage = webcamImage;
     //Este es el base64 a guardar en la base de datos usando un servicio -> webcamImage.imageAsDataUrl
-    console.log(webcamImage.imageAsDataUrl);
+    //this.foto = webcamImage;
+
 
     this.foto = webcamImage.imageAsDataUrl;
-    
+    //console.log("esta es la foto "+this.foto);
+
   }
   get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
@@ -137,19 +178,17 @@ export class PhotographyComponent implements OnInit {
 
 
 
-  hide_cam()
-  {
-   
-   this.div_cam = document.getElementById("div_cam") as HTMLElement;
-   this.div_photo = document.getElementById("div_photo") as HTMLElement;
-   this.div_cam.hidden = true;
-   this.div_photo.hidden = false;
+  hide_cam() {
+
+    this.div_cam = document.getElementById("div_cam") as HTMLElement;
+    this.div_photo = document.getElementById("div_photo") as HTMLElement;
+    this.div_cam.hidden = true;
+    this.div_photo.hidden = false;
   }
-    
 
 
-  hide_photo()
-  {
+
+  hide_photo() {
     this.div_cam = document.getElementById("div_cam") as HTMLElement;
     this.div_photo = document.getElementById("div_photo") as HTMLElement;
     this.div_cam.hidden = false;

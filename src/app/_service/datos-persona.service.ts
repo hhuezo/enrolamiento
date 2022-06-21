@@ -112,8 +112,8 @@ export class DatosPersonaService {
     this.url = "http://192.168.26.32/blog/public/api/tmp_persona/sign";
     const body = `{"dui":"${sessionStorage.getItem("dui")}","firma":"${requestDatosPersona.firma}"}`;
 
-    console.log('esta es el body guardar persona ' + body);
-    console.log('esta es la url guardar persona ' + this.url);
+   // console.log('esta es el body guardar persona ' + body);
+    //console.log('esta es la url guardar persona ' + this.url);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -121,6 +121,22 @@ export class DatosPersonaService {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }
+
+  photography(requestDatosPersona: RequestDatosPersona) {
+    this.url = "http://192.168.26.32/blog/public/api/tmp_persona/photography";
+    const body = `{"dui":"${sessionStorage.getItem("dui")}","foto":"${requestDatosPersona.foto}"}`;
+
+   // console.log('esta es el body guardar persona ' + body);
+    //console.log('esta es la url guardar persona ' + this.url);
+
+    //console.log('esta es la url validate login '+this.url);
+
+    return this.http.post<any>(this.url, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+
 
 
   getPersona() {
