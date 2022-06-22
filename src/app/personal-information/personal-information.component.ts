@@ -44,6 +44,7 @@ export class PersonalInformationComponent implements OnInit {
 
   img_personal_information?: HTMLImageElement;
 
+
   responseGeneros?: ResponseGeneros[];
   generos: ResponseGeneros[] = [];
 
@@ -79,7 +80,7 @@ export class PersonalInformationComponent implements OnInit {
     //para combo de generos
     this.catalogoService.getGeneros('1').subscribe((resp: ResponseGeneros[]) => {
       this.responseGeneros = resp;
-     // console.log('response generos: ', this.responseGeneros);
+      // console.log('response generos: ', this.responseGeneros);
 
       this.generos = this.responseGeneros;
 
@@ -111,7 +112,7 @@ export class PersonalInformationComponent implements OnInit {
       this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
         this.RequestDatosPersona = resp;
 
-      //  console.log('persona actual: ', this.RequestDatosPersona);
+        //  console.log('persona actual: ', this.RequestDatosPersona);
         this.persona = this.RequestDatosPersona;
 
 
@@ -128,6 +129,8 @@ export class PersonalInformationComponent implements OnInit {
         this.estado_civil = this.persona[0].PER_ESTADO_CIVIL;
         this.genero = this.persona[0].PER_SEXO;
         this.telefono_celular = this.persona[0].PER_TELEFONO_PERSONAL;
+
+
 
       });
 
@@ -197,9 +200,9 @@ export class PersonalInformationComponent implements OnInit {
     this.genero = this.form.controls['cbo_genero'].value;
     this.telefono_celular = this.form.controls['txt_telefono_celular'].value;
 
-    console.log("aaa: " + this.form.controls['txt_nombre'].value);
+    //console.log("aaa: " + this.genero);
 
-    console.log('this.nombre= ' + this.nombre + '<br>');
+   /* console.log('this.nombre= ' + this.nombre + '<br>');
     console.log('this.ape_paterno= ' + this.ape_paterno + '<br>');
     console.log('this.ape_materno= ' + this.ape_materno + '<br>');
     console.log('this.ape_casada= ' + this.ape_casada + '<br>');
@@ -212,7 +215,7 @@ export class PersonalInformationComponent implements OnInit {
     console.log('this.genero= ' + this.genero + '<br>');
     console.log('this.telefono_celular= ' + this.telefono_celular + '<br>');
 
-    console.log('guardando datos... de informacion personal');
+    console.log('guardando datos... de informacion personal');*/
 
     /* sessionStorage.setItem('nombre', this.nombre);
      sessionStorage.setItem('ape_paterno', this.ape_paterno);
@@ -226,7 +229,6 @@ export class PersonalInformationComponent implements OnInit {
      sessionStorage.setItem('estado_civil', this.estado_civil);
      sessionStorage.setItem('genero', this.genero);
      sessionStorage.setItem('telefono_celular', this.telefono_celular);*/
-
 
 
 
@@ -247,6 +249,8 @@ export class PersonalInformationComponent implements OnInit {
     body.ocupacion = this.ocupacion;
     body.estado_civil = this.estado_civil;
 
+    console.log("bodyyyy " + body);
+
     if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
       this.datosPersonaService.createPersona(body).subscribe((resp: RequestDatosPersona) => {
         this.RequestDatosPersona = resp;
@@ -255,7 +259,7 @@ export class PersonalInformationComponent implements OnInit {
     }
     else {
 
-      console.log("bodyyyy" + body);
+      //console.log("bodyyyy " + body);
 
       //update
       this.datosPersonaService.updatePersonalInformation(body).subscribe((resp: RequestDatosPersona) => {
@@ -266,7 +270,7 @@ export class PersonalInformationComponent implements OnInit {
 
 
 
-    this.router.navigate(['/physic-information']);
+     this.router.navigate(['/physic-information']);
   }
 
   load_icons() {

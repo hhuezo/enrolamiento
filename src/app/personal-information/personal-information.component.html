@@ -46,8 +46,7 @@
                 <div class="form-group">
                   <label class="col-md-12 control-label">Según CIP • Nombre</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="text" class="form-control"
-                      formControlName="txt_nombre" value="{{nombre}}"
+                    <input type="text" formControlName="txt_nombre" class="form-control" [(ngModel)]="nombre"  [value]="nombre"
                       tabindex="1"
                       [ngClass]="{'is-invalid': submitted &&
                       f['txt_nombre'].errors}">
@@ -66,9 +65,8 @@
                   <label class="col-md-12 control-label">Según CIP • Apellido
                     materno</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="text" class="form-control"
-                      value="{{ape_materno}}"
-                      formControlName="txt_ape_materno" tabindex="3"
+                    <input type="text" formControlName="txt_ape_materno" [(ngModel)]="ape_materno" class="form-control"   value="{{ape_materno}}"
+                        tabindex="3"
                       [ngClass]="{'is-invalid': submitted &&
                       f['txt_ape_materno'].errors}" />
                     <div *ngIf="submitted && f['txt_ape_materno'].errors"
@@ -88,7 +86,7 @@
                   <label class="col-md-12 control-label">Número de CIP</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="text" class="form-control"
-                      formControlName="txt_dui" value="{{dui}}" tabindex="5"
+                      formControlName="txt_dui"  value="{{dui}}" [(ngModel)]="dui" tabindex="5"
                       [ngClass]="{'is-invalid': submitted &&
                       f['txt_dui'].errors}" />
                     <div *ngIf="submitted && f['txt_dui'].errors"
@@ -105,7 +103,7 @@
                   <label class="col-md-12 control-label">Ocupación</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <select formControlName="cbo_ocupacion" tabindex="4">
+                    <select formControlName="cbo_ocupacion" [(ngModel)]="ocupacion" tabindex="7">
                       <option *ngFor="let item of ocupaciones"
                         value="{{item.id}}" [selected]="ocupacion == item.id">
                         {{item.ocu_descripcion}}
@@ -123,7 +121,7 @@
                   <label class="col-md-12 control-label">Correo electrónico</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="email" class="form-control"
-                      formControlName="txt_email" value="{{email}}" tabindex="9"
+                      formControlName="txt_email" value="{{email}}" [(ngModel)]="email" tabindex="9"
                       [ngClass]="{'is-invalid': submitted &&
                       f['txt_email'].errors}" />
                     <div *ngIf="submitted && f['txt_email'].errors"
@@ -138,9 +136,9 @@
                 <div class="form-group">
                   <label class="col-md-12 control-label">Género</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <select formControlName="cbo_genero" tabindex="4">
+                    <select formControlName="cbo_genero" [(ngModel)]="genero" tabindex="11">
                       <option value="">Seleccione Genero</option>
-                      <option value="{{item.id}}" *ngFor="let item of  generos" [selected]="genero == item.id">{{item.gen_descripcion}}</option>
+                      <option value="{{item.id}}"  *ngFor="let item of  generos" [selected]="genero == item.id">{{item.gen_descripcion}}</option>
                     </select>
 
 
@@ -157,7 +155,7 @@
                     paterno</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="text" class="form-control input"
-                      formControlName="txt_ape_paterno" value="{{ape_paterno}}"
+                      formControlName="txt_ape_paterno" value="{{ape_paterno}}" [(ngModel)]="ape_paterno"
                       tabindex="2"
                       [ngClass]="{'is-invalid': submitted &&
                       f['txt_ape_paterno'].errors}" />
@@ -178,15 +176,9 @@
                     casado/a</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="text" class="form-control"
-                      formControlName="txt_ape_casada" value="{{ape_casada}}"
-                      tabindex="4"
-                      [ngClass]="{'is-invalid': submitted &&
-                      f['txt_ape_casada'].errors}" />
-                    <div *ngIf="submitted && f['txt_ape_casada'].errors"
-                      class="invalid-feedback">
-                      <div *ngIf="f['txt_ape_casada'].errors?.['required']">Complete
-                        este campo</div>
-                    </div>
+                      formControlName="txt_ape_casada" value="{{ape_casada}}" [(ngModel)]="ape_casada"
+                      tabindex="4"/>
+
 
                   </div>
                   <div class="col-md-12">&nbsp;</div>
@@ -197,7 +189,7 @@
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="date" class="form-control"
                       formControlName="txt_fecha_emision_dui"
-                      value="{{fecha_emision_dui}}" tabindex="6"
+                      value="{{fecha_emision_dui}}" [(ngModel)]="fecha_emision_dui" tabindex="6"
                       [ngClass]="{'is-invalid': submitted &&
                       f['txt_fecha_emision_dui'].errors}" />
                     <div *ngIf="submitted && f['txt_fecha_emision_dui'].errors"
@@ -218,9 +210,8 @@
                   <label class="col-md-12 control-label">Fecha de vencimiento de
                     CIP</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="date" value="{{fecha_vto_dui}}"
+                    <input type="date" formControlName="txt_fecha_vto_dui" value="{{fecha_vto_dui}}" [(ngModel)]="fecha_vto_dui"
                       class="form-control input"
-                      formControlName="txt_fecha_vto_dui"
                       [ngClass]="{'is-invalid': submitted &&
                       f['txt_fecha_vto_dui'].errors}" tabindex="8" />
 
@@ -234,12 +225,7 @@
                   <label class="col-md-12 control-label">Estado civil </label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
 
-
-
-
-
-                    <select class="form-control select"
-                      formControlName="cbo_estado_civil" tabindex="10">
+                    <select class="form-control select" formControlName="cbo_estado_civil" [(ngModel)]="estado_civil" tabindex="10">
                       <option value="">Seleccione Estado Civil</option>
                       <option value="{{item.id}}" *ngFor="let item of estados_civil" [selected]="estado_civil == item.id">{{item.est_descripcion}}</option>
                     </select>
@@ -251,9 +237,9 @@
                 <div class="form-group">
                   <label class="col-md-12 control-label">Teléfono celular</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="text" class="form-control"
-                      value="{{telefono_celular}}"
-                      formControlName="txt_telefono_celular"
+                    <input type="text" class="form-control" formControlName="txt_telefono_celular"
+                      value="{{telefono_celular}}" [(ngModel)]="telefono_celular"
+
                       id="txt_telefono_celular" [ngClass]="{'is-invalid':
                       submitted && f['txt_telefono_celular'].errors}"
                       tabindex="12" />
