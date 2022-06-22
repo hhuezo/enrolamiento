@@ -160,7 +160,7 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 
   getMunicipiosActuales(ubicacion: string)
   {
-    //console.log('ubicacion: '+ "http://192.168.26.32/blog/public/api/get_municipios/"+ubicacion);
+    console.log('ubicacion: '+ "http://192.168.26.32/blog/public/api/get_municipios/"+ubicacion);
     this.url_municipios = "http://192.168.26.32/blog/public/api/get_municipios";
 
     return this.http.get<any>(this.url_municipios+"/"+ubicacion, {
