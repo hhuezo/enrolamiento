@@ -40,10 +40,10 @@ export class DemographicInformationComponent implements OnInit {
 
 
   responseDepartamentos?: ResponseDepartamentos[];
-  departamentos: ResponseDepartamentos[] = [];
+  departamentos: any;
 
   responseMunicipios?: ResponseMunicipios[];
-  municipios: ResponseMunicipios[] = [];
+  municipios: any;
 
   RequestDatosPersona?: RequestDatosPersona;
 
@@ -77,7 +77,7 @@ export class DemographicInformationComponent implements OnInit {
         this.lugar_nacimiento = this.persona[0].PER_LUGAR_DE_NACIMIENTO;
         this.municipio = this.persona[0].PER_ID_UGE_CODIGO;
         this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
-        this.departamento = 45;
+        this.departamento = this.persona[0].ID_DEPARTAMENTO;
         this.fecha_nacimiento = this.persona[0].PER_FECHA_DE_NACIMIENTO;
 
 
@@ -140,20 +140,38 @@ export class DemographicInformationComponent implements OnInit {
     this.catalogoService.getDepartamentos(paisSeleccionado).subscribe((resp: ResponseDepartamentos[]) => {
       this.responseDepartamentos = resp;
       this.departamentos = this.responseDepartamentos;
+      //console.log("con: "+JSON.stringify(this.departamentos));
+      //console.log("sin: "+this.departamentos);
     });
 
 
   }
 
+  /*onChangePais(paisSeleccionado: string) {
+    this.catalogoService.getDepartamentos(paisSeleccionado).subscribe((resp: ResponseDepartamentos[]) => {
+      this.responseDepartamentos = resp;
+      this.departamentos = this.responseDepartamentos;
+    });
+
+
+  }
+*/
 
 
 
-  onChangeDepartamento(paisSeleccionado: string, departamentoSeleccionado: string) {
+onChangeDepartamento(departamentoSeleccionado: string) {
+  this.catalogoService.getMunicipios(departamentoSeleccionado).subscribe((resp: ResponseMunicipios[]) => {
+    this.responseMunicipios = resp;
+    this.municipios = this.responseMunicipios;
+  });
+}
+
+ /* onChangeDepartamento(paisSeleccionado: string, departamentoSeleccionado: string) {
     this.catalogoService.getMunicipios(paisSeleccionado, departamentoSeleccionado).subscribe((resp: ResponseMunicipios[]) => {
       this.responseMunicipios = resp;
       this.municipios = this.responseMunicipios;
     });
-  }
+  }*/
 
 
 
