@@ -22,6 +22,7 @@ export class PhotographyComponent implements OnInit {
   webcamImage: WebcamImage | any;
   div_cam?: HTMLElement;
   div_photo?: HTMLElement;
+  div_photo2?: HTMLElement;
 
   //icons options
   img_physic_information?: HTMLImageElement;
@@ -54,10 +55,15 @@ export class PhotographyComponent implements OnInit {
       this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
         this.RequestDatosPersona = resp;
 
-        //console.log('persona actual: ', this.RequestDatosPersona);
+        console.log('persona actual: ', this.RequestDatosPersona);
         this.persona = this.RequestDatosPersona;
 
         this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
+        this.foto =this.persona[0].PER_FOTO;
+        if( this.foto != null && this.foto != '')
+        {
+          this.load_photo();
+        }
 
       });
 
@@ -84,6 +90,8 @@ export class PhotographyComponent implements OnInit {
         this.RequestDatosPersona = resp;
       });
     }
+
+    this.router.navigate(['/sign']);
 
     /*
     let body = new RequestFoto();
@@ -176,13 +184,23 @@ export class PhotographyComponent implements OnInit {
 
   //title = 'gfgangularwebcam';
 
-
+  load_photo()
+  {
+    this.div_cam = document.getElementById("div_cam") as HTMLElement;
+    this.div_photo = document.getElementById("div_photo") as HTMLElement;
+    this.div_photo2 = document.getElementById("div_photo2") as HTMLElement;
+    this.div_cam.hidden = true;
+    this.div_photo2.hidden = false;
+    this.div_photo.hidden = true;
+  }
 
   hide_cam() {
 
     this.div_cam = document.getElementById("div_cam") as HTMLElement;
     this.div_photo = document.getElementById("div_photo") as HTMLElement;
+    this.div_photo2 = document.getElementById("div_photo2") as HTMLElement;
     this.div_cam.hidden = true;
+    this.div_photo2.hidden = true;
     this.div_photo.hidden = false;
   }
 
@@ -191,8 +209,10 @@ export class PhotographyComponent implements OnInit {
   hide_photo() {
     this.div_cam = document.getElementById("div_cam") as HTMLElement;
     this.div_photo = document.getElementById("div_photo") as HTMLElement;
+    this.div_photo2 = document.getElementById("div_photo2") as HTMLElement;
     this.div_cam.hidden = false;
     this.div_photo.hidden = true;
+    this.div_photo2.hidden = true;
   }
 
 
