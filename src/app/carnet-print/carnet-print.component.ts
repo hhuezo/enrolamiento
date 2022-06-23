@@ -47,6 +47,9 @@ export class CarnetPrintComponent implements OnInit {
         console.log('persona actual: ', this.RequestDatosPersona);
         this.persona = this.RequestDatosPersona;
 
+        this.nombre = this.persona[0].PER_NOMBRE;
+        this.ape_paterno = this.persona[0].PER_APELLIDO_PATERNO;
+        this.ape_materno = this.persona[0].PER_APELLIDO_MATERNO;
         this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
         this.foto = this.persona[0].PER_FOTO;
         this.sign = this.persona[0].PER_FIRMA;
@@ -55,6 +58,7 @@ export class CarnetPrintComponent implements OnInit {
         this.genero = this.persona[0].GENERO;
         this.tipo_sangre = this.persona[0].PER_GRUPO_SANGUINEO;
         this.expedida = this.persona[0].PER_FECHA_EMISION_DUI;
+
       });
 
 
