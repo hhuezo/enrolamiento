@@ -59,7 +59,7 @@
                     <div class="main-rigth-body-form">
                       <div class="form-child-up">
                         <div id="div_canva" class="photo-box" style="align-items: center;">
-                          <canvas id="canva" #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+                          <canvas id="canva"  #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
                         </div>
                         <div id="div_sign" class="div_sign" style="align-items: center;">
                           <img [src]="sign" />
@@ -80,7 +80,8 @@
                     <a class="btn btn-outline-primary" (click)="clearPad()">&nbsp;Limpiar firma&nbsp;</a>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-primary" (click)="savePad()">&nbsp;Guardar&nbsp;</button>
+                    <button type="submit" id="btn_guardar" class="btn btn-primary" (click)="savePad()">&nbsp;Guardar&nbsp;</button>
+                    <button type="button" id="btn_next" class="btn btn-primary" (click)="link_print()">&nbsp;Siguiente&nbsp;</button>
                   </div>
                 </div>
 

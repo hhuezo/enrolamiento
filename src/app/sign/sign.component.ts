@@ -27,6 +27,9 @@ export class SignComponent implements OnInit {
   img_photography?: HTMLImageElement;
   img_sign?: HTMLImageElement;
 
+  btn_guardar?: HTMLElement;
+  btn_next?: HTMLElement;
+
   responseFirma?: ResponseFirma;
   msjerr?: string;
 
@@ -89,6 +92,10 @@ export class SignComponent implements OnInit {
   clearPad() {
     this.signaturePad.clear();
     this.load_canva();
+    this.btn_guardar = document.getElementById("btn_guardar") as HTMLElement;
+    this.btn_next= document.getElementById("btn_next") as HTMLElement;
+    this.btn_next.hidden = true;
+    this.btn_guardar.hidden = false;
   }
 
   savePad() {
@@ -99,7 +106,7 @@ export class SignComponent implements OnInit {
     body.dui = this.dui;
     //console.log(base64Data);
 
-    if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
+    if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null)   {
       //console.log("body" + body);
 
       //enviando  datos
@@ -108,7 +115,6 @@ export class SignComponent implements OnInit {
       });
     }
 
-    console.log(base64Data);
     this.signatureImg = base64Data;
     this.router.navigate(['/carnet-print']);
 
@@ -267,12 +273,21 @@ export class SignComponent implements OnInit {
 
   }
 
+  link_print()
+  {
+    this.router.navigate(['/carnet-print']);
+  }
   load_sign()
   {
     this.div_canva = document.getElementById("div_canva") as HTMLElement;
     this.div_sign= document.getElementById("div_sign") as HTMLElement;
+    this.btn_guardar = document.getElementById("btn_guardar") as HTMLElement;
+    this.btn_next= document.getElementById("btn_next") as HTMLElement;
     this.div_sign.hidden = false;
     this.div_canva.hidden = true;
+    this.btn_next.hidden = false;
+    this.btn_guardar.hidden = true;
+
   }
 
   load_canva()
