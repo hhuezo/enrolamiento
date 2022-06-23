@@ -58,8 +58,11 @@
 
                     <div class="main-rigth-body-form">
                       <div class="form-child-up">
-                        <div class="photo-box" style="align-items: center;">
+                        <div id="div_canva" class="photo-box" style="align-items: center;">
                           <canvas id="canva" #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+                        </div>
+                        <div id="div_sign" class="div_sign" style="align-items: center;">
+                          <img [src]="sign" />
                         </div>
                         <div class="form-child-up-col2">
 

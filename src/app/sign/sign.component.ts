@@ -35,6 +35,10 @@ export class SignComponent implements OnInit {
 
   dui!: any;
   persona: any;
+  sign: any;
+
+  div_canva?: HTMLElement;
+  div_sign?: HTMLElement;
 
 
   constructor(
@@ -47,16 +51,19 @@ export class SignComponent implements OnInit {
     this.load_icons();
 
     if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
-      //console.log('sin session');
 
-      //console.log('session');
       this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
         this.RequestDatosPersona = resp;
 
-        //console.log('persona actual: ', this.RequestDatosPersona);
+        console.log('persona actual: ', this.RequestDatosPersona);
         this.persona = this.RequestDatosPersona;
 
         this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
+        this.sign =this.persona[0].PER_FIRMA;
+        if( this.sign != null && this.sign != '')
+        {
+          this.load_sign();
+        }
 
       });
 
@@ -81,6 +88,7 @@ export class SignComponent implements OnInit {
 
   clearPad() {
     this.signaturePad.clear();
+    this.load_canva();
   }
 
   savePad() {
@@ -100,7 +108,9 @@ export class SignComponent implements OnInit {
       });
     }
 
-
+    console.log(base64Data);
+    this.signatureImg = base64Data;
+    this.router.navigate(['/carnet-print']);
 
   /*  let body = new RequestFirma();
     body.idPersona = '2';
@@ -254,8 +264,23 @@ export class SignComponent implements OnInit {
     });*/
 
 
-    console.log(base64Data);
-    this.signatureImg = base64Data;
+
+  }
+
+  load_sign()
+  {
+    this.div_canva = document.getElementById("div_canva") as HTMLElement;
+    this.div_sign= document.getElementById("div_sign") as HTMLElement;
+    this.div_sign.hidden = false;
+    this.div_canva.hidden = true;
+  }
+
+  load_canva()
+  {
+    this.div_canva = document.getElementById("div_canva") as HTMLElement;
+    this.div_sign= document.getElementById("div_sign") as HTMLElement;
+    this.div_sign.hidden = true;
+    this.div_canva.hidden = false;
   }
 
   load_icons() {

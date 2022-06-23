@@ -55,7 +55,7 @@ export class PhotographyComponent implements OnInit {
       this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
         this.RequestDatosPersona = resp;
 
-        console.log('persona actual: ', this.RequestDatosPersona);
+        //console.log('persona actual: ', this.RequestDatosPersona);
         this.persona = this.RequestDatosPersona;
 
         this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;

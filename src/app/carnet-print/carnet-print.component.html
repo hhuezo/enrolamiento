@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        Enrolamiento
+      Enrolamiento
     </title>
     <link href="carnet-print.component.css" rel="stylesheet" type="text/css">
-</head>
+  </head>
 
-<body>
+  <body>
     <app-header></app-header>
     <!--<div class="container-fluid">
         <div class="row">
@@ -37,19 +37,19 @@
                         </div>
                         <div class="row">
                             <div class="col-md-10 div_carnet">
-                               
+
 
                                 <div class="rectangule147"></div>
 
                                 <div class="maskgroup229">
-                                   
+
 
                                 </div>
                                 <div class="vector97"></div>
                             </div>
 
-                            
-                           
+
+
                         </div>
 
                         <div class="row">
@@ -74,82 +74,59 @@
         </div>
     </div>-->
     <div class="main">
-        <div class="main-carnet">
-            <div class="carnet-left">
-                <div class="carnet-header">
-                    <h2>REPÚBLICA DE PANAMÁ</h2>
-                    <p>CARNÉ DE RESIDENTE PERMANENTE</p>
-                </div>
-                <div class="carnet-info">
-                    <h2>{{ ape_paterno }} {{ ape_materno }}</h2>
-                    <h2>{{ nombre }}</h2>
-                    <p><b>FECHA DE NACIMIENTO:</b> {{ fecha_nacimiento }}</p>
-                    <p><b>PAIS DE NACMIENTO:</b> {{ nacionalidad }}</p>
-                    <p><b>SEXO:</b> {{ genero_full }}</p>
-                    <p><b>TIPO DE SANGRE:</b> {{ tipo_sangre }}</p>
-                    <p><b>EXPEDIDA:</b> {{ expedida }}</p>
-                </div>
-            </div>
-            
-            
-            <div class="carnet-right">
-                
-                <img [src]="foto" style="max-width: 171px; "/>
-                <p>{{ dui }}</p>
-                <img src="./assets/images/firma.png"/>
-                <p class="txt-firma"><b>Firma</b></p>
-            </div>
+      <div class="main-carnet">
+        <div class="carnet-left">
+          <div class="carnet-header">
+            <h2>REPÚBLICA DE PANAMÁ</h2>
+            <p>CARNÉ DE RESIDENTE PERMANENTE</p>
+          </div>
+          <div class="carnet-info">
+            <h2>{{ ape_paterno }} {{ ape_materno }}</h2>
+            <h2>{{ nombre }}</h2>
+            <p><b>FECHA DE NACIMIENTO:</b> {{ fecha_nacimiento }}</p>
+            <p><b>PAIS DE NACMIENTO:</b> {{ nacionalidad }}</p>
+            <p><b>SEXO:</b> {{ genero }}</p>
+            <p><b>TIPO DE SANGRE:</b> {{ tipo_sangre }}</p>
+            <p><b>EXPEDIDA:</b> {{ expedida }}</p>
+          </div>
         </div>
+
+
+        <div class="carnet-right">
+
+          <img [src]="foto" style="max-width: 171px;"/>
+          <p>{{ dui }}</p>
+          <img [src]="sign" />
+          <br>
+          <br>
+          <p class="txt-firma"><b>Firma</b></p>
+        </div>
+      </div>
 
     </div>
 
     <div class="row">
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-10">
+      <div class="col-md-12">
+        &nbsp;
+      </div>
+
+    </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="container-fluid">
-                <div class="row ">
-                    <div class="col-md-2">
-                        <img class="body-options-img " 
-                            src="./assets/images/datos_personales_blue.svg" alt="">
-                        <p>Datos Personales</p>
-                        <div class="line"></div>
-                    </div>
-                    <div class="col-md-2">
-                        <img class="body-options-img" src="./assets/images/datos_fisicos_blue.svg"
-                            alt="">
-                        <p>Datos Fisicos</p>
-                        <div class="line"></div>
-                    </div>
-                    <div class="col-md-2">
-                        <img class="body-options-img" src="./assets/images/datos_demograficos_blue.svg"
-                            alt="">
-                        <p>Datos Demograficos</p>
-                        <div class="line"></div>
-                    </div>
-                    <div class="col-md-2">
-                        <img class="body-options-img" src="./assets/images/datos_foto_blue.svg" alt="">
-                        <p>Fotografia</p>
-                        <div class="line"></div>
-                    </div>
-                    <div class="col-md-2">
-                        <img class="body-options-img" src="./assets/images/firma_blue.svg" alt="">
-                        <p>Firma</p>
-                        <div class="line"></div>
-                    </div>
-                    <div class="col-md-2">
-                        <img class="body-options-img" src="./assets/images/huella_digital_blue.svg" alt="">
-                        <p>Huella Digital</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-</body>
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-10">
 
-</html>     
+        <div class="row">
+          <div class="col-md-12">
+
+            <app-options></app-options>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>
