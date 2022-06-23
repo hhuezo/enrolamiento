@@ -9,7 +9,7 @@ import { RequestConfiguracion } from '../_model/requestConfiguracion';
 })
 export class ConfiguracionService {
 
-  private url: string = `${environment.HOST_LOGIN}/api/firma/guardar`;
+  private url: string = `${environment.HOST_LOGIN}/api/configuracion/guardar`;
   private requestConfiguracion?: RequestConfiguracion;
 
   constructor(

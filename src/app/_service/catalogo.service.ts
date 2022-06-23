@@ -29,7 +29,7 @@ export class CatalogoService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
   ) { }
 
   getPaises() {
@@ -111,6 +111,22 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 
 
   getDepartamentos(paisSeleccionado: string) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     if (paisSeleccionado === '72') this.divisionSeleccionada = 'DP';
     if (paisSeleccionado === '139') this.divisionSeleccionada = 'PV';
@@ -267,7 +283,7 @@ console.log('esta es la url catalogo de tipo documento seleccionado '+this.url_t
 //console.log('esta es el body validate login '+body);
 //console.log('esta es la url catalogo colores de piel '+this.url_colores_piel);
 
-    //console.log('esta es la url validate login '+this.url);
+    console.log('esta es la url colores de piel '+this.url_colores_piel);
 
     return this.http.get<any>(this.url_colores_piel, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')

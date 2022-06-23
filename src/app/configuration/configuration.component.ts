@@ -5,6 +5,7 @@ import { ResponsePaises } from '../_model/responsePaises';
 import { ResponseTiposDocumento } from '../_model/responseTiposDocumento';
 import { CatalogoService } from '../_service/catalogo.service';
 import * as $ from 'jquery';
+import { ConfiguracionService } from '../_service/configuracion.service';
 
 @Component({
   selector: 'app-configuration',
@@ -50,7 +51,8 @@ export class ConfigurationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private catalogoService: CatalogoService
+    private catalogoService: CatalogoService,
+    private configuracionService: ConfiguracionService
   ) { }
 
 
