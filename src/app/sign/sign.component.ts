@@ -325,4 +325,8 @@ export class SignComponent implements OnInit {
 
   }
 
+  back() {
+    this.router.navigate(['/home']);
+  }
+
 }

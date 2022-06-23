@@ -235,4 +235,8 @@ export class PhotographyComponent implements OnInit {
 
   }
 
+  back() {
+    this.router.navigate(['/home']);
+  }
+
 }

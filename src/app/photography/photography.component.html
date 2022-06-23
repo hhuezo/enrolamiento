@@ -126,10 +126,10 @@
 
                                 <div class="row">
                                     <div class="col-md-12 d-flex justify-content-center">
-                                        <button (click)="clean()" type="button" class="btn btn-outline-primary">&nbsp;Regresar a
+                                        <button (click)="back()" type="button" class="btn btn-outline-primary">&nbsp;Regresar a
                                             inicio&nbsp;</button>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-outline-primary" routerLink="/registro">Borrar Foto</a>
+                                        <a class="btn btn-outline-primary" (click)="clean()">Borrar Foto</a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                         <button (click)="guardar()" type="button" class="btn btn-primary">&nbsp;Guardar&nbsp;</button>
                                     </div>
