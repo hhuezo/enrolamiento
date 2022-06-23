@@ -264,6 +264,7 @@ export class PersonalInformationComponent implements OnInit {
       //update
       this.datosPersonaService.updatePersonalInformation(body).subscribe((resp: RequestDatosPersona) => {
         this.RequestDatosPersona = resp;
+        //console.log("aaa resp "+resp);
       });
     }
 
