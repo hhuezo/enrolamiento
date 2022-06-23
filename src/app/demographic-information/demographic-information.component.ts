@@ -219,7 +219,7 @@ onChangeDepartamento(departamentoSeleccionado: string) {
       });
     }
 
-    // this.router.navigate(['/photography']);
+     this.router.navigate(['/photography']);
   }
 
   get f(): { [key: string]: AbstractControl } {

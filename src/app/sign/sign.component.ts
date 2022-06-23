@@ -67,6 +67,9 @@ export class SignComponent implements OnInit {
         {
           this.load_sign();
         }
+        else{
+          this.load_canva();
+        }
 
       });
 
@@ -296,6 +299,11 @@ export class SignComponent implements OnInit {
     this.div_sign= document.getElementById("div_sign") as HTMLElement;
     this.div_sign.hidden = true;
     this.div_canva.hidden = false;
+
+    this.btn_guardar = document.getElementById("btn_guardar") as HTMLElement;
+    this.btn_next= document.getElementById("btn_next") as HTMLElement;
+    this.btn_guardar.hidden = false;
+    this.btn_next.hidden = true;
   }
 
   load_icons() {

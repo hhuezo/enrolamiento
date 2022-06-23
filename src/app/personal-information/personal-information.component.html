@@ -46,10 +46,11 @@
                 <div class="form-group">
                   <label class="col-md-12 control-label">Según CIP • Nombre</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="text" formControlName="txt_nombre" class="form-control" [(ngModel)]="nombre"  [value]="nombre"
+                    <input type="text" formControlName="txt_nombre" class="form-control" [(ngModel)]="nombre"  [value]="nombre" required="true"
                       tabindex="1"
                       [ngClass]="{'is-invalid': submitted &&
                       f['txt_nombre'].errors}">
+
 
                     <div *ngIf="submitted && f['txt_nombre'].errors"
                       class="invalid-feedback">
@@ -267,7 +268,7 @@
                 <button (click)="back()" type="button" class="btn
                   btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button (click)="guardar()" type="button" class="btn
+                <button (click)="guardar()" type="submit" class="btn
                   btn-primary">&nbsp;Guardar&nbsp;</button>
               </div>
             </div>

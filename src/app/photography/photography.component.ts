@@ -45,8 +45,7 @@ export class PhotographyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.load_icons();
-    this.hide_photo();
+
 
     if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
       //console.log('sin session');
@@ -60,6 +59,7 @@ export class PhotographyComponent implements OnInit {
 
         this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
         this.foto =this.persona[0].PER_FOTO;
+        //console.log('foto actual: ', this.foto);
         if( this.foto != null && this.foto != '')
         {
           this.load_photo();
@@ -69,6 +69,8 @@ export class PhotographyComponent implements OnInit {
 
 
     }
+    this.load_icons();
+    this.hide_photo();
   }
 
 
