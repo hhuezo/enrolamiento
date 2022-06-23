@@ -114,13 +114,23 @@ export class PhysicInformationComponent implements OnInit {
       });
 
 
-      this.obtenerColoresPiel();
 
     }
 
 
     this.opciones = ["SI", "NO"];
-    this.tipos_sangre = ["A +", "A -", "B +", "B -", "AB +", "AB -", "O +", "O -"]
+    this.tipos_sangre = ["A +","A -","B +","B -","AB +","AB -","O +","O -"];
+
+
+
+    //para combo colores de piel
+    this.catalogoService.getColoresPiel().subscribe((resp: ResponseColoresPiel[]) => { this.responseColoresPiel = resp;
+      //console.log('response colores de piel: ', this.responseColoresPiel);
+      console.log('response colores de piel: ', this.colores_pieles);
+      this.colores_piel = this.responseColoresPiel;
+
+
+    });
 
 
     //para combo de tipos de nariz
@@ -230,18 +240,6 @@ export class PhysicInformationComponent implements OnInit {
   }
 
 
-  async obtenerColoresPiel() {
-    //para combo colores de piel
-    await this.catalogoService.getColoresPiel().subscribe((resp: ResponseColoresPiel[]) => {
-      this.responseColoresPiel = resp;
-      //console.log('response colores de piel: ', this.responseColoresPiel);
-      console.log('response colores de piel: ', this.colores_pieles);
-      this.colores_piel = this.responseColoresPiel;
-
-
-    });
-
-  }
 
 
   get f(): { [key: string]: AbstractControl } {

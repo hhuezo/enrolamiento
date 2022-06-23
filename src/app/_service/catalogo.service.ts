@@ -29,7 +29,7 @@ export class CatalogoService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
   ) { }
 
   getPaises() {
