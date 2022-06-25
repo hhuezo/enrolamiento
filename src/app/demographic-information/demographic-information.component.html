@@ -43,21 +43,17 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="col-md-12 control-label">Domicilio </label>
-
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="text" class="form-control"
                           formControlName="txt_domicilio"
-                          [(ngModel)]="domicilio"
-                           value="{{domicilio}}"
-                          [ngClass]="{'is-invalid': submitted &&
-                          f['txt_domicilio'].errors}" tabindex="1"
-                          />
-                        <div *ngIf="submitted &&
-                          f['txt_domicilio'].errors"
-                          class="invalid-feedback">
-                          <div
-                            *ngIf="f['txt_domicilio'].errors?.['required']">Complete
-                            este campo</div>
+                          [(ngModel)]="domicilio" value="{{domicilio}}"
+                          tabindex="1" />
+                        <div *ngIf="f['txt_domicilio'].touched &&
+                          f['txt_domicilio'].invalid" class="alert
+                          alert-danger">
+                          <div *ngIf="f['txt_domicilio'].errors &&
+                            f['txt_domicilio'].errors['required']">Complete este
+                            campo</div>
                         </div>
 
                       </div>
@@ -72,15 +68,14 @@
                       </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="text" class="form-control"
-                          formControlName="txt_lugar_nacimiento"  [(ngModel)]="lugar_nacimiento" value="{{lugar_nacimiento}}"
-                          [ngClass]="{'is-invalid': submitted &&
-                          f['txt_lugar_nacimiento'].errors}" tabindex="3"
-                          />
-                        <div *ngIf="submitted &&
-                          f['txt_lugar_nacimiento'].errors"
-                          class="invalid-feedback">
-                          <div
-                            *ngIf="f['txt_lugar_nacimiento'].errors?.['required']">Complete
+                          formControlName="txt_lugar_nacimiento"
+                          [(ngModel)]="lugar_nacimiento"
+                          value="{{lugar_nacimiento}}" tabindex="3" />
+                        <div *ngIf="f['txt_lugar_nacimiento'].touched &&
+                          f['txt_lugar_nacimiento'].invalid" class="alert
+                          alert-danger">
+                          <div *ngIf="f['txt_lugar_nacimiento'].errors &&
+                            f['txt_lugar_nacimiento'].errors['required']">Complete
                             este campo</div>
                         </div>
 
@@ -93,14 +88,14 @@
                       </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="date" class="form-control"
-                          formControlName="txt_fecha_nacimiento" [(ngModel)]="fecha_nacimiento" value="{{fecha_nacimiento}}"
-                          [ngClass]="{'is-invalid': submitted &&
-                          f['txt_fecha_nacimiento'].errors}" tabindex="5" />
-                        <div *ngIf="submitted &&
-                          f['txt_fecha_nacimiento'].errors"
-                          class="invalid-feedback">
-                          <div
-                            *ngIf="f['txt_fecha_nacimiento'].errors?.['required']">Complete
+                          formControlName="txt_fecha_nacimiento"
+                          [(ngModel)]="fecha_nacimiento"
+                          value="{{fecha_nacimiento}}" tabindex="5" />
+                        <div *ngIf="f['txt_fecha_nacimiento'].touched &&
+                          f['txt_fecha_nacimiento'].invalid" class="alert
+                          alert-danger">
+                          <div *ngIf="f['txt_fecha_nacimiento'].errors &&
+                            f['txt_fecha_nacimiento'].errors['required']">Complete
                             este campo</div>
                         </div>
 
@@ -116,19 +111,20 @@
                       <label class="col-md-12 control-label">Pais de nacimiento</label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <select class="form-control select"
-                          formControlName="cbo_pais_nacimiento" [(ngModel)]="pais_nacimiento"
+                          formControlName="cbo_pais_nacimiento"
+                          [(ngModel)]="pais_nacimiento"
                           #cbo_pais_nacimiento tabindex="2"
                           (change)='onChangePais(cbo_pais_nacimiento.value)'>
                           <option value="">Seleccione Pais</option>
-                          <option value="{{item.id}}" *ngFor="let item of paises"  [selected]="pais_nacimiento == item.id">{{item.pai_descripcion}}</option>
+                          <option value="{{item.id}}" *ngFor="let item of
+                            paises" [selected]="pais_nacimiento == item.id">{{item.pai_descripcion}}</option>
                         </select>
-                        <div *ngIf="submitted &&
-                          f['cbo_pais_nacimiento'].errors"
-                          class="invalid-feedback">
-                          <div
-                            *ngIf="f['cbo_pais_nacimiento'].errors?.['required']">Complete
-                            este
-                            campo</div>
+                        <div *ngIf="f['cbo_pais_nacimiento'].touched &&
+                          f['cbo_pais_nacimiento'].invalid" class="alert
+                          alert-danger">
+                          <div *ngIf="f['cbo_pais_nacimiento'].errors &&
+                            f['cbo_pais_nacimiento'].errors['required']">Complete
+                            este campo</div>
                         </div>
 
                       </div>
@@ -140,20 +136,22 @@
                       </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <select class="form-control select"
-                          formControlName="cbo_departamento" [(ngModel)]="departamento" #cbo_departamento
+                          formControlName="cbo_departamento"
+                          [(ngModel)]="departamento" #cbo_departamento
                           tabindex="4"
                           (change)='onChangeDepartamento(cbo_departamento.value)'>
                           <option value="">Seleccione Departamento</option>
-                          <option value="{{item.id}}" *ngFor="let item of departamentos"  [selected]="departamento == item.id">
-                             {{item.uge_descripcion}}
+                          <option value="{{item.id}}" *ngFor="let item of
+                            departamentos" [selected]="departamento == item.id">
+                            {{item.uge_descripcion}}
                           </option>
                         </select>
-                        <div *ngIf="submitted && f['cbo_departamento'].errors"
-                          class="invalid-feedback">
-                          <div
-                            *ngIf="f['cbo_departamento'].errors?.['required']">Complete
-                            este
-                            campo</div>
+                        <div *ngIf="f['cbo_departamento'].touched &&
+                          f['cbo_departamento'].invalid" class="alert
+                          alert-danger">
+                          <div *ngIf="f['cbo_departamento'].errors &&
+                            f['cbo_departamento'].errors['required']">Complete
+                            este campo</div>
                         </div>
 
                       </div>
@@ -164,12 +162,16 @@
                       <label class="col-md-12 control-label">Municipio </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <select class="form-control select"
-                          formControlName="cbo_municipio"  [(ngModel)]="municipio" tabindex="6">
+                          formControlName="cbo_municipio"
+                          [(ngModel)]="municipio" tabindex="6">
                           <option value="">Seleccione Municipio</option>
-                          <option value="{{item.id}}" *ngFor="let item of  municipios" [selected]="municipio == item.id">
-                           {{item.uge_descripcion}}</option>
+                          <option value="{{item.id}}" *ngFor="let item of
+                            municipios" [selected]="municipio == item.id">
+                            {{item.uge_descripcion}}</option>
                         </select>
-
+                        <div *ngIf="f['cbo_municipio'].touched && f['cbo_municipio'].invalid" class="alert alert-danger">
+                          <div *ngIf="f['cbo_municipio'].errors && f['cbo_municipio'].errors['required']">Complete este campo</div>
+                      </div>
 
                       </div>
                       <div class="col-md-12">&nbsp;</div>

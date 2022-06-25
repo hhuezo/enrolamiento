@@ -49,6 +49,10 @@
                                           <option value="{{item}}" *ngFor="let item of opciones" [selected]="anteojos == item">{{item}}</option>
                                         </select>
 
+                                        <div *ngIf="f['cbo_anteojos'].touched && f['cbo_anteojos'].invalid" class="alert alert-danger">
+                                          <div *ngIf="f['cbo_anteojos'].errors && f['cbo_anteojos'].errors['required']">Complete este campo</div>
+                                      </div>
+
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
                                 </div>
@@ -61,6 +65,9 @@
                                               {{item.cpi_descripcion}}
                                             </option>
                                         </select>
+                                        <div *ngIf="f['cbo_colores_pieles'].touched && f['cbo_colores_pieles'].invalid" class="alert alert-danger">
+                                          <div *ngIf="f['cbo_colores_pieles'].errors && f['cbo_colores_pieles'].errors['required']">Complete este campo</div>
+                                      </div>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
                                 </div>
@@ -72,6 +79,9 @@
                                             <option value="">Seleccione tipo de boca</option>
                                             <option value="{{item.id}}" *ngFor="let item of  tipos_boca" [selected]="tipos_bocas == item.id">{{item.tbo_descripcion}}</option>
                                         </select>
+                                        <div *ngIf="f['cbo_tipos_bocas'].touched && f['cbo_tipos_bocas'].invalid" class="alert alert-danger">
+                                            <div *ngIf="f['cbo_tipos_bocas'].errors && f['cbo_tipos_bocas'].errors['required']">Complete este campo</div>
+                                        </div>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
                                 </div>
@@ -81,12 +91,10 @@
                                     <label class="col-md-12 control-label">Peso en libras</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <input type="number" formControlName="txt_peso_libras"  [(ngModel)]="peso_lb" step="0.01" min="1" value="{{peso_lb}}" name="txt_peso_libras" tabindex="7"
-                                            id="txt_peso_libras" class="form-control"
-                                            [ngClass]="{'is-invalid': submitted && f['txt_peso_libras'].errors}" />
-                                        <div *ngIf="submitted && f['txt_peso_libras'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['txt_peso_libras'].errors?.['required']">Complete este campo
+                                            id="txt_peso_libras" class="form-control"/>
+                                            <div *ngIf="f['txt_peso_libras'].touched && f['txt_peso_libras'].invalid" class="alert alert-danger">
+                                                <div *ngIf="f['txt_peso_libras'].errors && f['txt_peso_libras'].errors['required']">Complete este campo</div>
                                             </div>
-                                        </div>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
                                 </div>
@@ -98,7 +106,9 @@
                                             <select class="form-control select" formControlName="cbo_lentes_contacto" [(ngModel)]="lentes_contacto" tabindex="9">
                                               <option value="{{item}}" *ngFor="let item of opciones" [selected]="lentes_contacto == item">{{item}}</option>
                                             </select>
-
+                                            <div *ngIf="f['cbo_lentes_contacto'].touched && f['cbo_lentes_contacto'].invalid" class="alert alert-danger">
+                                                <div *ngIf="f['cbo_lentes_contacto'].errors && f['cbo_lentes_contacto'].errors['required']">Complete este campo</div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
@@ -112,6 +122,10 @@
                                             <option value="{{item.id}}" *ngFor="let item of colores_ojo" [selected]="colores_ojos == item.id">{{item.coj_descripcion}}</option>
 
                                         </select>
+
+                                        <div *ngIf="f['cbo_colores_ojos'].touched && f['cbo_colores_ojos'].invalid" class="alert alert-danger">
+                                            <div *ngIf="f['cbo_colores_ojos'].errors && f['cbo_colores_ojos'].errors['required']">Complete este campo</div>
+                                        </div>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
                                 </div>
@@ -128,6 +142,10 @@
                                             tipos_nariz" [selected]="tipos_narices == item.id">{{item.tna_descripcion}}</option>
 
                                         </select>
+
+                                        <div *ngIf="f['cbo_tipos_narices'].touched && f['cbo_tipos_narices'].invalid" class="alert alert-danger">
+                                            <div *ngIf="f['cbo_tipos_narices'].errors && f['cbo_tipos_narices'].errors['required']">Complete este campo</div>
+                                        </div>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
                                 </div>
@@ -140,6 +158,9 @@
                                           <option value="{{item}}" *ngFor="let item of opciones" [selected]="senales_especiales == item">{{item}}</option>
                                         </select>
 
+                                        <div *ngIf="f['cbo_senales_especiales'].touched && f['cbo_senales_especiales'].invalid" class="alert alert-danger">
+                                            <div *ngIf="f['cbo_senales_especiales'].errors && f['cbo_senales_especiales'].errors['required']">Complete este campo</div>
+                                        </div>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
                                 </div>
@@ -151,7 +172,9 @@
                                       <select class="form-control select" formControlName="txt_audifonos" [(ngModel)]="audifonos" tabindex="6">
                                         <option value="{{item}}" *ngFor="let item of opciones" [selected]="audifonos == item">{{item}}</option>
                                       </select>
-
+                                      <div *ngIf="f['txt_audifonos'].touched && f['txt_audifonos'].invalid" class="alert alert-danger">
+                                        <div *ngIf="f['txt_audifonos'].errors && f['txt_audifonos'].errors['required']">Complete este campo</div>
+                                    </div>
 
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
@@ -165,6 +188,9 @@
                                             <option value="">Seleccione colores de cabello</option>
                                             <option value="{{item.id}}" *ngFor="let item of colores_cabello" [selected]="colores_cabellos == item.id">{{item.cca_descripcion}}</option>
                                         </select>
+                                        <div *ngIf="f['cbo_colores_cabellos'].touched && f['cbo_colores_cabellos'].invalid" class="alert alert-danger">
+                                            <div *ngIf="f['cbo_colores_cabellos'].errors && f['cbo_colores_cabellos'].errors['required']">Complete este campo</div>
+                                        </div>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
                                 </div>
@@ -173,13 +199,11 @@
                                     <label class="col-md-12 control-label">Estatura</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <input type="number" formControlName="txt_estatura" [(ngModel)]="estatura" step="0.01" min="0.1" value="{{estatura}}" name="txt_estatura" id="txt_estatura" tabindex="10"
-                                            class="form-control input"
-                                            [ngClass]="{'is-invalid': submitted && f['txt_estatura'].errors}" />
-                                        <div *ngIf="submitted && f['txt_estatura'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['txt_estatura'].errors?.['required']">Complete este campo
-                                            </div>
-                                        </div>
+                                            class="form-control input" />
 
+                                        <div *ngIf="f['txt_estatura'].touched && f['txt_estatura'].invalid" class="alert alert-danger">
+                                            <div *ngIf="f['txt_estatura'].errors && f['txt_estatura'].errors['required']">Complete este campo</div>
+                                        </div>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
                                 </div>
@@ -199,6 +223,10 @@
                                             <option value="O +">O RH +</option>
                                             <option value="O -">O RH -</option>-->
                                         </select>
+
+                                        <div *ngIf="f['cbo_tipo_sangre'].touched && f['cbo_tipo_sangre'].invalid" class="alert alert-danger">
+                                            <div *ngIf="f['cbo_tipo_sangre'].errors && f['cbo_tipo_sangre'].errors['required']">Complete este campo</div>
+                                        </div>
 
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>

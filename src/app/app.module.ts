@@ -21,7 +21,7 @@ import { OptionsComponent } from './options/options.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 
 import { BrowserAnimationsModule }    from "@angular/platform-browser/animations";
-import { DropdownModule } from "primeng/dropdown";
+
 
 
 
@@ -51,7 +51,6 @@ import { DropdownModule } from "primeng/dropdown";
     StepsModule,
     WebcamModule,
     BrowserAnimationsModule,
-    DropdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

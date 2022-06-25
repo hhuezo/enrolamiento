@@ -46,17 +46,15 @@
                 <div class="form-group">
                   <label class="col-md-12 control-label">Según CIP • Nombre</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="text" formControlName="txt_nombre" class="form-control" [(ngModel)]="nombre"  [value]="nombre" required="true"
-                      tabindex="1"
-                      [ngClass]="{'is-invalid': submitted &&
-                      f['txt_nombre'].errors}">
+                    <input type="text" formControlName="txt_nombre"
+                      class="form-control" [(ngModel)]="nombre" [value]="nombre"
+                      tabindex="1" />
 
 
-                    <div *ngIf="submitted && f['txt_nombre'].errors"
-                      class="invalid-feedback">
-                      <div *ngIf="f['txt_nombre'].errors?.['required']">Complete
-                        este campo</div>
+                      <div *ngIf="f['txt_nombre'].touched && f['txt_nombre'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['txt_nombre'].errors && f['txt_nombre'].errors['required']">Complete este campo</div>
                     </div>
+
                   </div>
                   <div class="col-md-12">&nbsp;</div>
                 </div>
@@ -66,14 +64,12 @@
                   <label class="col-md-12 control-label">Según CIP • Apellido
                     materno</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="text" formControlName="txt_ape_materno" [(ngModel)]="ape_materno" class="form-control"   value="{{ape_materno}}"
-                        tabindex="3"
-                      [ngClass]="{'is-invalid': submitted &&
-                      f['txt_ape_materno'].errors}" />
-                    <div *ngIf="submitted && f['txt_ape_materno'].errors"
-                      class="invalid-feedback">
-                      <div *ngIf="f['txt_ape_materno'].errors?.['required']">Complete
-                        este campo</div>
+                    <input type="text" formControlName="txt_ape_materno"
+                      [(ngModel)]="ape_materno" class="form-control"
+                      value="{{ape_materno}}"
+                      tabindex="3" />
+                      <div *ngIf="f['txt_ape_materno'].touched && f['txt_ape_materno'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['txt_ape_materno'].errors && f['txt_ape_materno'].errors['required']">Complete este campo</div>
                     </div>
 
                   </div>
@@ -87,13 +83,10 @@
                   <label class="col-md-12 control-label">Número de CIP</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="text" class="form-control"
-                      formControlName="txt_dui"  value="{{dui}}" [(ngModel)]="dui" tabindex="5"
-                      [ngClass]="{'is-invalid': submitted &&
-                      f['txt_dui'].errors}" />
-                    <div *ngIf="submitted && f['txt_dui'].errors"
-                      class="invalid-feedback">
-                      <div *ngIf="f['txt_dui'].errors?.['required']">Complete
-                        este campo</div>
+                      formControlName="txt_dui" value="{{dui}}"
+                      [(ngModel)]="dui" tabindex="5" />
+                      <div *ngIf="f['txt_dui'].touched && f['txt_dui'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['txt_dui'].errors && f['txt_dui'].errors['required']">Complete este campo</div>
                     </div>
 
                   </div>
@@ -104,14 +97,17 @@
                   <label class="col-md-12 control-label">Ocupación</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <select formControlName="cbo_ocupacion" [(ngModel)]="ocupacion" tabindex="7">
+                    <select formControlName="cbo_ocupacion"
+                      [(ngModel)]="ocupacion" tabindex="7">
                       <option *ngFor="let item of ocupaciones"
                         value="{{item.id}}" [selected]="ocupacion == item.id">
                         {{item.ocu_descripcion}}
                       </option>
                     </select>
 
-
+                    <div *ngIf="f['cbo_ocupacion'].touched && f['cbo_ocupacion'].invalid" class="alert alert-danger">
+                      <div *ngIf="f['cbo_ocupacion'].errors && f['cbo_ocupacion'].errors['required']">Complete este campo</div>
+                  </div>
 
                   </div>
                   <div class="col-md-12">&nbsp;</div>
@@ -122,13 +118,11 @@
                   <label class="col-md-12 control-label">Correo electrónico</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="email" class="form-control"
-                      formControlName="txt_email" value="{{email}}" [(ngModel)]="email" tabindex="9"
-                      [ngClass]="{'is-invalid': submitted &&
-                      f['txt_email'].errors}" />
-                    <div *ngIf="submitted && f['txt_email'].errors"
-                      class="invalid-feedback">
-                      <div *ngIf="f['txt_email'].errors?.['required']">Complete
-                        este campo</div>
+                      formControlName="txt_email" value="{{email}}"
+                      [(ngModel)]="email" tabindex="9"
+                      />
+                      <div *ngIf="f['txt_email'].touched && f['txt_email'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['txt_email'].errors && f['txt_email'].errors['required']">Complete este campo</div>
                     </div>
                   </div>
                   <div class="col-md-12">&nbsp;</div>
@@ -137,12 +131,16 @@
                 <div class="form-group">
                   <label class="col-md-12 control-label">Género</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <select formControlName="cbo_genero" [(ngModel)]="genero" tabindex="11">
+                    <select formControlName="cbo_genero" [(ngModel)]="genero"
+                      tabindex="11">
                       <option value="">Seleccione Genero</option>
-                      <option value="{{item.id}}"  *ngFor="let item of  generos" [selected]="genero == item.id">{{item.gen_descripcion}}</option>
+                      <option value="{{item.id}}" *ngFor="let item of generos"
+                        [selected]="genero == item.id">{{item.gen_descripcion}}</option>
                     </select>
 
-
+                    <div *ngIf="f['cbo_genero'].touched && f['cbo_genero'].invalid" class="alert alert-danger">
+                      <div *ngIf="f['cbo_genero'].errors && f['cbo_genero'].errors['required']">Complete este campo</div>
+                  </div>
                   </div>
                   <div class="col-md-12">&nbsp;</div>
                 </div>
@@ -156,15 +154,12 @@
                     paterno</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="text" class="form-control input"
-                      formControlName="txt_ape_paterno" value="{{ape_paterno}}" [(ngModel)]="ape_paterno"
-                      tabindex="2"
-                      [ngClass]="{'is-invalid': submitted &&
-                      f['txt_ape_paterno'].errors}" />
+                      formControlName="txt_ape_paterno" value="{{ape_paterno}}"
+                      [(ngModel)]="ape_paterno"
+                      tabindex="2" />
 
-                    <div *ngIf="submitted && f['txt_ape_paterno'].errors"
-                      class="invalid-feedback">
-                      <div *ngIf="f['txt_ape_paterno'].errors?.['required']">Complete
-                        este campo</div>
+                      <div *ngIf="f['txt_ape_paterno'].touched && f['txt_ape_paterno'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['txt_ape_paterno'].errors && f['txt_ape_paterno'].errors['required']">Complete este campo</div>
                     </div>
                   </div>
                   <div class="col-md-12">&nbsp;</div>
@@ -177,8 +172,9 @@
                     casado/a</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="text" class="form-control"
-                      formControlName="txt_ape_casada" value="{{ape_casada}}" [(ngModel)]="ape_casada"
-                      tabindex="4"/>
+                      formControlName="txt_ape_casada" value="{{ape_casada}}"
+                      [(ngModel)]="ape_casada"
+                      tabindex="4" />
 
 
                   </div>
@@ -190,14 +186,10 @@
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="date" class="form-control"
                       formControlName="txt_fecha_emision_dui"
-                      value="{{fecha_emision_dui}}" [(ngModel)]="fecha_emision_dui" tabindex="6"
-                      [ngClass]="{'is-invalid': submitted &&
-                      f['txt_fecha_emision_dui'].errors}" />
-                    <div *ngIf="submitted && f['txt_fecha_emision_dui'].errors"
-                      class="invalid-feedback">
-                      <div
-                        *ngIf="f['txt_fecha_emision_dui'].errors?.['required']">Complete
-                        este campo</div>
+                      value="{{fecha_emision_dui}}"
+                      [(ngModel)]="fecha_emision_dui" tabindex="6" />
+                      <div *ngIf="f['txt_fecha_emision_dui'].touched && f['txt_fecha_emision_dui'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['txt_fecha_emision_dui'].errors && f['txt_fecha_emision_dui'].errors['required']">Complete este campo</div>
                     </div>
 
 
@@ -211,11 +203,13 @@
                   <label class="col-md-12 control-label">Fecha de vencimiento de
                     CIP</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="date" formControlName="txt_fecha_vto_dui" value="{{fecha_vto_dui}}" [(ngModel)]="fecha_vto_dui"
-                      class="form-control input"
-                      [ngClass]="{'is-invalid': submitted &&
-                      f['txt_fecha_vto_dui'].errors}" tabindex="8" />
+                    <input type="date" formControlName="txt_fecha_vto_dui"
+                      value="{{fecha_vto_dui}}" [(ngModel)]="fecha_vto_dui"
+                      class="form-control input"  tabindex="8" />
 
+                      <div *ngIf="f['txt_fecha_vto_dui'].touched && f['txt_fecha_vto_dui'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['txt_fecha_vto_dui'].errors && f['txt_fecha_vto_dui'].errors['required']">Complete este campo</div>
+                    </div>
                   </div>
 
 
@@ -226,10 +220,17 @@
                   <label class="col-md-12 control-label">Estado civil </label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <select class="form-control select" formControlName="cbo_estado_civil" [(ngModel)]="estado_civil" tabindex="10">
+                    <select class="form-control select"
+                      formControlName="cbo_estado_civil"
+                      [(ngModel)]="estado_civil" tabindex="10">
                       <option value="">Seleccione Estado Civil</option>
-                      <option value="{{item.id}}" *ngFor="let item of estados_civil" [selected]="estado_civil == item.id">{{item.est_descripcion}}</option>
+                      <option value="{{item.id}}" *ngFor="let item of
+                        estados_civil" [selected]="estado_civil == item.id">{{item.est_descripcion}}</option>
                     </select>
+
+                    <div *ngIf="f['cbo_estado_civil'].touched && f['cbo_estado_civil'].invalid" class="alert alert-danger">
+                      <div *ngIf="f['cbo_estado_civil'].errors && f['cbo_estado_civil'].errors['required']">Complete este campo</div>
+                  </div>
 
                   </div>
                   <div class="col-md-12">&nbsp;</div>
@@ -238,17 +239,12 @@
                 <div class="form-group">
                   <label class="col-md-12 control-label">Teléfono celular</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="text" class="form-control" formControlName="txt_telefono_celular"
-                      value="{{telefono_celular}}" [(ngModel)]="telefono_celular"
-
-                      id="txt_telefono_celular" [ngClass]="{'is-invalid':
-                      submitted && f['txt_telefono_celular'].errors}"
-                      tabindex="12" />
-                    <div *ngIf="submitted && f['txt_telefono_celular'].errors"
-                      class="invalid-feedback">
-                      <div
-                        *ngIf="f['txt_telefono_celular'].errors?.['required']">Complete
-                        este campo</div>
+                    <input type="text" class="form-control"
+                      formControlName="txt_telefono_celular"
+                      value="{{telefono_celular}}"
+                      [(ngModel)]="telefono_celular" tabindex="12" />
+                      <div *ngIf="f['txt_telefono_celular'].touched && f['txt_telefono_celular'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['txt_telefono_celular'].errors && f['txt_telefono_celular'].errors['required']">Complete este campo</div>
                     </div>
 
 
@@ -268,7 +264,7 @@
                 <button (click)="back()" type="button" class="btn
                   btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button (click)="guardar()" type="submit" class="btn
+                <button type="submit" class="btn
                   btn-primary">&nbsp;Guardar&nbsp;</button>
               </div>
             </div>
