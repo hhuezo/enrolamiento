@@ -18,7 +18,7 @@
             <div class="col-md-1">
             </div>
             <div class="col-md-10">
-              <form [formGroup]="form!" (ngSubmit)="guardar()">
+              <form [formGroup]="form!" >
                 <div class="row">
                     <div class="row">
                         <div class="col-md-12">&nbsp;
@@ -45,7 +45,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Anteojos</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <select  formControlName="cbo_anteojos" [(ngModel)]="anteojos" tabindex="1">
+                                        <select  formControlName="cbo_anteojos" [(ngModel)]="anteojos" tabindex="1" id="cbo_anteojos">
                                           <option value="{{item}}" *ngFor="let item of opciones" [selected]="anteojos == item">{{item}}</option>
                                         </select>
 
@@ -59,7 +59,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Piel</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <select class="form-control select"  formControlName="cbo_colores_pieles" [(ngModel)]="colores_pieles" tabindex="3">
+                                        <select class="form-control select"  formControlName="cbo_colores_pieles" id="cbo_colores_pieles" [(ngModel)]="colores_pieles" tabindex="3">
                                             <option value="">Seleccione color de piel</option>
                                             <option value="{{item.id}}" *ngFor="let item of colores_piel" [selected]="colores_pieles == item.id">
                                               {{item.cpi_descripcion}}
@@ -75,7 +75,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Boca</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <select class="form-control select" formControlName="cbo_tipos_bocas" [(ngModel)]="tipos_bocas" tabindex="5">
+                                        <select class="form-control select" formControlName="cbo_tipos_bocas" id="cbo_tipos_bocas" [(ngModel)]="tipos_bocas" tabindex="5">
                                             <option value="">Seleccione tipo de boca</option>
                                             <option value="{{item.id}}" *ngFor="let item of  tipos_boca" [selected]="tipos_bocas == item.id">{{item.tbo_descripcion}}</option>
                                         </select>
@@ -90,7 +90,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Peso en libras</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <input type="number" formControlName="txt_peso_libras"  [(ngModel)]="peso_lb" step="0.01" min="1" value="{{peso_lb}}" name="txt_peso_libras" tabindex="7"
+                                        <input type="number" formControlName="txt_peso_libras" [(ngModel)]="peso_lb" step="0.01" min="1" value="{{peso_lb}}" name="txt_peso_libras" tabindex="7"
                                             id="txt_peso_libras" class="form-control"/>
                                             <div *ngIf="f['txt_peso_libras'].touched && f['txt_peso_libras'].invalid" class="alert alert-danger">
                                                 <div *ngIf="f['txt_peso_libras'].errors && f['txt_peso_libras'].errors['required']">Complete este campo</div>
@@ -103,7 +103,7 @@
                                     <label class="col-md-12 control-label">Lentes de contactos</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <select class="form-control select" formControlName="cbo_lentes_contacto" [(ngModel)]="lentes_contacto" tabindex="9">
+                                            <select class="form-control select" formControlName="cbo_lentes_contacto" id="cbo_lentes_contacto" [(ngModel)]="lentes_contacto" tabindex="9">
                                               <option value="{{item}}" *ngFor="let item of opciones" [selected]="lentes_contacto == item">{{item}}</option>
                                             </select>
                                             <div *ngIf="f['cbo_lentes_contacto'].touched && f['cbo_lentes_contacto'].invalid" class="alert alert-danger">
@@ -117,7 +117,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Ojos</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <select class="form-control select" formControlName="cbo_colores_ojos" [(ngModel)]="colores_ojos" tabindex="11">
+                                        <select class="form-control select" formControlName="cbo_colores_ojos" id="cbo_colores_ojos" [(ngModel)]="colores_ojos" tabindex="11">
                                             <option value="">Seleccione colores de ojos</option>
                                             <option value="{{item.id}}" *ngFor="let item of colores_ojo" [selected]="colores_ojos == item.id">{{item.coj_descripcion}}</option>
 
@@ -136,7 +136,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Nariz</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <select class="form-control select" formControlName="cbo_tipos_narices" [(ngModel)]="tipos_narices" tabindex="2">
+                                        <select class="form-control select" formControlName="cbo_tipos_narices" id="cbo_tipos_narices" [(ngModel)]="tipos_narices" tabindex="2">
                                             <option value="">Seleccione Nariz</option>
                                             <option value="{{item.id}}" *ngFor="let item of
                                             tipos_nariz" [selected]="tipos_narices == item.id">{{item.tna_descripcion}}</option>
@@ -154,7 +154,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Señales especiales</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <select class="form-control select" formControlName="cbo_senales_especiales" [(ngModel)]="senales_especiales" tabindex="4">
+                                        <select class="form-control select" formControlName="cbo_senales_especiales" id="cbo_senales_especiales" [(ngModel)]="senales_especiales" tabindex="4">
                                           <option value="{{item}}" *ngFor="let item of opciones" [selected]="senales_especiales == item">{{item}}</option>
                                         </select>
 
@@ -169,7 +169,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Audífono</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                      <select class="form-control select" formControlName="txt_audifonos" [(ngModel)]="audifonos" tabindex="6">
+                                      <select class="form-control select" formControlName="txt_audifonos" id="txt_audifonos" [(ngModel)]="audifonos" tabindex="6">
                                         <option value="{{item}}" *ngFor="let item of opciones" [selected]="audifonos == item">{{item}}</option>
                                       </select>
                                       <div *ngIf="f['txt_audifonos'].touched && f['txt_audifonos'].invalid" class="alert alert-danger">
@@ -184,7 +184,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Cabello</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <select class="form-control select" formControlName="cbo_colores_cabellos" [(ngModel)]="colores_cabellos" tabindex="8">
+                                        <select class="form-control select" formControlName="cbo_colores_cabellos" id="cbo_colores_cabellos" [(ngModel)]="colores_cabellos" tabindex="8">
                                             <option value="">Seleccione colores de cabello</option>
                                             <option value="{{item.id}}" *ngFor="let item of colores_cabello" [selected]="colores_cabellos == item.id">{{item.cca_descripcion}}</option>
                                         </select>
@@ -198,7 +198,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Estatura</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <input type="number" formControlName="txt_estatura" [(ngModel)]="estatura" step="0.01" min="0.1" value="{{estatura}}" name="txt_estatura" id="txt_estatura" tabindex="10"
+                                        <input type="number" formControlName="txt_estatura"  [(ngModel)]="estatura" step="0.01" min="0.1" value="{{estatura}}" name="txt_estatura" id="txt_estatura" tabindex="10"
                                             class="form-control input" />
 
                                         <div *ngIf="f['txt_estatura'].touched && f['txt_estatura'].invalid" class="alert alert-danger">
@@ -211,7 +211,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Tipo de sangre</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <select class="form-control select" formControlName="cbo_tipo_sangre" [(ngModel)]="tipo_sangre" tabindex="12">
+                                        <select class="form-control select" formControlName="cbo_tipo_sangre" id="cbo_tipo_sangre" [(ngModel)]="tipo_sangre" tabindex="12">
                                           <option value="{{item}}" *ngFor="let item of tipos_sangre" [selected]="tipo_sangre == item">{{item}}</option>
                                            <!-- <option value="">Seleccione tipo de sangre</option>
                                             <option value="A +">A RH +</option>
@@ -244,7 +244,7 @@
                     <div class="col-md-12 d-flex justify-content-center">
                         <button (click)="back()" type="button" class="btn btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <button (click)="guardar()" type="button" class="btn btn-primary">&nbsp;Guardar&nbsp;</button>
+                        <button (click)="guardar()" id="btn_guardar" tabindex="13" type="button" class="btn btn-primary">&nbsp;Guardar&nbsp;</button>
 
                     </div>
                 </div>

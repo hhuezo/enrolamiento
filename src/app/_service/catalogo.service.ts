@@ -134,7 +134,7 @@ export class CatalogoService {
        headers: new HttpHeaders().set('Content-Type', 'application/json')
      });*/
 
-     this.url_departamentos = "http://192.168.26.32/blog/public/api/get_departamentos";
+     //this.url_departamentos = "http://192.168.26.32/blog/public/api/get_departamentos";
 
      console.log('esta es la url de departamentos '+this.url_departamentos + "/" + paisSeleccionado);
 
@@ -169,7 +169,7 @@ export class CatalogoService {
 
 
 
-    this.url_municipios = "http://192.168.26.32/blog/public/api/get_municipios";
+    //this.url_municipios = "http://192.168.26.32/blog/public/api/get_municipios";
     console.log('esta es la url catalogo municipios ' + this.url_municipios+"/"+departamentoSeleccionado);
     return this.http.get<any>(this.url_municipios + "/" + departamentoSeleccionado, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')

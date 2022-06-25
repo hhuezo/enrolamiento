@@ -20,7 +20,7 @@
         <div class="col-md-1">
         </div>
         <div class="col-md-10">
-          <form [formGroup]="form!" (ngSubmit)="guardar()">
+          <form [formGroup]="form!" >
             <div class="row">
               <div class="col-md-12">&nbsp;
               </div>
@@ -46,7 +46,7 @@
                 <div class="form-group">
                   <label class="col-md-12 control-label">Según CIP • Nombre</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="text" formControlName="txt_nombre"
+                    <input type="text" formControlName="txt_nombre" id="txt_nombre"
                       class="form-control" [(ngModel)]="nombre" [value]="nombre"
                       tabindex="1" />
 
@@ -64,7 +64,7 @@
                   <label class="col-md-12 control-label">Según CIP • Apellido
                     materno</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="text" formControlName="txt_ape_materno"
+                    <input type="text" formControlName="txt_ape_materno" id="txt_ape_materno"
                       [(ngModel)]="ape_materno" class="form-control"
                       value="{{ape_materno}}"
                       tabindex="3" />
@@ -83,7 +83,7 @@
                   <label class="col-md-12 control-label">Número de CIP</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="text" class="form-control"
-                      formControlName="txt_dui" value="{{dui}}"
+                      formControlName="txt_dui" value="{{dui}}" id="txt_dui"
                       [(ngModel)]="dui" tabindex="5" />
                       <div *ngIf="f['txt_dui'].touched && f['txt_dui'].invalid" class="alert alert-danger">
                         <div *ngIf="f['txt_dui'].errors && f['txt_dui'].errors['required']">Complete este campo</div>
@@ -97,7 +97,7 @@
                   <label class="col-md-12 control-label">Ocupación</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <select formControlName="cbo_ocupacion"
+                    <select formControlName="cbo_ocupacion" id="cbo_ocupacion"
                       [(ngModel)]="ocupacion" tabindex="7">
                       <option *ngFor="let item of ocupaciones"
                         value="{{item.id}}" [selected]="ocupacion == item.id">
@@ -118,7 +118,7 @@
                   <label class="col-md-12 control-label">Correo electrónico</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="email" class="form-control"
-                      formControlName="txt_email" value="{{email}}"
+                      formControlName="txt_email" value="{{email}}" id="txt_email"
                       [(ngModel)]="email" tabindex="9"
                       />
                       <div *ngIf="f['txt_email'].touched && f['txt_email'].invalid" class="alert alert-danger">
@@ -131,7 +131,7 @@
                 <div class="form-group">
                   <label class="col-md-12 control-label">Género</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <select formControlName="cbo_genero" [(ngModel)]="genero"
+                    <select formControlName="cbo_genero" [(ngModel)]="genero" id="cbo_genero"
                       tabindex="11">
                       <option value="">Seleccione Genero</option>
                       <option value="{{item.id}}" *ngFor="let item of generos"
@@ -153,7 +153,7 @@
                   <label class="col-md-12 control-label">Según CIP • Apellido
                     paterno</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="text" class="form-control input"
+                    <input type="text" class="form-control input" id="txt_ape_paterno"
                       formControlName="txt_ape_paterno" value="{{ape_paterno}}"
                       [(ngModel)]="ape_paterno"
                       tabindex="2" />
@@ -172,7 +172,7 @@
                     casado/a</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="text" class="form-control"
-                      formControlName="txt_ape_casada" value="{{ape_casada}}"
+                      formControlName="txt_ape_casada" value="{{ape_casada}}" id="txt_ape_casada"
                       [(ngModel)]="ape_casada"
                       tabindex="4" />
 
@@ -185,7 +185,7 @@
                   <label class="col-md-12 control-label">Fecha de emisión de CIP</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="date" class="form-control"
-                      formControlName="txt_fecha_emision_dui"
+                      formControlName="txt_fecha_emision_dui" id="txt_fecha_emision_dui"
                       value="{{fecha_emision_dui}}"
                       [(ngModel)]="fecha_emision_dui" tabindex="6" />
                       <div *ngIf="f['txt_fecha_emision_dui'].touched && f['txt_fecha_emision_dui'].invalid" class="alert alert-danger">
@@ -203,7 +203,7 @@
                   <label class="col-md-12 control-label">Fecha de vencimiento de
                     CIP</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="date" formControlName="txt_fecha_vto_dui"
+                    <input type="date" formControlName="txt_fecha_vto_dui" id="txt_fecha_vto_dui"
                       value="{{fecha_vto_dui}}" [(ngModel)]="fecha_vto_dui"
                       class="form-control input"  tabindex="8" />
 
@@ -221,7 +221,7 @@
                   <div class="col-md-12 col-sm-12 col-xs-12">
 
                     <select class="form-control select"
-                      formControlName="cbo_estado_civil"
+                      formControlName="cbo_estado_civil" id="cbo_estado_civil"
                       [(ngModel)]="estado_civil" tabindex="10">
                       <option value="">Seleccione Estado Civil</option>
                       <option value="{{item.id}}" *ngFor="let item of
@@ -240,7 +240,7 @@
                   <label class="col-md-12 control-label">Teléfono celular</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <input type="text" class="form-control"
-                      formControlName="txt_telefono_celular"
+                      formControlName="txt_telefono_celular" id="txt_telefono_celular"
                       value="{{telefono_celular}}"
                       [(ngModel)]="telefono_celular" tabindex="12" />
                       <div *ngIf="f['txt_telefono_celular'].touched && f['txt_telefono_celular'].invalid" class="alert alert-danger">
@@ -264,7 +264,7 @@
                 <button (click)="back()" type="button" class="btn
                   btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="submit" class="btn
+                <button type="button" id="btn_guardar" tabindex="13" (click)="guardar()" class="btn
                   btn-primary">&nbsp;Guardar&nbsp;</button>
               </div>
             </div>

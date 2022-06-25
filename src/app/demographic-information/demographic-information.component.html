@@ -45,7 +45,7 @@
                       <label class="col-md-12 control-label">Domicilio </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="text" class="form-control"
-                          formControlName="txt_domicilio"
+                          formControlName="txt_domicilio" id="txt_domicilio"
                           [(ngModel)]="domicilio" value="{{domicilio}}"
                           tabindex="1" />
                         <div *ngIf="f['txt_domicilio'].touched &&
@@ -68,7 +68,7 @@
                       </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="text" class="form-control"
-                          formControlName="txt_lugar_nacimiento"
+                          formControlName="txt_lugar_nacimiento" id="txt_lugar_nacimiento"
                           [(ngModel)]="lugar_nacimiento"
                           value="{{lugar_nacimiento}}" tabindex="3" />
                         <div *ngIf="f['txt_lugar_nacimiento'].touched &&
@@ -88,7 +88,7 @@
                       </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="date" class="form-control"
-                          formControlName="txt_fecha_nacimiento"
+                          formControlName="txt_fecha_nacimiento" id="txt_fecha_nacimiento"
                           [(ngModel)]="fecha_nacimiento"
                           value="{{fecha_nacimiento}}" tabindex="5" />
                         <div *ngIf="f['txt_fecha_nacimiento'].touched &&
@@ -111,7 +111,7 @@
                       <label class="col-md-12 control-label">Pais de nacimiento</label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <select class="form-control select"
-                          formControlName="cbo_pais_nacimiento"
+                          formControlName="cbo_pais_nacimiento" id="cbo_pais_nacimiento"
                           [(ngModel)]="pais_nacimiento"
                           #cbo_pais_nacimiento tabindex="2"
                           (change)='onChangePais(cbo_pais_nacimiento.value)'>
@@ -136,7 +136,7 @@
                       </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <select class="form-control select"
-                          formControlName="cbo_departamento"
+                          formControlName="cbo_departamento" id="cbo_departamento"
                           [(ngModel)]="departamento" #cbo_departamento
                           tabindex="4"
                           (change)='onChangeDepartamento(cbo_departamento.value)'>
@@ -162,7 +162,7 @@
                       <label class="col-md-12 control-label">Municipio </label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <select class="form-control select"
-                          formControlName="cbo_municipio"
+                          formControlName="cbo_municipio" id="cbo_municipio"
                           [(ngModel)]="municipio" tabindex="6">
                           <option value="">Seleccione Municipio</option>
                           <option value="{{item.id}}" *ngFor="let item of
@@ -191,7 +191,7 @@
                       <button (click)="back()" type="button" class="btn
                         btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
                       &nbsp;&nbsp;&nbsp;&nbsp;
-                      <button (click)="guardar()" type="button" class="btn
+                      <button (click)="guardar()" id="btn_guardar" tabindex="7" type="button" class="btn
                         btn-primary">&nbsp;Guardar&nbsp;</button>
                     </div>
                   </div>

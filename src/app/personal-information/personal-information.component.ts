@@ -8,6 +8,7 @@ import { ResponseOcupaciones } from '../_model/responseOcupaciones';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import { CatalogoService } from '../_service/catalogo.service';
 import { DatosPersonaService } from '../_service/datos-persona.service';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -62,7 +63,90 @@ export class PersonalInformationComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
+    $(document).ready(function(){
+      //alert('funcion jquery');
 
+      $('#txt_nombre').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#txt_ape_paterno').focus();                      
+        }
+      });
+
+      $('#txt_ape_paterno').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#txt_ape_materno').focus();                      
+        }
+      });
+
+      $('#txt_ape_materno').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#txt_ape_casada').focus();                      
+        }
+      });
+
+      $('#txt_ape_casada').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#txt_dui').focus();                      
+        }
+      });
+
+      $('#txt_dui').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#txt_fecha_emision_dui').focus();                      
+        }
+      });
+
+      $('#txt_fecha_emision_dui').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#cbo_ocupacion').focus();                      
+        }
+      });
+
+      // $('#cbo_ocupacion').keyup(function (e) {
+      //   if (e.keyCode === 13) {        
+      //       alert('doy enter en select');   
+      //      $('#txt_fecha_vto_dui').focus();                      
+      //   }
+      // });
+
+
+      $('#cbo_ocupacion').change(function (e) {
+            $('#txt_fecha_vto_dui').focus();                      
+        
+      });
+
+      $('#txt_fecha_vto_dui').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#txt_email').focus();                      
+        }
+      });
+
+      $('#txt_email').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#cbo_estado_civil').focus();                      
+        }
+      });
+
+      $('#cbo_estado_civil').change(function (e) {
+           $('#cbo_genero').focus();                              
+      });
+
+      $('#cbo_genero').change(function (e) {        
+           $('#txt_telefono_celular').focus();                              
+      });
+
+      
+      $('#txt_telefono_celular').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#btn_guardar').focus();                      
+        }
+      });
+
+      
+
+
+    });
 
 
     this.load_icons();

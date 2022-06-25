@@ -11,6 +11,8 @@ import { RequestDatosPersona } from '../_model/requestDatosPersona';
 
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-physic-information',
@@ -78,6 +80,90 @@ export class PhysicInformationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+
+    $(document).ready(function(){
+      //alert('funcion jquery');
+
+      $('#cbo_anteojos').keyup(function (e) {
+        
+           $('#cbo_tipos_narices').focus();                      
+        
+      });
+
+      $('#cbo_tipos_narices').keyup(function (e) {
+        
+           $('#cbo_colores_pieles').focus();                      
+        
+      });
+
+      $('#cbo_colores_pieles').keyup(function (e) {
+        
+           $('#cbo_senales_especiales').focus();                      
+        
+      });
+
+      $('#cbo_senales_especiales').keyup(function (e) {
+        
+           $('#cbo_tipos_bocas').focus();                      
+        
+      });
+
+      $('#cbo_tipos_bocas').keyup(function (e) {
+        
+           $('#txt_audifonos').focus();                      
+        
+      });
+
+      $('#txt_audifonos').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#txt_peso_libras').focus();                      
+        }
+      });
+
+      $('#txt_peso_libras').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#cbo_colores_cabellos').focus();                      
+        }
+      });
+
+      $('#cbo_colores_cabellos').keyup(function (e) {
+        
+           $('#cbo_lentes_contacto').focus();                      
+        
+      });
+
+      $('#cbo_lentes_contacto').keyup(function (e) {
+        
+           $('#txt_estatura').focus();                      
+        
+      });
+
+      $('#txt_estatura').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#cbo_colores_ojos').focus();                      
+        }
+      });
+
+      $('#cbo_colores_ojos').keyup(function (e) {
+        
+           $('#cbo_tipo_sangre').focus();                      
+        
+      });
+
+      
+      $('#cbo_tipo_sangre').keyup(function (e) {
+        
+           $('#btn_guardar').focus();                      
+        
+      });
+
+      
+
+
+    });
+
+
     this.load_icons();
     this.submitted = true;
 

@@ -8,6 +8,8 @@ import { CatalogoService } from '../_service/catalogo.service';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-demographic-information',
@@ -57,6 +59,54 @@ export class DemographicInformationComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+
+    $(document).ready(function(){
+      //alert('funcion jquery');
+
+      $('#txt_domicilio').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#cbo_pais_nacimiento').focus();                      
+        }
+      });
+
+      $('#cbo_pais_nacimiento').change(function (e) {
+            
+           $('#txt_lugar_nacimiento').focus();                      
+        
+      });
+
+      $('#txt_lugar_nacimiento').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#cbo_departamento').focus();                      
+        }
+      });
+
+      $('#cbo_departamento').keyup(function (e) {
+        
+           $('#txt_fecha_nacimiento').focus();                      
+        
+      });
+
+      $('#txt_fecha_nacimiento').keyup(function (e) {
+        if (e.keyCode === 13) {           
+           $('#cbo_municipio').focus();                      
+        }
+      });
+
+      $('#cbo_municipio').change(function (e) {
+        
+           $('#btn_guardar').focus();                      
+        
+      });
+
+
+
+    });
+
+
+
+
     this.load_icons();
     this.submitted = true;
 
