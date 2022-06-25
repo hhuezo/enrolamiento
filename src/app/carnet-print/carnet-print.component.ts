@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
+import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 @Component({
   selector: 'app-carnet-print',
@@ -8,7 +9,7 @@ import { DatosPersonaService } from '../_service/datos-persona.service';
 })
 export class CarnetPrintComponent implements OnInit {
 
-  RequestDatosPersona?: RequestDatosPersona;
+  responseTmpDatosPersona?: ResponseTmpDatosPersona[];
   persona: any;
   foto?: string;
   firma?: string;
@@ -41,23 +42,23 @@ export class CarnetPrintComponent implements OnInit {
       //console.log('sin session');
 
       //console.log('session');
-      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.responseTmpDatosPersona = resp;
 
-        console.log('persona actual: ', this.RequestDatosPersona);
-        this.persona = this.RequestDatosPersona;
+        console.log('persona actual: ', this.responseTmpDatosPersona);
+        this.persona = this.responseTmpDatosPersona;
 
-        this.nombre = this.persona[0].PER_NOMBRE;
-        this.ape_paterno = this.persona[0].PER_APELLIDO_PATERNO;
-        this.ape_materno = this.persona[0].PER_APELLIDO_MATERNO;
-        this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
-        this.foto = this.persona[0].PER_FOTO;
-        this.sign = this.persona[0].PER_FIRMA;
-        this.fecha_nacimiento = this.persona[0].PER_FECHA_DE_NACIMIENTO_DMY;
-        this.nacionalidad = this.persona[0].PAIS;
-        this.genero = this.persona[0].GENERO;
-        this.tipo_sangre = this.persona[0].PER_GRUPO_SANGUINEO;
-        this.expedida = this.persona[0].PER_FECHA_EMISION_DUI_DMY;
+        this.nombre = this.persona[0].nombre;
+        this.ape_paterno = this.persona[0].ape_paterno;
+        this.ape_materno = this.persona[0].ape_materno;
+        this.dui = this.persona[0].dui;
+        this.foto = this.persona[0].foto;
+        this.sign = this.persona[0].firma;
+        this.fecha_nacimiento = this.persona[0].fecha_nacimiento;
+        this.nacionalidad = this.persona[0].pais;
+        this.genero = this.persona[0].genero;
+        this.tipo_sangre = this.persona[0].tipo_sangre;
+        this.expedida = this.persona[0].txt_fecha_emision_dui;
 
       });
 

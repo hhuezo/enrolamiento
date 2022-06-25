@@ -10,6 +10,7 @@ import { ResponseFoto } from '../_model/responseFoto';
 
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
+import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 
 @Component({
   selector: 'app-photography',
@@ -30,7 +31,8 @@ export class PhotographyComponent implements OnInit {
   img_demographic_information?: HTMLImageElement;
   img_photography?: HTMLImageElement;
 
-  RequestDatosPersona?: RequestDatosPersona;
+  responseTmpDatosPersona?: ResponseTmpDatosPersona[];
+
 
   msjerr?: string;
   foto?: string;
@@ -45,20 +47,20 @@ export class PhotographyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    
 
     if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
       //console.log('sin session');
 
       //console.log('session');
-      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.responseTmpDatosPersona = resp;
 
         //console.log('persona actual: ', this.RequestDatosPersona);
-        this.persona = this.RequestDatosPersona;
+        this.persona = this.responseTmpDatosPersona;
 
-        this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
-        this.foto =this.persona[0].PER_FOTO;
+        this.dui = this.persona[0].dui;
+        this.foto =this.persona[0].foto;
         //console.log('foto actual: ', this.foto);
         if( this.foto != null && this.foto != '')
         {
@@ -88,8 +90,8 @@ export class PhotographyComponent implements OnInit {
       console.log("body" + body);
 
       //enviando  datos
-      this.datosPersonaService.photography(body).subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.photography(body).subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.responseTmpDatosPersona = resp;
       });
     }
 

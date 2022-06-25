@@ -10,6 +10,7 @@ import { CatalogoService } from '../_service/catalogo.service';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
 
 import { DatosPersonaService } from '../_service/datos-persona.service';
+import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 
 @Component({
   selector: 'app-physic-information',
@@ -22,7 +23,7 @@ export class PhysicInformationComponent implements OnInit {
   img_physic_information?: HTMLImageElement;
   img_personal_information?: HTMLImageElement;
 
-  RequestDatosPersona?: RequestDatosPersona;
+  responseTmpDatosPersona?: ResponseTmpDatosPersona[];
 
   persona: any;
   color_piel: any;
@@ -86,28 +87,28 @@ export class PhysicInformationComponent implements OnInit {
       // this.obtenerDatosPersona();
 
 
-      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.responseTmpDatosPersona = resp;
 
-        console.log('persona: ', this.RequestDatosPersona);
-        this.persona = this.RequestDatosPersona;
+        console.log('persona: ', this.responseTmpDatosPersona);
+        this.persona = this.responseTmpDatosPersona;
 
 
-        this.anteojos = this.persona[0].PER_ANTEOJOS;
+        this.anteojos = this.persona[0].anteojos;
         console.log("anteojos " + this.anteojos);
-        this.tipos_narices = this.persona[0].PER_ID_TNA_CODIGO;
-        this.colores_pieles = this.persona[0].PER_ID_CPI_CODIGO;
+        this.tipos_narices = this.persona[0].nariz;
+        this.colores_pieles = this.persona[0].piel;
 
-        this.senales_especiales = this.persona[0].PER_SENALES_ESPECIALES;
-        this.tipos_bocas = this.persona[0].PER_ID_TBO_CODIGO;
-        this.audifonos = this.persona[0].PER_AUDIFONO;
-        this.peso_lb = this.persona[0].PER_PESO;
-        this.colores_cabellos = this.persona[0].PER_ID_CCA_CODIGO;
+        this.senales_especiales = this.persona[0].senales_especiales;
+        this.tipos_bocas = this.persona[0].boca;
+        this.audifonos = this.persona[0].audifonos;
+        this.peso_lb = this.persona[0].peso_libras;
+        this.colores_cabellos = this.persona[0].cabello;
 
-        this.lentes_contacto = this.persona[0].PER_LENTES_DE_CONTACTO;
-        this.estatura = this.persona[0].PER_ESTATURA;
-        this.colores_ojos = this.persona[0].PER_ID_COJ_CODIGO;
-        this.tipo_sangre = this.persona[0].PER_GRUPO_SANGUINEO;
+        this.lentes_contacto = this.persona[0].lentes_contacto;
+        this.estatura = this.persona[0].estatura;
+        this.colores_ojos = this.persona[0].ojos;
+        this.tipo_sangre = this.persona[0].tipo_sangre;
 
 
 
@@ -210,28 +211,28 @@ export class PhysicInformationComponent implements OnInit {
 
 
   async obtenerDatosPersona() {
-    await this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
-      this.RequestDatosPersona = resp;
+    await this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
+      this.responseTmpDatosPersona = resp;
 
-      console.log('persona: ', this.RequestDatosPersona);
-      this.persona = this.RequestDatosPersona;
+      console.log('persona: ', this.responseTmpDatosPersona);
+      this.persona = this.responseTmpDatosPersona;
 
 
-      this.anteojos = this.persona[0].PER_ANTEOJOS;
+      this.anteojos = this.persona[0].anteojos;
       console.log("anteojos " + this.anteojos);
-      this.tipos_narices = this.persona[0].PER_ID_TNA_CODIGO;
-      this.colores_pieles = this.persona[0].PER_ID_CPI_CODIGO;
+      this.tipos_narices = this.persona[0].nariz;
+      this.colores_pieles = this.persona[0].piel;
 
-      this.senales_especiales = this.persona[0].PER_SENALES_ESPECIALES;
-      this.tipos_bocas = this.persona[0].PER_ID_TBO_CODIGO;
-      this.audifonos = this.persona[0].PER_AUDIFONO;
-      this.peso_lb = this.persona[0].PER_PESO;
-      this.colores_cabellos = this.persona[0].PER_ID_CCA_CODIGO;
+      this.senales_especiales = this.persona[0].senales_especiales;
+      this.tipos_bocas = this.persona[0].boca;
+      this.audifonos = this.persona[0].audifonos;
+      this.peso_lb = this.persona[0].peso_libras;
+      this.colores_cabellos = this.persona[0].cabello;
 
-      this.lentes_contacto = this.persona[0].PER_LENTES_DE_CONTACTO;
-      this.estatura = this.persona[0].PER_ESTATURA;
-      this.colores_ojos = this.persona[0].PER_ID_COJ_CODIGO;
-      this.tipo_sangre = this.persona[0].PER_GRUPO_SANGUINEO;
+      this.lentes_contacto = this.persona[0].lentes_contacto;
+      this.estatura = this.persona[0].estatura;
+      this.colores_ojos = this.persona[0].ojos;
+      this.tipo_sangre = this.persona[0].tipo_sangre;
 
 
 
@@ -302,8 +303,8 @@ export class PhysicInformationComponent implements OnInit {
       console.log("body" + body);
 
       //insertado datos
-      this.datosPersonaService.physicInformation(body).subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.physicInformation(body).subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.responseTmpDatosPersona = resp;
       });
     }
 

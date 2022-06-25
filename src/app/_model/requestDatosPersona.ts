@@ -5,7 +5,7 @@ export class RequestDatosPersona {
     ape_casada?: string
     dui?: string
     fecha_emision_dui?: string
-    ocupacion?: string
+    ocupacion?: number
     fecha_vto_dui?: string
     email?: string
     estado_civil?: string

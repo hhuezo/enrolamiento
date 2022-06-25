@@ -12,7 +12,11 @@ export class CatalogoService {
 
   private url_paises: string = `${environment.HOST_LOGIN}/api/catalogo/paises`;
   private url_departamentos: string = `${environment.HOST_LOGIN}/api/catalogo/departamentos`;
+  private url_departamentos_actuales: string = `${environment.HOST_LOGIN}/api/catalogo/departamentos_actuales`;
+
   private url_municipios: string = `${environment.HOST_LOGIN}/api/catalogo/municipios`;
+  private url_municipios_actuales: string = `${environment.HOST_LOGIN}/api/catalogo/municipios_actuales`;
+
   private url_ocupaciones: string = `${environment.HOST_LOGIN}/api/catalogo/ocupaciones`;
   private url_generos: string = `${environment.HOST_LOGIN}/api/catalogo/generos`;
   private url_estados_civiles: string = `${environment.HOST_LOGIN}/api/catalogo/estados_civil`;
@@ -175,19 +179,21 @@ export class CatalogoService {
 
 
   getMunicipiosActuales(ubicacion: string) {
-    console.log('ubicacion: '+ "http://192.168.26.32/blog/public/api/get_municipios_actuales/"+ubicacion);
-    this.url_municipios = "http://192.168.26.32/blog/public/api/get_municipios_actuales";
+    //console.log('ubicacion: '+ "http://192.168.26.32/blog/public/api/get_municipios_actuales/"+ubicacion);
+    console.log("municipios actuales "+this.url_municipios_actuales + "/" + ubicacion) ;
 
-    return this.http.get<any>(this.url_municipios + "/" + ubicacion, {
+    
+    return this.http.get<any>(this.url_municipios_actuales + "/" + ubicacion, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }
 
   getDepartamentosActuales(ubicacion: string) {
     //console.log('ubicacion: '+ "http://192.168.26.32/blog/public/api/get_departamentos_actuales/"+ubicacion);
-    this.url_departamentos = "http://192.168.26.32/blog/public/api/get_departamentos_actuales";
+    //this.url_departamentos = "http://192.168.26.32/blog/public/api/get_departamentos_actuales";
+    console.log("departamentos actuales "+this.url_departamentos_actuales + "/" + ubicacion) ;
 
-    return this.http.get<any>(this.url_departamentos + "/" + ubicacion, {
+    return this.http.get<any>(this.url_departamentos_actuales + "/" + ubicacion, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }

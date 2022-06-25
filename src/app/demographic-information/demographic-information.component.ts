@@ -7,6 +7,7 @@ import { ResponsePaises } from '../_model/responsePaises';
 import { CatalogoService } from '../_service/catalogo.service';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
+import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 
 @Component({
   selector: 'app-demographic-information',
@@ -45,7 +46,7 @@ export class DemographicInformationComponent implements OnInit {
   responseMunicipios?: ResponseMunicipios[];
   municipios: any;
 
-  RequestDatosPersona?: RequestDatosPersona;
+  responseTmpDatosPersona?: ResponseTmpDatosPersona[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,31 +66,31 @@ export class DemographicInformationComponent implements OnInit {
       //console.log('sin session');
 
       //console.log('session');
-      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.responseTmpDatosPersona = resp;
 
-        console.log('persona actual: ', this.RequestDatosPersona);
-        this.persona = this.RequestDatosPersona;
-
-
-        this.domicilio = this.persona[0].PER_DOMICILIO;
-        this.pais_nacimiento = this.persona[0].UGE_CODIGO_PAIS;
-        this.lugar_nacimiento = this.persona[0].PER_LUGAR_DE_NACIMIENTO;
-        this.municipio = this.persona[0].PER_ID_UGE_CODIGO;
-        this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
-        this.departamento = this.persona[0].ID_DEPARTAMENTO;
-        this.fecha_nacimiento = this.persona[0].PER_FECHA_DE_NACIMIENTO;
+        console.log('persona actual: ', this.responseTmpDatosPersona);
+        this.persona = this.responseTmpDatosPersona;
 
 
-        if(this.persona[0].PER_ID_UGE_CODIGO != null)
+        this.domicilio = this.persona[0].domicilio;
+        this.pais_nacimiento = this.persona[0].pais_nacimiento;
+        this.lugar_nacimiento = this.persona[0].lugar_nacimiento;
+        this.municipio = this.persona[0].municipio;
+        this.dui = this.persona[0].dui;
+        this.departamento = this.persona[0].departamento;
+        this.fecha_nacimiento = this.persona[0].fecha_nacimiento;
+
+
+        if(this.persona[0].municipio != null)
         {
-          this.catalogoService.getMunicipiosActuales(this.persona[0].PER_ID_UGE_CODIGO).subscribe((resp: ResponseMunicipios[]) => {
+          this.catalogoService.getMunicipiosActuales(this.persona[0].municipio).subscribe((resp: ResponseMunicipios[]) => {
             this.responseMunicipios = resp;
             this.municipios = this.responseMunicipios;
           });
 
 
-          this.catalogoService.getDepartamentosActuales(this.persona[0].PER_ID_UGE_CODIGO).subscribe((resp: ResponseDepartamentos[]) => {
+          this.catalogoService.getDepartamentosActuales(this.persona[0].municipio).subscribe((resp: ResponseDepartamentos[]) => {
             this.responseDepartamentos = resp;
             this.departamentos = this.responseDepartamentos;
           });
@@ -214,8 +215,8 @@ onChangeDepartamento(departamentoSeleccionado: string) {
       console.log("body" + body);
 
       //insertado datos
-      this.datosPersonaService.demographicInformation(body).subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.demographicInformation(body).subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.responseTmpDatosPersona = resp;
       });
     }
 

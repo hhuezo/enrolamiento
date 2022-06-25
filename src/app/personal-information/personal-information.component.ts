@@ -5,6 +5,7 @@ import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { ResponseEstadosCivil } from '../_model/responseEstadosCivil';
 import { ResponseGeneros } from '../_model/responseGeneros';
 import { ResponseOcupaciones } from '../_model/responseOcupaciones';
+import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import { CatalogoService } from '../_service/catalogo.service';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 
@@ -20,10 +21,9 @@ export class PersonalInformationComponent implements OnInit {
   ocupaciones: any;
   responseOcupaciones?: ResponseOcupaciones;
 
-  RequestDatosPersona?: RequestDatosPersona;
+  responseTmpDatosPersona?: ResponseTmpDatosPersona[];
 
-
-  persona: any;
+  persona?: any;
 
 
   form!: FormGroup;
@@ -35,7 +35,7 @@ export class PersonalInformationComponent implements OnInit {
   ape_casada!: string;
   dui!: string;
   fecha_emision_dui!: string;
-  ocupacion!: string;
+  ocupacion!: number;
   fecha_vto_dui!: string;
   email!: string;
   estado_civil!: string;
@@ -105,34 +105,36 @@ export class PersonalInformationComponent implements OnInit {
 
 
     if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
-      //console.log('sin session');
+      console.log('sin session');
     }
     else {
       console.log('session');
-      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.responseTmpDatosPersona = resp;
 
-        //  console.log('persona actual: ', this.RequestDatosPersona);
-        this.persona = this.RequestDatosPersona;
+        console.log('persona actual: ', this.responseTmpDatosPersona);
+        this.persona = this.responseTmpDatosPersona;
 
 
-        this.nombre = this.persona[0].PER_NOMBRE;
-        this.ape_paterno = this.persona[0].PER_APELLIDO_PATERNO;
-        this.ape_materno = this.persona[0].PER_APELLIDO_MATERNO;
-        this.ape_casada = this.persona[0].PER_APELLIDO_CASADA;
-        this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
-        this.fecha_emision_dui = this.persona[0].PER_FECHA_EMISION_DUI
-        this.ocupacion = this.persona[0].PER_ID_OCU_CODIGO;
-        this.fecha_vto_dui = this.persona[0].PER_FECHA_VENCIMIENTO_DUI
+        this.nombre = this.persona[0].nombre!;
+        this.ape_paterno = this.persona[0].ape_paterno!;
+        this.ape_materno = this.persona[0].ape_materno!;
+        this.ape_casada = this.persona[0].ape_casada!;
+        this.dui = this.persona[0].dui!;
+        this.fecha_emision_dui = this.persona[0].fecha_emision_dui!;
+        this.ocupacion = +this.persona[0].ocupacion!;
+        this.fecha_vto_dui = this.persona[0].fecha_vto_dui!;
 
-        this.email = this.persona[0].PER_EMAIL;
-        this.estado_civil = this.persona[0].PER_ESTADO_CIVIL;
-        this.genero = this.persona[0].PER_SEXO;
-        this.telefono_celular = this.persona[0].PER_TELEFONO_PERSONAL;
+        this.email = this.persona[0].email!;
+        this.estado_civil = this.persona[0].estado_civil!;
+        this.genero = this.persona[0].genero!;
+        this.telefono_celular = this.persona[0].telefono_celular!;
 
 
 
       });
+
+      console.log('this.nombre: ', this.nombre);
 
 
     }
@@ -173,6 +175,8 @@ export class PersonalInformationComponent implements OnInit {
 
 
   }
+
+
 
 
   get f(): { [key: string]: AbstractControl } {
@@ -252,8 +256,8 @@ export class PersonalInformationComponent implements OnInit {
     console.log("bodyyyy " + body);
 
     if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
-      this.datosPersonaService.createPersona(body).subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.createPersona(body).subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.persona = resp;
         sessionStorage.setItem('dui', this.dui);
       });
     }
@@ -262,8 +266,8 @@ export class PersonalInformationComponent implements OnInit {
       //console.log("bodyyyy " + body);
 
       //update
-      this.datosPersonaService.updatePersonalInformation(body).subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.updatePersonalInformation(body).subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.persona = resp;
         //console.log("aaa resp "+resp);
       });
     }

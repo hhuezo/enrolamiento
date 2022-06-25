@@ -6,6 +6,7 @@ import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { RequestFirma } from '../_model/requestFirma';
 import { ResponseDatosPersona } from '../_model/responseDatosPersona';
 import { ResponseFirma } from '../_model/responseFirma';
+import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { FirmaService } from '../_service/firma.service';
 
@@ -36,6 +37,9 @@ export class SignComponent implements OnInit {
   responseDatosPersona?: ResponseDatosPersona;
   RequestDatosPersona?: RequestDatosPersona;
 
+  responseTmpDatosPersona?: ResponseTmpDatosPersona[];
+  
+
   dui!: any;
   persona: any;
   sign: any;
@@ -55,14 +59,14 @@ export class SignComponent implements OnInit {
 
     if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
 
-      this.datosPersonaService.getPersona().subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.responseTmpDatosPersona = resp;
 
-        console.log('persona actual: ', this.RequestDatosPersona);
-        this.persona = this.RequestDatosPersona;
+        console.log('persona actual: ', this.responseTmpDatosPersona);
+        this.persona = this.responseTmpDatosPersona;
 
-        this.dui = this.persona[0].PER_NRO_DE_DOCUMENTO;
-        this.sign =this.persona[0].PER_FIRMA;
+        this.dui = this.persona[0].dui;
+        this.sign =this.persona[0].firma;
         if( this.sign != null && this.sign != '')
         {
           this.load_sign();
@@ -113,8 +117,8 @@ export class SignComponent implements OnInit {
       //console.log("body" + body);
 
       //enviando  datos
-      this.datosPersonaService.sign(body).subscribe((resp: RequestDatosPersona) => {
-        this.RequestDatosPersona = resp;
+      this.datosPersonaService.sign(body).subscribe((resp: ResponseTmpDatosPersona[]) => {
+        this.responseTmpDatosPersona = resp;
       });
     }
 
