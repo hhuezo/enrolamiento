@@ -54,11 +54,11 @@ export class CarnetPrintComponent implements OnInit {
         this.dui = this.persona[0].dui;
         this.foto = this.persona[0].foto;
         this.sign = this.persona[0].firma;
-        this.fecha_nacimiento = this.persona[0].fecha_nacimiento;
-        this.nacionalidad = this.persona[0].pais;
-        this.genero = this.persona[0].genero;
+        this.fecha_nacimiento = this.persona[0].fecha_nacimiento_dmy;
+        this.nacionalidad = this.persona[0].pais_descripcion;
+        this.genero = this.persona[0].genero_descripcion;
         this.tipo_sangre = this.persona[0].tipo_sangre;
-        this.expedida = this.persona[0].txt_fecha_emision_dui;
+        this.expedida = this.persona[0].fecha_emision_dui_dmy;
 
       });
 
