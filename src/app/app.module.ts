@@ -20,6 +20,10 @@ import { CarnetPrintComponent } from './carnet-print/carnet-print.component';
 import { OptionsComponent } from './options/options.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 
+import { BrowserAnimationsModule }    from "@angular/platform-browser/animations";
+import { DropdownModule } from "primeng/dropdown";
+
+
 
 @NgModule({
   declarations: [
@@ -45,7 +49,9 @@ import { ConfigurationComponent } from './configuration/configuration.component'
     ReactiveFormsModule,
     TimelineModule,
     StepsModule,
-    WebcamModule
+    WebcamModule,
+    BrowserAnimationsModule,
+    DropdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
