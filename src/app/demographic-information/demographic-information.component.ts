@@ -65,39 +65,39 @@ export class DemographicInformationComponent implements OnInit {
       //alert('funcion jquery');
 
       $('#txt_domicilio').keyup(function (e) {
-        if (e.keyCode === 13) {           
-           $('#cbo_pais_nacimiento').focus();                      
+        if (e.keyCode === 13) {
+           $('#cbo_pais_nacimiento').focus();
         }
       });
 
       $('#cbo_pais_nacimiento').change(function (e) {
-            
-           $('#txt_lugar_nacimiento').focus();                      
-        
+
+           $('#txt_lugar_nacimiento').focus();
+
       });
 
       $('#txt_lugar_nacimiento').keyup(function (e) {
-        if (e.keyCode === 13) {           
-           $('#cbo_departamento').focus();                      
+        if (e.keyCode === 13) {
+           $('#cbo_departamento').focus();
         }
       });
 
       $('#cbo_departamento').keyup(function (e) {
-        
-           $('#txt_fecha_nacimiento').focus();                      
-        
+
+           $('#txt_fecha_nacimiento').focus();
+
       });
 
       $('#txt_fecha_nacimiento').keyup(function (e) {
-        if (e.keyCode === 13) {           
-           $('#cbo_municipio').focus();                      
+        if (e.keyCode === 13) {
+           $('#cbo_municipio').focus();
         }
       });
 
       $('#cbo_municipio').change(function (e) {
-        
-           $('#btn_guardar').focus();                      
-        
+
+           $('#btn_guardar').focus();
+
       });
 
 
@@ -187,13 +187,18 @@ export class DemographicInformationComponent implements OnInit {
   }
 
 
-  onChangePais(paisSeleccionado: string) {
-    this.catalogoService.getDepartamentos(paisSeleccionado).subscribe((resp: ResponseDepartamentos[]) => {
+  onChangePais(/*paisSeleccionado: string*/ event:any) {
+    //console.log('event :' + event);
+    //console.log(event.value);
+    this.catalogoService.getDepartamentos(event.value).subscribe((resp: ResponseDepartamentos[]) => {
       this.responseDepartamentos = resp;
       this.departamentos = this.responseDepartamentos;
+      }
+    );
+
       //console.log("con: "+JSON.stringify(this.departamentos));
       //console.log("sin: "+this.departamentos);
-    });
+
 
 
   }
