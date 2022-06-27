@@ -82,7 +82,7 @@ export class DemographicInformationComponent implements OnInit {
         }
       });
 
-      $('#cbo_departamento').keyup(function (e) {
+      $('#cbo_departamento').change(function (e) {
         
            $('#txt_fecha_nacimiento').focus();                      
         

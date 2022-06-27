@@ -76,7 +76,7 @@ export class DatosPersonaService {
     "ape_paterno":"${requestDatosPersona.ape_paterno}","ape_casada":"${requestDatosPersona.ape_casada}",
     "fecha_emision_dui":"${requestDatosPersona.fecha_emision_dui}","dui":"${requestDatosPersona.dui}",
     "email":"${requestDatosPersona.email}","genero":"${requestDatosPersona.genero}","fecha_vto_dui":"${requestDatosPersona.fecha_vto_dui}",
-    "telefono_celular":"${requestDatosPersona.telefono_celular}","ocupacion":"${requestDatosPersona.ocupacion}"}`;
+    "telefono_celular":"${requestDatosPersona.telefono_celular}","ocupacion":"${requestDatosPersona.ocupacion}", "estado_civil":"${requestDatosPersona.estado_civil}"}`;
 
     console.log('esta es el body actualizar datos personales tmp ' + body);
     console.log('esta es la url actualizar datos personales tmp ' + this.url_tmp_datos_personales_update);
