@@ -22,6 +22,8 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 
 import { BrowserAnimationsModule }    from "@angular/platform-browser/animations";
 
+import {DropdownModule} from 'primeng/dropdown';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 
@@ -50,9 +52,10 @@ import { BrowserAnimationsModule }    from "@angular/platform-browser/animations
     TimelineModule,
     StepsModule,
     WebcamModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,DropdownModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

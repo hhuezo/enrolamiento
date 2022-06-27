@@ -123,9 +123,7 @@ export class SignComponent implements OnInit {
     }
 
     this.signatureImg = base64Data;
-    //this.router.navigate(['/fingerprint']);
     this.router.navigate(['/carnet-print']);
-
 
   /*  let body = new RequestFirma();
     body.idPersona = '2';

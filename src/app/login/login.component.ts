@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { RequestLogin } from '../_model/requestLogin';
@@ -13,7 +13,7 @@ import { LoginService } from '../_service/login.service';
 })
 export class LoginComponent implements OnInit {
   
-  form?: FormGroup ;
+  form?: UntypedFormGroup ;
   submitted = false;
   
   usuario?: string;
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   msjerr?: string;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private loginService: LoginService,
     private router: Router,
   ) { }

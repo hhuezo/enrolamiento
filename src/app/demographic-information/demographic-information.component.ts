@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ResponseDepartamentos } from '../_model/responseDepartamentos';
 import { ResponseMunicipios } from '../_model/responseMunicipios';
@@ -25,7 +25,7 @@ export class DemographicInformationComponent implements OnInit {
 
 
 
-  form!: FormGroup;
+  form!: UntypedFormGroup;
   submitted = false;
 
   dui!: string;
@@ -51,7 +51,7 @@ export class DemographicInformationComponent implements OnInit {
   responseTmpDatosPersona?: ResponseTmpDatosPersona[];
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private catalogoService: CatalogoService,
     private datosPersonaService: DatosPersonaService,
@@ -82,7 +82,7 @@ export class DemographicInformationComponent implements OnInit {
         }
       });
 
-      $('#cbo_departamento').change(function (e) {
+      $('#cbo_departamento').keyup(function (e) {
         
            $('#txt_fecha_nacimiento').focus();                      
         

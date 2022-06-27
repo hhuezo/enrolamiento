@@ -169,11 +169,11 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Audífono</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                      <select class="form-control select" formControlName="cbo_audifonos" id="cbo_audifonos" [(ngModel)]="audifonos" tabindex="6">
+                                      <select class="form-control select" formControlName="txt_audifonos" id="txt_audifonos" [(ngModel)]="audifonos" tabindex="6">
                                         <option value="{{item}}" *ngFor="let item of opciones" [selected]="audifonos == item">{{item}}</option>
                                       </select>
-                                      <div *ngIf="f['cbo_audifonos'].touched && f['cbo_audifonos'].invalid" class="alert alert-danger">
-                                        <div *ngIf="f['cbo_audifonos'].errors && f['cbo_audifonos'].errors['required']">Complete este campo</div>
+                                      <div *ngIf="f['txt_audifonos'].touched && f['txt_audifonos'].invalid" class="alert alert-danger">
+                                        <div *ngIf="f['txt_audifonos'].errors && f['txt_audifonos'].errors['required']">Complete este campo</div>
                                     </div>
 
                                     </div>

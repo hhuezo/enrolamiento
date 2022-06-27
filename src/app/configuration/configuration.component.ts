@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ResponsePaises } from '../_model/responsePaises';
 import { ResponseTiposDocumento } from '../_model/responseTiposDocumento';
@@ -14,7 +14,7 @@ import { ConfiguracionService } from '../_service/configuracion.service';
 })
 export class ConfigurationComponent implements OnInit {
 
-  form!: FormGroup;
+  form!: UntypedFormGroup;
   submitted = false;
 
   responsePaises?: ResponsePaises[];
@@ -49,7 +49,7 @@ export class ConfigurationComponent implements OnInit {
 
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private catalogoService: CatalogoService,
     private configuracionService: ConfiguracionService

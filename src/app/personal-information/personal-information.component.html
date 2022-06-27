@@ -97,13 +97,10 @@
                   <label class="col-md-12 control-label">Ocupación</label>
                   <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <select formControlName="cbo_ocupacion" id="cbo_ocupacion"
-                      [(ngModel)]="ocupacion" tabindex="7">
-                      <option *ngFor="let item of ocupaciones"
-                        value="{{item.id}}" [selected]="ocupacion == item.id">
-                        {{item.ocu_descripcion}}
-                      </option>
-                    </select>
+
+
+                    <p-dropdown formControlName="cbo_ocupacion" id="cbo_ocupacion" [options]="ocupaciones" optionValue="id" optionLabel="ocu_descripcion" [filter]="true" filterBy="ocu_descripcion"
+                    [(ngModel)]="ocupacion" [style]="{ width: '100%' }"></p-dropdown>
 
                     <div *ngIf="f['cbo_ocupacion'].touched && f['cbo_ocupacion'].invalid" class="alert alert-danger">
                       <div *ngIf="f['cbo_ocupacion'].errors && f['cbo_ocupacion'].errors['required']">Complete este campo</div>

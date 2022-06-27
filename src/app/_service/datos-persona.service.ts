@@ -51,7 +51,7 @@ export class DatosPersonaService {
   createPersona(requestDatosPersona: RequestDatosPersona) {
     //comento url de alex
     //this.url = "http://192.168.26.32/blog/public/api/tmp_persona";
-    
+
     const body = `{"nombre":"${requestDatosPersona.nombre}","ape_materno":"${requestDatosPersona.ape_materno}",
     "ape_paterno":"${requestDatosPersona.ape_paterno}","ape_casada":"${requestDatosPersona.ape_casada}",
     "fecha_emision_dui":"${requestDatosPersona.fecha_emision_dui}","dui":"${requestDatosPersona.dui}",
@@ -67,7 +67,7 @@ export class DatosPersonaService {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }
-  
+
 
   updatePersonalInformation(requestDatosPersona: RequestDatosPersona) {
     //this.url = "http://192.168.26.32/blog/public/api/tmp_persona/personal_information/"+sessionStorage.getItem('dui');
@@ -76,7 +76,7 @@ export class DatosPersonaService {
     "ape_paterno":"${requestDatosPersona.ape_paterno}","ape_casada":"${requestDatosPersona.ape_casada}",
     "fecha_emision_dui":"${requestDatosPersona.fecha_emision_dui}","dui":"${requestDatosPersona.dui}",
     "email":"${requestDatosPersona.email}","genero":"${requestDatosPersona.genero}","fecha_vto_dui":"${requestDatosPersona.fecha_vto_dui}",
-    "telefono_celular":"${requestDatosPersona.telefono_celular}","ocupacion":"${requestDatosPersona.ocupacion}", "estado_civil":"${requestDatosPersona.estado_civil}"}`;
+    "telefono_celular":"${requestDatosPersona.telefono_celular}","ocupacion":"${requestDatosPersona.ocupacion},"estado_civil":"${requestDatosPersona.estado_civil}"}`;
 
     console.log('esta es el body actualizar datos personales tmp ' + body);
     console.log('esta es la url actualizar datos personales tmp ' + this.url_tmp_datos_personales_update);
@@ -166,7 +166,7 @@ export class DatosPersonaService {
     //this.url ="http://192.168.26.32/blog/public/api/tmp_persona/"+sessionStorage.getItem('dui');
     console.log("dui= "+sessionStorage.getItem('dui'));
     this.url_obtener_tmp_datos_persona =this.url_tmp_datos_persona+sessionStorage.getItem('dui');
-    
+
     console.log('esta es la url show persona ' + this.url_obtener_tmp_datos_persona);
 
     //console.log('esta es la url validate login '+this.url);

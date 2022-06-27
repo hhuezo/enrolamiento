@@ -5,5 +5,5 @@ export const environment = {
   //HOST: 'https://www.em.com.sv/babson-maps-backend/api', 
   //HOST: 'https://www.em.com.sv/proyectos/public/babson-maps-backend/api', //ok
   //HOST_TEMP: ' http://172.31.65.26:8080/esquelassqlservices2/correo'   
-  HOST_TEMP: 'https://www.sertracen.com.sv/esquelassqlservices/correo'   
+  HOST_TEMP: 'https://www.sertracen.com.sv/esquelassqlservices/correo'  
 };

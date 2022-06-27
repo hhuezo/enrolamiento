@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ResponseColoresCabello } from '../_model/responseColoresCabello';
 import { ResponseColoresOjo } from '../_model/responseColoresOjo';
@@ -30,7 +30,7 @@ export class PhysicInformationComponent implements OnInit {
   persona: any;
   color_piel: any;
 
-  form!: FormGroup;
+  form!: UntypedFormGroup;
   submitted = false;
 
 
@@ -74,7 +74,7 @@ export class PhysicInformationComponent implements OnInit {
 
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private datosPersonaService: DatosPersonaService, private catalogoService: CatalogoService
   ) { }
@@ -85,40 +85,40 @@ export class PhysicInformationComponent implements OnInit {
     $(document).ready(function(){
       //alert('funcion jquery');
 
-      $('#cbo_anteojos').change(function (e) {
+      $('#cbo_anteojos').keyup(function (e) {
         
            $('#cbo_tipos_narices').focus();                      
         
       });
 
-      $('#cbo_tipos_narices').change(function (e) {
+      $('#cbo_tipos_narices').keyup(function (e) {
         
            $('#cbo_colores_pieles').focus();                      
         
       });
 
-      $('#cbo_colores_pieles').change(function (e) {
+      $('#cbo_colores_pieles').keyup(function (e) {
         
            $('#cbo_senales_especiales').focus();                      
         
       });
 
-      $('#cbo_senales_especiales').change(function (e) {
+      $('#cbo_senales_especiales').keyup(function (e) {
         
            $('#cbo_tipos_bocas').focus();                      
         
       });
 
-      $('#cbo_tipos_bocas').change(function (e) {
+      $('#cbo_tipos_bocas').keyup(function (e) {
         
-           $('#cbo_audifonos').focus();                      
+           $('#txt_audifonos').focus();                      
         
       });
 
-      $('#cbo_audifonos').change(function (e) {
-         
+      $('#txt_audifonos').keyup(function (e) {
+        if (e.keyCode === 13) {           
            $('#txt_peso_libras').focus();                      
-        
+        }
       });
 
       $('#txt_peso_libras').keyup(function (e) {
@@ -127,13 +127,13 @@ export class PhysicInformationComponent implements OnInit {
         }
       });
 
-      $('#cbo_colores_cabellos').change(function (e) {
+      $('#cbo_colores_cabellos').keyup(function (e) {
         
            $('#cbo_lentes_contacto').focus();                      
         
       });
 
-      $('#cbo_lentes_contacto').change(function (e) {
+      $('#cbo_lentes_contacto').keyup(function (e) {
         
            $('#txt_estatura').focus();                      
         
@@ -145,14 +145,14 @@ export class PhysicInformationComponent implements OnInit {
         }
       });
 
-      $('#cbo_colores_ojos').change(function (e) {
+      $('#cbo_colores_ojos').keyup(function (e) {
         
            $('#cbo_tipo_sangre').focus();                      
         
       });
 
       
-      $('#cbo_tipo_sangre').change(function (e) {
+      $('#cbo_tipo_sangre').keyup(function (e) {
         
            $('#btn_guardar').focus();                      
         
@@ -277,7 +277,7 @@ export class PhysicInformationComponent implements OnInit {
         cbo_colores_pieles: ['', Validators.required],
         cbo_senales_especiales: ['', Validators.required],
         cbo_tipos_bocas: ['', Validators.required],
-        cbo_audifonos: ['', Validators.required],
+        txt_audifonos: ['', Validators.required],
         txt_peso_libras: ['', Validators.required],
         cbo_colores_cabellos: ['', Validators.required],
         cbo_lentes_contacto: ['', Validators.required],
@@ -345,7 +345,7 @@ export class PhysicInformationComponent implements OnInit {
     this.colores_pieles = this.form.controls['cbo_colores_pieles'].value;
     this.senales_especiales = this.form.controls['cbo_senales_especiales'].value;
     this.tipos_bocas = this.form.controls['cbo_tipos_bocas'].value;
-    this.audifonos = this.form.controls['cbo_audifonos'].value;
+    this.audifonos = this.form.controls['txt_audifonos'].value;
     this.peso_lb = this.form.controls['txt_peso_libras'].value;
     this.colores_cabellos = this.form.controls['cbo_colores_cabellos'].value;
     this.lentes_contacto = this.form.controls['cbo_lentes_contacto'].value;
