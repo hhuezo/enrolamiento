@@ -110,7 +110,11 @@
                     <div class="form-group">
                       <label class="col-md-12 control-label">Pais de nacimiento</label>
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <select class="form-control select"
+                        <p-dropdown formControlName="cbo_pais_nacimiento" id="cbo_pais_nacimiento" [options]="paises" optionValue="id" optionLabel="pai_descripcion" [filter]="true" filterBy="pai_descripcion"
+                        [(ngModel)]="pais_nacimiento" [style]="{ width: '100%' }"  (onChange)='onChangePais($event)'></p-dropdown>
+
+
+                        <!--<select class="form-control select"
                           formControlName="cbo_pais_nacimiento" id="cbo_pais_nacimiento"
                           [(ngModel)]="pais_nacimiento"
                           #cbo_pais_nacimiento tabindex="2"
@@ -118,7 +122,7 @@
                           <option value="">Seleccione Pais</option>
                           <option value="{{item.id}}" *ngFor="let item of
                             paises" [selected]="pais_nacimiento == item.id">{{item.pai_descripcion}}</option>
-                        </select>
+                        </select>-->
                         <div *ngIf="f['cbo_pais_nacimiento'].touched &&
                           f['cbo_pais_nacimiento'].invalid" class="alert
                           alert-danger">
