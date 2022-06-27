@@ -359,7 +359,7 @@ export class PersonalInformationComponent implements OnInit {
 
 
 
-     //this.router.navigate(['/physic-information']);
+     this.router.navigate(['/physic-information']);
   }
 
   load_icons() {
