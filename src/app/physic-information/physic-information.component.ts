@@ -86,92 +86,88 @@ export class PhysicInformationComponent implements OnInit {
       //alert('funcion jquery');
 
       $('#cbo_anteojos').keyup(function (e) {
-        
-           $('#cbo_tipos_narices').focus();                      
-        
+
+           $('#cbo_tipos_narices').focus();
+
       });
 
       $('#cbo_tipos_narices').keyup(function (e) {
-        
-           $('#cbo_colores_pieles').focus();                      
-        
+
+           $('#cbo_colores_pieles').focus();
+
       });
 
       $('#cbo_colores_pieles').keyup(function (e) {
-        
-           $('#cbo_senales_especiales').focus();                      
-        
+
+           $('#cbo_senales_especiales').focus();
+
       });
 
       $('#cbo_senales_especiales').keyup(function (e) {
-        
-           $('#cbo_tipos_bocas').focus();                      
-        
+
+           $('#cbo_tipos_bocas').focus();
+
       });
 
       $('#cbo_tipos_bocas').keyup(function (e) {
-        
-           $('#txt_audifonos').focus();                      
-        
+
+           $('#txt_audifonos').focus();
+
       });
 
       $('#txt_audifonos').keyup(function (e) {
-        if (e.keyCode === 13) {           
-           $('#txt_peso_libras').focus();                      
+        if (e.keyCode === 13) {
+           $('#txt_peso_libras').focus();
         }
       });
 
       $('#txt_peso_libras').keyup(function (e) {
-        if (e.keyCode === 13) {           
-           $('#cbo_colores_cabellos').focus();                      
+        if (e.keyCode === 13) {
+           $('#cbo_colores_cabellos').focus();
         }
       });
 
       $('#cbo_colores_cabellos').keyup(function (e) {
-        
-           $('#cbo_lentes_contacto').focus();                      
-        
+
+           $('#cbo_lentes_contacto').focus();
+
       });
 
       $('#cbo_lentes_contacto').keyup(function (e) {
-        
-           $('#txt_estatura').focus();                      
-        
+
+           $('#txt_estatura').focus();
+
       });
 
       $('#txt_estatura').keyup(function (e) {
-        if (e.keyCode === 13) {           
-           $('#cbo_colores_ojos').focus();                      
+        if (e.keyCode === 13) {
+           $('#cbo_colores_ojos').focus();
         }
       });
 
       $('#cbo_colores_ojos').keyup(function (e) {
-        
-           $('#cbo_tipo_sangre').focus();                      
-        
+
+           $('#cbo_tipo_sangre').focus();
+
       });
 
-      
+
       $('#cbo_tipo_sangre').keyup(function (e) {
-        
-           $('#btn_guardar').focus();                      
-        
+
+           $('#btn_guardar').focus();
+
       });
 
-      
+
 
 
     });
 
 
-    this.load_icons();
+
     this.submitted = true;
 
-    if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
-      console.log('session');
-
-      // this.obtenerDatosPersona();
-
+    if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
 
       this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
         this.responseTmpDatosPersona = resp;
@@ -416,11 +412,5 @@ export class PhysicInformationComponent implements OnInit {
 
   }
 
-  load_icons() {
-    this.img_personal_information = document.getElementById("img_personal_information") as HTMLImageElement;
-    this.img_personal_information.src = "../../assets/images/datos_personales_blue.svg";
 
-    this.img_physic_information = document.getElementById("img_physic_information") as HTMLImageElement;
-    this.img_physic_information.src = "../../assets/images/datos_fisicos_blue.svg";
-  }
 }

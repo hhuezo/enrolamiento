@@ -9,6 +9,7 @@ import { ResponseFirma } from '../_model/responseFirma';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { FirmaService } from '../_service/firma.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-sign',
@@ -38,7 +39,7 @@ export class SignComponent implements OnInit {
   RequestDatosPersona?: RequestDatosPersona;
 
   responseTmpDatosPersona?: ResponseTmpDatosPersona[];
-  
+
 
   dui!: any;
   persona: any;
@@ -55,7 +56,7 @@ export class SignComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.load_icons();
+
 
     if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
 
@@ -79,6 +80,16 @@ export class SignComponent implements OnInit {
 
 
     }
+
+
+
+
+
+
+
+
+
+
   }
 
 
@@ -310,24 +321,7 @@ export class SignComponent implements OnInit {
     this.btn_next.hidden = true;
   }
 
-  load_icons() {
 
-    this.img_personal_information = document.getElementById("img_personal_information") as HTMLImageElement;
-    this.img_personal_information.src = "../../assets/images/datos_personales_blue.svg";
-
-    this.img_physic_information = document.getElementById("img_physic_information") as HTMLImageElement;
-    this.img_physic_information.src = "../../assets/images/datos_fisicos_blue.svg";
-
-    this.img_demographic_information = document.getElementById("img_demographic_information") as HTMLImageElement;
-    this.img_demographic_information.src = "../../assets/images/datos_demograficos_blue.svg";
-
-    this.img_photography = document.getElementById("img_photography") as HTMLImageElement;
-    this.img_photography.src = "../../assets/images/datos_foto_blue.svg";
-
-    this.img_sign = document.getElementById("img_sign") as HTMLImageElement;
-    this.img_sign.src = "../../assets/images/firma_blue.svg";
-
-  }
 
   back() {
     this.router.navigate(['/home']);

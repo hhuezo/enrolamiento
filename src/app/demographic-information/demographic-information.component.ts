@@ -107,7 +107,7 @@ export class DemographicInformationComponent implements OnInit {
 
 
 
-    this.load_icons();
+
     this.submitted = true;
 
 
@@ -282,16 +282,6 @@ onChangeDepartamento(departamentoSeleccionado: string) {
     return this.form!.controls;
   }
 
-  load_icons() {
 
-    this.img_personal_information = document.getElementById("img_personal_information") as HTMLImageElement;
-    this.img_personal_information.src = "../../assets/images/datos_personales_blue.svg";
-
-    this.img_physic_information = document.getElementById("img_physic_information") as HTMLImageElement;
-    this.img_physic_information.src = "../../assets/images/datos_fisicos_blue.svg";
-
-    this.img_demographic_information = document.getElementById("img_demographic_information") as HTMLImageElement;
-    this.img_demographic_information.src = "../../assets/images/datos_demograficos_blue.svg";
-  }
 
 }

@@ -62,44 +62,44 @@ export class PersonalInformationComponent implements OnInit {
   ) { }
 
 
+
   ngOnInit(): void {
 
-    $(document).ready(function(){
-      //alert('funcion jquery');
+    $(document).ready(function () {
 
       $('#txt_nombre').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#txt_ape_paterno').focus();
+          $('#txt_ape_paterno').focus();
         }
       });
 
       $('#txt_ape_paterno').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#txt_ape_materno').focus();
+          $('#txt_ape_materno').focus();
         }
       });
 
       $('#txt_ape_materno').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#txt_ape_casada').focus();
+          $('#txt_ape_casada').focus();
         }
       });
 
       $('#txt_ape_casada').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#txt_dui').focus();
+          $('#txt_dui').focus();
         }
       });
 
       $('#txt_dui').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#txt_fecha_emision_dui').focus();
+          $('#txt_fecha_emision_dui').focus();
         }
       });
 
       $('#txt_fecha_emision_dui').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#cbo_ocupacion').focus();
+          $('#cbo_ocupacion').focus();
         }
       });
 
@@ -112,51 +112,50 @@ export class PersonalInformationComponent implements OnInit {
 
 
       $('#cbo_ocupacion').change(function (e) {
-            $('#txt_fecha_vto_dui').focus();
+        $('#txt_fecha_vto_dui').focus();
 
       });
 
       $('#txt_fecha_vto_dui').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#txt_email').focus();
+          $('#txt_email').focus();
         }
       });
 
       $('#txt_email').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#cbo_estado_civil').focus();
+          $('#cbo_estado_civil').focus();
         }
       });
 
       $('#cbo_estado_civil').change(function (e) {
-           $('#cbo_genero').focus();
+        $('#cbo_genero').focus();
       });
 
       $('#cbo_genero').change(function (e) {
-           $('#txt_telefono_celular').focus();
+        $('#txt_telefono_celular').focus();
       });
 
 
       $('#txt_telefono_celular').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#btn_guardar').focus();
+          $('#btn_guardar').focus();
         }
       });
-
 
 
 
     });
 
 
-    this.load_icons();
+
     this.submitted = true;
 
 
     //para combo de ocupaciones
     this.catalogoService.getOcupaciones().subscribe((resp: ResponseOcupaciones) => {
       this.responseOcupaciones = resp;
-      console.log('ocupaciones: ', this.responseOcupaciones);
+      //console.log('ocupaciones: ', this.responseOcupaciones);
       this.ocupaciones = this.responseOcupaciones;
     });
 
@@ -189,14 +188,14 @@ export class PersonalInformationComponent implements OnInit {
 
 
     if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
-      console.log('sin session');
+      //console.log('sin session');
     }
     else {
-      console.log('session');
+
       this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
         this.responseTmpDatosPersona = resp;
 
-        console.log('persona actual: ', this.responseTmpDatosPersona);
+        //console.log('persona actual: ', this.responseTmpDatosPersona);
         this.persona = this.responseTmpDatosPersona;
 
 
@@ -218,7 +217,7 @@ export class PersonalInformationComponent implements OnInit {
 
       });
 
-      console.log('this.nombre: ', this.nombre);
+
 
 
     }
@@ -290,20 +289,20 @@ export class PersonalInformationComponent implements OnInit {
 
     //console.log("aaa: " + this.genero);
 
-   /* console.log('this.nombre= ' + this.nombre + '<br>');
-    console.log('this.ape_paterno= ' + this.ape_paterno + '<br>');
-    console.log('this.ape_materno= ' + this.ape_materno + '<br>');
-    console.log('this.ape_casada= ' + this.ape_casada + '<br>');
-    console.log('this.dui= ' + this.dui + '<br>');
-    console.log('this.fecha_emision_dui= ' + this.fecha_emision_dui + '<br>');
-    console.log('this.ocupacion= ' + this.ocupacion + '<br>');
-    console.log('this.fecha_vto_dui= ' + this.fecha_vto_dui + '<br>');
-    console.log('this.email= ' + this.email + '<br>');
-    console.log('this.estado_civil= ' + this.estado_civil + '<br>');
-    console.log('this.genero= ' + this.genero + '<br>');
-    console.log('this.telefono_celular= ' + this.telefono_celular + '<br>');
+    /* console.log('this.nombre= ' + this.nombre + '<br>');
+     console.log('this.ape_paterno= ' + this.ape_paterno + '<br>');
+     console.log('this.ape_materno= ' + this.ape_materno + '<br>');
+     console.log('this.ape_casada= ' + this.ape_casada + '<br>');
+     console.log('this.dui= ' + this.dui + '<br>');
+     console.log('this.fecha_emision_dui= ' + this.fecha_emision_dui + '<br>');
+     console.log('this.ocupacion= ' + this.ocupacion + '<br>');
+     console.log('this.fecha_vto_dui= ' + this.fecha_vto_dui + '<br>');
+     console.log('this.email= ' + this.email + '<br>');
+     console.log('this.estado_civil= ' + this.estado_civil + '<br>');
+     console.log('this.genero= ' + this.genero + '<br>');
+     console.log('this.telefono_celular= ' + this.telefono_celular + '<br>');
 
-    console.log('guardando datos... de informacion personal');*/
+     console.log('guardando datos... de informacion personal');*/
 
     /* sessionStorage.setItem('nombre', this.nombre);
      sessionStorage.setItem('ape_paterno', this.ape_paterno);
@@ -359,12 +358,9 @@ export class PersonalInformationComponent implements OnInit {
 
 
 
-     this.router.navigate(['/physic-information']);
+    this.router.navigate(['/physic-information']);
   }
 
-  load_icons() {
-    this.img_personal_information = document.getElementById("img_personal_information") as HTMLImageElement;
-    this.img_personal_information.src = "../../assets/images/datos_personales_blue.svg";
-  }
+
 
 }

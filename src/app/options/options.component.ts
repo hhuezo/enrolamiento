@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DatosPersonaService } from '../_service/datos-persona.service';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
+import { DatosPersonaService } from '../_service/datos-persona.service';
+
+import * as $ from 'jquery';
 @Component({
   selector: 'app-options',
   templateUrl: './options.component.html',
@@ -21,81 +23,148 @@ export class OptionsComponent implements OnInit {
   nombre: any;
   foto: any;
   firma_persona: any;
+  estado: any;
+
+  img_personal_information?: HTMLImageElement;
 
   ngOnInit(): void {
+    this.estado = 0;
     if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
-      console.log('sin session');
+      //console.log('sin session');
     }
     else {
-      console.log('session');
+
       this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
         this.responseTmpDatosPersona = resp;
+        this.persona = this.responseTmpDatosPersona;
 
-        console.log('persona actual: ', this.responseTmpDatosPersona);
+        console.log('sin session '+ resp);
 
-        this.nombre = this.persona[0].nombre!;
+        this.nombre = this.persona[0].nombre;
+        console.log('persona actualll: ', this.nombre);
         this.anteojos = this.persona[0].anteojos;
         this.domicilio = this.persona[0].domicilio;
         this.foto = this.persona[0].foto;
         this.firma_persona = this.persona[0].firma;
 
-        /*this.persona = this.responseTmpDatosPersona;
 
 
-        this.nombre = this.persona[0].nombre!;
-        this.ape_paterno = this.persona[0].ape_paterno!;
-        this.ape_materno = this.persona[0].ape_materno!;
-        this.ape_casada = this.persona[0].ape_casada!;
-        this.dui = this.persona[0].dui!;
-        this.fecha_emision_dui = this.persona[0].fecha_emision_dui!;
-        this.ocupacion = +this.persona[0].ocupacion!;
-        this.fecha_vto_dui = this.persona[0].fecha_vto_dui!;
+        if(this.firma_persona != null)
+        {
+          this.estado = 5;
+        }
+        else if(this.foto != null)
+        {
+          this.estado = 4;
+        }
+        else if(this.domicilio != null)
+        {
+          this.estado = 3;
+        }
+        else if(this.anteojos != null)
+        {
+          this.estado = 2;
+        }
+        else if(this.nombre != null)
+        {
+          this.estado = 1;
+        }
 
-        this.email = this.persona[0].email!;
-        this.estado_civil = this.persona[0].estado_civil!;
-        this.genero = this.persona[0].genero!;
-        this.telefono_celular = this.persona[0].telefono_celular!;*/
 
+
+
+
+        $(document).ready(function () {
+          load_iconos();
+
+          function load_iconos() {
+
+
+            if($("#estado").val() == 1)
+            {
+              $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
+            }
+            else if($("#estado").val() == 2)
+            {
+              $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
+              $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
+            }
+            else if($("#estado").val() == 3)
+            {
+              $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
+                $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
+                $("#img_demographic_information").attr("src", "../../assets/images/datos_demograficos_blue.svg");
+            }
+            else if($("#estado").val() == 4)
+            {
+              $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
+                $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
+                $("#img_demographic_information").attr("src", "../../assets/images/datos_demograficos_blue.svg");
+                $("#img_photography").attr("src", "../../assets/images/datos_foto_blue.svg");
+            }
+            else if($("#estado").val() == 5)
+            {
+              $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
+              $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
+              $("#img_demographic_information").attr("src", "../../assets/images/datos_demograficos_blue.svg");
+              $("#img_photography").attr("src", "../../assets/images/datos_foto_blue.svg");
+              $("#img_sign").attr("src", "../../assets/images/firma_blue.svg");
+            }
+          }
+
+
+
+
+        });
 
 
       });
+
+
 
       // console.log('this.nombre: ', this.nombre);
 
 
     }
+
+
   }
+
 
   datos_personales() {
     this.router.navigate(['/personal-information']);
   }
 
   datos_fisicos() {
+    this.router.navigate(['/physic-information']);
     if ( this.nombre != null) {
       this.router.navigate(['/physic-information']);
     }
   }
 
   datos_demograficos() {
-    //domicilio
+    this.router.navigate(['/demographic-information']);
     if ( this.anteojos != null) {
     this.router.navigate(['/demographic-information']);
     }
   }
 
   fotografia() {
+    this.router.navigate(['/photography']);
     if ( this.domicilio != null) {
     this.router.navigate(['/photography']);
     }
   }
 
   firma() {
+    this.router.navigate(['/sign']);
     if ( this.foto != null) {
     this.router.navigate(['/sign']);
     }
   }
 
   huella() {
+    this.router.navigate(['/fingerprint']);
     if ( this.firma_persona != null) {
     this.router.navigate(['/fingerprint']);
     }
