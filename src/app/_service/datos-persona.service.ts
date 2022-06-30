@@ -139,10 +139,10 @@ export class DatosPersonaService {
   }
 
   photography(requestDatosPersona: RequestDatosPersona) {
-    //this.url = "http://192.168.26.32/blog/public/api/tmp_persona/photography";
-    const body = `{"dui":"${sessionStorage.getItem("dui")}","foto":"${requestDatosPersona.foto}"}`;
+    this.url_tmp_datos_foto = "http://192.168.26.17/blog/public/api/tmp_persona/foto_bg";
+    const body = `{"dui":"${sessionStorage.getItem("dui")}","imagen":"${requestDatosPersona.foto}"}`;
 
-   console.log('esta es el body guardar foto tmp ' + body);
+    console.log('esta es el body guardar foto tmp ' + body);
     console.log('esta es la url guardar foto tmp ' + this.url_tmp_datos_foto);
 
     //console.log('esta es la url_tmp_datos_foto validate login '+this.url_tmp_datos_foto);

@@ -35,7 +35,7 @@ export class PhotographyComponent implements OnInit {
 
 
   msjerr?: string;
-  foto?: string;
+  foto?: any;
   dui!: any;
   persona: any;
 
@@ -61,9 +61,10 @@ export class PhotographyComponent implements OnInit {
 
         this.dui = this.persona[0].dui;
         this.foto =this.persona[0].foto;
-        //console.log('foto actual: ', this.foto);
+
         if( this.foto != null && this.foto != '')
         {
+          //console.log('foto actualll: ', this.foto);
           this.load_photo();
         }
 
@@ -95,7 +96,7 @@ export class PhotographyComponent implements OnInit {
     body.foto = this.foto;
    //console.log("body: " +  body.foto);
    if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
-      console.log("body" + body);
+      //console.log("body" + body);
 
       //enviando  datos
       this.datosPersonaService.photography(body).subscribe((resp: ResponseTmpDatosPersona[]) => {
@@ -184,6 +185,7 @@ export class PhotographyComponent implements OnInit {
     this.webcamImage = webcamImage;
     //Este es el base64 a guardar en la base de datos usando un servicio -> webcamImage.imageAsDataUrl
     //this.foto = webcamImage;
+
 
 
     this.foto = webcamImage.imageAsDataUrl;
