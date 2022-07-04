@@ -34,10 +34,6 @@ export class PhysicInformationComponent implements OnInit {
   submitted = false;
 
 
-
-
-
-
   //datos fisicos
   anteojos!: any;
   colores_pieles!: any;
@@ -53,6 +49,8 @@ export class PhysicInformationComponent implements OnInit {
   tipo_sangre!: string;
   opciones!: string[];
   tipos_sangre!: string[];
+
+  estado: any;
 
 
 
@@ -79,7 +77,59 @@ export class PhysicInformationComponent implements OnInit {
     private datosPersonaService: DatosPersonaService, private catalogoService: CatalogoService
   ) { }
 
+
+
   ngOnInit(): void {
+
+
+    this.submitted = true;
+
+
+    this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
+      this.responseTmpDatosPersona = resp;
+
+      //console.log('persona: ', this.responseTmpDatosPersona);
+      this.persona = this.responseTmpDatosPersona;
+
+
+      this.anteojos = this.persona[0].anteojos;
+      //onsole.log("anteojos " + this.anteojos);
+      this.tipos_narices = this.persona[0].nariz;
+      this.colores_pieles = this.persona[0].piel;
+
+      this.senales_especiales = this.persona[0].senales_especiales;
+      this.tipos_bocas = this.persona[0].boca;
+      this.audifonos = this.persona[0].audifonos;
+      this.peso_lb = this.persona[0].peso_libras;
+      this.colores_cabellos = this.persona[0].cabello;
+
+      this.lentes_contacto = this.persona[0].lentes_contacto;
+      this.estatura = this.persona[0].estatura;
+      this.colores_ojos = this.persona[0].ojos;
+      this.tipo_sangre = this.persona[0].tipo_sangre;
+
+
+     //variables de session
+     sessionStorage.setItem('dui', '');
+     sessionStorage.setItem('nombre', '');
+     sessionStorage.setItem('anteojos', '');
+     sessionStorage.setItem('domicilio', '');
+     sessionStorage.setItem('foto', '');
+     sessionStorage.setItem('firma', '');
+
+     if (this.persona) {
+       //variables de session
+       sessionStorage.setItem('dui', this.persona[0].dui);
+       sessionStorage.setItem('nombre', this.persona[0].nombre);
+       sessionStorage.setItem('anteojos', this.persona[0].anteojos);
+       sessionStorage.setItem('domicilio', this.persona[0].domicilio);
+       sessionStorage.setItem('foto', this.persona[0].foto);
+       sessionStorage.setItem('firma', this.persona[0].firma);
+     }
+
+    });
+
+
 
 
     $(document).ready(function(){
@@ -165,42 +215,6 @@ export class PhysicInformationComponent implements OnInit {
 
 
 
-    this.submitted = true;
-
-    if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
-
-      this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
-        this.responseTmpDatosPersona = resp;
-
-        console.log('persona: ', this.responseTmpDatosPersona);
-        this.persona = this.responseTmpDatosPersona;
-
-
-        this.anteojos = this.persona[0].anteojos;
-        console.log("anteojos " + this.anteojos);
-        this.tipos_narices = this.persona[0].nariz;
-        this.colores_pieles = this.persona[0].piel;
-
-        this.senales_especiales = this.persona[0].senales_especiales;
-        this.tipos_bocas = this.persona[0].boca;
-        this.audifonos = this.persona[0].audifonos;
-        this.peso_lb = this.persona[0].peso_libras;
-        this.colores_cabellos = this.persona[0].cabello;
-
-        this.lentes_contacto = this.persona[0].lentes_contacto;
-        this.estatura = this.persona[0].estatura;
-        this.colores_ojos = this.persona[0].ojos;
-        this.tipo_sangre = this.persona[0].tipo_sangre;
-
-
-
-      });
-
-
-
-    }
-
-
     this.opciones = ["SI", "NO"];
     this.tipos_sangre = ["A +","A -","B +","B -","AB +","AB -","O +","O -"];
 
@@ -209,7 +223,7 @@ export class PhysicInformationComponent implements OnInit {
     //para combo colores de piel
     this.catalogoService.getColoresPiel().subscribe((resp: ResponseColoresPiel[]) => { this.responseColoresPiel = resp;
       //console.log('response colores de piel: ', this.responseColoresPiel);
-      console.log('response colores de piel: ', this.colores_pieles);
+     // console.log('response colores de piel: ', this.colores_pieles);
       this.colores_piel = this.responseColoresPiel;
 
 
@@ -266,6 +280,8 @@ export class PhysicInformationComponent implements OnInit {
 
 
 
+
+
     this.form = this.formBuilder.group(
       {
         cbo_anteojos: ['', Validators.required],
@@ -292,37 +308,45 @@ export class PhysicInformationComponent implements OnInit {
   }
 
 
-  async obtenerDatosPersona() {
-    await this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
-      this.responseTmpDatosPersona = resp;
 
-      console.log('persona: ', this.responseTmpDatosPersona);
-      this.persona = this.responseTmpDatosPersona;
+  datos_personales() {
+    this.router.navigate(['/personal-information']);
+  }
 
+  datos_fisicos() {
+    console.log(sessionStorage.getItem('nombre'));
+    if (sessionStorage.getItem('nombre') && sessionStorage.getItem('nombre') != '' && sessionStorage.getItem('nombre') != 'null') {
 
-      this.anteojos = this.persona[0].anteojos;
-      console.log("anteojos " + this.anteojos);
-      this.tipos_narices = this.persona[0].nariz;
-      this.colores_pieles = this.persona[0].piel;
-
-      this.senales_especiales = this.persona[0].senales_especiales;
-      this.tipos_bocas = this.persona[0].boca;
-      this.audifonos = this.persona[0].audifonos;
-      this.peso_lb = this.persona[0].peso_libras;
-      this.colores_cabellos = this.persona[0].cabello;
-
-      this.lentes_contacto = this.persona[0].lentes_contacto;
-      this.estatura = this.persona[0].estatura;
-      this.colores_ojos = this.persona[0].ojos;
-      this.tipo_sangre = this.persona[0].tipo_sangre;
-
-
-
-    });
+      this.router.navigate(['/physic-information']);
+    }
 
   }
 
+  datos_demograficos() {
+    if (sessionStorage.getItem('anteojos') && sessionStorage.getItem('anteojos') != '' && sessionStorage.getItem('anteojos') != 'null') {
+      //console.log("ante :" + sessionStorage.getItem('anteojos'));
+      this.router.navigate(['/demographic-information']);
+    }
+  }
 
+  fotografia() {
+    if (sessionStorage.getItem('domicilio') && sessionStorage.getItem('domicilio') != '' && sessionStorage.getItem('domicilio') != 'null') {
+
+      this.router.navigate(['/photography']);
+    }
+  }
+
+  firma() {
+    if (sessionStorage.getItem('foto') && sessionStorage.getItem('foto') != '' && sessionStorage.getItem('foto') != 'null') {
+      this.router.navigate(['/sign']);
+    }
+  }
+
+  huella() {
+    if (sessionStorage.getItem('firma') && sessionStorage.getItem('firma') != '' && sessionStorage.getItem('firma') != 'null') {
+      this.router.navigate(['/fingerprint']);
+    }
+  }
 
 
   get f(): { [key: string]: AbstractControl } {
@@ -349,22 +373,6 @@ export class PhysicInformationComponent implements OnInit {
     this.colores_ojos = this.form.controls['cbo_colores_ojos'].value;
     this.tipo_sangre = this.form.controls['cbo_tipo_sangre'].value;
 
-    console.log("anteojos: " + this.anteojos);
-    console.log("nariz: " + this.tipos_narices);
-    console.log("piel: " + this.colores_pieles);
-    console.log("senales_especiales: " + this.senales_especiales);
-    console.log("boca: " + this.tipos_bocas);
-    console.log("audifonos: " + this.audifonos);
-    console.log("peso_libras: " + this.peso_lb);
-    console.log("cabello: " + this.colores_cabellos);
-    console.log("lentes_contacto: " + this.lentes_contacto);
-    console.log("ojos: " + this.colores_ojos);
-    console.log("estatura: " + this.estatura);
-    console.log("tipo_sangre: " + this.tipo_sangre);
-
-
-
-
     // guardando persona en tabla temporal
     let body = new RequestDatosPersona();
     body.anteojos = this.anteojos;
@@ -382,30 +390,13 @@ export class PhysicInformationComponent implements OnInit {
 
 
     if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
-      console.log("body" + body);
+      //console.log("body" + body);
 
       //insertado datos
       this.datosPersonaService.physicInformation(body).subscribe((resp: ResponseTmpDatosPersona[]) => {
         this.responseTmpDatosPersona = resp;
       });
     }
-
-
-    /*
-        sessionStorage.setItem('anteojos', this.anteojos);
-        sessionStorage.setItem('nariz', this.tipos_narices);
-        sessionStorage.setItem('piel', this.colores_pieles);
-        sessionStorage.setItem('senales_especiales', this.senales_especiales);
-        sessionStorage.setItem('boca', this.tipos_bocas);
-        sessionStorage.setItem('audifonos', this.audifonos);
-        sessionStorage.setItem('peso_libras', this.peso_lb);
-        sessionStorage.setItem('cabello', this.colores_cabellos);
-        sessionStorage.setItem('lentes_contacto', this.lentes_contacto);
-        sessionStorage.setItem('ojos', this.colores_ojos);
-        sessionStorage.setItem('estatura', this.estatura);
-        sessionStorage.setItem('tipo_sangre', this.tipo_sangre);*/
-
-
 
     this.router.navigate(['/demographic-information']);
 

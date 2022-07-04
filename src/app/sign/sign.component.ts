@@ -68,6 +68,26 @@ export class SignComponent implements OnInit {
 
         this.dui = this.persona[0].dui;
         this.sign =this.persona[0].firma;
+
+
+        //variables de session
+        sessionStorage.setItem('dui', '');
+        sessionStorage.setItem('nombre', '');
+        sessionStorage.setItem('anteojos', '');
+        sessionStorage.setItem('domicilio', '');
+        sessionStorage.setItem('foto', '');
+        sessionStorage.setItem('firma', '');
+
+        if (this.persona) {
+          //variables de session
+          sessionStorage.setItem('dui', this.persona[0].dui);
+          sessionStorage.setItem('nombre', this.persona[0].nombre);
+          sessionStorage.setItem('anteojos', this.persona[0].anteojos);
+          sessionStorage.setItem('domicilio', this.persona[0].domicilio);
+          sessionStorage.setItem('foto', this.persona[0].foto);
+          sessionStorage.setItem('firma', this.persona[0].firma);
+        }
+
         if( this.sign != null && this.sign != '')
         {
           this.load_sign();
@@ -82,15 +102,48 @@ export class SignComponent implements OnInit {
     }
 
 
+  }
 
 
+  datos_personales() {
+    this.router.navigate(['/personal-information']);
+  }
 
+  datos_fisicos() {
+    console.log(sessionStorage.getItem('nombre'));
+    if (sessionStorage.getItem('nombre') && sessionStorage.getItem('nombre') != '' && sessionStorage.getItem('nombre') != 'null') {
 
-
-
-
+      this.router.navigate(['/physic-information']);
+    }
 
   }
+
+  datos_demograficos() {
+    if (sessionStorage.getItem('anteojos') && sessionStorage.getItem('anteojos') != '' && sessionStorage.getItem('anteojos') != 'null') {
+      //console.log("ante :" + sessionStorage.getItem('anteojos'));
+      this.router.navigate(['/demographic-information']);
+    }
+  }
+
+  fotografia() {
+    if (sessionStorage.getItem('domicilio') && sessionStorage.getItem('domicilio') != '' && sessionStorage.getItem('domicilio') != 'null') {
+
+      this.router.navigate(['/photography']);
+    }
+  }
+
+  firma() {
+    if (sessionStorage.getItem('foto') && sessionStorage.getItem('foto') != '' && sessionStorage.getItem('foto') != 'null') {
+      this.router.navigate(['/sign']);
+    }
+  }
+
+  huella() {
+    if (sessionStorage.getItem('firma') && sessionStorage.getItem('firma') != '' && sessionStorage.getItem('firma') != 'null') {
+      this.router.navigate(['/fingerprint']);
+    }
+  }
+
 
 
   ngAfterViewInit() {

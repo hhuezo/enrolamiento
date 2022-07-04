@@ -17,105 +17,103 @@ export class OptionsComponent implements OnInit {
 
   responseTmpDatosPersona?: ResponseTmpDatosPersona[];
 
-  persona?: any;
-  anteojos: any;
-  domicilio: any;
-  nombre: any;
-  foto: any;
-  firma_persona: any;
-  estado: any;
+  persona_option?: any;
+  anteojos_option: any;
+  domicilio_option: any;
+  nombre_option: any;
+  foto_option: any;
+  firma_persona_option: any;
+  //estado: any;
 
   img_personal_information?: HTMLImageElement;
 
   ngOnInit(): void {
-    this.estado = 0;
+    /*this.estado = 0;
+
+
+
     if (!sessionStorage.getItem('dui') || sessionStorage.getItem('dui') == null) {
-      //console.log('sin session');
+
     }
     else {
 
       this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
         this.responseTmpDatosPersona = resp;
-        this.persona = this.responseTmpDatosPersona;
+        this.persona_option = this.responseTmpDatosPersona;
 
-        console.log('sin session '+ resp);
+        //console.log('sin session '+ resp);
 
-        this.nombre = this.persona[0].nombre;
-        console.log('persona actualll: ', this.nombre);
-        this.anteojos = this.persona[0].anteojos;
-        this.domicilio = this.persona[0].domicilio;
-        this.foto = this.persona[0].foto;
-        this.firma_persona = this.persona[0].firma;
+        this.nombre_option = this.persona_option[0].nombre;
+        //console.log('persona actualll: ', this.nombre_option);
+        //this.anteojos = this.persona[0].anteojos;
+        this.domicilio_option = this.persona_option[0].domicilio;
+        this.foto_option = this.persona_option[0].foto;
+        this.firma_persona_option = this.persona_option[0].firma;
 
 
 
-        if(this.firma_persona != null)
-        {
+        if (this.firma_persona_option != null) {
           this.estado = 5;
         }
-        else if(this.foto != null)
-        {
+        else if (this.foto_option != null) {
           this.estado = 4;
         }
-        else if(this.domicilio != null)
-        {
+        else if (this.domicilio_option != null) {
           this.estado = 3;
         }
-        else if(this.anteojos != null)
-        {
+        else if (this.anteojos_option != null) {
           this.estado = 2;
         }
-        else if(this.nombre != null)
-        {
+        else if (this.nombre_option != null) {
+
           this.estado = 1;
         }
 
+        console.log("estado: "+this.estado);
+
+
+                   $(document).ready(function () {
+                     load_iconos();
+
+                     function load_iconos() {
+
+
+                       if($("#estado").val() == 1)
+                       {
+                         $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
+                       }
+                       else if($("#estado").val() == 2)
+                       {
+                         $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
+                         $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
+                       }
+                       else if($("#estado").val() == 3)
+                       {
+                         $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
+                           $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
+                           $("#img_demographic_information").attr("src", "../../assets/images/datos_demograficos_blue.svg");
+                       }
+                       else if($("#estado").val() == 4)
+                       {
+                         $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
+                           $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
+                           $("#img_demographic_information").attr("src", "../../assets/images/datos_demograficos_blue.svg");
+                           $("#img_photography").attr("src", "../../assets/images/datos_foto_blue.svg");
+                       }
+                       else if($("#estado").val() == 5)
+                       {
+                         $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
+                         $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
+                         $("#img_demographic_information").attr("src", "../../assets/images/datos_demograficos_blue.svg");
+                         $("#img_photography").attr("src", "../../assets/images/datos_foto_blue.svg");
+                         $("#img_sign").attr("src", "../../assets/images/firma_blue.svg");
+                       }
+                     }
 
 
 
 
-        $(document).ready(function () {
-          load_iconos();
-
-          function load_iconos() {
-
-
-            if($("#estado").val() == 1)
-            {
-              $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
-            }
-            else if($("#estado").val() == 2)
-            {
-              $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
-              $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
-            }
-            else if($("#estado").val() == 3)
-            {
-              $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
-                $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
-                $("#img_demographic_information").attr("src", "../../assets/images/datos_demograficos_blue.svg");
-            }
-            else if($("#estado").val() == 4)
-            {
-              $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
-                $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
-                $("#img_demographic_information").attr("src", "../../assets/images/datos_demograficos_blue.svg");
-                $("#img_photography").attr("src", "../../assets/images/datos_foto_blue.svg");
-            }
-            else if($("#estado").val() == 5)
-            {
-              $("#img_personal_information").attr("src", "../../assets/images/datos_personales_blue.svg");
-              $("#img_physic_information").attr("src",  "../../assets/images/datos_fisicos_blue.svg");
-              $("#img_demographic_information").attr("src", "../../assets/images/datos_demograficos_blue.svg");
-              $("#img_photography").attr("src", "../../assets/images/datos_foto_blue.svg");
-              $("#img_sign").attr("src", "../../assets/images/firma_blue.svg");
-            }
-          }
-
-
-
-
-        });
+                   });
 
 
       });
@@ -125,7 +123,7 @@ export class OptionsComponent implements OnInit {
       // console.log('this.nombre: ', this.nombre);
 
 
-    }
+    }*/
 
 
   }
@@ -137,36 +135,36 @@ export class OptionsComponent implements OnInit {
 
   datos_fisicos() {
     this.router.navigate(['/physic-information']);
-    if ( this.nombre != null) {
+    if (this.nombre_option != null) {
       this.router.navigate(['/physic-information']);
     }
   }
 
   datos_demograficos() {
     this.router.navigate(['/demographic-information']);
-    if ( this.anteojos != null) {
-    this.router.navigate(['/demographic-information']);
+    if (this.anteojos_option != null) {
+      this.router.navigate(['/demographic-information']);
     }
   }
 
   fotografia() {
     this.router.navigate(['/photography']);
-    if ( this.domicilio != null) {
-    this.router.navigate(['/photography']);
+    if (this.domicilio_option != null) {
+      this.router.navigate(['/photography']);
     }
   }
 
   firma() {
     this.router.navigate(['/sign']);
-    if ( this.foto != null) {
-    this.router.navigate(['/sign']);
+    if (this.foto_option != null) {
+      this.router.navigate(['/sign']);
     }
   }
 
   huella() {
     this.router.navigate(['/fingerprint']);
-    if ( this.firma_persona != null) {
-    this.router.navigate(['/fingerprint']);
+    if (this.firma_persona_option != null) {
+      this.router.navigate(['/fingerprint']);
     }
   }
 

@@ -58,8 +58,8 @@ export class DatosPersonaService {
     "email":"${requestDatosPersona.email}","genero":"${requestDatosPersona.genero}","fecha_vto_dui":"${requestDatosPersona.fecha_vto_dui}",
     "telefono_celular":"${requestDatosPersona.telefono_celular}","ocupacion":"${requestDatosPersona.ocupacion}","estado_civil":"${requestDatosPersona.estado_civil}"}`;
 
-    console.log('esta es el body crear persona tmp ' + body);
-    console.log('esta es la url crear persona tmp ' + this.url_tmp_datos_personales_crear);
+    //console.log('esta es el body crear persona tmp ' + body);
+    //console.log('esta es la url crear persona tmp ' + this.url_tmp_datos_personales_crear);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -78,8 +78,8 @@ export class DatosPersonaService {
     "email":"${requestDatosPersona.email}","genero":"${requestDatosPersona.genero}","fecha_vto_dui":"${requestDatosPersona.fecha_vto_dui}",
     "telefono_celular":"${requestDatosPersona.telefono_celular}","ocupacion":"${requestDatosPersona.ocupacion}","estado_civil":"${requestDatosPersona.estado_civil}"}`;
 
-    console.log('esta es el body actualizar datos personales tmp ' + body);
-    console.log('esta es la url actualizar datos personales tmp ' + this.url_tmp_datos_personales_update);
+    //console.log('esta es el body actualizar datos personales tmp ' + body);
+    //console.log('esta es la url actualizar datos personales tmp ' + this.url_tmp_datos_personales_update);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -98,8 +98,8 @@ export class DatosPersonaService {
     "peso_libras":"${requestDatosPersona.peso_libras}","cabello":"${requestDatosPersona.cabello}","lentes_contacto":"${requestDatosPersona.lentes_contacto}",
     "ojos":"${requestDatosPersona.ojos}","estatura":"${requestDatosPersona.estatura}","tipo_sangre":"${requestDatosPersona.tipo_sangre}"}`;
 
-    console.log('esta es el body actualizar informacion fisica persona ' + body);
-    console.log('esta es la url actualizar informacion fisica persona ' + this.url_tmp_datos_fisicos);
+    //console.log('esta es el body actualizar informacion fisica persona ' + body);
+    //console.log('esta es la url actualizar informacion fisica persona ' + this.url_tmp_datos_fisicos);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -167,7 +167,7 @@ export class DatosPersonaService {
     console.log("dui= "+sessionStorage.getItem('dui'));
     this.url_obtener_tmp_datos_persona =this.url_tmp_datos_persona+sessionStorage.getItem('dui');
 
-    console.log('esta es la url show persona ' + this.url_obtener_tmp_datos_persona);
+    //console.log('esta es la url show persona ' + this.url_obtener_tmp_datos_persona);
 
     //console.log('esta es la url validate login '+this.url);
 

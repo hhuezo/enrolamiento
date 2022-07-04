@@ -132,6 +132,25 @@ export class DemographicInformationComponent implements OnInit {
         this.fecha_nacimiento = this.persona[0].fecha_nacimiento;
 
 
+          //variables de session
+          sessionStorage.setItem('dui', '');
+          sessionStorage.setItem('nombre', '');
+          sessionStorage.setItem('anteojos', '');
+          sessionStorage.setItem('domicilio', '');
+          sessionStorage.setItem('foto', '');
+          sessionStorage.setItem('firma', '');
+
+          if (this.persona) {
+            //variables de session
+            sessionStorage.setItem('dui', this.persona[0].dui);
+            sessionStorage.setItem('nombre', this.persona[0].nombre);
+            sessionStorage.setItem('anteojos', this.persona[0].anteojos);
+            sessionStorage.setItem('domicilio', this.persona[0].domicilio);
+            sessionStorage.setItem('foto', this.persona[0].foto);
+            sessionStorage.setItem('firma', this.persona[0].firma);
+          }
+
+
         if(this.persona[0].municipio != null)
         {
           this.catalogoService.getMunicipiosActuales(this.persona[0].municipio).subscribe((resp: ResponseMunicipios[]) => {
@@ -184,6 +203,46 @@ export class DemographicInformationComponent implements OnInit {
 
 
 
+  }
+
+
+  datos_personales() {
+    this.router.navigate(['/personal-information']);
+  }
+
+  datos_fisicos() {
+    console.log(sessionStorage.getItem('nombre'));
+    if (sessionStorage.getItem('nombre') && sessionStorage.getItem('nombre') != '' && sessionStorage.getItem('nombre') != 'null') {
+
+      this.router.navigate(['/physic-information']);
+    }
+
+  }
+
+  datos_demograficos() {
+    if (sessionStorage.getItem('anteojos') && sessionStorage.getItem('anteojos') != '' && sessionStorage.getItem('anteojos') != 'null') {
+      //console.log("ante :" + sessionStorage.getItem('anteojos'));
+      this.router.navigate(['/demographic-information']);
+    }
+  }
+
+  fotografia() {
+    if (sessionStorage.getItem('domicilio') && sessionStorage.getItem('domicilio') != '' && sessionStorage.getItem('domicilio') != 'null') {
+
+      this.router.navigate(['/photography']);
+    }
+  }
+
+  firma() {
+    if (sessionStorage.getItem('foto') && sessionStorage.getItem('foto') != '' && sessionStorage.getItem('foto') != 'null') {
+      this.router.navigate(['/sign']);
+    }
+  }
+
+  huella() {
+    if (sessionStorage.getItem('firma') && sessionStorage.getItem('firma') != '' && sessionStorage.getItem('firma') != 'null') {
+      this.router.navigate(['/fingerprint']);
+    }
   }
 
 
@@ -250,13 +309,6 @@ onChangeDepartamento(departamentoSeleccionado: string) {
     console.log('Pais de Nacimiento: ' + this.pais_nacimiento);
     console.log('Municipio: ' + this.municipio);
     console.log('Fecha Nacimiento: ' + this.fecha_nacimiento);
-
-    /* sessionStorage.setItem('domicilio',this.domicilio);
-     sessionStorage.setItem('lugar_nacimiento',this.lugar_nacimiento);
-     sessionStorage.setItem('departamento',this.departamento);
-     sessionStorage.setItem('pais_nacimiento',this.pais_nacimiento);
-     sessionStorage.setItem('municipio',this.municipio);
-     sessionStorage.setItem('fecha_nacimiento',this.fecha_nacimiento);*/
 
 
     // guardando persona en tabla temporal

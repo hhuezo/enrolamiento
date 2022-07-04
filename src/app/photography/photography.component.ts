@@ -62,6 +62,27 @@ export class PhotographyComponent implements OnInit {
         this.dui = this.persona[0].dui;
         this.foto =this.persona[0].foto;
 
+
+        //variables de session
+        sessionStorage.setItem('dui', '');
+        sessionStorage.setItem('nombre', '');
+        sessionStorage.setItem('anteojos', '');
+        sessionStorage.setItem('domicilio', '');
+        sessionStorage.setItem('foto', '');
+        sessionStorage.setItem('firma', '');
+
+        if (this.persona) {
+          //variables de session
+          sessionStorage.setItem('dui', this.persona[0].dui);
+          sessionStorage.setItem('nombre', this.persona[0].nombre);
+          sessionStorage.setItem('anteojos', this.persona[0].anteojos);
+          sessionStorage.setItem('domicilio', this.persona[0].domicilio);
+          sessionStorage.setItem('foto', this.persona[0].foto);
+          sessionStorage.setItem('firma', this.persona[0].firma);
+        }
+
+
+
         if( this.foto != null && this.foto != '')
         {
           //console.log('foto actualll: ', this.foto);
@@ -89,6 +110,55 @@ export class PhotographyComponent implements OnInit {
     this.webcamImage.imageAsDataUrl = "";
   }
 
+
+
+  datos_personales() {
+    this.router.navigate(['/personal-information']);
+  }
+
+  datos_fisicos() {
+    console.log(sessionStorage.getItem('nombre'));
+    if (sessionStorage.getItem('nombre') && sessionStorage.getItem('nombre') != '' && sessionStorage.getItem('nombre') != 'null') {
+
+      this.router.navigate(['/physic-information']);
+    }
+
+  }
+
+  datos_demograficos() {
+    if (sessionStorage.getItem('anteojos') && sessionStorage.getItem('anteojos') != '' && sessionStorage.getItem('anteojos') != 'null') {
+      //console.log("ante :" + sessionStorage.getItem('anteojos'));
+      this.router.navigate(['/demographic-information']);
+    }
+  }
+
+  fotografia() {
+    if (sessionStorage.getItem('domicilio') && sessionStorage.getItem('domicilio') != '' && sessionStorage.getItem('domicilio') != 'null') {
+
+      this.router.navigate(['/photography']);
+    }
+  }
+
+  firma() {
+    if (sessionStorage.getItem('foto') && sessionStorage.getItem('foto') != '' && sessionStorage.getItem('foto') != 'null') {
+      this.router.navigate(['/sign']);
+    }
+  }
+
+  huella() {
+    if (sessionStorage.getItem('firma') && sessionStorage.getItem('firma') != '' && sessionStorage.getItem('firma') != 'null') {
+      this.router.navigate(['/fingerprint']);
+    }
+  }
+
+
+
+
+
+
+
+
+
   guardar() {
 
     let body = new RequestDatosPersona();
@@ -105,54 +175,6 @@ export class PhotographyComponent implements OnInit {
     }
 
     this.router.navigate(['/sign']);
-
-    /*
-    let body = new RequestFoto();
-    // body.documento = this.usuario;
-    // body.password = this.encodedpw;
-    body.idPersona = '2';
-    body.foto = this.foto;
-
-    console.log("bodyFoto: ", body);
-
-    // this.serviceLogin =
-    this.fotoService.guardarFoto(body).subscribe((resp: ResponseFoto) => { this.responseFoto = resp;
-    console.log('response: ', this.responseFoto);
-
-      if (this.responseFoto.val === '0') {
-
-          sessionStorage.setItem('foto',this.foto!);
-          this.router.navigate(['/sign']);
-
-      } else if (this.responseFoto.val === '1') {
-          this.msjerr = this.responseFoto.mensaje;
-
-          // this.modalService.open(content);
-          Swal.fire({
-            icon: 'error',
-            title: this.msjerr,
-            confirmButtonText: 'ATRAS',
-            confirmButtonColor: '#007bff',
-            backdrop: false,
-            position: 'center'
-          });
-      }
-      else {
-        this.msjerr = this.responseFoto.mensaje;
-
-        // this.modalService.open(content);
-        Swal.fire({
-          icon: 'error',
-          title: this.msjerr,
-          confirmButtonText: 'ATRAS',
-          confirmButtonColor: '#007bff',
-          backdrop: false,
-          position: 'center'
-        });
-      }
-
-
-    });*/
   }
 
 

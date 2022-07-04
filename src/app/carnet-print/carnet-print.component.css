@@ -95,7 +95,7 @@ select {
     height: 181.31px;
     left: 0;
     bottom: 0;
-    
+
     background: linear-gradient(262.21deg, #5893D9 4.89%, rgba(17, 86, 167, 0) 81.61%);
 }
 
@@ -155,3 +155,41 @@ h2{
 
 
 /* NEW STYLE */
+
+
+.body-options{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.body-options-img{
+  border-radius: 5px;
+  border: 2px solid #E6E6E6;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.line{
+  background-color: #E6E6E6;
+  width: 100%;
+  height: 2px;
+  position: relative;
+  top: -75px;
+  left: 100px;
+  z-index: -1;
+}
+
+.text_icon{
+align-items: center;
+justify-content: center;
+text-align: center;
+display: grid;
+}
+
