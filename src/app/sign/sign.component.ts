@@ -10,6 +10,7 @@ import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { FirmaService } from '../_service/firma.service';
 import * as $ from 'jquery';
+import { HuellaService } from '../_service/huella.service';
 
 @Component({
   selector: 'app-sign',
@@ -53,6 +54,7 @@ export class SignComponent implements OnInit {
     private firmaService: FirmaService,
     private router: Router,
     private datosPersonaService: DatosPersonaService,
+    private huellaService: HuellaService
   ) { }
 
   ngOnInit(): void {
@@ -100,6 +102,31 @@ export class SignComponent implements OnInit {
 
 
     }
+
+    this.detenerHuella();
+  }
+
+
+  detenerHuella(){
+    //para combo de ocupaciones
+    this.huellaService.detenerHuella().subscribe((resp: any) => {
+
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
+          text: 'No se puede detener el lector de huella',
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      }
+      else{
+      console.log('El aparato pudo ser detenido');
+      }
+
+    });
 
 
   }
@@ -339,7 +366,6 @@ export class SignComponent implements OnInit {
 
 
     });*/
-
 
 
   }

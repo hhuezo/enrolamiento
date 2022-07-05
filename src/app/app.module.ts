@@ -21,6 +21,7 @@ import { OptionsComponent } from './options/options.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 
 import { BrowserAnimationsModule }    from "@angular/platform-browser/animations";
+import { ChatComponent } from './chat/chat.component';
 
 import {DropdownModule} from 'primeng/dropdown';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -41,7 +42,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     HeaderComponent,
     CarnetPrintComponent,
     OptionsComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

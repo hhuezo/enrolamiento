@@ -9,6 +9,8 @@ import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import * as $ from 'jquery';
+import { HuellaService } from '../_service/huella.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -55,6 +57,7 @@ export class DemographicInformationComponent implements OnInit {
     private router: Router,
     private catalogoService: CatalogoService,
     private datosPersonaService: DatosPersonaService,
+    private huellaService: HuellaService
   ) { }
 
 
@@ -202,6 +205,7 @@ export class DemographicInformationComponent implements OnInit {
     });
 
 
+    this.detenerHuella();
 
   }
 
@@ -246,10 +250,35 @@ export class DemographicInformationComponent implements OnInit {
   }
 
 
-  onChangePais(/*paisSeleccionado: string*/ event:any) {
-    //console.log('event :' + event);
-    //console.log(event.value);
-    this.catalogoService.getDepartamentos(event.value).subscribe((resp: ResponseDepartamentos[]) => {
+
+  detenerHuella(){
+    //para combo de ocupaciones
+    this.huellaService.detenerHuella().subscribe((resp: any) => {
+
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
+          text: 'No se puede detener el lector de huella',
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      }
+      else{
+      console.log('El aparato pudo ser detenido');
+      }
+
+    });
+
+
+  }
+
+
+
+  onChangePais(paisSeleccionado: string) {
+    this.catalogoService.getDepartamentos(paisSeleccionado).subscribe((resp: ResponseDepartamentos[]) => {
       this.responseDepartamentos = resp;
       this.departamentos = this.responseDepartamentos;
       }

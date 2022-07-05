@@ -285,6 +285,21 @@
             </div>
             <div class="row">
               <div class="col-md-12">
+
+                <form #sendForm="ngForm">
+                  <div class="chat-send row">
+                      <div class="col-2">
+                          <input type="hidden" class="form-control" name="user" id="input-user" ngModel>
+                      </div>
+                      <div class="col-8">
+                          <input type="hidden" class="form-control" name="message" id="input-message" ngModel>
+                      </div>
+                      <div class="col-2">
+                          <input (click)="sendMessage()" type="hidden" class="form-control" name="btn_send" id="btn_send" >                          
+                      </div>
+                  </div>
+              </form>
+
               </div>
             </div>
 
