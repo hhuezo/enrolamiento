@@ -12,6 +12,8 @@ import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import * as $ from 'jquery';
+import { HuellaService } from '../_service/huella.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -76,7 +78,9 @@ export class PhysicInformationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private datosPersonaService: DatosPersonaService, private catalogoService: CatalogoService
+    private datosPersonaService: DatosPersonaService, 
+    private catalogoService: CatalogoService,
+    private huellaService: HuellaService
   ) { }
 
   ngOnInit(): void {
@@ -290,10 +294,37 @@ export class PhysicInformationComponent implements OnInit {
 
 
 
-
+    this.detenerHuella();
 
 
   }
+
+
+
+  detenerHuella(){
+    //para combo de ocupaciones
+    this.huellaService.detenerHuella().subscribe((resp: any) => {
+      
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {        
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
+          text: 'No se puede detener el lector de huella',
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      }
+      else{
+      console.log('El aparato pudo ser detenido');
+      }
+
+    });
+
+
+  }
+
 
 
   async obtenerDatosPersona() {

@@ -72,14 +72,23 @@
                     </div>
                     <div class="form-child-down">
                         <div class="btn_continuar">
-                            <a class="btn_blue" routerLink="/registro">Capturar huella nuevamente</a>
-                            <a class="btn_blue" routerLink="/registro">Confirmar</a>
+                            <a class="btn_blue" (click)="back()">&nbsp;Regresar a inicio&nbsp;</a>
+                            <a class="btn_blue" (click)="leerHuella()" id="btn_capture_sign">{{texto_boton}}</a>
+                            <button [ngClass]="{'btn_blue':estado_blue,'btn_gray':estado_gray}" (click)="cancelar()" [disabled]="btn_guardar_active">&nbsp;Guardar&nbsp;</button>
                         </div>
                     </div>
+                    <!-- <div>
+                        <img [src]="img_huella_jpg" width="250px" class="fingerprint" >
+                    </div>
+                    <div>
+                        <button (click)="test()" >Test</button>
+                    </div> -->
                 </div>
 
 
             </div>
+
+
         </div>
     </div>
 

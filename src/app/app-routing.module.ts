@@ -11,6 +11,7 @@ import { PhysicInformationComponent } from './physic-information/physic-informat
 import { SignComponent } from './sign/sign.component';
 import { OptionsComponent } from './options/options.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
+import { ChatComponent } from './chat/chat.component';
 
 /* se declaran las rutas de los componentes */
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'options', component: OptionsComponent },
   { path: 'configuration', component: ConfigurationComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'chat', component: ChatComponent },
 ];
 
 

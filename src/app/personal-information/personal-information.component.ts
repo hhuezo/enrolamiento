@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { ResponseEstadosCivil } from '../_model/responseEstadosCivil';
@@ -9,6 +9,10 @@ import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import { CatalogoService } from '../_service/catalogo.service';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import * as $ from 'jquery';
+import { ChatMessageDto } from '../_model/ChatMessageDto';
+import { WebSocketService } from '../_service/web-socket.service';
+import { HuellaService } from '../_service/huella.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -16,7 +20,7 @@ import * as $ from 'jquery';
   templateUrl: './personal-information.component.html',
   styleUrls: ['./personal-information.component.css']
 })
-export class PersonalInformationComponent implements OnInit {
+export class PersonalInformationComponent implements OnInit, OnDestroy {
 
   //combos
   ocupaciones: any;
@@ -52,53 +56,97 @@ export class PersonalInformationComponent implements OnInit {
   responseEstadosCivil?: ResponseEstadosCivil[];
   estados_civil: ResponseEstadosCivil[] = [];
 
+  txt_input_user?: HTMLInputElement;
+  txt_input_message?: HTMLInputElement;
 
+  txt_input_nombre?: HTMLInputElement;
 
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router, private catalogoService: CatalogoService,
     private datosPersonaService: DatosPersonaService,
+    public webSocketService: WebSocketService,
+    private huellaService: HuellaService
   ) { }
 
 
   ngOnInit(): void {
+
+    this.txt_input_nombre = document.getElementById("txt_nombre") as HTMLInputElement;
+
+    this.txt_input_user = document.getElementById("input-user") as HTMLInputElement;
+
+
+    
+
+    this.webSocketService.openWebSocket();
     
     $(document).ready(function(){
       //alert('funcion jquery');
 
       $('#txt_nombre').keyup(function (e) {
         if (e.keyCode === 13) {           
-           $('#txt_ape_paterno').focus();                      
+          $("#input-user").val("Nombre");
+          var nombre = $('#txt_nombre').val();
+          $("#input-message").val(nombre!);          
+          $('#btn_send').click();  
+
+          $('#txt_ape_paterno').focus();                      
         }
       });
 
       $('#txt_ape_paterno').keyup(function (e) {
         if (e.keyCode === 13) {           
+          $("#input-user").val("Apellido Paterno");
+          var apellidoPaterno = $('#txt_ape_paterno').val();
+          $("#input-message").val(apellidoPaterno!);          
+          $('#btn_send').click();  
+
            $('#txt_ape_materno').focus();                      
         }
       });
 
       $('#txt_ape_materno').keyup(function (e) {
-        if (e.keyCode === 13) {           
+        if (e.keyCode === 13) {  
+          $("#input-user").val("Apellido Materno");
+          var apellidoMaterno = $('#txt_ape_materno').val();
+          $("#input-message").val(apellidoMaterno!);          
+          $('#btn_send').click();
+
            $('#txt_ape_casada').focus();                      
         }
       });
 
       $('#txt_ape_casada').keyup(function (e) {
-        if (e.keyCode === 13) {           
+        if (e.keyCode === 13) {     
+          $("#input-user").val("Apellido Casada");
+          var apellidoCadada = $('#txt_ape_casada').val();
+          $("#input-message").val(apellidoCadada!);          
+          $('#btn_send').click();
+
            $('#txt_dui').focus();                      
         }
       });
 
       $('#txt_dui').keyup(function (e) {
-        if (e.keyCode === 13) {           
+        if (e.keyCode === 13) {  
+          $("#input-user").val("DUI");
+          var dui = $('#txt_dui').val();
+          $("#input-message").val(dui!);          
+          $('#btn_send').click();
+
            $('#txt_fecha_emision_dui').focus();                      
         }
       });
 
       $('#txt_fecha_emision_dui').keyup(function (e) {
-        if (e.keyCode === 13) {           
+        if (e.keyCode === 13) {   
+          $("#input-user").val("Fecha Emision DUI");
+          var fechaEmisionDUI = $('#txt_fecha_emision_dui').val();
+          $("#input-message").val(fechaEmisionDUI!);          
+          $('#btn_send').click();
+
            $('#cbo_ocupacion').focus();                      
         }
       });
@@ -112,33 +160,62 @@ export class PersonalInformationComponent implements OnInit {
 
 
       $('#cbo_ocupacion').change(function (e) {
+            $("#input-user").val("Ocupacion");            
+            var ocupacion = $("#cbo_ocupacion option:selected").text();
+            $("#input-message").val(ocupacion!);          
+            $('#btn_send').click();
+
             $('#txt_fecha_vto_dui').focus();                      
         
       });
 
       $('#txt_fecha_vto_dui').keyup(function (e) {
         if (e.keyCode === 13) {           
+          $("#input-user").val("Fecha Vento DUI");
+          var fechaVentoDUI = $('#txt_fecha_vto_dui').val();
+          $("#input-message").val(fechaVentoDUI!);          
+          $('#btn_send').click();
+
            $('#txt_email').focus();                      
         }
       });
 
       $('#txt_email').keyup(function (e) {
-        if (e.keyCode === 13) {           
+        if (e.keyCode === 13) {  
+          $("#input-user").val("Email");
+          var email = $('#txt_email').val();
+          $("#input-message").val(email!);          
+          $('#btn_send').click();
+
            $('#cbo_estado_civil').focus();                      
         }
       });
 
       $('#cbo_estado_civil').change(function (e) {
+        $("#input-user").val("Estado civil");
+        var estadoCivil = $("#cbo_estado_civil option:selected").text();        
+        $("#input-message").val(estadoCivil!);          
+        $('#btn_send').click();
+
            $('#cbo_genero').focus();                              
       });
 
       $('#cbo_genero').change(function (e) {        
+          $("#input-user").val("Genero");
+          var genero = $("#cbo_genero option:selected").text();
+          $("#input-message").val(genero!);          
+          $('#btn_send').click();
            $('#txt_telefono_celular').focus();                              
       });
 
       
       $('#txt_telefono_celular').keyup(function (e) {
-        if (e.keyCode === 13) {           
+        if (e.keyCode === 13) {  
+          $("#input-user").val("Telefono Celular");
+          var genero = $('#txt_telefono_celular').val();
+          $("#input-message").val(genero!);          
+          $('#btn_send').click();
+
            $('#btn_guardar').focus();                      
         }
       });
@@ -218,7 +295,7 @@ export class PersonalInformationComponent implements OnInit {
 
       });
 
-      console.log('this.nombre: ', this.nombre);
+      this.detenerHuella();
 
 
     }
@@ -249,15 +326,46 @@ export class PersonalInformationComponent implements OnInit {
 
       })
 
+  }
+
+
+
+  detenerHuella(){
+    //para combo de ocupaciones
+    this.huellaService.detenerHuella().subscribe((resp: any) => {
+      
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {        
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
+          text: 'No se puede detener el lector de huella',
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      }
+      else{
+      console.log('El aparato pudo ser detenido');
+      }
+
+    });
+
+
+  }
 
 
 
 
+  sendMessage() {
 
+    this.txt_input_user = document.getElementById("input-user") as HTMLInputElement;
+    this.txt_input_message = document.getElementById("input-message") as HTMLInputElement;
 
-
-
-
+    const chatMessageDto = new ChatMessageDto(this.txt_input_user.value, this.txt_input_message.value);
+    this.webSocketService.sendMessage(chatMessageDto);
+    //sendForm.controls.message.reset();
+    //sendForm.controls.message.reset();
   }
 
 
@@ -365,6 +473,11 @@ export class PersonalInformationComponent implements OnInit {
   load_icons() {
     this.img_personal_information = document.getElementById("img_personal_information") as HTMLImageElement;
     this.img_personal_information.src = "../../assets/images/datos_personales_blue.svg";
+  }
+
+
+  ngOnDestroy(): void {
+    this.webSocketService.closeWebSocket();
   }
 
 }

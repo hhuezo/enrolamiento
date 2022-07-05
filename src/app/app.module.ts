@@ -21,6 +21,7 @@ import { OptionsComponent } from './options/options.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 
 import { BrowserAnimationsModule }    from "@angular/platform-browser/animations";
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -39,7 +40,8 @@ import { BrowserAnimationsModule }    from "@angular/platform-browser/animations
     HeaderComponent,
     CarnetPrintComponent,
     OptionsComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
