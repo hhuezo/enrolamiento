@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+<<<<<<< HEAD
 import { ChatMessageDto } from '../_model/chatMessageDto';
+=======
+import { ChatMessageDto } from '../_model/ChatMessageDto';
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
 import { WebSocketService } from '../_service/web-socket.service';
 
 @Component({

@@ -5,6 +5,10 @@ import { environment } from 'src/environments/environment';
 import { RequestBuscarHuella } from '../_model/requestBuscarHuella';
 import { RequestInsertarHuella } from '../_model/requestInsertarHuella';
 import { RequestValidarHuella } from '../_model/requestValidarHuella';
+<<<<<<< HEAD
+=======
+import { ResponseIniciarHuella } from '../_model/responseIniciarHuella';
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +18,15 @@ export class HuellaService {
   private url_iniciar_huella: string = `${environment.HOST_HUELLA}/start`;
   private url_leer_huella: string = `${environment.HOST_HUELLA}/capture`;
   private url_detener_huella: string = `${environment.HOST_HUELLA}/stop`;
+<<<<<<< HEAD
   //private url_buscar_huella: string = `${environment.HOST_HUELLA2}/search`;
   //private url_insertar_huella: string = `${environment.HOST_HUELLA2}/insert`;
   //private url_validar_huella: string = `${environment.HOST_HUELLA2}/verify`;
+=======
+  private url_buscar_huella: string = `${environment.HOST_HUELLA2}/search`;
+  private url_insertar_huella: string = `${environment.HOST_HUELLA2}/insert`;
+  private url_validar_huella: string = `${environment.HOST_HUELLA2}/verify`;
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
   private requestBuscarHuella?: RequestBuscarHuella;
 
   constructor(
@@ -83,7 +93,11 @@ console.log('esta es la url detener huella '+this.url_detener_huella);
 
   }
 
+<<<<<<< HEAD
 /*
+=======
+
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
   buscarHuella(requestBuscarHuella: RequestBuscarHuella){
 
     //console.log("Inicio dentro de login");
@@ -101,8 +115,13 @@ console.log('esta es la url buscar huella '+this.url_buscar_huella);
     });
 
   }
+<<<<<<< HEAD
 */
 /*
+=======
+
+
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
   insertarHuella(requestInsertarHuella: RequestInsertarHuella){
 
     //console.log("Inicio dentro de login");
@@ -120,8 +139,13 @@ console.log('esta es la url insertar huella '+this.url_insertar_huella);
     });
 
   }
+<<<<<<< HEAD
 */
 /*
+=======
+
+
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
   validarHuella(requestValidarHuella: RequestValidarHuella){
 
     //console.log("Inicio dentro de login");
@@ -139,6 +163,10 @@ console.log('esta es la url validar huella '+this.url_validar_huella);
     });
 
   }
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
 
 }

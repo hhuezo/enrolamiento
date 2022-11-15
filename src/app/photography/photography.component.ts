@@ -12,12 +12,15 @@ import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import { HuellaService } from '../_service/huella.service';
+<<<<<<< HEAD
 import { WebSocketService } from '../_service/web-socket.service';
 import { ChatMessageDto } from '../_model/chatMessageDto';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { RequestFotoGuardar } from '../_model/requestFotoGuardar';
 import { RequestFotoBorrar } from '../_model/RequestFotoBorrar';
+=======
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
 
 @Component({
   selector: 'app-photography',
@@ -66,9 +69,13 @@ export class PhotographyComponent implements OnInit {
     private fotoService: FotoService,
     private router: Router,
     private datosPersonaService: DatosPersonaService,
+<<<<<<< HEAD
     private huellaService: HuellaService,
     private webSocketService: WebSocketService,
     private http: HttpClient
+=======
+    private huellaService: HuellaService
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
   ) { }
 
   ngOnInit(): void {
@@ -125,15 +132,34 @@ export class PhotographyComponent implements OnInit {
 
     this.hide_photo();
     this.detenerHuella();
+<<<<<<< HEAD
     //this.borrarFoto();
 
+=======
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
   }
 
 
+  detenerHuella(){
+    //para combo de ocupaciones
+    this.huellaService.detenerHuella().subscribe((resp: any) => {
 
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
+          text: 'No se puede detener el lector de huella',
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      }
+      else{
+      console.log('El aparato pudo ser detenido');
+      }
 
-
-
+    });
 
   detenerHuella(){
     //para combo de ocupaciones
@@ -181,6 +207,7 @@ export class PhotographyComponent implements OnInit {
 
   }
 */
+
 
   clean() {
     this.webcamImage.imageAsDataUrl = "";
