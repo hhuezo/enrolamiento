@@ -61,4 +61,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/fingerprint']);
   }
 
+  webScoket(){
+    this.router.navigate(['/carnet-show']);
+  }
+
 }

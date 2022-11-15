@@ -9,6 +9,10 @@ import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import { CatalogoService } from '../_service/catalogo.service';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import * as $ from 'jquery';
+import { ChatMessageDto } from '../_model/chatMessageDto';
+import { WebSocketService } from '../_service/web-socket.service';
+import { HuellaService } from '../_service/huella.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -21,6 +25,8 @@ export class PersonalInformationComponent implements OnInit {
   //combos
   ocupaciones: any;
   responseOcupaciones?: ResponseOcupaciones;
+  responseOcupacionSel?: ResponseOcupaciones[];
+  ocu_descripcion?: string;
 
   responseTmpDatosPersona?: ResponseTmpDatosPersona[];
 
@@ -55,17 +61,24 @@ export class PersonalInformationComponent implements OnInit {
 
 
 
+  txt_input_user?: HTMLInputElement;
+  txt_input_message?: HTMLInputElement;
+
 
   constructor(
     private formBuilder: UntypedFormBuilder,
-    private router: Router, private catalogoService: CatalogoService,
+    private router: Router, 
+    private catalogoService: CatalogoService,
     private datosPersonaService: DatosPersonaService,
+    private webSocketService: WebSocketService,
+    private huellaService: HuellaService
   ) { }
 
 
 
   ngOnInit(): void {
 
+    this.webSocketService.openWebSocket();
     this.submitted = true;
 
 
@@ -113,17 +126,54 @@ export class PersonalInformationComponent implements OnInit {
 
         this.nombre = this.persona[0].nombre!;
         this.ape_paterno = this.persona[0].ape_paterno!;
+
+        
+        if (this.ape_paterno === "undefined")
+        {
+          this.ape_paterno = "";
+        }
+
         this.ape_materno = this.persona[0].ape_materno!;
+
+        
+        if (this.ape_materno === "undefined")
+        {
+          this.ape_materno = "";
+        }
+
         this.ape_casada = this.persona[0].ape_casada!;
+
+        //alert(this.ape_casada);
+        
+
+        if (this.ape_casada === "undefined")
+        {
+          this.ape_casada = "";
+        }
+
+
         this.dui = this.persona[0].dui!;
         this.fecha_emision_dui = this.persona[0].fecha_emision_dui!;
         this.ocupacion = +this.persona[0].ocupacion!;
         this.fecha_vto_dui = this.persona[0].fecha_vto_dui!;
 
         this.email = this.persona[0].email!;
+
+        if (this.email === "undefined")
+        {
+          this.email = "";
+        }
+
+
         this.estado_civil = this.persona[0].estado_civil!;
         this.genero = this.persona[0].genero!;
         this.telefono_celular = this.persona[0].telefono_celular!;
+
+        if (this.telefono_celular === "undefined")
+        {
+          this.telefono_celular = "";
+        }
+
 
         //variables de session
         sessionStorage.setItem('dui', '');
@@ -158,7 +208,7 @@ export class PersonalInformationComponent implements OnInit {
 
 
 
-
+    this.detenerHuella();
 
 
     this.form = this.formBuilder.group(
@@ -187,37 +237,89 @@ export class PersonalInformationComponent implements OnInit {
 
 
       $('#txt_nombre').keyup(function (e) {
-        if (e.keyCode === 13) {
-          $('#txt_ape_paterno').focus();
+        if (e.keyCode === 13) {        
+  
+          $("#input-user").val("Nombre");
+
+          const nombre = $('#txt_nombre').val();
+
+          $("#input-message").val(nombre!);          
+
+          $('#btn_send').click();  
+
+          $('#txt_ape_paterno').focus();                      
+
         }
       });
 
       $('#txt_ape_paterno').keyup(function (e) {
         if (e.keyCode === 13) {
+          $("#input-user").val("Apellido Paterno");
+          const apellidoPaterno = $('#txt_ape_paterno').val();
+          $("#input-message").val(apellidoPaterno!);  
+                    
+          $('#btn_send').click();  
+
           $('#txt_ape_materno').focus();
         }
       });
 
+
+      
+
       $('#txt_ape_materno').keyup(function (e) {
         if (e.keyCode === 13) {
+          $("#input-user").val("Apellido Materno");
+          const apellidoMaterno = $('#txt_ape_materno').val();
+          $("#input-message").val(apellidoMaterno!);          
+          $('#btn_send').click();
+
           $('#txt_ape_casada').focus();
         }
       });
 
       $('#txt_ape_casada').keyup(function (e) {
         if (e.keyCode === 13) {
+          $("#input-user").val("Apellido Casada");
+          const apellidoCadada = $('#txt_ape_casada').val();
+
+
+
+
+          $("#input-message").val(apellidoCadada!);          
+          $('#btn_send').click();
+
           $('#txt_dui').focus();
         }
       });
 
       $('#txt_dui').keyup(function (e) {
         if (e.keyCode === 13) {
+          $("#input-user").val("DUI");
+          const dui = $('#txt_dui').val();
+          $("#input-message").val(dui!);          
+          $('#btn_send').click();
+
           $('#txt_fecha_emision_dui').focus();
         }
       });
 
       $('#txt_fecha_emision_dui').keyup(function (e) {
         if (e.keyCode === 13) {
+          $("#input-user").val("Fecha Emision DUI");
+          const fechaEmisionDUI = $('#txt_fecha_emision_dui').val();
+
+          const dia = fechaEmisionDUI?.toString().substr(8,2);
+          const mes = fechaEmisionDUI?.toString().substr(5,2);
+          const anio = fechaEmisionDUI?.toString().substr(0,4);
+
+          const fecha_dmy = dia+'/'+mes+'/'+anio;
+
+          //alert('fecha emision dui= '+fecha_dmy);
+          
+          $("#input-message").val(fecha_dmy!);          
+          $('#btn_send').click();
+
           $('#cbo_ocupacion').focus();
         }
       });
@@ -230,34 +332,81 @@ export class PersonalInformationComponent implements OnInit {
       // });
 
 
-      $('#cbo_ocupacion').change(function (e) {
-        $('#txt_fecha_vto_dui').focus();
+      // $('#cbo_ocupacion').change(function (e) {
 
-      });
+      //   $("#input-user").val("Ocupacion");            
+      //   var ocupacion = $("#cbo_ocupacion option:selected").text();
+      //   $("#input-message").val(ocupacion!);   
+      //   //alert(ocupacion);   
+      //   alert('ocupacion');   
+      //   $('#btn_send').click();
+        
+      //   $('#txt_fecha_vto_dui').focus();
+
+      // });
+
+
+
+
+
 
       $('#txt_fecha_vto_dui').keyup(function (e) {
         if (e.keyCode === 13) {
+          $("#input-user").val("Fecha Vento DUI");
+          const fechaVentoDUI = $('#txt_fecha_vto_dui').val();
+
+          const dia = fechaVentoDUI?.toString().substr(8,2);
+          const mes = fechaVentoDUI?.toString().substr(5,2);
+          const anio = fechaVentoDUI?.toString().substr(0,4);
+
+          const fecha_dmy = dia+'/'+mes+'/'+anio;
+
+
+          $("#input-message").val(fecha_dmy!);      
+          
+          $('#btn_send').click();
+
           $('#txt_email').focus();
         }
       });
 
       $('#txt_email').keyup(function (e) {
         if (e.keyCode === 13) {
+          $("#input-user").val("Email");
+          const email = $('#txt_email').val();
+          $("#input-message").val(email!);          
+          $('#btn_send').click();
+
           $('#cbo_estado_civil').focus();
         }
       });
 
       $('#cbo_estado_civil').change(function (e) {
+        $("#input-user").val("Estado civil");
+        const estadoCivil = $("#cbo_estado_civil option:selected").text();        
+        $("#input-message").val(estadoCivil!);          
+        $('#btn_send').click();
+
         $('#cbo_genero').focus();
       });
 
       $('#cbo_genero').change(function (e) {
+        $("#input-user").val("Genero");
+        const genero = $("#cbo_genero option:selected").text();
+        $("#input-message").val(genero!);          
+        $('#btn_send').click();
+
         $('#txt_telefono_celular').focus();
       });
 
 
       $('#txt_telefono_celular').keyup(function (e) {
         if (e.keyCode === 13) {
+          $("#input-user").val("Telefono Celular");
+          const genero = $('#txt_telefono_celular').val();
+          $("#input-message").val(genero!);          
+          $('#btn_send').click();
+
           $('#btn_guardar').focus();
         }
       });
@@ -270,6 +419,82 @@ export class PersonalInformationComponent implements OnInit {
 
 
   }
+
+  test(){
+                 
+        const ocupacionSel = this.ocupacion;
+        
+        //alert(ocupacionSel);   
+
+
+    //para combo de ocupaciones
+    this.catalogoService.getOcupacion(ocupacionSel).subscribe((resp: ResponseOcupaciones[]) => {
+      this.responseOcupacionSel = resp;
+      console.log('responseOcupacionSel: ', this.responseOcupacionSel);
+
+      this.ocu_descripcion = this.responseOcupacionSel[0].ocu_descripcion;
+
+      console.log('this.ocu_descripcion= '+this.ocu_descripcion);
+
+      $("#input-user").val("Ocupacion");   
+      $("#input-message").val(this.ocu_descripcion!);
+      $('#btn_send').click();
+
+    });
+
+    //alert(this.ocu_descripcion);
+
+      
+      
+        
+        $('#txt_fecha_vto_dui').focus();
+  }
+
+  detenerHuella(){
+    //para combo de ocupaciones
+    this.huellaService.detenerHuella().subscribe((resp: any) => {
+      
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {        
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
+          text: 'No se puede detener el lector de huella',
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      }
+      else{
+      console.log('El aparato pudo ser detenido');
+      }
+
+    });
+
+
+  }
+
+  sendMessage() {
+
+    //console.log('uno');
+
+    this.txt_input_user = document.getElementById("input-user") as HTMLInputElement;
+    this.txt_input_message = document.getElementById("input-message") as HTMLInputElement;
+
+
+    //console.log('dos');
+
+    const chatMessageDto = new ChatMessageDto(this.txt_input_user.value, this.txt_input_message.value);
+
+    //console.log('tres');
+    
+    this.webSocketService.sendMessage(chatMessageDto);
+    //console.log('cuatro');
+
+    //sendForm.controls.message.reset();
+    //sendForm.controls.message.reset();
+  }
+
 
 
   datos_personales() {

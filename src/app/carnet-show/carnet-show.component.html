@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enrolamiento</title>
+    <link href="carnet-show.component.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <app-header></app-header>
+    <!--<div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>Impresión de carnet </h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="text">Por favor verifique la información registrada en el carnet, si la
+                                    información es correcta puede hacer clic en “Imprimir carnet”. </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 div_carnet">
+
+
+                                <div class="rectangule147"></div>
+
+                                <div class="maskgroup229">
+
+
+                                </div>
+                                <div class="vector97"></div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <div class="row">
+          <ul class="nav nav-tabs" id="myTab">
+            <li class="nav-item">
+              <a
+                href="carnet-show#datos_personales"
+                (click)="mostrarDatosPersonales()"
+                class="nav-link {{ tabActiveDatosPersonales }}"
+                data-bs-toggle="tab"
+                >Datos personales</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="carnet-show#datos_fisicos"
+                (click)="mostrarDatosFisicos()"
+                class="nav-link {{ tabActiveDatosFisicos }}"
+                data-bs-toggle="tab"
+                >Datos fisicos</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="carnet-show#datos_demograficos"
+                (click)="mostrarDatosDemograficos()"
+                class="nav-link {{ tabActiveDatosDemograficos }}"
+                data-bs-toggle="tab"
+                >Datos demograficos</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a
+                href="carnet-show#fotografia"
+                (click)="mostrarDatosFotografia()"
+                class="nav-link {{ tabActiveDatosFotografia }}"
+                data-bs-toggle="tab"
+                >Fotografia</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="carnet-show#firma"
+                (click)="mostrarDatosFirma()"
+                class="nav-link {{ tabActiveDatosFirma }}"
+                data-bs-toggle="tab"
+                >Firma</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="carnet-show#huella"
+                (click)="mostrarDatosHuella()"
+                class="nav-link {{ tabActiveDatosHuella }}"
+                data-bs-toggle="tab"
+                >Huella</a
+              >
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div
+              class="tab-pane fade show {{ tabActiveDatosPersonales }}"
+              id="datos_personales"
+            >
+              <h4 class="mt-2">DATOS PERSONALES</h4>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="col-md-12 control-label"
+                      >Según CIP • Nombre</label
+                    >
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'Nombre'"
+                          type="text"
+                          id="txt_nombre"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-12 control-label"
+                      >Según CIP • Apellido materno</label
+                    >
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'Apellido Materno'"
+                          type="text"
+                          id="txt_ape_materno"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-12 control-label">Número de CIP</label>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'DUI'"
+                          type="text"
+                          id="txt_dui"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-12 control-label">Ocupación</label>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'Ocupacion'"
+                          type="text"
+                          id="txt_ocupacion"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-12 control-label"
+                      >Correo electrónico</label
+                    >
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'Email'"
+                          type="text"
+                          id="txt_email"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-12 control-label">Género</label>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'Genero'"
+                          type="text"
+                          id="txt_genero"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="col-md-12 control-label"
+                      >Según CIP • Apellido paterno</label
+                    >
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'Apellido Paterno'"
+                          type="text"
+                          id="txt_ape_paterno"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-12 control-label"
+                      >Según CIP • Apellido casado/a</label
+                    >
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'Apellido Casada'"
+                          type="text"
+                          id="txt_ape_casada"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-12 control-label"
+                      >Fecha de emisión de CIP</label
+                    >
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'Fecha Emision DUI'"
+                          type="text"
+                          id="txt_fecha_emision_dui"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-12 control-label"
+                      >Fecha de vencimiento de CIP</label
+                    >
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'Fecha Vento DUI'"
+                          type="text"
+                          id="txt_fecha_vto_dui"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-12 control-label">Estado civil </label>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'Estado civil'"
+                          type="text"
+                          id="txt_estado_civil"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-12 control-label"
+                      >Teléfono celular</label
+                    >
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div
+                        *ngFor="
+                          let chatMessage of webSocketService.chatMessages
+                        "
+                      >
+                        <input
+                          *ngIf="chatMessage.user == 'Telefono Celular'"
+                          type="text"
+                          id="txt_telefono_celular"
+                          value="{{ chatMessage.message }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade show {{ tabActiveDatosFisicos }}"
+              id="datos_fisicos"
+            >
+              <h4 class="mt-2">DATOS FISICOS</h4>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="col-md-12 control-label">Anteojos</label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Anteojos'"
+                              type="text"
+                              id="txt_anteojos"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label">Piel</label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Pieles'"
+                              type="text"
+                              id="txt_piel"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label">Tipo boca</label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Tipos de boca'"
+                              type="text"
+                              id="txt_tipos_bocas"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label"
+                          >Peso en libras</label
+                        >
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Peso en libras'"
+                              type="text"
+                              id="txt_peso_libras"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label"
+                          >Lentes de contacto</label
+                        >
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Lentes de contacto'"
+                              type="text"
+                              id="txt_lentes_contacto"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label">Ojos</label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Color de ojos'"
+                              type="text"
+                              id="txt_colores_ojos"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="col-md-12 control-label">Nariz</label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Narices'"
+                              type="text"
+                              id="txt_tipos_narices"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label"
+                          >Senales especiales</label
+                        >
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Señales especiales'"
+                              type="text"
+                              id="txt_senales_especiales"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label">Audifonos</label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Audifonos'"
+                              type="text"
+                              id="txt_audifonos"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label">Cabellos</label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Cabellos'"
+                              type="text"
+                              id="txt_cabellos"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label">Estatura</label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Estatura'"
+                              type="text"
+                              id="txt_estatura"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label"
+                          >Tipo de sangre</label
+                        >
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Tipo de sangre'"
+                              type="text"
+                              id="txt_tipo_sangre"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade show {{ tabActiveDatosDemograficos }}"
+              id="datos_demograficos"
+            >
+              <h4 class="mt-2">DATOS DEMOGRAFICOS</h4>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="col-md-12 control-label">Domicilio</label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Domicilio'"
+                              type="text"
+                              id="txt_domicilio"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label"
+                          >Lugar nacimiento</label
+                        >
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Lugar nacimiento'"
+                              type="text"
+                              id="txt_lugar_nacimiento"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label"
+                          >fecha nacimiento</label
+                        >
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Fecha nacimiento'"
+                              type="text"
+                              id="txt_fecha_nacimiento"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="col-md-12 control-label"
+                          >pais nacimiento</label
+                        >
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'PaisNacimiento'"
+                              type="text"
+                              id="txt_pais_nacimiento"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label"
+                          >Departamento</label
+                        >
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Departamento'"
+                              type="text"
+                              id="txt_departamento"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-12 control-label">Municipio</label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div
+                            *ngFor="
+                              let chatMessage of webSocketService.chatMessages
+                            "
+                          >
+                            <input
+                              *ngIf="chatMessage.user == 'Municipio'"
+                              type="text"
+                              id="txt_municipio"
+                              value="{{ chatMessage.message }}"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">&nbsp;</div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade show {{ tabActiveDatosFotografia }}"
+              id="fotografia"
+            >
+              <h4 class="mt-2">FOTOGRAFIA</h4>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="col-md-12 justify-content-center photo_div2">
+                    <b
+                      *ngFor="let chatMessage1 of webSocketService.chatMessages"
+                    >
+                      <b *ngIf="chatMessage1.user === 'Foto'">
+                        <div class="snapshot">
+                          <img
+                            src="{{ chatMessage1.message }}"
+                            style="width: 300px; height: 370px"
+                          />
+                        </div>
+
+                        <!-- {{ chatMessage1.message }} -->
+                      </b>
+                    </b>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade show {{ tabActiveDatosFirma }}"
+              id="firma"
+            >
+              <h4 class="mt-2">FIRMA</h4>
+
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h1>Deja aquí tu firma</h1>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h3></h3>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 div_sing">
+                      <div class="main-rigth-body-form">
+                        <div class="form-child-up">
+                          <div
+                            id="div_canva"
+                            class="photo-box"
+                            style="align-items: center"
+                          >
+                            <canvas
+                              id="canva"
+                              #canvas
+                              (touchstart)="startDrawing($event)"
+                              (touchmove)="moved($event)"
+                            ></canvas>
+                          </div>
+                          <div
+                            id="div_sign"
+                            class="div_sign"
+                            style="align-items: center"
+                          >
+                            <img [src]="sign" />
+                          </div>
+                          <div class="form-child-up-col2"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                      <a class="btn btn-outline-primary" (click)="clearPad()"
+                        >&nbsp;Limpiar firma&nbsp;</a
+                      >
+
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <button
+                        type="submit"
+                        id="btn_guardar"
+                        class="btn btn-primary"
+                        (click)="savePad()"
+                      >
+                        &nbsp;Guardar&nbsp;
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <form #sendForm="ngForm">
+                        <div class="chat-send row">
+                          <div class="col-2">
+                            <input
+                              type="hidden"
+                              class="form-control"
+                              name="user"
+                              id="input-user"
+                              ngModel
+                            />
+                          </div>
+                          <div class="col-8">
+                            <input
+                              type="hidden"
+                              class="form-control"
+                              name="message"
+                              id="input-message"
+                              ngModel
+                            />
+                          </div>
+                          <div class="col-2">
+                            <input
+                              (click)="sendMessage()"
+                              type="hidden"
+                              class="form-control"
+                              name="btn_send"
+                              id="btn_send"
+                            />
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade show {{ tabActiveDatosHuella }}"
+              id="huella"
+            >
+              <h4 class="mt-2">HUELLA</h4>
+              <p>
+                Donec vel placerat quam, ut euismod risus. Sed a mi suscipit,
+                elementum sem a, hendrerit velit. Donec at erat magna. Sed
+                dignissim orci nec eleifend egestas. Donec eget mi consequat
+                massa vestibulum laoreet. Mauris et ultrices nulla, malesuada
+                volutpat ante. Fusce ut orci lorem. Donec molestie libero in
+                tempus imperdiet. Cum sociis natoque penatibus et magnis.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- <main class="chat">
+                <div class="container">
+
+                    <div class="chat-content">
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" *ngFor="let chatMessage of webSocketService.chatMessages">
+                                    <div *ngIf="chatMessage.user != 'Foto' ">
+                                        <strong>{{chatMessage.user}}: </strong>
+                                        <span>{{chatMessage.message}}</span>
+                                    </div>
+                                    
+                                    
+                                </li>
+
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <form (ngSubmit)="sendMessage(sendForm)" #sendForm="ngForm">
+                        <div class="chat-send row">
+                            <div class="col-2">
+                                <input type="hidden" class="form-control" name="user" id="input-user" ngModel>
+                            </div>
+                            <div class="col-8">
+                                <input type="hidden" class="form-control" name="message" id="input-message" ngModel>
+                            </div>
+                            <div class="col-2">
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            
+            </main>  -->
+      </div>
+
+      <div class="col-md-1"></div>
+
+      <div class="col-md-6">
+        <div class="main">
+          <div class="main-carnet">
+            <div class="carnet-left">
+              <div class="carnet-header">
+                <h2>PES</h2>
+                <p>CARNÉ DE PERMISO TEMPORAL</p>
+              </div>
+              <div class="carnet-info">
+                <table style="padding: 0">
+                  <tr>
+                    <td>
+                      <h1
+                        *ngFor="
+                          let chatMessage1 of webSocketService.chatMessages
+                        "
+                      >
+                        <h2 *ngIf="chatMessage1.user === 'Nombre'">
+                          {{ chatMessage1.message }}
+                        </h2>
+                      </h1>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- <h1 *ngFor="let chatMessage1 of webSocketService.chatMessages">
+
+                            <h2 *ngIf="chatMessage1.user === 'Nombre'">
+                                {{ chatMessage1.message }}  
+                            </h2>                          
+
+                        </h1> -->
+
+                <table style="padding: 0">
+                  <tr>
+                    <td>
+                      <h1
+                        *ngFor="
+                          let chatMessage1 of webSocketService.chatMessages
+                        "
+                      >
+                        <h2 *ngIf="chatMessage1.user === 'Apellido Paterno'">
+                          {{ chatMessage1.message }} &nbsp;
+                        </h2>
+                      </h1>
+                    </td>
+
+                    <td>
+                      <h1
+                        *ngFor="
+                          let chatMessage1 of webSocketService.chatMessages
+                        "
+                      >
+                        <h2 *ngIf="chatMessage1.user === 'Apellido Materno'">
+                          {{ chatMessage1.message }}
+                        </h2>
+                      </h1>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td>
+                      <b>FECHA NACIMIENTO: </b>
+                    </td>
+                    <td>
+                      <b
+                        *ngFor="
+                          let chatMessage1 of webSocketService.chatMessages
+                        "
+                      >
+                        <b *ngIf="chatMessage1.user === 'Fecha nacimiento'">
+                          {{ chatMessage1.message }}
+                        </b>
+                      </b>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td>
+                      <b>PAIS NACIMIENTO: </b>
+                    </td>
+                    <td>
+                      <b
+                        *ngFor="
+                          let chatMessage1 of webSocketService.chatMessages
+                        "
+                      >
+                        <b *ngIf="chatMessage1.user === 'PaisNacimiento'">
+                          {{ chatMessage1.message }}
+                        </b>
+                      </b>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td>
+                      <b>SEXO: </b>
+                    </td>
+                    <td>
+                      <b
+                        *ngFor="
+                          let chatMessage1 of webSocketService.chatMessages
+                        "
+                      >
+                        <b *ngIf="chatMessage1.user === 'Genero'">
+                          {{ chatMessage1.message }}
+                        </b>
+                      </b>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td>
+                      <b>TIPO SANGRE: </b>
+                    </td>
+                    <td>
+                      <b
+                        *ngFor="
+                          let chatMessage1 of webSocketService.chatMessages
+                        "
+                      >
+                        <b *ngIf="chatMessage1.user === 'Tipo de sangre'">
+                          {{ chatMessage1.message }}
+                        </b>
+                      </b>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td>
+                      <b>EXPEDIDA: </b>
+                    </td>
+                    <td>
+                      <b
+                        *ngFor="
+                          let chatMessage1 of webSocketService.chatMessages
+                        "
+                      >
+                        <b *ngIf="chatMessage1.user === 'Fecha Emision DUI'">
+                          {{ chatMessage1.message }}
+                        </b>
+                      </b>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="carnet-right">
+              <br /><br /><br />
+
+              <b *ngFor="let chatMessage1 of webSocketService.chatMessages">
+                <b *ngIf="chatMessage1.user === 'Foto'">
+                  <div class="marco_foto">
+                    <img
+                      id="user_foto"
+                      src="{{ chatMessage1.message }}"
+                      style="width: 171px; height: 211px"
+                    />
+                  </div>
+
+                  <!-- {{ chatMessage1.message }} -->
+                </b>
+              </b>
+
+              <b *ngFor="let chatMessage of webSocketService.chatMessages">
+                <b *ngIf="chatMessage.user == 'DUI'">
+                  {{ chatMessage.message }}
+                </b>
+              </b>
+
+              <p></p>
+
+              <b *ngFor="let chatMessage1 of webSocketService.chatMessages">
+                <b *ngIf="chatMessage1.user === 'Firma'">
+                  <img
+                    id="imgSignature"
+                    src="{{ chatMessage1.message }}"
+                    width="114"
+                    height="92"
+                  />
+                  <!-- {{ chatMessage1.message }} -->
+                </b>
+              </b>
+
+              <p class="txt-firma"><b>FIRMA</b></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">&nbsp;</div>
+    </div>
+  </body>
+</html>

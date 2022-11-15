@@ -12,6 +12,10 @@ import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import * as $ from 'jquery';
+import { HuellaService } from '../_service/huella.service';
+import Swal from 'sweetalert2';
+import { WebSocketService } from '../_service/web-socket.service';
+import { ChatMessageDto } from '../_model/chatMessageDto';
 
 
 @Component({
@@ -71,17 +75,26 @@ export class PhysicInformationComponent implements OnInit {
 
 
 
+  txt_input_user?: HTMLInputElement;
+  txt_input_message?: HTMLInputElement;
+
+
+
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private router: Router,
-    private datosPersonaService: DatosPersonaService, private catalogoService: CatalogoService
+    private datosPersonaService: DatosPersonaService, 
+    private catalogoService: CatalogoService,
+    private huellaService: HuellaService,
+    private webSocketService: WebSocketService,
   ) { }
 
 
 
   ngOnInit(): void {
 
-
+    this.webSocketService.openWebSocket();
     this.submitted = true;
 
 
@@ -135,78 +148,125 @@ export class PhysicInformationComponent implements OnInit {
     $(document).ready(function(){
       //alert('funcion jquery');
 
-      $('#cbo_anteojos').keyup(function (e) {
 
-           $('#cbo_tipos_narices').focus();
+      $('#cbo_anteojos').change(function (e) {
+        $("#input-user").val("Anteojos");
+        const anteojos = $("#cbo_anteojos option:selected").text();        
+        $("#input-message").val(anteojos!);          
+        $('#btn_send').click();
 
+        $('#cbo_tipos_narices').focus();
       });
 
-      $('#cbo_tipos_narices').keyup(function (e) {
+      $('#cbo_tipos_narices').change(function (e) {
+        $("#input-user").val("Narices");
+        const narices = $("#cbo_tipos_narices option:selected").text();        
+        $("#input-message").val(narices!);          
+        $('#btn_send').click();
 
-           $('#cbo_colores_pieles').focus();
-
+        $('#cbo_colores_pieles').focus();
       });
 
-      $('#cbo_colores_pieles').keyup(function (e) {
+      $('#cbo_colores_pieles').change(function (e) {
+        $("#input-user").val("Pieles");
+        const pieles = $("#cbo_colores_pieles option:selected").text();        
+        $("#input-message").val(pieles!);          
+        $('#btn_send').click();
 
-           $('#cbo_senales_especiales').focus();
-
+        $('#cbo_senales_especiales').focus();
       });
 
-      $('#cbo_senales_especiales').keyup(function (e) {
+      $('#cbo_senales_especiales').change(function (e) {
+        $("#input-user").val("Señales especiales");
+        const senalesEspeciales = $("#cbo_senales_especiales option:selected").text();        
+        $("#input-message").val(senalesEspeciales!);          
+        $('#btn_send').click();
 
-           $('#cbo_tipos_bocas').focus();
-
+        $('#cbo_tipos_bocas').focus();
       });
 
-      $('#cbo_tipos_bocas').keyup(function (e) {
+      $('#cbo_tipos_bocas').change(function (e) {
+        $("#input-user").val("Tipos de boca");
+        const bocas = $("#cbo_tipos_bocas option:selected").text();        
+        $("#input-message").val(bocas!);          
+        $('#btn_send').click();
 
-           $('#txt_audifonos').focus();
-
+        $('#cbo_audifonos').focus();
       });
 
-      $('#txt_audifonos').keyup(function (e) {
-        if (e.keyCode === 13) {
-           $('#txt_peso_libras').focus();
-        }
+      $('#cbo_audifonos').change(function (e) {
+        $("#input-user").val("Audifonos");
+        const audifonos = $("#cbo_audifonos option:selected").text();        
+        $("#input-message").val(audifonos!);          
+        $('#btn_send').click();
+
+        $('#txt_peso_libras').focus();
       });
+
+
 
       $('#txt_peso_libras').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#cbo_colores_cabellos').focus();
+          $("#input-user").val("Peso en libras");
+          const audifonos = $('#txt_peso_libras').val();
+          $("#input-message").val(audifonos!);          
+          $('#btn_send').click();
+
+          $('#cbo_colores_cabellos').focus();
         }
       });
 
-      $('#cbo_colores_cabellos').keyup(function (e) {
 
-           $('#cbo_lentes_contacto').focus();
+      $('#cbo_colores_cabellos').change(function (e) {
+        $("#input-user").val("Cabellos");
+        const cabellos = $("#cbo_colores_cabellos option:selected").text();        
+        $("#input-message").val(cabellos!);          
+        $('#btn_send').click();
 
+        $('#cbo_lentes_contacto').focus();
       });
 
-      $('#cbo_lentes_contacto').keyup(function (e) {
 
-           $('#txt_estatura').focus();
+      $('#cbo_lentes_contacto').change(function (e) {
+        $("#input-user").val("Lentes de contacto");
+        const lentesContacto = $("#cbo_lentes_contacto option:selected").text();        
+        $("#input-message").val(lentesContacto!);          
+        $('#btn_send').click();
 
+        $('#txt_estatura').focus();
       });
+
 
       $('#txt_estatura').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#cbo_colores_ojos').focus();
+          $("#input-user").val("Estatura");
+          const estatura = $('#txt_estatura').val();
+          $("#input-message").val(estatura!);          
+          $('#btn_send').click();
+
+          $('#cbo_colores_ojos').focus();
         }
       });
 
-      $('#cbo_colores_ojos').keyup(function (e) {
+      $('#cbo_colores_ojos').change(function (e) {
+        $("#input-user").val("Color de ojos");
+        const coloresOjo = $("#cbo_colores_ojos option:selected").text();        
+        $("#input-message").val(coloresOjo!);          
+        $('#btn_send').click();
 
-           $('#cbo_tipo_sangre').focus();
-
+        $('#cbo_tipo_sangre').focus();
       });
 
 
-      $('#cbo_tipo_sangre').keyup(function (e) {
+      $('#cbo_tipo_sangre').change(function (e) {
+        $("#input-user").val("Tipo de sangre");
+        const tipoSangre = $("#cbo_tipo_sangre option:selected").text();        
+        $("#input-message").val(tipoSangre!);          
+        $('#btn_send').click();
 
-           $('#btn_guardar').focus();
-
+        $('#btn_guardar').focus();
       });
+
 
 
 
@@ -289,7 +349,7 @@ export class PhysicInformationComponent implements OnInit {
         cbo_colores_pieles: ['', Validators.required],
         cbo_senales_especiales: ['', Validators.required],
         cbo_tipos_bocas: ['', Validators.required],
-        txt_audifonos: ['', Validators.required],
+        cbo_audifonos: ['', Validators.required],
         txt_peso_libras: ['', Validators.required],
         cbo_colores_cabellos: ['', Validators.required],
         cbo_lentes_contacto: ['', Validators.required],
@@ -302,11 +362,57 @@ export class PhysicInformationComponent implements OnInit {
 
 
 
-
+  this.detenerHuella();
 
 
   }
 
+
+  sendMessage() {
+
+    //console.log('uno');
+
+    this.txt_input_user = document.getElementById("input-user") as HTMLInputElement;
+    this.txt_input_message = document.getElementById("input-message") as HTMLInputElement;
+
+    //console.log('dos');
+
+    const chatMessageDto = new ChatMessageDto(this.txt_input_user.value, this.txt_input_message.value);
+    
+    //console.log('tres');
+    
+    this.webSocketService.sendMessage(chatMessageDto);
+    //console.log('cuatro');
+
+    //sendForm.controls.message.reset();
+    //sendForm.controls.message.reset();
+  }
+
+
+
+  detenerHuella(){
+    //para combo de ocupaciones
+    this.huellaService.detenerHuella().subscribe((resp: any) => {
+      
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {        
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
+          text: 'No se puede detener el lector de huella',
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      }
+      else{
+      console.log('El aparato pudo ser detenido');
+      }
+
+    });
+
+
+  }
 
 
   datos_personales() {
@@ -365,7 +471,7 @@ export class PhysicInformationComponent implements OnInit {
     this.colores_pieles = this.form.controls['cbo_colores_pieles'].value;
     this.senales_especiales = this.form.controls['cbo_senales_especiales'].value;
     this.tipos_bocas = this.form.controls['cbo_tipos_bocas'].value;
-    this.audifonos = this.form.controls['txt_audifonos'].value;
+    this.audifonos = this.form.controls['cbo_audifonos'].value;
     this.peso_lb = this.form.controls['txt_peso_libras'].value;
     this.colores_cabellos = this.form.controls['cbo_colores_cabellos'].value;
     this.lentes_contacto = this.form.controls['cbo_lentes_contacto'].value;

@@ -1,5 +1,5 @@
 export class ResponseOcupaciones {
-  ID?: number;
-  OCU_CODIGO?: string;
-  OCU_DESCRIPCION?: string;
+  id?: number;
+  ocu_codigo?: string;
+  ocu_descripcion?: string;
 }

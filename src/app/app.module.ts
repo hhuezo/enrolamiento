@@ -24,6 +24,20 @@ import { BrowserAnimationsModule }    from "@angular/platform-browser/animations
 
 import {DropdownModule} from 'primeng/dropdown';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ChatComponent } from './chat/chat.component';
+
+// Add these two
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+import { CommonModule } from '@angular/common';
+import { CarnetShowComponent } from './carnet-show/carnet-show.component';
+import { Sign1Component } from './sign1/sign1.component';
+import { Photography2Component } from './photography2/photography2.component';
+
+// Export this function
+export function playerFactory(): any {  
+  return import('lottie-web');
+}
 
 
 
@@ -41,7 +55,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     HeaderComponent,
     CarnetPrintComponent,
     OptionsComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    ChatComponent,
+    CarnetShowComponent,
+    Sign1Component,
+    Photography2Component
   ],
   imports: [
     BrowserModule,
@@ -53,6 +71,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     StepsModule,
     WebcamModule,
     BrowserAnimationsModule,DropdownModule,
+    CommonModule,
+    LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [],
   bootstrap: [AppComponent],

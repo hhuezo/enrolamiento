@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
@@ -34,7 +35,7 @@ export class CarnetPrintComponent implements OnInit {
   img_photography?: HTMLImageElement;
   img_sign?: HTMLImageElement;
 
-  constructor(private datosPersonaService: DatosPersonaService) { }
+  constructor(private datosPersonaService: DatosPersonaService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -91,6 +92,52 @@ export class CarnetPrintComponent implements OnInit {
 
 
   }
+
+
+
+  
+datos_personales() {
+  this.router.navigate(['/personal-information']);
+}
+
+datos_fisicos() {
+  console.log(sessionStorage.getItem('nombre'));
+  if (sessionStorage.getItem('nombre') && sessionStorage.getItem('nombre') != '' && sessionStorage.getItem('nombre') != 'null') {
+
+    this.router.navigate(['/physic-information']);
+  }
+
+}
+
+datos_demograficos() {
+  if (sessionStorage.getItem('anteojos') && sessionStorage.getItem('anteojos') != '' && sessionStorage.getItem('anteojos') != 'null') {
+    //console.log("ante :" + sessionStorage.getItem('anteojos'));
+    this.router.navigate(['/demographic-information']);
+  }
+}
+
+fotografia() {
+  if (sessionStorage.getItem('domicilio') && sessionStorage.getItem('domicilio') != '' && sessionStorage.getItem('domicilio') != 'null') {
+
+    this.router.navigate(['/photography']);
+  }
+}
+
+firma_p() {
+  if (sessionStorage.getItem('foto') && sessionStorage.getItem('foto') != '' && sessionStorage.getItem('foto') != 'null') {
+    this.router.navigate(['/sign']);
+  }
+}
+
+huella() {
+  if (sessionStorage.getItem('firma') && sessionStorage.getItem('firma') != '' && sessionStorage.getItem('firma') != 'null') {
+    this.router.navigate(['/fingerprint']);
+  }
+}
+
+
+
+
 
 
 

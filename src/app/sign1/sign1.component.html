@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    Enrolamiento
+  </title>
+
+</head>
+
+<body>
+  <app-header></app-header>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="row">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-12">&nbsp;
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="container-fluid">
+                  <div class="row ">
+                    <div class="col-md-2 text_icon">
+                            <img class="body-options-img" (click)="datos_personales()" id="img_personal_information" src="./assets/images/datos_personales_blue.svg" alt="">
+                            <p >Datos Personales</p>
+                            <div class="line"></div>
+                    </div>
+                    <div class="col-md-2 text_icon">
+                            <img class="body-options-img" (click)="datos_fisicos()" id="img_physic_information" src="./assets/images/datos_fisicos_blue.svg" alt="">
+                            <p>Datos Fisicos</p>
+                            <div class="line"></div>
+                    </div>
+                    <div class="col-md-2 text_icon">
+                            <img class="body-options-img" (click)="datos_demograficos()" id="img_demographic_information" src="./assets/images/datos_demograficos_blue.svg" alt="">
+                            <p>Datos Demograficos</p>
+                            <div class="line"></div>
+                    </div>
+                    <div class="col-md-2 text_icon">
+                            <img class="body-options-img" (click)="fotografia()" id="img_photography" src="./assets/images/datos_foto_blue.svg" alt="">
+                            <p>Fotografia</p>
+                            <div class="line"></div>
+                    </div>
+                    <div class="col-md-2 text_icon">
+                            <img class="body-options-img" (click)="firma()" id="img_sign" src="./assets/images/firma_blue.svg" alt="">
+                            <p>Firma</p>
+                            <div class="line"></div>
+                    </div>
+                    <div class="col-md-2 text_icon">
+                            <img class="body-options-img" (click)="huella()" id="img_fingerprint" src="./assets/images/datos_huella.svg" alt="">
+                            <p>Huella Digital</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-10">
+
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1>Deja aquí tu firma </h1>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <h3>Debe escribir su firma en el cuadro gris, al igual que en su documento de identificación único.
+                    </h3>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 div_sing">
+
+                    <div class="main-rigth-body-form">
+                      <div class="form-child-up">
+                        <div class="photo-box" style="align-items: center;">
+
+                          <div *ngFor="let chatMessage of webSocketService.chatMessages; " >
+                            
+                            <b *ngIf="chatMessage.user === 'Firma' ">
+                              <div class="snapshot">
+                                  
+                                  <img src="{{chatMessage.message}}" style="width: 500px;  height: 300px;" />
+                            
+                              </div>
+                              
+                              <!-- {{ chatMessage1.message }} -->
+                          </b>   
+                          </div>   
+                        </div>
+           
+                        <div class="form-child-up-col2">
+
+                        </div>
+                      </div>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+                      <label class="col-md-12 control-label">Firma Test</label>
+
+<div id="__printingFrame"></div>
+
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                                  
+                      </div>
+                      <div class="col-md-12">&nbsp;</div>
+                  </div>
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 d-flex justify-content-center">
+
+                    <button type="submit" (click)="back()" class="btn btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-outline-primary" (click)="clearPad()">&nbsp;Limpiar firma&nbsp;</a>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" id="btn_guardar" class="btn btn-primary" (click)="savePad()">&nbsp;Guardar&nbsp;</button>
+                    <!-- <button type="button" id="btn_next" class="btn btn-primary" (click)="link_print()">&nbsp;Siguiente&nbsp;</button> -->
+                  </div>
+                </div>
+
+
+
+
+              </div>
+              <div class="col-md-1">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-12">&nbsp;</div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

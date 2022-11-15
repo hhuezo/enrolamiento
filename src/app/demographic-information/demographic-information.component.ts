@@ -9,6 +9,10 @@ import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import * as $ from 'jquery';
+import { HuellaService } from '../_service/huella.service';
+import Swal from 'sweetalert2';
+import { WebSocketService } from '../_service/web-socket.service';
+import { ChatMessageDto } from '../_model/chatMessageDto';
 
 
 @Component({
@@ -38,6 +42,7 @@ export class DemographicInformationComponent implements OnInit {
   fecha_nacimiento!: string;
 
   responsePaises?: ResponsePaises[];
+  responsePaisNacimientoSel?: ResponsePaises[];
   paises: ResponsePaises[] = [];
 
 
@@ -50,55 +55,107 @@ export class DemographicInformationComponent implements OnInit {
 
   responseTmpDatosPersona?: ResponseTmpDatosPersona[];
 
+
+  
+  txt_input_user?: HTMLInputElement;
+  txt_input_message?: HTMLInputElement;
+
+  pai_descripcion?: string;
+
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private router: Router,
     private catalogoService: CatalogoService,
     private datosPersonaService: DatosPersonaService,
+    private huellaService: HuellaService,
+    private webSocketService: WebSocketService,
   ) { }
 
 
   ngOnInit(): void {
 
+    
 
     $(document).ready(function(){
       //alert('funcion jquery');
 
       $('#txt_domicilio').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#cbo_pais_nacimiento').focus();
+          $("#input-user").val("Domicilio");
+          const domicilio = $('#txt_domicilio').val();
+          $("#input-message").val(domicilio!);          
+          $('#btn_send').click();
+
+          $('#cbo_pais_nacimiento').focus();
         }
       });
 
+
+/*
       $('#cbo_pais_nacimiento').change(function (e) {
+        $("#input-user").val("Pais nacimiento");
+        const paisNacimiento = $("#cbo_pais_nacimiento option:selected").text();        
+        $("#input-message").val(paisNacimiento!);          
+        $('#btn_send').click();
 
-           $('#txt_lugar_nacimiento').focus();
-
+        $('#txt_lugar_nacimiento').focus();
       });
+*/
 
       $('#txt_lugar_nacimiento').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#cbo_departamento').focus();
+          $("#input-user").val("Lugar nacimiento");
+          const lugarNacimiento = $('#txt_lugar_nacimiento').val();
+          $("#input-message").val(lugarNacimiento!);          
+          $('#btn_send').click();
+
+          $('#cbo_departamento').focus();
         }
       });
 
-      $('#cbo_departamento').keyup(function (e) {
 
-           $('#txt_fecha_nacimiento').focus();
 
+      $('#cbo_departamento').change(function (e) {
+        $("#input-user").val("Departamento");
+        const departamento = $("#cbo_departamento option:selected").text();        
+        $("#input-message").val(departamento!);          
+        $('#btn_send').click();
+
+        $('#txt_fecha_nacimiento').focus();
       });
+
 
       $('#txt_fecha_nacimiento').keyup(function (e) {
         if (e.keyCode === 13) {
-           $('#cbo_municipio').focus();
+          $("#input-user").val("Fecha nacimiento");
+          const fechaNacimiento = $('#txt_fecha_nacimiento').val();
+
+
+          const dia = fechaNacimiento?.toString().substr(8,2);
+          const mes = fechaNacimiento?.toString().substr(5,2);
+          const anio = fechaNacimiento?.toString().substr(0,4);
+
+          const fecha_dmy = dia+'/'+mes+'/'+anio;
+
+          $("#input-message").val(fecha_dmy!);          
+          $('#btn_send').click();
+
+          $('#cbo_municipio').focus();
         }
       });
 
+
       $('#cbo_municipio').change(function (e) {
+        $("#input-user").val("Municipio");
+        const municipio = $("#cbo_municipio option:selected").text();        
+        $("#input-message").val(municipio!);          
+        $('#btn_send').click();
 
-           $('#btn_guardar').focus();
-
+        $('#btn_guardar').focus();
       });
+
+
 
 
 
@@ -107,7 +164,7 @@ export class DemographicInformationComponent implements OnInit {
 
 
 
-
+    this.webSocketService.openWebSocket();
     this.submitted = true;
 
 
@@ -201,9 +258,65 @@ export class DemographicInformationComponent implements OnInit {
       this.paises = this.responsePaises;
     });
 
+    
+    this.detenerHuella();
 
 
   }
+
+
+  sendMessage() {
+
+    //console.log('uno');
+
+    this.txt_input_user = document.getElementById("input-user") as HTMLInputElement;
+    this.txt_input_message = document.getElementById("input-message") as HTMLInputElement;
+
+    //console.log('dos');
+
+    const chatMessageDto = new ChatMessageDto(this.txt_input_user.value, this.txt_input_message.value);
+    
+    //console.log('tres');
+    
+    this.webSocketService.sendMessage(chatMessageDto);
+    //console.log('cuatro');
+
+    //sendForm.controls.message.reset();
+    //sendForm.controls.message.reset();
+  }
+
+
+
+  test(){
+                 
+    const paisNacimientoSel = this.pais_nacimiento;
+    
+    //alert(ocupacionSel);   
+
+
+//para combo de ocupaciones
+this.catalogoService.getPais(paisNacimientoSel).subscribe((resp: ResponsePaises[]) => {
+  this.responsePaisNacimientoSel = resp;
+  console.log('responsePaisNacimientoSel: ', this.responsePaisNacimientoSel);
+
+  this.pai_descripcion = this.responsePaisNacimientoSel[0].pai_descripcion;
+
+  console.log('this.pai_descripcion= '+this.pai_descripcion);
+
+  $("#input-user").val("PaisNacimiento");   
+  $("#input-message").val(this.pai_descripcion!);
+  $('#btn_send').click();
+
+});
+
+//alert(this.ocu_descripcion);
+
+  
+  
+    
+    $('#txt_lugar_nacimiento').focus();
+}
+
 
 
   datos_personales() {
@@ -244,6 +357,33 @@ export class DemographicInformationComponent implements OnInit {
       this.router.navigate(['/fingerprint']);
     }
   }
+
+
+
+  detenerHuella(){
+    //para combo de ocupaciones
+    this.huellaService.detenerHuella().subscribe((resp: any) => {
+      
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {        
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
+          text: 'No se puede detener el lector de huella',
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      }
+      else{
+      console.log('El aparato pudo ser detenido');
+      }
+
+    });
+
+
+  }
+
 
 
   onChangePais(/*paisSeleccionado: string*/ event:any) {
@@ -296,6 +436,7 @@ onChangeDepartamento(departamentoSeleccionado: string) {
   }
 
   guardar() {
+
     this.domicilio = this.form.controls['txt_domicilio'].value;
     this.lugar_nacimiento = this.form.controls['txt_lugar_nacimiento'].value;
     this.departamento = this.form.controls['cbo_departamento'].value;
@@ -303,12 +444,14 @@ onChangeDepartamento(departamentoSeleccionado: string) {
     this.municipio = this.form.controls['cbo_municipio'].value;
     this.fecha_nacimiento = this.form.controls['txt_fecha_nacimiento'].value;
 
-    console.log('Domicilio : ' + this.domicilio);
-    console.log('Lugar de Nacimiento :' + this.lugar_nacimiento);
-    console.log('Departamento: ' + this.departamento);
-    console.log('Pais de Nacimiento: ' + this.pais_nacimiento);
-    console.log('Municipio: ' + this.municipio);
-    console.log('Fecha Nacimiento: ' + this.fecha_nacimiento);
+
+
+    // console.log('Domicilio : ' + this.domicilio);
+    // console.log('Lugar de Nacimiento :' + this.lugar_nacimiento);
+    // console.log('Departamento: ' + this.departamento);
+    // console.log('Pais de Nacimiento: ' + this.pais_nacimiento);
+    // console.log('Municipio: ' + this.municipio);
+    // console.log('Fecha Nacimiento: ' + this.fecha_nacimiento);
 
 
     // guardando persona en tabla temporal
@@ -318,14 +461,23 @@ onChangeDepartamento(departamentoSeleccionado: string) {
     body.municipio = this.municipio;
     body.fecha_nacimiento = this.fecha_nacimiento;
 
+
+
     if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
       console.log("body" + body);
+
+
 
       //insertado datos
       this.datosPersonaService.demographicInformation(body).subscribe((resp: ResponseTmpDatosPersona[]) => {
         this.responseTmpDatosPersona = resp;
+
+
+
       });
     }
+
+
 
      this.router.navigate(['/photography']);
   }

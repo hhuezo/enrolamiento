@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WebcamImage } from 'ngx-webcam';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Observer, Subject } from 'rxjs';
 import * as $ from 'jquery';
 import Swal from 'sweetalert2';
 import { RequestFoto } from '../_model/requestFoto';
@@ -11,6 +11,13 @@ import { ResponseFoto } from '../_model/responseFoto';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
+import { HuellaService } from '../_service/huella.service';
+import { WebSocketService } from '../_service/web-socket.service';
+import { ChatMessageDto } from '../_model/chatMessageDto';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { RequestFotoGuardar } from '../_model/requestFotoGuardar';
+import { RequestFotoBorrar } from '../_model/RequestFotoBorrar';
 
 @Component({
   selector: 'app-photography',
@@ -24,6 +31,8 @@ export class PhotographyComponent implements OnInit {
   div_cam?: HTMLElement;
   div_photo?: HTMLElement;
   div_photo2?: HTMLElement;
+
+
 
   //icons options
   img_physic_information?: HTMLImageElement;
@@ -41,13 +50,33 @@ export class PhotographyComponent implements OnInit {
 
   responseFoto?: ResponseFoto;
 
+    
+  txt_input_user?: HTMLInputElement;
+  txt_input_message?: HTMLInputElement;
+
+  formData?: FormData;
+  ReqJson: any = {};
+  imageBlob?: Blob;
+  continuarFoto?: boolean;
+
+
+  private url_tmp_upload_file: string = `${environment.HOST_LOGIN}/api/upload_file`;
+
   constructor(
     private fotoService: FotoService,
-    private router: Router,private datosPersonaService: DatosPersonaService
+    private router: Router,
+    private datosPersonaService: DatosPersonaService,
+    private huellaService: HuellaService,
+    private webSocketService: WebSocketService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
 
+
+    this.continuarFoto = false;
+    
+    //this.webSocketService.openWebSocket();
 
     if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
       //console.log('sin session');
@@ -95,16 +124,63 @@ export class PhotographyComponent implements OnInit {
     }
 
     this.hide_photo();
+    this.detenerHuella();
+    //this.borrarFoto();
+
+  }
 
 
 
 
 
 
+
+  detenerHuella(){
+    //para combo de ocupaciones
+    this.huellaService.detenerHuella().subscribe((resp: any) => {
+      
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {        
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
+          text: 'No se puede detener el lector de huella',
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      }
+      else{
+      console.log('El aparato pudo ser detenido');
+      }
+
+    });
 
 
   }
 
+/*
+  borrarFoto(){
+    //para combo de ocupaciones
+
+    let body = new RequestFotoBorrar();
+    body.ruta = "abc";
+    this.datosPersonaService.borrar_foto(body).subscribe((resp: any) => {
+      
+      console.log('resp= '+resp);
+      if (resp === 0)
+      {        
+        console.log('Foto borrada correctamente');
+      }
+      else{
+      console.log('Foto no pudo ser borrada');
+      }
+
+    });
+
+
+  }
+*/
 
   clean() {
     this.webcamImage.imageAsDataUrl = "";
@@ -161,10 +237,20 @@ export class PhotographyComponent implements OnInit {
 
   guardar() {
 
+    
+
+    // $("#input-user").val("Foto");   
+    // $("#input-message").val(this.foto);
+    // //$("#input-message").val('');
+    // $('#btn_send').click();
+    
+/*
     let body = new RequestDatosPersona();
     body.dui = this.dui;
     body.foto = this.foto;
    //console.log("body: " +  body.foto);
+
+
    if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
       //console.log("body" + body);
 
@@ -174,12 +260,54 @@ export class PhotographyComponent implements OnInit {
       });
     }
 
-    this.router.navigate(['/sign']);
+
+
+
+    let body2 = new RequestFotoGuardar();
+    body2.foto = this.foto;
+   //console.log("body: " +  body.foto);
+
+   if (sessionStorage.getItem('dui') && sessionStorage.getItem('dui') != null) {
+      //console.log("body" + body);
+
+      //enviando  datos
+
+
+
+      this.datosPersonaService.guardar_foto(body2).subscribe((resp: ResponseFoto) => {
+        this.responseFoto = resp;
+
+        console.log('this.responseFoto = '+this.responseFoto);
+
+        this.continuarFoto = true;
+
+        
+
+      });
+
+
+
+    }
+*/
+
+
+
+
+    //alert(this.foto);
+
+
+
+    this.router.navigate(['/photography2']);
   }
 
 
+  continuar(){
+    this.router.navigate(['/photography2']);
+  }
+
 
   takePicture(): void {
+
 
     this.seconds = 5;
     setTimeout(() => {
@@ -204,6 +332,9 @@ export class PhotographyComponent implements OnInit {
 
 
   handleImage(webcamImage: WebcamImage): void {
+
+    //alert('Estoy guardando la foto');
+
     this.webcamImage = webcamImage;
     //Este es el base64 a guardar en la base de datos usando un servicio -> webcamImage.imageAsDataUrl
     //this.foto = webcamImage;
@@ -211,9 +342,27 @@ export class PhotographyComponent implements OnInit {
 
 
     this.foto = webcamImage.imageAsDataUrl;
-    //console.log("esta es la foto "+this.foto);
+    console.log("esta es la foto "+this.foto);
+
+
+
 
   }
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
   get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
   }

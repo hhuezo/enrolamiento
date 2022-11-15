@@ -18,7 +18,7 @@
             <div class="col-md-1">
             </div>
             <div class="col-md-10">
-              <form [formGroup]="form!" >
+              <form [formGroup]="form!" #sendForm="ngForm">
                 <div class="row">
                     <div class="row">
                         <div class="col-md-12">&nbsp;
@@ -201,11 +201,11 @@
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Audífono</label>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                      <select class="form-control select" formControlName="txt_audifonos" id="txt_audifonos" [(ngModel)]="audifonos" tabindex="6">
+                                      <select class="form-control select" formControlName="cbo_audifonos" id="cbo_audifonos" [(ngModel)]="audifonos" tabindex="6">
                                         <option value="{{item}}" *ngFor="let item of opciones" [selected]="audifonos == item">{{item}}</option>
                                       </select>
-                                      <div *ngIf="f['txt_audifonos'].touched && f['txt_audifonos'].invalid" class="alert alert-danger">
-                                        <div *ngIf="f['txt_audifonos'].errors && f['txt_audifonos'].errors['required']">Complete este campo</div>
+                                      <div *ngIf="f['cbo_audifonos'].touched && f['cbo_audifonos'].invalid" class="alert alert-danger">
+                                        <div *ngIf="f['cbo_audifonos'].errors && f['cbo_audifonos'].errors['required']">Complete este campo</div>
                                     </div>
 
                                     </div>
@@ -272,6 +272,29 @@
                     <div class="col-md-12">
                     </div>
                 </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+      
+                      <form #sendForm="ngForm">
+                        <div class="chat-send row">
+                            <div class="col-2">
+                                <input type="hidden" class="form-control" name="user" id="input-user" ngModel>
+                            </div>
+                            <div class="col-8">
+                                <input type="hidden" class="form-control" name="message" id="input-message" ngModel>
+                            </div>
+                            <div class="col-2">
+                                <input (click)="sendMessage()" type="hidden" class="form-control" name="btn_send" id="btn_send" >                          
+                            </div>
+                        </div>
+                    </form>
+      
+                    </div>
+                  </div>
+                  
+
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center">
                         <button (click)="back()" type="button" class="btn btn-outline-primary">&nbsp;Regresar a inicio&nbsp;</button>

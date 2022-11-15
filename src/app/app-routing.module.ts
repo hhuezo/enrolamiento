@@ -11,6 +11,10 @@ import { PhysicInformationComponent } from './physic-information/physic-informat
 import { SignComponent } from './sign/sign.component';
 import { OptionsComponent } from './options/options.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
+import { ChatComponent } from './chat/chat.component';
+import { CarnetShowComponent } from './carnet-show/carnet-show.component';
+import { Sign1Component } from './sign1/sign1.component';
+import { Photography2Component } from './photography2/photography2.component';
 
 /* se declaran las rutas de los componentes */
 const routes: Routes = [
@@ -20,12 +24,16 @@ const routes: Routes = [
   { path: 'physic-information', component: PhysicInformationComponent },
   { path: 'demographic-information', component: DemographicInformationComponent },
   { path: 'photography', component: PhotographyComponent },
+  { path: 'photography2', component: Photography2Component },
   { path: 'sign', component: SignComponent },
+  { path: 'sign1', component: Sign1Component },
   { path: 'fingerprint', component: FingerprintComponent },
   { path: 'carnet-print', component: CarnetPrintComponent },
   { path: 'options', component: OptionsComponent },
   { path: 'configuration', component: ConfigurationComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'chat', component: ChatComponent },
+  { path: 'carnet-show', component: CarnetShowComponent },
 ];
 
 

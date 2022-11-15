@@ -20,7 +20,7 @@
         <div class="col-md-1">
         </div>
         <div class="col-md-10">
-          <form [formGroup]="form!" >
+          <form [formGroup]="form!" #sendForm="ngForm">
             <div class="row">
               <div class="col-md-12">&nbsp;
               </div>
@@ -131,7 +131,9 @@
 
 
 
-                    <p-dropdown formControlName="cbo_ocupacion" id="cbo_ocupacion" [options]="ocupaciones" optionValue="id" optionLabel="ocu_descripcion" [filter]="true" filterBy="ocu_descripcion"
+                    <p-dropdown formControlName="cbo_ocupacion" id="cbo_ocupacion" name="cbo_ocupacion" 
+                    (keyup.enter)="test()"
+                    [options]="ocupaciones" optionValue="id" optionLabel="ocu_descripcion" [filter]="true" filterBy="ocu_descripcion"
                     [(ngModel)]="ocupacion" [style]="{ width: '100%' }"></p-dropdown>
 
                     <div *ngIf="f['cbo_ocupacion'].touched && f['cbo_ocupacion'].invalid" class="alert alert-danger">
@@ -285,6 +287,26 @@
             </div>
             <div class="row">
               <div class="col-md-12">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+
+                <form #sendForm="ngForm">
+                  <div class="chat-send row">
+                      <div class="col-2">
+                          <input type="hidden" class="form-control" name="user" id="input-user" ngModel>
+                      </div>
+                      <div class="col-8">
+                          <input type="hidden" class="form-control" name="message" id="input-message" ngModel>
+                      </div>
+                      <div class="col-2">
+                          <input (click)="sendMessage()" type="hidden" class="form-control" name="btn_send" id="btn_send" >                          
+                      </div>
+                  </div>
+              </form>
+
               </div>
             </div>
 

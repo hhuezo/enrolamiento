@@ -1,88 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enrolamiento</title>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Enrolamiento
-    </title>
-
-</head>
-
-<body>
-
+  <body>
     <app-header></app-header>
-
-
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-1">
-            </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-1"></div>
             <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+              </div>
 
-                <div class="row">
-                    <div class="col-md-12">&nbsp;
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-2 text_icon">
+                        <img
+                          class="body-options-img"
+                          (click)="datos_personales()"
+                          id="img_personal_information"
+                          src="./assets/images/datos_personales_blue.svg"
+                          alt=""
+                        />
+                        <p>Datos Personales</p>
+                        <div class="line"></div>
+                      </div>
+                      <div class="col-md-2 text_icon">
+                        <img
+                          class="body-options-img"
+                          (click)="datos_fisicos()"
+                          id="img_physic_information"
+                          src="./assets/images/datos_fisicos_blue.svg"
+                          alt=""
+                        />
+                        <p>Datos Fisicos</p>
+                        <div class="line"></div>
+                      </div>
+                      <div class="col-md-2 text_icon">
+                        <img
+                          class="body-options-img"
+                          (click)="datos_demograficos()"
+                          id="img_demographic_information"
+                          src="./assets/images/datos_demograficos_blue.svg"
+                          alt=""
+                        />
+                        <p>Datos Demograficos</p>
+                        <div class="line"></div>
+                      </div>
+                      <div class="col-md-2 text_icon">
+                        <img
+                          class="body-options-img"
+                          (click)="fotografia()"
+                          id="img_photography"
+                          src="./assets/images/datos_foto_blue.svg"
+                          alt=""
+                        />
+                        <p>Fotografia</p>
+                        <div class="line"></div>
+                      </div>
+                      <div class="col-md-2 text_icon">
+                        <img
+                          class="body-options-img"
+                          (click)="firma()"
+                          id="img_sign"
+                          src="./assets/images/firma_blue.svg"
+                          alt=""
+                        />
+                        <p>Firma</p>
+                        <div class="line"></div>
+                      </div>
+                      <div class="col-md-2 text_icon">
+                        <img
+                          class="body-options-img"
+                          (click)="huella()"
+                          id="img_fingerprint"
+                          src="./assets/images/huella_digital_gray.svg"
+                          alt=""
+                        />
+                        <p>Huella Digital</p>
+                      </div>
                     </div>
+                  </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <app-options></app-options>
-                    </div>
-                </div>
+              </div>
 
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="main-rigth-top">
-
-    </div>
-    <div class="main">
-
-        <div class="main_rigth">
-            <div class="text-icons">
-
-            </div>
-            <div class="main-rigth-body">
-
-                <h2>Captura de Huella</h2>
-                <p>1- Coloque su pulgar derecho en el lector de huellas dactilar que se muestra en la imagen, espere a
-                    que <b>se escanee su huella.</b> </p>
-                <p>2- Coloque su pulgar izquierdo en el lector de huellas dactilar que se muestra en la imagen,
-                    <b>espere a que se escanee su huella.</b>
-                </p>
-                <div class="main-rigth-body-form">
-                    <div class="form-child-up">
+              <div class="main">
+                <div class="main_rigth">
+                  <div class="main-rigth-body">
+                    <h1>Captura de Huella</h1>
+                    <p>
+                      1- Coloque su pulgar derecho en el lector de huellas
+                      dactilar que se muestra en la imagen, espere a que
+                      <b>se escanee su huella.</b>
+                    </p>
+                    <p>
+                      2- Coloque su pulgar izquierdo en el lector de huellas
+                      dactilar que se muestra en la imagen,
+                      <b>espere a que se escanee su huella.</b>
+                    </p>
+                    <div class="main-rigth-body-form">
+                      <div class="form-child-up">
                         <div class="form-child-up-col1">
-                            <div class="fingerprint"></div>
-                            <p>Pulgar Izquierdo</p>
+                          <img
+                            *ngIf="img_huella_left"
+                            class="fingerprint"
+                            [src]="img_huella_left"
+                            alt=""
+                          />
+                          <img
+                            *ngIf="!img_huella_left"
+                            src="./assets/images/datos_huella.svg"
+                            alt=""
+                          />
+
+                          <p>Pulgar Izquierdo</p>
+                          <!-- <div *ngIf="showSignValid">
+                                              <ng-lottie [options]="options" (animationCreated)="onAnimate($event)"></ng-lottie>          
+                                          </div> -->
+
+                          <div *ngIf="showSignError">
+                            <ng-lottie
+                              [options]="options2"
+                              (animationCreated)="onAnimate($event)"
+                            ></ng-lottie>
+                          </div>
+
+                          <div *ngIf="showSignValid1">
+                            <ng-lottie
+                              [options]="options3"
+                              (animationCreated)="onAnimate($event)"
+                            ></ng-lottie>
+                          </div>
+
+                          <div *ngIf="showSignValid2">
+                            <ng-lottie
+                              [options]="options4"
+                              (animationCreated)="onAnimate($event)"
+                            ></ng-lottie>
+                          </div>
+
+                          <div *ngIf="showSignValid3">
+                            <ng-lottie
+                              [options]="options5"
+                              (animationCreated)="onAnimate($event)"
+                            ></ng-lottie>
+                          </div>
+
+                          <div *ngIf="showSignValid4">
+                            <ng-lottie
+                              [options]="options6"
+                              (animationCreated)="onAnimate($event)"
+                            ></ng-lottie>
+                          </div>
                         </div>
                         <div class="form-child-up-col2">
-                            <div class="fingerprint"></div>
-                            <p>Pulgar Derecho</p>
+                          <img
+                            *ngIf="img_huella_right"
+                            class="fingerprint"
+                            [src]="img_huella_right"
+                            alt=""
+                          />
+                          <img
+                            *ngIf="!img_huella_right"
+                            src="./assets/images/datos_huella.svg"
+                            alt=""
+                          />
+
+                          <p>Pulgar Derecho</p>
+                          <div *ngIf="showSignError">
+                            <ng-lottie
+                              [options]="options2"
+                              (animationCreated)="onAnimate($event)"
+                            ></ng-lottie>
+                          </div>
+
+                          <div *ngIf="showSignValid5">
+                            <ng-lottie
+                              [options]="options7"
+                              (animationCreated)="onAnimate($event)"
+                            ></ng-lottie>
+                          </div>
+
+                          <div *ngIf="showSignValid6">
+                            <ng-lottie
+                              [options]="options8"
+                              (animationCreated)="onAnimate($event)"
+                            ></ng-lottie>
+                          </div>
+
+                          <div *ngIf="showSignValid7">
+                            <ng-lottie
+                              [options]="options9"
+                              (animationCreated)="onAnimate($event)"
+                            ></ng-lottie>
+                          </div>
+
+                          <div *ngIf="showSignValid8">
+                            <ng-lottie
+                              [options]="options10"
+                              (animationCreated)="onAnimate($event)"
+                            ></ng-lottie>
+                          </div>
                         </div>
                         <div class="form-child-up-col3">
-                            <img class="fingerprint-img" src="./assets/images/huella_digital.png" alt="">
+                          <img
+                            class="fingerprint-img"
+                            src="./assets/images/huella.gif"
+                            alt=""
+                          />
                         </div>
-                    </div>
-                    <div class="form-child-down">
+                      </div>
+                      <div class="form-child-down">
                         <div class="btn_continuar">
-                            <a class="btn_blue" routerLink="/registro">Capturar huella nuevamente</a>
-                            <a class="btn_blue" routerLink="/registro">Confirmar</a>
+                          <a class="btn_blue" (click)="back()"
+                            >&nbsp;Regresar a inicio&nbsp;</a
+                          >
+
+                          <button
+                            class="btn_blue"
+                            (click)="leerHuella()"
+                            id="btn_capture_sign"
+                          >
+                            {{ texto_boton }}
+                          </button>
+                          <button
+                            class="{{ btn_class_guardar }}"
+                            (click)="guardar()"
+                            [disabled]="btn_guardar_disactive"
+                          >
+                            &nbsp;Guardar&nbsp;
+                          </button>
                         </div>
+                      </div>
+                      <!-- <div>
+                                      <img [src]="img_huella_jpg" width="250px" class="fingerprint" >
+                                  </div>
+                                  <div>
+                                      <button (click)="test()" >Test</button>
+                                  </div> -->
                     </div>
+                  </div>
                 </div>
-
-
+              </div>
             </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-12">&nbsp;</div>
+          </div>
         </div>
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>

@@ -10,6 +10,9 @@ import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import { DatosPersonaService } from '../_service/datos-persona.service';
 import { FirmaService } from '../_service/firma.service';
 import * as $ from 'jquery';
+import { HuellaService } from '../_service/huella.service';
+import { WebSocketService } from '../_service/web-socket.service';
+import { ChatMessageDto } from '../_model/chatMessageDto';
 
 @Component({
   selector: 'app-sign',
@@ -30,7 +33,9 @@ export class SignComponent implements OnInit {
   img_sign?: HTMLImageElement;
 
   btn_guardar?: HTMLElement;
-  btn_next?: HTMLElement;
+  //btn_next?: HTMLElement;
+
+  control_Print?: HTMLElement;
 
   responseFirma?: ResponseFirma;
   msjerr?: string;
@@ -39,7 +44,7 @@ export class SignComponent implements OnInit {
   RequestDatosPersona?: RequestDatosPersona;
 
   responseTmpDatosPersona?: ResponseTmpDatosPersona[];
-
+  
 
   dui!: any;
   persona: any;
@@ -48,16 +53,31 @@ export class SignComponent implements OnInit {
   div_canva?: HTMLElement;
   div_sign?: HTMLElement;
 
+  imgSignature?: HTMLImageElement;
+  txtImgSignature?: HTMLInputElement;
+
+      
+  txt_input_user?: HTMLInputElement;
+  txt_input_message?: HTMLInputElement;
+
 
   constructor(
     private firmaService: FirmaService,
     private router: Router,
     private datosPersonaService: DatosPersonaService,
+    private huellaService: HuellaService,
+    public webSocketService: WebSocketService
   ) { }
 
   ngOnInit(): void {
 
 
+
+     
+
+    
+    this.webSocketService.openWebSocket();
+    
     if (sessionStorage.getItem('dui') || sessionStorage.getItem('dui') != null) {
 
       this.datosPersonaService.getPersona().subscribe((resp: ResponseTmpDatosPersona[]) => {
@@ -100,6 +120,36 @@ export class SignComponent implements OnInit {
 
 
     }
+
+    this.detenerHuella();
+  }
+
+
+  reloadCurrentPage() {
+    window.location.reload();
+   }
+   
+
+  detenerHuella(){
+    //para combo de ocupaciones
+    this.huellaService.detenerHuella().subscribe((resp: any) => {
+      
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {        
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
+          text: 'No se puede detener el lector de huella',
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      }
+      else{
+      console.log('El aparato pudo ser detenido');
+      }
+
+    });
 
 
   }
@@ -145,10 +195,21 @@ export class SignComponent implements OnInit {
   }
 
 
+  getBase64(event: any) {
+    let me = this;
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      //me.modelvalue = reader.result;
+      console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+ }
 
-  ngAfterViewInit() {
-    this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
-  }
+
 
   startDrawing(event: Event) {
     console.log(event);
@@ -161,16 +222,28 @@ export class SignComponent implements OnInit {
   }
 
   clearPad() {
-    this.signaturePad.clear();
-    this.load_canva();
-    this.btn_guardar = document.getElementById("btn_guardar") as HTMLElement;
-    this.btn_next= document.getElementById("btn_next") as HTMLElement;
-    this.btn_next.hidden = true;
-    this.btn_guardar.hidden = false;
+    this.router.navigate(['/sign1']);
+    // this.signaturePad.clear();
+    // this.load_canva();
+    // this.btn_guardar = document.getElementById("btn_guardar") as HTMLElement;
+    // this.btn_next= document.getElementById("btn_next") as HTMLElement;
+    // this.btn_next.hidden = true;
+    // this.btn_guardar.hidden = false;
   }
 
   savePad() {
-    const base64Data = this.signaturePad.toDataURL();
+
+    this.txtImgSignature = document.getElementById("txtImgSignature") as HTMLInputElement;
+    console.log('Este es el base64 de a imagen firma: '+this.txtImgSignature.value);
+
+    const base64Data = this.txtImgSignature.value;
+
+
+    $("#input-user").val("Firma");   
+    $("#input-message").val(base64Data);
+    //$("#input-message").val('');
+    $('#btn_send').click();
+
 
     let body = new RequestDatosPersona();
     body.firma = base64Data;
@@ -187,7 +260,9 @@ export class SignComponent implements OnInit {
     }
 
     this.signatureImg = base64Data;
-    this.router.navigate(['/carnet-print']);
+    this.router.navigate(['/fingerprint']);
+    //this.router.navigate(['/carnet-print']);
+
 
   /*  let body = new RequestFirma();
     body.idPersona = '2';
@@ -340,8 +415,7 @@ export class SignComponent implements OnInit {
 
     });*/
 
-
-
+    
   }
 
   link_print()
@@ -350,14 +424,14 @@ export class SignComponent implements OnInit {
   }
   load_sign()
   {
-    this.div_canva = document.getElementById("div_canva") as HTMLElement;
-    this.div_sign= document.getElementById("div_sign") as HTMLElement;
+    // this.div_canva = document.getElementById("div_canva") as HTMLElement;
+    // this.div_sign= document.getElementById("div_sign") as HTMLElement;
     this.btn_guardar = document.getElementById("btn_guardar") as HTMLElement;
-    this.btn_next= document.getElementById("btn_next") as HTMLElement;
-    this.div_sign.hidden = false;
-    this.div_canva.hidden = true;
-    this.btn_next.hidden = false;
-    this.btn_guardar.hidden = true;
+    //this.btn_next= document.getElementById("btn_next") as HTMLElement;
+    // this.div_sign.hidden = false;
+    // this.div_canva.hidden = true;
+    //this.btn_next.hidden = false;
+    this.btn_guardar.hidden = false;
 
   }
 
@@ -365,19 +439,41 @@ export class SignComponent implements OnInit {
   {
     this.div_canva = document.getElementById("div_canva") as HTMLElement;
     this.div_sign= document.getElementById("div_sign") as HTMLElement;
-    this.div_sign.hidden = true;
-    this.div_canva.hidden = false;
+    // this.div_sign.hidden = true;
+    // this.div_canva.hidden = false;
 
     this.btn_guardar = document.getElementById("btn_guardar") as HTMLElement;
-    this.btn_next= document.getElementById("btn_next") as HTMLElement;
+    //this.btn_next= document.getElementById("btn_next") as HTMLElement;
     this.btn_guardar.hidden = false;
-    this.btn_next.hidden = true;
+    //this.btn_next.hidden = true;
   }
 
 
 
   back() {
     this.router.navigate(['/home']);
+  }
+
+
+  sendMessage() {
+
+    //console.log('uno');
+
+    this.txt_input_user = document.getElementById("input-user") as HTMLInputElement;
+    this.txt_input_message = document.getElementById("input-message") as HTMLInputElement;
+
+
+    //console.log('dos');
+
+    const chatMessageDto = new ChatMessageDto(this.txt_input_user.value, this.txt_input_message.value);
+    
+    //console.log('tres');
+    
+    this.webSocketService.sendMessage(chatMessageDto);
+    //console.log('cuatro');
+
+    //sendForm.controls.message.reset();
+    //sendForm.controls.message.reset();
   }
 
 }

@@ -2,7 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { RequestCalidadHuella } from '../_model/requestCalidadHuella';
 import { RequestDatosPersona } from '../_model/requestDatosPersona';
+import { RequestFotoBorrar } from '../_model/RequestFotoBorrar';
+import { RequestFotoGuardar } from '../_model/requestFotoGuardar';
+import { RequestValidarHuella } from '../_model/requestValidarHuella';
 import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 
 @Injectable({
@@ -18,10 +22,19 @@ export class DatosPersonaService {
   private url_tmp_datos_demograficos: string = `${environment.HOST_LOGIN}/api/tmp_datos_demograficos/guardar`;
   private url_tmp_datos_firma: string = `${environment.HOST_LOGIN}/api/tmp_datos_firma/guardar`;
   private url_tmp_datos_foto: string = `${environment.HOST_LOGIN}/api/tmp_datos_foto/guardar`;
+
+  private url_tmp_datos_pui: string = `${environment.HOST_LOGIN}/api/tmp_datos_pu_i/guardar`;
+  private url_tmp_datos_pud: string = `${environment.HOST_LOGIN}/api/tmp_datos_pu_d/guardar`;
+
   private url_tmp_datos_persona: string = `${environment.HOST_LOGIN}/api/tmp_datos_personas/obtener_persona/`;
 
+  private url_validar_calidad_huella: string = `${environment.HOST_HUELLA2}/quality`;
+
+  //private url_guardar_foto: string = `${environment.HOST_LOGIN}/api/upload_file`;
+  //private url_borrar_foto: string = `${environment.HOST_LOGIN}/api/delete_file`;
 
   private requestDatosPersona?: RequestDatosPersona;
+
 
   constructor(
     private http: HttpClient,
@@ -48,6 +61,7 @@ export class DatosPersonaService {
   }
 */
 
+
   createPersona(requestDatosPersona: RequestDatosPersona) {
     //comento url de alex
     //this.url = "http://192.168.26.32/blog/public/api/tmp_persona";
@@ -58,10 +72,10 @@ export class DatosPersonaService {
     "email":"${requestDatosPersona.email}","genero":"${requestDatosPersona.genero}","fecha_vto_dui":"${requestDatosPersona.fecha_vto_dui}",
     "telefono_celular":"${requestDatosPersona.telefono_celular}","ocupacion":"${requestDatosPersona.ocupacion}","estado_civil":"${requestDatosPersona.estado_civil}"}`;
 
-    //console.log('esta es el body crear persona tmp ' + body);
+    console.log('esta es el body crear persona tmp ' + body);
     //console.log('esta es la url crear persona tmp ' + this.url_tmp_datos_personales_crear);
 
-    //console.log('esta es la url validate login '+this.url);
+    console.log('esta es la url crear tmp persona '+this.url_tmp_datos_personales_crear);
 
     return this.http.post<any>(this.url_tmp_datos_personales_crear, body, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -78,10 +92,10 @@ export class DatosPersonaService {
     "email":"${requestDatosPersona.email}","genero":"${requestDatosPersona.genero}","fecha_vto_dui":"${requestDatosPersona.fecha_vto_dui}",
     "telefono_celular":"${requestDatosPersona.telefono_celular}","ocupacion":"${requestDatosPersona.ocupacion}","estado_civil":"${requestDatosPersona.estado_civil}"}`;
 
-    //console.log('esta es el body actualizar datos personales tmp ' + body);
+    console.log('esta es el body actualizar datos personales tmp ' + body);
     //console.log('esta es la url actualizar datos personales tmp ' + this.url_tmp_datos_personales_update);
 
-    //console.log('esta es la url validate login '+this.url);
+    console.log('esta es la url update tmp persona '+this.url_tmp_datos_personales_update);
 
     return this.http.post<any>(this.url_tmp_datos_personales_update, body, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -98,8 +112,8 @@ export class DatosPersonaService {
     "peso_libras":"${requestDatosPersona.peso_libras}","cabello":"${requestDatosPersona.cabello}","lentes_contacto":"${requestDatosPersona.lentes_contacto}",
     "ojos":"${requestDatosPersona.ojos}","estatura":"${requestDatosPersona.estatura}","tipo_sangre":"${requestDatosPersona.tipo_sangre}"}`;
 
-    //console.log('esta es el body actualizar informacion fisica persona ' + body);
-    //console.log('esta es la url actualizar informacion fisica persona ' + this.url_tmp_datos_fisicos);
+    console.log('esta es el body actualizar informacion fisica persona ' + body);
+    console.log('esta es la url actualizar informacion fisica persona ' + this.url_tmp_datos_fisicos);
 
     //console.log('esta es la url validate login '+this.url);
 
@@ -119,14 +133,14 @@ export class DatosPersonaService {
 
     //console.log('esta es la url validate login '+this.url);
 
-    return this.http.post<any>(this.url_tmp_datos_demograficos, body, {
+    return  this.http.post<any>(this.url_tmp_datos_demograficos, body, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }
 
   sign(requestDatosPersona: RequestDatosPersona) {
     //this.url = "http://192.168.26.32/blog/public/api/tmp_persona/sign";
-    const body = `{"dui":"${sessionStorage.getItem("dui")}","firma":"${requestDatosPersona.firma}"}`;
+    const body = `{"dui":"${requestDatosPersona.dui}","firma":"${requestDatosPersona.firma}"}`;
 
    console.log('esta es el body guardar firma tmp ' + body);
     console.log('esta es la url guardar firma tmp ' + this.url_tmp_datos_firma);
@@ -139,11 +153,13 @@ export class DatosPersonaService {
   }
 
   photography(requestDatosPersona: RequestDatosPersona) {
+    //this.url_tmp_datos_foto = "https://proyectos.em.com.sv:6443/api/tmp_persona/foto_bg";
     this.url_tmp_datos_foto = "http://192.168.26.17/blog/public/api/tmp_persona/foto_bg";
     const body = `{"dui":"${sessionStorage.getItem("dui")}","imagen":"${requestDatosPersona.foto}"}`;
 
     console.log('esta es el body guardar foto tmp ' + body);
     console.log('esta es la url guardar foto tmp ' + this.url_tmp_datos_foto);
+
 
     //console.log('esta es la url_tmp_datos_foto validate login '+this.url_tmp_datos_foto);
 
@@ -152,8 +168,109 @@ export class DatosPersonaService {
     });
   }
 
+  // validar_izquierdo(requestValidarHuella: RequestValidarHuella) {
+  //   //this.url = "http://192.168.26.32/blog/public/api/tmp_persona/photography";
+  //   const body = `{"identifier":"${requestValidarHuella.identifier}","fingerPrint":"${requestValidarHuella.fingerPrint}","position":"${requestValidarHuella.position}"}`;
+
+  //  console.log('esta es el body validar pui tmp ' + body);
+  //   console.log('esta es la url validar pui tmp ' + this.url_validar_huella);
+
+  //   //console.log('esta es la url_tmp_datos_foto validate login '+this.url_tmp_datos_foto);
+
+  //   return this.http.post<any>(this.url_validar_huella, body, {
+  //     headers: new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `T0lFOlRZNTYkU1g=`)
+  //   });
+  // }
+   
+
+  validar_calidad_huella(requestCalidadHuella: RequestCalidadHuella) {
+    //this.url = "http://192.168.26.32/blog/public/api/tmp_persona/photography";
+    const body = `{"fingerPrint":"${requestCalidadHuella.fingerPrint}"}`;
+
+   console.log('esta es el body validar calidad huella ' + body);
+  console.log('esta es la url validar calidad huella ' + this.url_validar_calidad_huella);
+
+    //console.log('esta es la url_tmp_datos_foto validate login '+this.url_tmp_datos_foto);
+
+    return this.http.post<any>(this.url_validar_calidad_huella, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `T0lFOlRZNTYkU1g=`)
+    });
+  }
+
+  pulgar_izquierdo(requestDatosPersona: RequestDatosPersona) {
+    //this.url = "http://192.168.26.32/blog/public/api/tmp_persona/photography";
+    const body = `{"dui":"${sessionStorage.getItem("dui")}","huella_pui":"${requestDatosPersona.pu_i}"}`;
+
+   console.log('esta es el body guardar pui tmp ' + body);
+    console.log('esta es la url guardar pui tmp ' + this.url_tmp_datos_pui);
+
+    //console.log('esta es la url_tmp_datos_foto validate login '+this.url_tmp_datos_foto);
+
+    return this.http.post<any>(this.url_tmp_datos_pui, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+  // validar_derecho(requestValidarHuella: RequestValidarHuella) {
+  //   //this.url = "http://192.168.26.32/blog/public/api/tmp_persona/photography";
+  //   const body = `{"identifier":"${requestValidarHuella.identifier}","fingerPrint":"${requestValidarHuella.fingerPrint}","position":"${requestValidarHuella.position}"}`;
+
+  //  console.log('esta es el body validar pud tmp ' + body);
+  //   console.log('esta es la url validar pud tmp ' + this.url_validar_huella);
+
+  //   //console.log('esta es la url_tmp_datos_foto validate login '+this.url_tmp_datos_foto);
+
+  //   return this.http.post<any>(this.url_validar_huella, body, {
+  //     headers: new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `T0lFOlRZNTYkU1g=`)
+  //   });
+  // }
+
+  pulgar_derecho(requestDatosPersona: RequestDatosPersona) {
+    //this.url = "http://192.168.26.32/blog/public/api/tmp_persona/photography";
+    const body = `{"dui":"${sessionStorage.getItem("dui")}","huella_pud":"${requestDatosPersona.pu_d}"}`;
+
+   console.log('esta es el body guardar pud tmp ' + body);
+    console.log('esta es la url guardar pud tmp ' + this.url_tmp_datos_pud);
+
+    //console.log('esta es la url_tmp_datos_foto validate login '+this.url_tmp_datos_foto);
+
+    return this.http.post<any>(this.url_tmp_datos_pud, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
 
 
+  /*
+  guardar_foto(requestFotoGuardar: RequestFotoGuardar) {
+    //this.url = "http://192.168.26.32/blog/public/api/tmp_persona/photography";
+    const body = `{"foto":"${requestFotoGuardar.foto}"}`;
+
+   console.log('esta es el body guardar pud tmp ' + body);
+    console.log('esta es la url guardar pud tmp ' + this.url_guardar_foto);
+
+    //console.log('esta es la url_tmp_datos_foto validate login '+this.url_tmp_datos_foto);
+
+    return this.http.post<any>(this.url_guardar_foto, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+*/
+
+/*
+  borrar_foto(requestFotoBorrar: RequestFotoBorrar) {
+    //this.url = "http://192.168.26.32/blog/public/api/tmp_persona/photography";
+    const body = `{"ruta":"${requestFotoBorrar.ruta}"}`;
+
+   console.log('esta es el body borrar pud tmp ' + body);
+    console.log('esta es la url borrar pud tmp ' + this.url_borrar_foto);
+
+    //console.log('esta es la url_tmp_datos_foto validate login '+this.url_tmp_datos_foto);
+
+    return this.http.post<any>(this.url_borrar_foto, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+  */
 
   getPersona() {
 
@@ -169,7 +286,7 @@ export class DatosPersonaService {
 
     //console.log('esta es la url show persona ' + this.url_obtener_tmp_datos_persona);
 
-    //console.log('esta es la url validate login '+this.url);
+    console.log('esta es la url obtener persona '+this.url_obtener_tmp_datos_persona);
 
     return this.http.get<any>(this.url_obtener_tmp_datos_persona, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')

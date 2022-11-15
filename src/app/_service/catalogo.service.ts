@@ -105,12 +105,40 @@ export class CatalogoService {
     //this.url_ocupaciones ="http://192.168.26.32/blog/public/api/get_ocupaciones";
     //console.log('esta es la url catalogo paises ' + this.url_ocupaciones);
 
-    //console.log('esta es la url validate login '+this.url);
+    console.log('esta es la url ocupaciones '+this.url_ocupaciones);
 
     return this.http.get<any>(this.url_ocupaciones, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
 
+  }
+
+  getOcupacion(ocupacionSeleccionada: number) {
+
+    /* if (paisSeleccionado === '72') this.divisionSeleccionada = 'DP';
+     if (paisSeleccionado === '139') this.divisionSeleccionada = 'PV';*/
+
+    //console.log("Inicio dentro de login");
+
+    //const body = `grant_type=password&username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(contrasena)}`;
+    //const body = `{"username":"${requestLogin.user_name}","password":"${requestLogin.password}"}`;
+
+    //console.log('esta es el body validate login '+body);
+    //console.log('esta es la url catalogo departamentos ' + this.url_departamentos);
+
+    /* console.log('esta es la url de departamentos '+this.url_departamentos + "/" + paisSeleccionado + "/" + this.divisionSeleccionada);
+
+     return this.http.get<any>(this.url_departamentos + "/" + paisSeleccionado + "/" + this.divisionSeleccionada, {
+       headers: new HttpHeaders().set('Content-Type', 'application/json')
+     });*/
+
+     //this.url_departamentos = "http://192.168.26.32/blog/public/api/get_departamentos";
+
+     console.log('esta es la url de ocupaciones '+this.url_ocupaciones + "/" + ocupacionSeleccionada);
+
+    return this.http.get<any>(this.url_ocupaciones + "/" + ocupacionSeleccionada, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
   }
 
 
@@ -206,6 +234,7 @@ export class CatalogoService {
 
 
   getGeneros(paisSeleccionado: string) {
+    console.log("generos "+this.url_generos + "/" + paisSeleccionado) ;
     return this.http.get<any>(this.url_generos + "/" + paisSeleccionado, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -215,6 +244,7 @@ export class CatalogoService {
 
 
   getEstadosCiviles() {
+    console.log("estados civil "+this.url_estados_civiles) ;
     return this.http.get<any>(this.url_estados_civiles, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -240,6 +270,7 @@ export class CatalogoService {
 
 
   getColoresPiel() {
+    console.log('url colores piel= '+this.url_colores_piel);
     return this.http.get<any>(this.url_colores_piel, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -249,6 +280,7 @@ export class CatalogoService {
 
 
   getTiposBoca() {
+    console.log('url tipos boca= '+this.url_tipos_boca);
     return this.http.get<any>(this.url_tipos_boca, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -257,6 +289,7 @@ export class CatalogoService {
 
 
   getColoresCabello() {
+    console.log('url colores cabello= '+this.url_colores_cabello);
     return this.http.get<any>(this.url_colores_cabello, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
@@ -265,6 +298,7 @@ export class CatalogoService {
 
 
   getColoresOjo() {
+    console.log('url colores ojo= '+this.url_colores_ojo);
     return this.http.get<any>(this.url_colores_ojo, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
