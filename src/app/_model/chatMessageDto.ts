@@ -1,8 +1,8 @@
 export class ChatMessageDto {
     user: string;
-    message: any;
+    message: string;
 
-    constructor(user: string, message: any){
+    constructor(user: string, message: string){
         this.user = user;
         this.message = message;
     }
