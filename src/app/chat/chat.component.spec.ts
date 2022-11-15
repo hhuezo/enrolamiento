@@ -11,7 +11,13 @@ describe('ChatComponent', () => {
       declarations: [ ChatComponent ]
     })
     .compileComponents();
+<<<<<<< HEAD
 
+=======
+  });
+
+  beforeEach(() => {
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
     fixture = TestBed.createComponent(ChatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

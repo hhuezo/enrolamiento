@@ -11,8 +11,11 @@ import { ResponseTmpDatosPersona } from '../_model/responseTmpDatosPersona';
 import * as $ from 'jquery';
 import { HuellaService } from '../_service/huella.service';
 import Swal from 'sweetalert2';
+<<<<<<< HEAD
 import { WebSocketService } from '../_service/web-socket.service';
 import { ChatMessageDto } from '../_model/chatMessageDto';
+=======
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
 
 
 @Component({
@@ -68,8 +71,12 @@ export class DemographicInformationComponent implements OnInit {
     private router: Router,
     private catalogoService: CatalogoService,
     private datosPersonaService: DatosPersonaService,
+<<<<<<< HEAD
     private huellaService: HuellaService,
     private webSocketService: WebSocketService,
+=======
+    private huellaService: HuellaService
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
   ) { }
 
 
@@ -261,6 +268,7 @@ export class DemographicInformationComponent implements OnInit {
     
     this.detenerHuella();
 
+    this.detenerHuella();
 
   }
 
@@ -363,10 +371,17 @@ this.catalogoService.getPais(paisNacimientoSel).subscribe((resp: ResponsePaises[
   detenerHuella(){
     //para combo de ocupaciones
     this.huellaService.detenerHuella().subscribe((resp: any) => {
+<<<<<<< HEAD
       
       console.log('resp= '+resp);
       if (resp !== 0)
       {        
+=======
+
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
         Swal.fire({
           icon: 'error',
           title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
@@ -386,10 +401,15 @@ this.catalogoService.getPais(paisNacimientoSel).subscribe((resp: ResponsePaises[
 
 
 
+<<<<<<< HEAD
   onChangePais(/*paisSeleccionado: string*/ event:any) {
     //console.log('event :' + event);
     //console.log(event.value);
     this.catalogoService.getDepartamentos(event.value).subscribe((resp: ResponseDepartamentos[]) => {
+=======
+  onChangePais(paisSeleccionado: string) {
+    this.catalogoService.getDepartamentos(paisSeleccionado).subscribe((resp: ResponseDepartamentos[]) => {
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
       this.responseDepartamentos = resp;
       this.departamentos = this.responseDepartamentos;
       }

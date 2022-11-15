@@ -221,6 +221,7 @@
                       </div>
                       <div class="form-child-down">
                         <div class="btn_continuar">
+<<<<<<< HEAD
                           <a class="btn_blue" (click)="back()"
                             >&nbsp;Regresar a inicio&nbsp;</a
                           >
@@ -239,6 +240,11 @@
                           >
                             &nbsp;Guardar&nbsp;
                           </button>
+=======
+                            <a class="btn_blue" (click)="back()">&nbsp;Regresar a inicio&nbsp;</a>
+                            <a class="btn_blue" (click)="leerHuella()" id="btn_capture_sign">{{texto_boton}}</a>
+                            <button [ngClass]="{'btn_blue':estado_blue,'btn_gray':estado_gray}" (click)="cancelar()" [disabled]="btn_guardar_active">&nbsp;Guardar&nbsp;</button>
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
                         </div>
                       </div>
                       <!-- <div>
@@ -248,13 +254,27 @@
                                       <button (click)="test()" >Test</button>
                                   </div> -->
                     </div>
+<<<<<<< HEAD
                   </div>
+=======
+                    <!-- <div>
+                        <img [src]="img_huella_jpg" width="250px" class="fingerprint" >
+                    </div>
+                    <div>
+                        <button (click)="test()" >Test</button>
+                    </div> -->
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
             <div class="col-md-1"></div>
             <div class="col-md-12">&nbsp;</div>
           </div>
+=======
+
+
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
         </div>
       </div>
     </div>

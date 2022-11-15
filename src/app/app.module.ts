@@ -21,6 +21,7 @@ import { OptionsComponent } from './options/options.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 
 import { BrowserAnimationsModule }    from "@angular/platform-browser/animations";
+import { ChatComponent } from './chat/chat.component';
 
 import {DropdownModule} from 'primeng/dropdown';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -56,10 +57,14 @@ export function playerFactory(): any {
     CarnetPrintComponent,
     OptionsComponent,
     ConfigurationComponent,
+<<<<<<< HEAD
     ChatComponent,
     CarnetShowComponent,
     Sign1Component,
     Photography2Component
+=======
+    ChatComponent
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
   ],
   imports: [
     BrowserModule,

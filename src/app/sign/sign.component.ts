@@ -11,8 +11,11 @@ import { DatosPersonaService } from '../_service/datos-persona.service';
 import { FirmaService } from '../_service/firma.service';
 import * as $ from 'jquery';
 import { HuellaService } from '../_service/huella.service';
+<<<<<<< HEAD
 import { WebSocketService } from '../_service/web-socket.service';
 import { ChatMessageDto } from '../_model/chatMessageDto';
+=======
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
 
 @Component({
   selector: 'app-sign',
@@ -65,8 +68,12 @@ export class SignComponent implements OnInit {
     private firmaService: FirmaService,
     private router: Router,
     private datosPersonaService: DatosPersonaService,
+<<<<<<< HEAD
     private huellaService: HuellaService,
     public webSocketService: WebSocketService
+=======
+    private huellaService: HuellaService
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
   ) { }
 
   ngOnInit(): void {
@@ -125,6 +132,7 @@ export class SignComponent implements OnInit {
   }
 
 
+<<<<<<< HEAD
   reloadCurrentPage() {
     window.location.reload();
    }
@@ -137,6 +145,15 @@ export class SignComponent implements OnInit {
       console.log('resp= '+resp);
       if (resp !== 0)
       {        
+=======
+  detenerHuella(){
+    //para combo de ocupaciones
+    this.huellaService.detenerHuella().subscribe((resp: any) => {
+
+      console.log('resp= '+resp);
+      if (resp !== 0)
+      {
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
         Swal.fire({
           icon: 'error',
           title: 'Lo sentimos.. el aparato lector de huella, no púdo ser detenido',
@@ -415,7 +432,11 @@ export class SignComponent implements OnInit {
 
     });*/
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 03180eba913de986976c13b8ed80925eb06fe567
   }
 
   link_print()
